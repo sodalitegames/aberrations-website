@@ -10,6 +10,9 @@
   "dependencies": {
     "@babel/core": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
+    "@headlessui/react": "^1.4.2",
+    "@heroicons/react": "^1.0.5",
+    "@tailwindcss/typography": "^0.5.0",
     "frontmatter-markdown-loader": "^3.6.3",
     "netlify-cms-app": "^2.15.63",
     "next": "12.0.7",
@@ -17,7 +20,10 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.2",
     "eslint": "8.6.0",
-    "eslint-config-next": "12.0.7"
+    "eslint-config-next": "12.0.7",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.12"
   }
 }
