@@ -1,21 +1,129 @@
 backend:
   name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)
-media_folder: public/img
-public_folder: img
+  branch: main
+  commit_messages:
+    create: 'Create {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: '[skip ci] Upload “{{path}}”'
+    deleteMedia: '[skip ci] Delete “{{path}}”'
+
+media_folder: public/images/uploads
+public_folder: images/uploads
+
+local_backend: true
+
 collections:
+  - name: 'blog-post'
+    label: 'Blog Posts'
+    create: true
+    folder: /content/posts
+    fields:
+      - label: 'Title'
+        name: 'title'
+        widget: 'string'
+      - label: 'Author'
+        name: 'author'
+        widget: 'string'
+      - label: 'Content'
+        name: 'content'
+        widget: 'markdown'
   - name: 'pages'
     label: 'Pages'
     files:
-      - label: 'Home'
+      - file: 'content/pages/home.md'
+        label: 'Home'
         name: 'home'
-        file: 'content/home.md'
         fields:
+          # Template Key
+          - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'index-page' }
+
+          # Section Order
+          - {
+              label: 'Section Order',
+              name: sectionOrder,
+              widget: 'select',
+              multiple: true,
+              options:
+                [
+                  { label: 'Column Content', value: 'columnContent' },
+                  { label: Image Gallery, value: 'imageGallery' },
+                  { label: Testimonials, value: 'testimonials' },
+                  { label: 'Active Campaign Form', value: 'activeCampaignForm' },
+                ],
+            }
+
+          # Metadata
+          - {
+              label: 'Metadata',
+              name: 'metadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+          # Other
           - { label: 'Title', name: 'title', widget: 'string' }
           - { label: 'Publish Date', name: 'date', widget: 'datetime' }
           - { label: 'Body', name: 'body', widget: 'markdown' }
           - label: 'Cats'
             name: 'cats'
+            widget: list
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string' }
+              - { label: 'Description', name: 'description', widget: 'text' }
+
+      - file: 'content/pages/about.md'
+        label: 'About'
+        name: 'about'
+        fields:
+          # Template Key
+          - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'index-page' }
+
+          # Section Order
+          - {
+              label: 'Section Order',
+              name: sectionOrder,
+              widget: 'select',
+              multiple: true,
+              options:
+                [
+                  { label: 'Column Content', value: 'columnContent' },
+                  { label: Image Gallery, value: 'imageGallery' },
+                  { label: Testimonials, value: 'testimonials' },
+                  { label: 'Active Campaign Form', value: 'activeCampaignForm' },
+                ],
+            }
+
+          # Metadata
+          - {
+              label: 'Metadata',
+              name: 'metadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+          # Other
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
+          - label: 'Dogs'
+            name: 'dogs'
             widget: list
             fields:
               - { label: 'Name', name: 'name', widget: 'string' }
