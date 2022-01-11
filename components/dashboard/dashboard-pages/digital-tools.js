@@ -39,7 +39,7 @@ export default function DigitalTools({ user, digitalTools }) {
       <Section heading="More Digital Tools" description="We also provide many more tools to aid you in your gameplay." ariaTag="digital-tools">
         <div className="rounded-lg overflow-hidden space-x-2 divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px">
           {digitalTools.map((tool, index) => (
-            <Action key={index} heading={tool.heading} description={tool.description} iconRef={tool.iconRef} href={tool.href} index={index} length={digitalTools.length} />
+            <Action key={index} heading={tool.name} description={tool.description} iconRef={tool.iconRef} href={tool.href} index={index} length={digitalTools.length} />
           ))}
         </div>
       </Section>

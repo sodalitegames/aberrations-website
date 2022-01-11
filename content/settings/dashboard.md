@@ -1,14 +1,14 @@
 ---
 resources:
+  - name: Player Rules (Beta-0.0.5)
+    description: Learn the player rules of Aberrations RPG, a new tabletop
+      role-playing game that is straightforward to learn and exciting to play.
+    iconRef: DocumentTextIcon
+    resource: images/uploads/player-rules-beta-0.0.5.pdf
   - name: Character Sheet (Beta-0.0.5)
     description: Use our character sheet PDF to track your characters information,
       belongings, and stats as you play. Be sure to use a pencil so you can
       erase!
-    iconRef: DocumentTextIcon
-    resource: images/uploads/player-rules-beta-0.0.5.pdf
-  - name: Player Rules (Beta-0.0.5)
-    description: Learn the player rules of Aberrations RPG, a new tabletop
-      role-playing game that is straightforward to learn and exciting to play.
     iconRef: DocumentTextIcon
     resource: images/uploads/character-sheet-beta-0.0.5.pdf
   - name: Avarice World Playbook (Beta-0.0.5)

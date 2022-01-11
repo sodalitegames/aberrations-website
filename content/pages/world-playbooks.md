@@ -1,6 +1,6 @@
 ---
 name: World Playbooks
-parent: get-started
+parent: Get Started__get-started
 sections:
   - type: navigationCards
     theme: SECONDARY

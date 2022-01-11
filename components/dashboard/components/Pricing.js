@@ -6,7 +6,7 @@ import { getStripe } from '../../../lib/stripe-client';
 
 import classNames from '../../../utils/functions/classnames';
 
-export default function Pricing({ active, tiers, subscriptionInterval, paidPlan }) {
+export default function Pricing({ active, plans, subscriptionInterval, paidPlan }) {
   const [interval, setInterval] = useState('month');
 
   const handleCheckout = async lookupId => {
@@ -62,7 +62,7 @@ export default function Pricing({ active, tiers, subscriptionInterval, paidPlan 
         </div>
       </div>
       <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:mx-auto xl:grid-cols-3">
-        {tiers.map(tier => (
+        {plans.map(tier => (
           <div
             key={tier.name}
             className={classNames(

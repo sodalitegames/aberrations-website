@@ -1,6 +1,6 @@
 ---
 name: Player Rules
-parent: get-started
+parent: Get Started__get-started
 metadata:
   title: Player Rules
   slug: player-rules

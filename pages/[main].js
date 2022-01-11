@@ -3,9 +3,9 @@ import ErrorPage from 'next/error';
 import PageLayout from '../layouts/PageLayout';
 import Sections from '../components/sections';
 
-const Page = ({ metadata, sections }) => {
+const MainPage = ({ metadata, sections }) => {
   // Check if the required data was provided
-  if (!sections?.length) {
+  if (!sections) {
     return <ErrorPage statusCode={404} />;
   }
 
@@ -17,9 +17,15 @@ const Page = ({ metadata, sections }) => {
 };
 
 export const getStaticPaths = async () => {
-  const paths = (context => {
-    return context.keys().map(key => ({ params: { slug: key.replace(/^.*[\\\/]/, '').slice(0, -3) } }));
-  })(require.context('../content/pages', true, /\.md$/));
+  const {
+    attributes: { paths: siteMap },
+  } = await import('../content/settings/paths.md');
+
+  console.log(siteMap);
+
+  const paths = siteMap.map(({ parent }) => ({ params: { main: parent } }));
+
+  console.log(paths);
 
   return {
     paths,
@@ -28,13 +34,11 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async context => {
-  const { slug } = context.params;
+  const { main } = context.params;
 
-  const page = await import(`../content/pages/${slug}.md`).catch(error => null);
+  const page = await import(`../content/pages/${main}.md`).catch(error => null);
 
-  console.log(page.attributes);
-
-  const { name, metadata, sections } = page.attributes;
+  const { name, metadata, sections = [] } = page.attributes;
 
   return {
     props: {
@@ -44,4 +48,4 @@ export const getStaticProps = async context => {
   };
 };
 
-export default Page;
+export default MainPage;

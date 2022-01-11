@@ -8,7 +8,7 @@ import Pricing from '../components/Pricing';
 
 import Notice from '../../elements/notice';
 
-export default function PlanAndBilling({ user, pricingTiers }) {
+export default function PlanAndBilling({ user, pricingPlans }) {
   const [subscriptionData, setSubscriptionData] = useState(null);
   const [notice, setNotice] = useState(null);
 
@@ -134,21 +134,21 @@ export default function PlanAndBilling({ user, pricingTiers }) {
       {/* Plans Overview if on Free Forever plan */}
       {!user.stripeCustomerId && !user.subscription ? (
         <Section heading="About Plans" description="Sign up for a paid plan to unlock tools, resources, content, and more." ariaTag="about-plans">
-          <Pricing active="free-forever" tiers={pricingTiers} />
+          <Pricing active="free-forever" plans={pricingPlans} />
         </Section>
       ) : null}
 
       {/* Plans Overview if on Free Forever plan, but used to have a subscription */}
       {user.stripeCustomerId && user.subscription && user.subscription.status !== 'active' ? (
         <Section heading="About Plans" description="Sign up for a paid plan to unlock tools, resources, content, and more." ariaTag="about-plans">
-          <Pricing active="free-forever" tiers={pricingTiers} />
+          <Pricing active="free-forever" plans={pricingPlans} />
         </Section>
       ) : null}
 
       {/* Plans Overview if on paid plan */}
       {user.stripeCustomerId && user.subscription && subscriptionData ? (
         <Section heading="See More Plans" description="Upgrade your paid plan to unlock even more tools, resources, content, and more." ariaTag="about-plans">
-          <Pricing active={subscriptionData.lookup_key} tiers={pricingTiers} paidPlan subscriptionInterval={subscriptionData.interval === 'month' ? 'Monthly' : 'Yearly'} />
+          <Pricing active={subscriptionData.lookup_key} plans={pricingPlans} paidPlan subscriptionInterval={subscriptionData.interval === 'month' ? 'Monthly' : 'Yearly'} />
         </Section>
       ) : null}
     </>

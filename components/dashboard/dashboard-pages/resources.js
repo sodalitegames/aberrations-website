@@ -9,10 +9,10 @@ export default function Resources({ user, resources }) {
           {resources.map((resource, index) => (
             <Action
               key={index}
-              heading={resource.heading}
+              heading={resource.name}
               description={resource.description}
               iconRef={resource.iconRef}
-              href={resource.resource.url}
+              href={`/${resource.resource}`}
               index={index}
               length={resources.length}
               externalLink

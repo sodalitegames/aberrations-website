@@ -1,6 +1,6 @@
 ---
 name: Mailing List
-parent: community
+parent: Community__community
 sections:
   - type: mailingList
     theme: PRIMARY

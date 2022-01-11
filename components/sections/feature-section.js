@@ -45,7 +45,7 @@ export default function FeatureWithScreenshot({ data }) {
               <div className="pl-4 -mr-48 sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
                 <img
                   className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                  src={data.image.image}
+                  src={`/${data.image.image}`}
                   alt="Aberrations RPG Sheets user interface"
                 />
               </div>
@@ -86,7 +86,7 @@ export default function FeatureWithScreenshot({ data }) {
               <div className="pr-4 -ml-48 sm:pr-6 md:-ml-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
                 <img
                   className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
-                  src={data.image.image}
+                  src={`/${data.image.image}`}
                   alt="Aberrations RPG Sheets user interface"
                 />
               </div>

@@ -1,6 +1,6 @@
 ---
 name: Roll Dice
-parent: digital-tools
+parent: Digital Tools__digital-tools
 sections:
   - type: digitalTool
     tool: ROLL_DICE

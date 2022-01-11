@@ -1,6 +1,6 @@
 ---
 name: CC Guide
-parent: get-started
+parent: Get Started__get-started
 metadata:
   title: CC Guide
   slug: cc-guide

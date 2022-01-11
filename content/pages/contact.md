@@ -1,6 +1,6 @@
 ---
 name: Contact
-parent: community
+parent: Community__community
 sections:
   - theme: SECONDARY
     text: We would love to hear from you! Ask us questions, give us feedback, or

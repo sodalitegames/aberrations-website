@@ -1,6 +1,6 @@
 ---
 name: Blog
-parent: community
+parent: Community__community
 metadata:
   title: Blog
   slug: blog

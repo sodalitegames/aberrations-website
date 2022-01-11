@@ -27,7 +27,7 @@ const Home = ({ metadata, sections }) => {
 export async function getStaticProps() {
   const page = await import('../content/pages/home.md').catch(error => null);
 
-  const { name, metadata, sections } = page.attributes;
+  const { name, metadata, sections = [] } = page.attributes;
 
   return {
     props: {
