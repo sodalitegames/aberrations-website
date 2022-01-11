@@ -2,8 +2,8 @@
 sectionOrder:
   - imageGallery
 metadata:
-  title: asdf
-  slug: asdf
+  title: Home
+  slug: /
   description: asdf
 title: Awesome kitties
 date: 2019-03-17T19:31:20.591Z
@@ -14,7 +14,6 @@ cats:
     name: Lil Bub
   - description: Grumpy cat is an American celebrity cat known for her grumpy appearance.
     name: Grumpy cat (Tardar Sauce)
+name: Home
 ---
-Welcome to my awesome page about cats of the internet.
-
-This page is built with NextJS, and content is managed in Netlify CMS
+asdf

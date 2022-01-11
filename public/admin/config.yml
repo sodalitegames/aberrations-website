@@ -14,20 +14,291 @@ public_folder: images/uploads
 local_backend: true
 
 collections:
-  - name: 'blog-post'
-    label: 'Blog Posts'
-    create: true
-    folder: /content/posts
-    fields:
-      - label: 'Title'
-        name: 'title'
-        widget: 'string'
-      - label: 'Author'
-        name: 'author'
-        widget: 'string'
-      - label: 'Content'
-        name: 'content'
-        widget: 'markdown'
+  # Settings
+  - name: 'settings'
+    label: 'Settings'
+    files:
+      - file: 'content/settings/global.md'
+        label: 'Global'
+        name: 'global'
+        fields:
+          # Site Title
+          - { label: 'Site Title', name: 'siteTitle', widget: 'string' }
+
+          # Default Metadata
+          - {
+              label: 'Default Metadata',
+              name: 'defaultMetadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+          # Site Banner
+          - {
+              label: 'Site Banner',
+              name: 'siteBanner',
+              widget: object,
+              fields:
+                [
+                  { label: 'Short Text', name: 'shortText', widget: string },
+                  { label: 'Long Text', name: 'longText', widget: string },
+                  {
+                    label: 'Link',
+                    name: 'link',
+                    widget: object,
+                    required: false,
+                    fields:
+                      [
+                        { label: Href, name: href, widget: string, required: false },
+                        { label: Text, name: text, widget: string, required: false },
+                        { label: External, name: external, widget: boolean, default: false, required: false },
+                      ],
+                  },
+                ],
+            }
+
+      - file: 'content/settings/navigation.md'
+        label: 'Navigation'
+        name: 'navigation'
+        fields:
+          # Header Navigation
+          - { label: 'Header Navigation', label_singular: 'Navigation Item', name: headerNavigation, widget: 'list', fields: [
+                  { label: 'Name', name: 'name', widget: string },
+                  { label: Path, name: path, widget: relation, collection: 'pages', search_fields: ['metadata.slug'], value_field: 'metadata.slug', display_fields: ['name'] },
+                  {
+                    label: 'Icon Ref',
+                    name: 'iconRef',
+                    widget: select,
+                    options:
+                      [
+                        'BookmarkAltIcon',
+                        'DesktopComputerIcon',
+                        'PlayIcon',
+                        'UserGroupIcon',
+                        'SupportIcon',
+                        'GlobeIcon',
+                        'DocumentTextIcon',
+                        'BookOpenIcon',
+                        'CollectionIcon',
+                        'MailIcon',
+                        'ChartSquareBarIcon',
+                        'SparklesIcon',
+                        'ExternalLinkIcon',
+                        'DatabaseIcon',
+                        'CubeTransparentIcon',
+                        'FingerPrintIcon',
+                      ],
+                  },
+                  { label: 'Description', name: 'description', widget: text },
+                  { label: 'Show in Child List', name: showInChildList, widget: select, options: ['No', 'Top', 'Bottom'], default: 'No' },
+
+                  # Children
+                  {
+                    label: 'Children',
+                    label_singular: 'Item',
+                    name: 'children',
+                    widget: 'list',
+                    fields:
+                      [
+                        { label: 'Name', name: 'name', widget: string },
+                        { label: Path, name: path, widget: relation, collection: 'pages', search_fields: ['metadata.slug'], value_field: 'metadata.slug', display_fields: ['name'] },
+                        {
+                          label: 'Icon Ref',
+                          name: 'iconRef',
+                          widget: select,
+                          options:
+                            [
+                              'BookmarkAltIcon',
+                              'DesktopComputerIcon',
+                              'PlayIcon',
+                              'UserGroupIcon',
+                              'SupportIcon',
+                              'GlobeIcon',
+                              'DocumentTextIcon',
+                              'BookOpenIcon',
+                              'CollectionIcon',
+                              'MailIcon',
+                              'ChartSquareBarIcon',
+                              'SparklesIcon',
+                              'ExternalLinkIcon',
+                              'DatabaseIcon',
+                              'CubeTransparentIcon',
+                              'FingerPrintIcon',
+                            ],
+                        },
+                        { label: 'Description', name: 'description', widget: text },
+                      ],
+                  },
+
+                  # Call to Actions
+                  {
+                    label: 'Call To Actions',
+                    label_singular: 'Call to Action',
+                    name: callToActions,
+                    widget: list,
+                    fields:
+                      [
+                        { label: 'Name', name: 'name', widget: string },
+                        {
+                          label: 'Icon Ref',
+                          name: 'iconRef',
+                          widget: select,
+                          options:
+                            [
+                              'BookmarkAltIcon',
+                              'DesktopComputerIcon',
+                              'PlayIcon',
+                              'UserGroupIcon',
+                              'SupportIcon',
+                              'GlobeIcon',
+                              'DocumentTextIcon',
+                              'BookOpenIcon',
+                              'CollectionIcon',
+                              'MailIcon',
+                              'ChartSquareBarIcon',
+                              'SparklesIcon',
+                              'ExternalLinkIcon',
+                              'DatabaseIcon',
+                              'CubeTransparentIcon',
+                              'FingerPrintIcon',
+                            ],
+                        },
+                        { label: Href, name: href, widget: string },
+                        { label: 'External Link', name: externalLink, widget: boolean, default: false },
+                      ],
+                  },
+                ] }
+
+          # Footer Navigation
+          - {
+              label: 'Footer Navigation',
+              label_singular: 'Column',
+              name: footerNavigation,
+              widget: list,
+              fields:
+                [
+                  { label: 'Column Name', name: name, widget: string },
+                  {
+                    label: 'Navigation Items',
+                    label_singular: 'Navigation Item',
+                    name: navigationItems,
+                    widget: list,
+                    fields: [{ label: Name, name: name, widget: string }, { label: Href, name: href, widget: string }, { label: External Link, name: externalLink, widget: boolean, default: false }],
+                  },
+                ],
+            }
+
+      - file: 'content/settings/dashboard.md'
+        label: 'Dashboard'
+        name: 'dashboard'
+        fields:
+          # Resources
+          - {
+              label: 'Resources',
+              label_singular: 'Resource',
+              name: resources,
+              widget: 'list',
+              fields:
+                [
+                  { label: 'Name', name: 'name', widget: string },
+                  { label: 'Description', name: 'description', widget: text },
+                  {
+                    label: 'Icon Ref',
+                    name: 'iconRef',
+                    widget: select,
+                    options:
+                      [
+                        'BookmarkAltIcon',
+                        'DesktopComputerIcon',
+                        'PlayIcon',
+                        'UserGroupIcon',
+                        'SupportIcon',
+                        'GlobeIcon',
+                        'DocumentTextIcon',
+                        'BookOpenIcon',
+                        'CollectionIcon',
+                        'MailIcon',
+                        'ChartSquareBarIcon',
+                        'SparklesIcon',
+                        'ExternalLinkIcon',
+                        'DatabaseIcon',
+                        'CubeTransparentIcon',
+                        'FingerPrintIcon',
+                      ],
+                  },
+
+                  { label: 'Resource', name: resource, widget: file },
+                ],
+            }
+
+          # Digital Tools
+          - {
+              label: 'Digital Tools',
+              label_singular: 'Tool',
+              name: digitalTools,
+              widget: list,
+              fields:
+                [
+                  { label: 'Name', name: name, widget: string },
+                  { label: 'Description', name: 'description', widget: text },
+                  {
+                    label: 'Icon Ref',
+                    name: 'iconRef',
+                    widget: select,
+                    options:
+                      [
+                        'BookmarkAltIcon',
+                        'DesktopComputerIcon',
+                        'PlayIcon',
+                        'UserGroupIcon',
+                        'SupportIcon',
+                        'GlobeIcon',
+                        'DocumentTextIcon',
+                        'BookOpenIcon',
+                        'CollectionIcon',
+                        'MailIcon',
+                        'ChartSquareBarIcon',
+                        'SparklesIcon',
+                        'ExternalLinkIcon',
+                        'DatabaseIcon',
+                        'CubeTransparentIcon',
+                        'FingerPrintIcon',
+                      ],
+                  },
+                  { label: Href, name: href, widget: string },
+                  { label: External Link, name: externalLink, widget: boolean, default: false },
+                ],
+            }
+
+          # Pricing Plans
+          - {
+              label: 'Pricing Plans',
+              label_singular: 'Plan',
+              name: pricingPlans,
+              widget: list,
+              fields:
+                [
+                  { label: 'Name', name: name, widget: string },
+                  { label: 'Description', name: 'description', widget: text },
+                  { label: 'Monthly - Price', name: priceMonthly, widget: string },
+                  { label: 'Monthly - Lookup Id', name: lookupIdMonthly, widget: string },
+                  { label: 'Yearly - Price', name: priceYearly, widget: string },
+                  { label: 'Yearly - Lookup Id', name: lookupIdYearly, widget: string },
+                  { label: Included Features, label_singular: Feature, name: includedFeatures, widget: list, fields: [{ label: Feature, name: feature, widget: string }] },
+                  { label: Sheets Features, label_singular: Feature, name: sheetsFeatures, widget: list, fields: [{ label: Feature, name: feature, widget: string }] },
+                  { label: Coming Soon, label_singular: Feature, name: comingSoon, widget: list, fields: [{ label: Feature, name: feature, widget: string }] },
+                ],
+            }
+
+  # Pages
   - name: 'pages'
     label: 'Pages'
     files:
@@ -35,9 +306,6 @@ collections:
         label: 'Home'
         name: 'home'
         fields:
-          # Template Key
-          - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'index-page' }
-
           # Section Order
           - {
               label: 'Section Order',
@@ -52,6 +320,12 @@ collections:
                   { label: 'Active Campaign Form', value: 'activeCampaignForm' },
                 ],
             }
+
+          # Name
+          - { label: 'Name', name: 'name', widget: 'string' }
+
+          # Parent
+          - { label: Parent, name: parent, widget: relation, collection: pages, search_fields: ['metadata.slug'], value_field: metadata.slug, display_fields: ['name'], required: false }
 
           # Metadata
           - {
@@ -69,24 +343,13 @@ collections:
                 ],
             }
 
-          # Other
-          - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-          - { label: 'Body', name: 'body', widget: 'markdown' }
-          - label: 'Cats'
-            name: 'cats'
-            widget: list
-            fields:
-              - { label: 'Name', name: 'name', widget: 'string' }
-              - { label: 'Description', name: 'description', widget: 'text' }
+          # Content
+          - { label: 'Content', name: 'body', widget: 'markdown' }
 
       - file: 'content/pages/about.md'
         label: 'About'
         name: 'about'
         fields:
-          # Template Key
-          - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'index-page' }
-
           # Section Order
           - {
               label: 'Section Order',
@@ -101,6 +364,12 @@ collections:
                   { label: 'Active Campaign Form', value: 'activeCampaignForm' },
                 ],
             }
+
+          # Name
+          - { label: 'Name', name: 'name', widget: 'string' }
+
+          # Parent
+          - { label: Parent, name: parent, widget: relation, collection: pages, search_fields: ['metadata.slug'], value_field: metadata.slug, display_fields: ['name'], required: false }
 
           # Metadata
           - {
@@ -118,13 +387,741 @@ collections:
                 ],
             }
 
-          # Other
-          - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-          - { label: 'Body', name: 'body', widget: 'markdown' }
-          - label: 'Dogs'
-            name: 'dogs'
-            widget: list
-            fields:
-              - { label: 'Name', name: 'name', widget: 'string' }
-              - { label: 'Description', name: 'description', widget: 'text' }
+          # Content
+          - { label: 'Content', name: 'body', widget: 'markdown' }
+
+  # Blog Posts
+  - name: 'posts'
+    label: 'Posts'
+    label_singular: Post
+    identifier_field: name
+    create: true
+    folder: /content/posts
+    fields:
+      # State
+      - { label: 'State', name: 'state', widget: 'select', options: ['Draft', 'Published'], default: 'Draft' }
+
+      # Name
+      - { label: 'Name', name: 'name', widget: 'string' }
+
+      # Author
+      - { label: 'Author', name: 'author', widget: 'select', options: ['Aberrations RPG', 'Talon Durrant', 'Dallin Warner', 'Carl'] }
+
+      # Publish Date
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+
+      # Categories
+      - {
+          label: 'Categories',
+          name: 'categories',
+          widget: 'relation',
+          collection: 'categories',
+          multiple: true,
+          search_fields: ['metadata.slug'],
+          value_field: 'metadata.slug',
+          display_fields: ['name'],
+        }
+
+      # Featured Post
+      - { label: 'Featured', name: 'featured', widget: 'boolean', default: false }
+
+      #  Restriction
+      - { label: 'Restriction', name: 'restriction', widget: 'select', options: ['NONE', 'FREE', 'PAID'] }
+
+      # Excerpt
+      - { label: 'Excerpt', name: 'excerpt', widget: 'text' }
+
+      # Content
+      - { label: Content, name: body, widget: markdown }
+
+      # Metadata
+      - {
+          label: 'Metadata',
+          name: 'metadata',
+          widget: 'object',
+          fields:
+            [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Slug', name: slug, widget: string },
+              { label: 'Description', name: 'description', widget: 'text' },
+              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+            ],
+        }
+
+  # Post Categories
+  - name: 'categories'
+    label: 'Categories'
+    label_singular: 'Category'
+    identifier_field: name
+    create: true
+    folder: /content/categories
+    fields:
+      # Name
+      - { label: 'Name', name: 'name', widget: 'string' }
+
+      # Color
+      - { label: 'Color', name: 'color', widget: 'color' }
+
+      # Metadata
+      - {
+          label: 'Metadata',
+          name: 'metadata',
+          widget: 'object',
+          fields:
+            [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Slug', name: slug, widget: string },
+              { label: 'Description', name: 'description', widget: 'text' },
+              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+            ],
+        }
+
+  # Rules
+  - name: 'rules'
+    label: 'Rules'
+    files:
+      - file: 'content/rules/player-rules.md'
+        label: 'Player Rules'
+        name: 'playerRules'
+        fields:
+          # Name
+          - { label: 'Name', name: 'name', widget: 'string' }
+
+          # Content
+          - { label: 'Content', name: 'body', widget: 'markdown' }
+
+          # Navigation
+          - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
+
+          # Metadata
+          - {
+              label: 'Metadata',
+              name: 'metadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+      - file: 'content/rules/belongings-in-depth.md'
+        label: 'Belongings In-Depth'
+        name: 'belongingsInDepth'
+        fields:
+          # Name
+          - { label: 'Name', name: 'name', widget: 'string' }
+
+          # Content
+          - { label: 'Content', name: 'body', widget: 'markdown' }
+
+          # Navigation
+          - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
+
+          # Metadata
+          - {
+              label: 'Metadata',
+              name: 'metadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+      - file: 'content/rules/cc-guide.md'
+        label: 'CC Guide'
+        name: 'ccGuide'
+        fields:
+          # Name
+          - { label: 'Name', name: 'name', widget: 'string' }
+
+          # Content
+          - { label: 'Content', name: 'body', widget: 'markdown' }
+
+          # Navigation
+          - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
+
+          # Metadata
+          - {
+              label: 'Metadata',
+              name: 'metadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+      - file: 'content/rules/avarice-world-playbook.md'
+        label: 'Avarice World Playbook'
+        name: 'avariceWorldPlaybook'
+        fields:
+          # Name
+          - { label: 'Name', name: 'name', widget: 'string' }
+
+          # Overview
+          - { label: 'Overview', name: 'overview', widget: 'markdown' }
+
+          # Species
+          - { label: 'Species', name: 'species', widget: 'markdown' }
+
+          # Augmentations
+          - { label: 'Augmentations', name: 'augmentations', widget: 'markdown' }
+
+          # Weapons
+          - { label: 'Weapons', name: 'weapons', widget: 'markdown' }
+
+          # Consumables
+          - { label: 'Consumables', name: 'consumables', widget: 'markdown' }
+
+          # Creatures
+          - { label: 'Creatures', name: 'creatures', widget: 'markdown' }
+
+          # World Rules
+          - { label: 'World Rules', name: 'worldRules', widget: 'markdown' }
+
+          # World Summary
+          - { label: 'World Summary', name: 'worldSummary', widget: 'markdown' }
+
+          # Navigation
+          - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
+
+          # Metadata
+          - {
+              label: 'Metadata',
+              name: 'metadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+  # Worlds
+  - name: 'worlds'
+    label: 'Worlds'
+    files:
+      - file: 'content/worlds/avarice.md'
+        label: 'Avarice'
+        name: 'avarice'
+        fields:
+          # Name
+          - { label: 'Name', name: 'name', widget: 'string' }
+
+          # Metadata
+          - {
+              label: 'Metadata',
+              name: 'metadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+          # World Overview
+          - {
+              label: 'World Overview',
+              name: 'worldOverview',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                  {
+                    label: Sections,
+                    label_singular: Section,
+                    name: sections,
+                    widget: list,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: Content, name: content, widget: markdown },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                ],
+            }
+
+          # Species
+          - {
+              label: 'Species',
+              name: 'species',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                ],
+            }
+
+          # Creatures
+          - {
+              label: 'Creatures',
+              name: 'creatures',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                ],
+            }
+
+          # Belongings
+          - {
+              label: 'Belongings',
+              name: 'belongings',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                  {
+                    label: Weapons,
+                    name: weapons,
+                    widget: object,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: 'Overview', name: overview, widget: 'markdown' },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                  {
+                    label: Wearables,
+                    name: wearables,
+                    widget: object,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: 'Overview', name: overview, widget: 'markdown' },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                  {
+                    label: Consumables,
+                    name: consumables,
+                    widget: object,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: 'Overview', name: overview, widget: 'markdown' },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                  {
+                    label: Usables,
+                    name: usables,
+                    widget: object,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: 'Overview', name: overview, widget: 'markdown' },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                ],
+            }
+
+          # CorpoNations
+          - {
+              label: 'CorpoNations',
+              name: 'corponations',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                  {
+                    label: Sections,
+                    label_singular: Section,
+                    name: sections,
+                    widget: list,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: Content, name: content, widget: markdown },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                ],
+            }
+
+          # Religions
+          - {
+              label: 'Religions',
+              name: 'religions',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                  {
+                    label: Sections,
+                    label_singular: Section,
+                    name: sections,
+                    widget: list,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: Content, name: content, widget: markdown },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                ],
+            }
+
+          # Other Organizations
+          - {
+              label: 'Other Organizations',
+              name: 'otherOrganizations',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                  {
+                    label: Sections,
+                    label_singular: Section,
+                    name: sections,
+                    widget: list,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: Content, name: content, widget: markdown },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                ],
+            }
+
+          # Geography & Maps
+          - {
+              label: 'Geography & Maps',
+              name: 'geographyAndMaps',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                  {
+                    label: Maps,
+                    label_singular: Map,
+                    name: maps,
+                    widget: list,
+                    fields: [{ label: Name, name: name, widget: string }, { label: About, name: about, widget: text }, { label: 'Image', name: 'image', widget: 'image' }],
+                  },
+                  {
+                    label: Sections,
+                    label_singular: Section,
+                    name: sections,
+                    widget: list,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: Content, name: content, widget: markdown },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                ],
+            }
+
+          # World History
+          - {
+              label: 'World History',
+              name: 'worldHistory',
+              widget: object,
+              fields:
+                [
+                  { label: 'Overview', name: overview, widget: 'markdown' },
+                  {
+                    label: 'Metadata',
+                    name: 'metadata',
+                    widget: 'object',
+                    fields:
+                      [
+                        { label: 'Title', name: 'title', widget: 'string' },
+                        { label: 'Slug', name: slug, widget: string },
+                        { label: 'Description', name: 'description', widget: 'text' },
+                        { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                        { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                        { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                      ],
+                  },
+                  {
+                    label: Sections,
+                    label_singular: Section,
+                    name: sections,
+                    widget: list,
+                    fields:
+                      [
+                        { label: Name, name: name, widget: string },
+                        { label: Content, name: content, widget: markdown },
+                        {
+                          label: 'Metadata',
+                          name: 'metadata',
+                          widget: 'object',
+                          fields:
+                            [
+                              { label: 'Title', name: 'title', widget: 'string' },
+                              { label: 'Slug', name: slug, widget: string },
+                              { label: 'Description', name: 'description', widget: 'text' },
+                              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                            ],
+                        },
+                      ],
+                  },
+                ],
+            }
