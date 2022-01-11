@@ -5,10 +5,10 @@ import rehypeSlug from 'rehype-slug';
 // import rehypeRaw from 'rehype-raw';
 // import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 
-const MarkdownText = ({ markdown }) => {
+const MarkdownText = ({ markdown, children }) => {
   return (
     <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]}>
-      {markdown}
+      {children || markdown}
     </Markdown>
   );
 };

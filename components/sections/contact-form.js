@@ -41,8 +41,8 @@ export default function ContactForm({ data }) {
               </defs>
             </svg>
           </div>
-          <h3 className="text-lg font-medium text-white">{data.mainHeading}</h3>
-          <p className="mt-6 text-base text-gray-100 max-w-3xl">{data.paragraph}</p>
+          <h3 className="text-lg font-medium text-white">{data.heading}</h3>
+          <p className="mt-6 text-base text-gray-100 max-w-3xl">{data.text}</p>
           <dl className="mt-8 space-y-6">
             {data.phoneNumber ? (
               <>
@@ -60,7 +60,7 @@ export default function ContactForm({ data }) {
             </dt>
             <dd className="flex text-base text-gray-100">
               <MailIcon className="flex-shrink-0 w-6 h-6 text-gray-100" aria-hidden="true" />
-              <span className="ml-3">{data.contactEmail}</span>
+              <span className="ml-3">{data.email}</span>
             </dd>
           </dl>
         </div>
@@ -68,15 +68,8 @@ export default function ContactForm({ data }) {
         {/* CONTACT FORM */}
         <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
           <h3 className="text-lg font-medium">{data.formHeading}</h3>
-          <form
-            action="/community/contact/thanks"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            name={data.contactEmail}
-            className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
-          >
-            <input type="hidden" name="form-name" value={data.contactEmail} />
+          <form action="/community/contact/thanks" method="POST" data-netlify="true" netlify-honeypot="bot-field" name={data.email} className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+            <input type="hidden" name="form-name" value={data.email} />
             <div>
               <label htmlFor="first-name" className="block text-sm font-medium">
                 First name
@@ -166,7 +159,7 @@ export default function ContactForm({ data }) {
             </div>
             <div className="sm:col-span-2 sm:flex sm:justify-end">
               <button type="submit" className="btn-primary mt-2 px-6 py-3">
-                {data.submitButtonText}
+                {data.formButton}
               </button>
             </div>
           </form>

@@ -6,6 +6,7 @@ date: 2021-08-13T20:51:55.776Z
 categories:
   - campaign-stories
   - isle-saint-lemon
+relatedPosts: []
 featured: false
 restriction: NONE
 excerpt: This is where it all begins. Six players have paid handsomely for a

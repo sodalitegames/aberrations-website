@@ -5,7 +5,7 @@ import { EMAIL_LISTS } from '../../utils/maps/email-lists';
 
 import SubmitButton from '../elements/submit-button';
 
-export default function MailingListFeature({ data }) {
+export default function MailingList({ data }) {
   const [email, setEmail] = useState('');
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -48,8 +48,8 @@ export default function MailingListFeature({ data }) {
           </div>
           <div className="relative">
             <div className="sm:text-center">
-              <h2 className="text-3xl font-extrabold text-white dark:text-gray-200 tracking-tight sm:text-4xl">{data.featureHeading}</h2>
-              <p className="mt-6 mx-auto max-w-2xl text-lg text-gray-300">{data.featureText}</p>
+              <h2 className="text-3xl font-extrabold text-white dark:text-gray-200 tracking-tight sm:text-4xl">{data.heading}</h2>
+              <p className="mt-6 mx-auto max-w-2xl text-lg text-gray-300">{data.text}</p>
             </div>
             <form className="mt-12 sm:mx-auto sm:max-w-lg sm:flex" onSubmit={formSubmit}>
               <div className="min-w-0 flex-1">
@@ -67,7 +67,7 @@ export default function MailingListFeature({ data }) {
                 />
               </div>
               <div className="mt-4 sm:mt-0 sm:ml-3">
-                <SubmitButton type="secondary" classes="text-sm px-5 py-3" text={success ? 'Success!' : data.submitButtonText} loading={processing} />
+                <SubmitButton type="secondary" classes="text-sm px-5 py-3" text={success ? 'Success!' : data.button} loading={processing} />
               </div>
             </form>
             {success && <p className="text-gray-100 mt-4 text-center">Thank you! Please check your inbox to activate your subscription.</p>}

@@ -3,13 +3,13 @@ import Head from 'next/head';
 import ErrorPage from 'next/error';
 
 import PageLayout from '../layouts/PageLayout';
-// import Sections from '../components/sections';
+import Sections from '../components/sections';
 
-const Home = ({ metadata, content }) => {
+const Home = ({ metadata, sections }) => {
   // Check if the required data was provided
-  // if (!sections?.length) {
-  //   return <ErrorPage statusCode={404} />;
-  // }
+  if (!sections?.length) {
+    return <ErrorPage statusCode={404} />;
+  }
 
   return (
     <>
@@ -18,8 +18,7 @@ const Home = ({ metadata, content }) => {
         <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
       </Head>
       <PageLayout full title={metadata.title} seo={metadata}>
-        {/* <Sections sections={sections} /> */}
-        {content}
+        <Sections sections={sections} />
       </PageLayout>
     </>
   );
@@ -28,17 +27,12 @@ const Home = ({ metadata, content }) => {
 export async function getStaticProps() {
   const page = await import('../content/pages/home.md').catch(error => null);
 
-  console.log(page.html);
-
-  console.log(page.attributes);
-  //const { title, metadata, contentSections } = data;
-
-  const { name, metadata } = page.attributes;
+  const { name, metadata, sections } = page.attributes;
 
   return {
     props: {
       metadata,
-      content: page.html,
+      sections,
     },
   };
 }

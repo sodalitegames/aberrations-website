@@ -5,6 +5,8 @@ author: Aberrations RPG
 date: 2021-10-13T20:44:36.153Z
 categories:
   - announcements-and-updates
+relatedPosts:
+  - isle-saint-lemon-chapter-one
 featured: true
 restriction: NONE
 excerpt: Aberrations RPG is looking for beta testers to learn the rules and play

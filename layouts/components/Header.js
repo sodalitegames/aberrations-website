@@ -28,8 +28,6 @@ export default function Header() {
   const { siteTitle } = global;
   const { headerNavigation } = navigation;
 
-  console.log(headerNavigation);
-
   return (
     <Popover className="relative bg-gray-50 dark:bg-dark-50 border-b-2 border-gray-100 dark:border-gray-800">
       <div className="max-w-7xl mx-auto">

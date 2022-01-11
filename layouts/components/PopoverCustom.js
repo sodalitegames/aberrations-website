@@ -53,8 +53,6 @@ export default function PopoverCustom({ name, navigation, actions }) {
     setIcon({ icon: ICON_MAP[navigation.iconRef] });
   }, [navigation.iconRef]);
 
-  console.log('hello', navigation);
-
   return (
     <Popover className="relative">
       {({ open }) => (

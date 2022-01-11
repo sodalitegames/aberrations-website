@@ -1,38 +1,37 @@
 import RichText from './sections/rich-text';
-import DynamicCards from './sections/dynamic-cards';
 import DigitalTool from './sections/digital-tool';
-import NewsletterSignUp from './sections/newsletter-sign-up';
 import UnderConstruction from './sections/under-construction';
 import ContactForm from './sections/contact-form';
-import MailingListFeature from './sections/mailing-list-feature';
+import MailingList from './sections/mailing-list';
 import HeroSection from './sections/hero-section';
-import GridWithIcons from './sections/grid-with-icons';
 import FeaturesList from './sections/features-list';
-import FeatureWithScreenshot from './sections/feature-with-screenshot';
+import FeatureSection from './sections/feature-section';
 import ColumnContent from './sections/column-content';
-import ColumnContentWithImage from './sections/column-content-with-image';
+import ColumnContentWithImage from './sections/image';
+import Buttons from './sections/buttons';
+import Heading from './sections/heading';
+import NavigationCards from './sections/navigation-cards';
 
-// Map Strapi sections to section components
+// Map page sections to section components
 const sectionComponents = {
-  'pages.rich-text': RichText,
-  'pages.dynamic-cards': DynamicCards,
-  'pages.digital-tool': DigitalTool,
-  'pages.newsletter-signup': NewsletterSignUp,
-  'pages.under-construction': UnderConstruction,
-  'pages.contact-form': ContactForm,
-  'pages.mailing-list-feature': MailingListFeature,
-  'pages.hero-section': HeroSection,
-  'pages.grid-with-icons': GridWithIcons,
-  'pages.features-list': FeaturesList,
-  'pages.feature-with-screenshot': FeatureWithScreenshot,
-  'pages.column-content': ColumnContent,
-  'pages.column-content-with-image': ColumnContentWithImage,
+  // content: RichText,
+  digitalTool: DigitalTool,
+  underConstruction: UnderConstruction,
+  contactForm: ContactForm,
+  mailingList: MailingList,
+  hero: HeroSection,
+  navigationCards: NavigationCards,
+  featuresList: FeaturesList,
+  feature: FeatureSection,
+  columnContent: ColumnContent,
+  heading: Heading,
+  buttons: Buttons,
 };
 
 // Display a section individually
 const Section = ({ sectionData }) => {
   // Prepare the component
-  const SectionComponent = sectionComponents[sectionData.__component];
+  const SectionComponent = sectionComponents[sectionData.type];
 
   if (!SectionComponent) {
     return null;
@@ -44,11 +43,12 @@ const Section = ({ sectionData }) => {
 
 // Display the list of sections
 const Sections = ({ sections }) => {
+  console.log('Sections', sections);
   return (
     <>
       {/* Show the actual sections */}
-      {sections.map(section => (
-        <Section sectionData={section} key={`${section.__component}${section.id}`} />
+      {sections.map((section, index) => (
+        <Section sectionData={section} key={`${section.type}-${index}`} />
       ))}
     </>
   );

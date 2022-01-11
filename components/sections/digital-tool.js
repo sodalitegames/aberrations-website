@@ -1,7 +1,7 @@
 import RollDice from '../tools/roll-dice';
 
 const DigitalTool = ({ data }) => {
-  return <>{data.type === 'ROLL_DICE' ? <RollDice /> : `DIGITAL TOOL TYPE: ${data.type}`}</>;
+  return <>{data.tool === 'ROLL_DICE' ? <RollDice /> : `DIGITAL TOOL TYPE: ${data.tool}`}</>;
 };
 
 export default DigitalTool;

@@ -301,94 +301,305 @@ collections:
   # Pages
   - name: 'pages'
     label: 'Pages'
-    files:
-      - file: 'content/pages/home.md'
-        label: 'Home'
-        name: 'home'
-        fields:
-          # Section Order
-          - {
-              label: 'Section Order',
-              name: sectionOrder,
-              widget: 'select',
-              multiple: true,
-              options:
-                [
-                  { label: 'Column Content', value: 'columnContent' },
-                  { label: Image Gallery, value: 'imageGallery' },
-                  { label: Testimonials, value: 'testimonials' },
-                  { label: 'Active Campaign Form', value: 'activeCampaignForm' },
-                ],
-            }
+    label_singular: 'Page'
+    summary: '{{name}}'
+    identifier_field: '{{parent}}__{{metadata.slug}}'
+    create: true
+    folder: /content/pages
+    nested:
+      depth: 100
+      summary: '{{name}}'
+    meta: { path: { widget: string, label: 'Path', index_file: 'index' } }
+    fields:
+      # Name
+      - { label: 'Name', name: 'name', widget: 'string' }
 
-          # Name
-          - { label: 'Name', name: 'name', widget: 'string' }
+      # Parent
+      - {
+          label: Parent,
+          name: parent,
+          widget: relation,
+          collection: pages,
+          search_fields: ['metadata.slug'],
+          value_field: '{{metadata.title}}__{{metadata.slug}}',
+          display_fields: ['name'],
+          required: false,
+        }
 
-          # Parent
-          - { label: Parent, name: parent, widget: relation, collection: pages, search_fields: ['metadata.slug'], value_field: metadata.slug, display_fields: ['name'], required: false }
+      # Sections
+      - { label: 'Sections', label_singular: Section, name: 'sections', widget: 'list', types: [
+              # Heading
+              {
+                label: Heading,
+                name: heading,
+                widget: object,
+                fields:
+                  [
+                    { label: Theme, name: theme, widget: select, options: ['PRIMARY', 'SECONDARY', 'TERTIARY'], default: 'PRIMARY' },
+                    { label: 'Heading', name: 'heading', widget: string },
+                    { label: 'Subheading', name: 'subheading', widget: string, required: false },
+                    { label: 'Text', name: 'text', widget: text, required: false },
+                    { label: 'Centered', name: centered, widget: boolean, default: false },
+                  ],
+              },
 
-          # Metadata
-          - {
-              label: 'Metadata',
-              name: 'metadata',
-              widget: 'object',
-              fields:
-                [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Slug', name: slug, widget: string },
-                  { label: 'Description', name: 'description', widget: 'text' },
-                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
-                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
-                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
-                ],
-            }
+              # Buttons
+              {
+                label: Buttons,
+                label_singular: Button,
+                name: buttons,
+                widget: object,
+                field:
+                  {
+                    label: Buttons,
+                    label_singular: Button,
+                    summary: '{{text}}',
+                    name: buttons,
+                    widget: list,
+                    fields:
+                      [
+                        { label: Theme, name: theme, widget: select, options: ['PRIMARY', 'SECONDARY', 'TERTIARY'], default: 'PRIMARY' },
+                        { label: Config, name: config, widget: select, options: ['STANDARD', 'TEXT'], default: STANDARD },
+                        { label: 'Text', name: 'text', widget: string },
+                        { label: Href, name: href, widget: string },
+                        { label: 'External Link', name: externalLink, widget: boolean, default: false },
+                      ],
+                  },
+              },
 
-          # Content
-          - { label: 'Content', name: 'body', widget: 'markdown' }
+              # Column Content
+              {
+                label: 'Column Content',
+                name: columnContent,
+                widget: object,
+                fields:
+                  [
+                    {
+                      label: 'Left Column',
+                      label_singular: Section,
+                      name: leftColumn,
+                      widget: list,
+                      types:
+                        [
+                          { label: Content, name: content, widget: object, field: { label: 'Content', name: content, widget: markdown } },
+                          {
+                            label: Image,
+                            name: image,
+                            widget: object,
+                            fields: [{ label: Config, name: config, widget: select, options: ['CONTAINED', 'FULL'], default: CONTAINED }, { label: Image, name: image, widget: image }],
+                          },
+                        ],
+                    },
 
-      - file: 'content/pages/about.md'
-        label: 'About'
-        name: 'about'
-        fields:
-          # Section Order
-          - {
-              label: 'Section Order',
-              name: sectionOrder,
-              widget: 'select',
-              multiple: true,
-              options:
-                [
-                  { label: 'Column Content', value: 'columnContent' },
-                  { label: Image Gallery, value: 'imageGallery' },
-                  { label: Testimonials, value: 'testimonials' },
-                  { label: 'Active Campaign Form', value: 'activeCampaignForm' },
-                ],
-            }
+                    {
+                      label: 'Right Column',
+                      label_singular: Section,
+                      name: rightColumn,
+                      widget: list,
+                      types:
+                        [
+                          { label: Content, name: content, widget: object, field: { label: 'Content', name: content, widget: markdown } },
+                          {
+                            label: Image,
+                            name: image,
+                            widget: object,
+                            fields: [{ label: Config, name: config, widget: select, options: ['CONTAINED', 'FULL'], default: CONTAINED }, { label: Image, name: image, widget: image }],
+                          },
+                        ],
+                    },
+                  ],
+              },
 
-          # Name
-          - { label: 'Name', name: 'name', widget: 'string' }
+              # Contact Form
+              {
+                label: Contact Form,
+                name: contactForm,
+                widget: object,
+                fields:
+                  [
+                    { label: Theme, name: theme, widget: select, options: ['PRIMARY', 'SECONDARY', 'TERTIARY'], default: 'SECONDARY' },
+                    { label: 'Heading', name: 'heading', widget: string },
+                    { label: 'Text', name: 'text', widget: text },
+                    { label: Contact Email, name: email, widget: string },
+                    { label: 'Phone Number', name: phoneNumber, widget: string, required: false },
+                    { label: Form Title, name: formTitle, widget: string, required: false },
+                    { label: 'Form Heading', name: 'formHeading', widget: string },
+                    { label: 'Form Button', name: 'formButton', widget: string },
+                  ],
+              },
 
-          # Parent
-          - { label: Parent, name: parent, widget: relation, collection: pages, search_fields: ['metadata.slug'], value_field: metadata.slug, display_fields: ['name'], required: false }
+              # Digital Tool
+              { label: Digital Tool, name: digitalTool, widget: object, fields: [{ label: Tool, name: tool, widget: select, options: ['ROLL_DICE', 'GENERATE_INTERACTABLES'] }] },
 
-          # Metadata
-          - {
-              label: 'Metadata',
-              name: 'metadata',
-              widget: 'object',
-              fields:
-                [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Slug', name: slug, widget: string },
-                  { label: 'Description', name: 'description', widget: 'text' },
-                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
-                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
-                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
-                ],
-            }
+              # Navigation Cards
+              {
+                label: Navigation Cards,
+                label_singular: Card,
+                name: navigationCards,
+                widget: object,
+                fields:
+                  [
+                    { label: Theme, name: theme, widget: select, options: ['PRIMARY', 'SECONDARY', 'TERTIARY'], default: 'SECONDARY' },
+                    { label: Config, name: config, widget: select, options: ['LIST', 'GRID'], default: LIST },
+                    {
+                      label: Cards,
+                      label_singular: Card,
+                      summary: '{{name}}',
+                      name: cards,
+                      widget: list,
+                      fields:
+                        [
+                          { label: 'Name', name: 'name', widget: string },
+                          { label: 'Description', name: 'description', widget: text },
+                          {
+                            label: 'Icon Ref',
+                            name: 'iconRef',
+                            widget: select,
+                            options:
+                              [
+                                'BookmarkAltIcon',
+                                'DesktopComputerIcon',
+                                'PlayIcon',
+                                'UserGroupIcon',
+                                'SupportIcon',
+                                'GlobeIcon',
+                                'DocumentTextIcon',
+                                'BookOpenIcon',
+                                'CollectionIcon',
+                                'MailIcon',
+                                'ChartSquareBarIcon',
+                                'SparklesIcon',
+                                'ExternalLinkIcon',
+                                'DatabaseIcon',
+                                'CubeTransparentIcon',
+                                'FingerPrintIcon',
+                              ],
+                          },
+                          { label: Href, name: href, widget: string },
+                          { label: 'External Link', name: externalLink, widget: boolean, default: false },
+                        ],
+                    },
+                  ],
+              },
 
-          # Content
-          - { label: 'Content', name: 'body', widget: 'markdown' }
+              # Features List
+              {
+                label: Features List,
+                name: featuresList,
+                widget: object,
+                fields:
+                  [
+                    { label: Theme, name: theme, widget: select, options: ['PRIMARY', 'SECONDARY', 'TERTIARY'], default: 'PRIMARY' },
+                    { label: 'Config', name: config, widget: select, options: ['LIST', 'GRID'], default: LIST },
+                    { label: 'Heading', name: 'heading', widget: string },
+                    { label: 'Subheading', name: 'subheading', widget: string, required: false },
+                    { label: 'Text', name: 'text', widget: text },
+                    { label: List, label_singular: Item, name: list, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Description, name: description, widget: text }] },
+                  ],
+              },
+
+              # Hero
+              {
+                label: 'Hero',
+                name: 'hero',
+                widget: 'object',
+                fields:
+                  [
+                    { label: Theme, name: theme, widget: select, options: ['PRIMARY', 'SECONDARY', 'TERTIARY'], default: 'PRIMARY' },
+                    { label: 'Heading', name: heading, widget: 'string' },
+                    { label: 'Heading Highlight', name: headingHighlight, widget: 'string' },
+                    { label: Text, name: text, widget: text },
+                    { label: Image, name: image, widget: image, required: false },
+                    { label: 'Primary Button', name: primaryButton, widget: 'object', fields: [{ label: Text, name: text, widget: string }, { label: Href, name: href, widget: string }] },
+                    { label: 'Secondary Button', name: secondaryButton, widget: 'object', fields: [{ label: Text, name: text, widget: string }, { label: Href, name: href, widget: string }] },
+                  ],
+              },
+
+              # Feature
+              {
+                label: 'Feature',
+                name: 'feature',
+                widget: 'object',
+                fields:
+                  [
+                    { label: Theme, name: theme, widget: select, options: ['PRIMARY', 'SECONDARY', 'TERTIARY'], default: 'PRIMARY' },
+                    { label: 'Heading', name: heading, widget: 'string' },
+                    {
+                      label: 'Icon Ref',
+                      name: 'iconRef',
+                      widget: select,
+                      options:
+                        [
+                          'BookmarkAltIcon',
+                          'DesktopComputerIcon',
+                          'PlayIcon',
+                          'UserGroupIcon',
+                          'SupportIcon',
+                          'GlobeIcon',
+                          'DocumentTextIcon',
+                          'BookOpenIcon',
+                          'CollectionIcon',
+                          'MailIcon',
+                          'ChartSquareBarIcon',
+                          'SparklesIcon',
+                          'ExternalLinkIcon',
+                          'DatabaseIcon',
+                          'CubeTransparentIcon',
+                          'FingerPrintIcon',
+                        ],
+                    },
+                    { label: Text, name: text, widget: text },
+                    {
+                      label: Image,
+                      name: image,
+                      widget: object,
+                      fields: [{ label: Image, name: image, widget: image }, { label: Side, name: side, widget: select, options: ['LEFT', 'RIGHT'], default: 'RIGHT' }],
+                    },
+                    {
+                      label: 'Button',
+                      name: button,
+                      widget: 'object',
+                      fields: [{ label: Text, name: text, widget: string }, { label: Href, name: href, widget: string }, { label: External Link, name: externalLink, widget: boolean, default: false }],
+                    },
+                  ],
+              },
+
+              # Mailing List
+              {
+                label: 'Mailing List',
+                name: 'mailingList',
+                widget: 'object',
+                fields:
+                  [
+                    { label: Theme, name: theme, widget: select, options: ['PRIMARY', 'SECONDARY', 'TERTIARY'], default: 'PRIMARY' },
+                    { label: 'Heading', name: heading, widget: 'string' },
+                    { label: 'Text', name: text, widget: 'string' },
+                    { label: 'Button', name: button, widget: 'string' },
+                  ],
+              },
+
+              # Content
+              { label: 'Content', name: 'content', widget: 'object', fields: [{ label: 'Content', name: content, widget: 'markdown' }] },
+
+              # Under Construction
+              { label: 'Under Construction', name: 'underConstruction', widget: 'object', fields: [{ label: 'Heading', name: heading, widget: 'string' }] },
+            ] }
+
+      # Metadata
+      - {
+          label: 'Metadata',
+          name: 'metadata',
+          widget: 'object',
+          fields:
+            [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Slug', name: slug, widget: string },
+              { label: 'Description', name: 'description', widget: 'text' },
+              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+            ],
+        }
 
   # Blog Posts
   - name: 'posts'
@@ -417,6 +628,19 @@ collections:
           widget: 'relation',
           collection: 'categories',
           multiple: true,
+          search_fields: ['metadata.slug'],
+          value_field: 'metadata.slug',
+          display_fields: ['name'],
+        }
+
+      # Related Posts
+      - {
+          label: 'Related Posts',
+          name: 'relatedPosts',
+          widget: 'relation',
+          collection: 'posts',
+          multiple: true,
+          required: false,
           search_fields: ['metadata.slug'],
           value_field: 'metadata.slug',
           display_fields: ['name'],
@@ -618,6 +842,45 @@ collections:
                   { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
                   { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
                   { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+      - file: 'content/rules/beta-change-log.md'
+        label: 'Beta Change Log'
+        name: 'betaChangeLog'
+        fields:
+          # Name
+          - { label: 'Name', name: 'name', widget: 'string' }
+
+          # Metadata
+          - {
+              label: 'Metadata',
+              name: 'metadata',
+              widget: 'object',
+              fields:
+                [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Slug', name: slug, widget: string },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+                ],
+            }
+
+          # Change Logs
+          - {
+              label: 'Change Logs',
+              label_singular: Version,
+              name: 'changeLogs',
+              summary: 'Beta-{{betaVersion}}',
+              widget: 'list',
+              fields:
+                [
+                  { label: Date, name: date, widget: date },
+                  { label: Beta Version, name: betaVersion, widget: string },
+                  { label: Email Notification Sent, name: emailNotificationSent, widget: boolean, default: false },
+                  { label: Change Log, name: log, widget: markdown },
                 ],
             }
 
