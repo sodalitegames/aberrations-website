@@ -1,11 +1,11 @@
 ---
-state: Draft
+state: Published
 name: Isle Saint Lemon Chapter 1 - Takeoff
 author: Talon Durrant
 date: 2021-08-13T20:51:55.776Z
 categories:
-  - campaign-stories
-  - isle-saint-lemon
+  - Campaign Stories__campaign-stories__#2aa1d3
+  - Isle Saint Lemon__isle-saint-lemon__#eae726
 relatedPosts: []
 featured: false
 restriction: NONE

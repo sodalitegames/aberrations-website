@@ -14,7 +14,7 @@ import ActionCard from '../../components/elements/cards/action-card';
 const PlayerRulesPage = ({ playerRules, belongingsInDepth, actionsAndTests, navigation, metadata }) => {
   // Check if the required data was provided
   if (!playerRules || !belongingsInDepth || !actionsAndTests) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={500} />;
   }
 
   return (

@@ -1,17 +1,14 @@
 import Link from 'next/link';
 import ErrorPage from 'next/error';
-import { gql } from '@apollo/client';
-
-import client from '../../../../lib/apollo-client';
 
 import PageLayout from '../../../../layouts/PageLayout';
-import BlogPostCard from '../../../../components/elements/blog-post-card';
+import BlogPostCard from '../../../../components/blog/blog-post-card';
 import EmailCTA from '../../../../components/elements/email-cta';
 
 const CategoryPage = ({ posts, category, metadata }) => {
   // Check if the required data was provided
   if (!posts || !category) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={500} />;
   }
 
   return (
@@ -25,7 +22,7 @@ const CategoryPage = ({ posts, category, metadata }) => {
         { name: metadata.title, href: `/community/blog/categories/${metadata.slug}` },
       ]}
     >
-      <p className="my-8">{category.metadata.description}</p>
+      <p className="mb-10">{category.metadata.description}</p>
 
       <EmailCTA ctaText={`Get ${metadata.title} sent straight to your inbox`} buttonText="Sign me up" />
 
@@ -46,19 +43,13 @@ const CategoryPage = ({ posts, category, metadata }) => {
 };
 
 export async function getStaticPaths() {
-  const { data } = await client.query({
-    query: gql`
-      query Categories {
-        postCategories {
-          slug
-        }
-      }
-    `,
-  });
+  const slugs = (context => {
+    return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
+  })(require.context('../../../../content/categories', true, /\.md$/));
 
-  const paths = data.postCategories.map(category => ({
+  const paths = slugs.map(slug => ({
     params: {
-      category: category.slug,
+      category: slug,
     },
   }));
 
@@ -71,47 +62,32 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { category } = context.params;
 
-  const { data } = await client.query({
-    query: gql`
-      query Categories($slug: String) {
-        postCategories(where: { slug: $slug }) {
-          name
-          slug
-          color
-          metadata {
-            title
-            slug
-            description
-            shareImage {
-              url
-            }
-            twitterUsername
-            twitterCardType
-          }
-          posts {
-            title
-            author
-            slug
-            datePublished
-            excerpt
-            restriction
-            categories {
-              name
-              slug
-              color
-            }
-          }
-        }
-      }
-    `,
-    variables: { slug: category },
+  const categoryContent = await import(`../../../../content/categories/${category}.md`);
+
+  const { metadata, color } = categoryContent.attributes;
+
+  // Import all posts
+  const postSlugs = (context => {
+    return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
+  })(require.context('../../../../content/posts', true, /\.md$/));
+
+  const allPosts = await Promise.all(
+    postSlugs.map(async slug => {
+      const post = await import(`../../../../content/posts/${slug}.md`).catch(error => null);
+      return { ...post.attributes, content: post.html };
+    })
+  );
+
+  const postsInCategory = allPosts.filter(post => {
+    // Format includes text to match how the data string is stored in the posts relation property
+    return post.categories.includes(`${metadata.title}__${metadata.slug}__${color}`);
   });
 
   return {
     props: {
-      category: data.postCategories[0],
-      posts: data.postCategories[0].posts,
-      metadata: data.postCategories[0].metadata,
+      category: categoryContent.attributes,
+      posts: postsInCategory,
+      metadata,
     },
   };
 }

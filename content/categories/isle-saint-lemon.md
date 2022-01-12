@@ -1,6 +1,8 @@
 ---
 name: Isle Saint Lemon
 color: "#eae726"
+featuredPosts:
+  - Isle Saint Lemon Chapter 1 - Takeoff__isle-saint-lemon-chapter-one
 metadata:
   title: Isle Saint Lemon
   slug: isle-saint-lemon

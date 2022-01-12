@@ -11,7 +11,7 @@ import { parseDateShort } from '../utility/parse-date';
 const BetaChangeLog = ({ changeLogs, metadata }) => {
   // Check if the required data was provided
   if (!changeLogs) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={500} />;
   }
 
   return (

@@ -1,7 +1,11 @@
 import Link from 'next/link';
 
-import Notice from './notice';
-import MarkdownContent from '../sections/markdown-content';
+import { parseDate } from '../../utility/parse-date';
+import { getCategory } from '../../utility/split-data';
+
+import HtmlContent from '../sections/html-content';
+
+import Notice from '../elements/notice';
 
 export const PostHeader = ({ post, notice }) => {
   return (
@@ -16,15 +20,16 @@ export const PostHeader = ({ post, notice }) => {
 
       <div className="font-semibold italic py-4 mb-4">
         <p>
-          Published on {new Date(post.datePublished).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} by {post.author.replace('_', ' ')}
+          Published on {parseDate(post.date)} by {post.author}
         </p>
         <p>
           Categories:{' '}
           {post.categories.map((categ, index) => {
+            const category = getCategory(categ);
             return (
-              <Link key={categ.name} href={`/community/blog/categories/${categ.slug}`}>
+              <Link key={category.title} href={`/community/blog/categories/${category.slug}`}>
                 <a className="text-link-accent3">
-                  {categ.name}
+                  {category.title}
                   {index === post.categories.length - 1 ? '' : ', '}
                 </a>
               </Link>
@@ -40,7 +45,7 @@ const PostContent = ({ post, notice }) => {
   return (
     <article>
       <PostHeader post={post} notice={notice} />
-      <MarkdownContent data={{ content: post.content }} />
+      <HtmlContent data={{ content: post.content }} />
     </article>
   );
 };

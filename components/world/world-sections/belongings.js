@@ -96,7 +96,7 @@ export default Belongings;
 // const BelongingsPage = ({ world, belongings, lists, navigation, metadata }) => {
 //   // Check if the required data was provided
 //   if (!world || !navigation || !belongings || !lists) {
-//     return <ErrorPage statusCode={404} />;
+//     return <ErrorPage statusCode={500} />;
 //   }
 
 //   return (

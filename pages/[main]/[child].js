@@ -3,12 +3,12 @@ import ErrorPage from 'next/error';
 import PageLayout from '../../layouts/PageLayout';
 import Sections from '../../components/sections';
 
-import { getParent } from '../../utility/get-parent';
+import { getParent } from '../../utility/split-data';
 
 const ChildPage = ({ parent, metadata, sections }) => {
   // Check if the required data was provided
   if (!sections) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={500} />;
   }
 
   return (
@@ -30,8 +30,6 @@ export async function getStaticPaths() {
     attributes: { paths: siteMap },
   } = await import('../../content/settings/paths.md');
 
-  console.log(siteMap);
-
   let paths = [];
 
   siteMap
@@ -47,8 +45,6 @@ export async function getStaticPaths() {
       paths = [...paths, ...childPaths];
     });
 
-  console.log(paths);
-
   return {
     paths,
     fallback: false,
@@ -60,7 +56,7 @@ export async function getStaticProps(context) {
 
   const page = await import(`../../content/pages/${child}.md`).catch(error => null);
 
-  const { name, parent, metadata, sections = [] } = page.attributes;
+  const { parent, metadata, sections = [] } = page.attributes;
 
   return {
     props: {
