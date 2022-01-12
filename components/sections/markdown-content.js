@@ -2,7 +2,7 @@ import MarkdownText from '../utility/markdown-text';
 
 import classNames from '../../utils/functions/classnames';
 
-const Content = ({ data }) => {
+const MarkdownContent = ({ data }) => {
   return (
     <div className={classNames('rich-content-container')}>
       <MarkdownText markdown={data.content} />
@@ -10,4 +10,4 @@ const Content = ({ data }) => {
   );
 };
 
-export default Content;
+export default MarkdownContent;

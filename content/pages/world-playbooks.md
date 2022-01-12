@@ -11,7 +11,7 @@ sections:
         description: This World Playbook is for the world of Avarice, a cyberpunk-ishly
           capitalistically dystopian tech world.
         iconRef: BookOpenIcon
-        href: get-started/world-playbooks/avarice
+        href: /get-started/world-playbooks/avarice
 metadata:
   title: World Playbooks
   slug: world-playbooks

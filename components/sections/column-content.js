@@ -1,5 +1,4 @@
-import MarkdownText from '../utility/markdown-text';
-import RichText from './rich-text';
+import HtmlContent from './html-content';
 
 const ColumnContent = ({ data }) => {
   return (
@@ -19,11 +18,7 @@ const Column = ({ sections }) => {
     <div>
       {sections.map((section, index) => {
         if (section.type === 'content') {
-          return (
-            <div key={index}>
-              <MarkdownText>{section.content}</MarkdownText>
-            </div>
-          );
+          return <HtmlContent data={section} />;
         }
 
         if (section.type === 'image') {

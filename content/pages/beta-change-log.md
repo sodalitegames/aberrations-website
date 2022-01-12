@@ -1,5 +1,8 @@
 ---
 name: Beta Change Log
+sections:
+  - type: rules
+    rules: BETA_CHANGE_LOG
 metadata:
   title: Beta Change Log
   slug: beta-change-log

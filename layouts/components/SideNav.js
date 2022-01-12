@@ -6,8 +6,8 @@ const SideNav = ({ navigation, classes, closePanel }) => {
   return (
     <nav className={classNames('space-y-1', classes)} aria-label="Sidebar">
       {navigation.map(item =>
-        !item.navigationItem.length ? (
-          <div key={item.heading}>
+        !item.children.length ? (
+          <div key={item.name}>
             <a
               href={`#${item.idRef}`}
               onClick={closePanel}
@@ -18,11 +18,11 @@ const SideNav = ({ navigation, classes, closePanel }) => {
                 'group w-full flex items-center pl-2 py-2 text-sm font-medium rounded-md'
               )}
             >
-              {item.heading}
+              {item.name}
             </a>
           </div>
         ) : (
-          <Disclosure as="div" key={item.heading} className="space-y-1">
+          <Disclosure as="div" key={item.name} className="space-y-1">
             {({ open }) => (
               <>
                 <Disclosure.Button
@@ -33,7 +33,7 @@ const SideNav = ({ navigation, classes, closePanel }) => {
                     'group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-accent3-dark dark:focus:ring-accent3'
                   )}
                 >
-                  <span className="flex-1">{item.heading}</span>
+                  <span className="flex-1">{item.name}</span>
                   <svg
                     className={classNames(
                       open ? 'text-gray-400 dark:text-gray-300 rotate-90' : 'text-gray-300 dark:text-gray-400',
@@ -46,7 +46,7 @@ const SideNav = ({ navigation, classes, closePanel }) => {
                   </svg>
                 </Disclosure.Button>
                 <Disclosure.Panel className="space-y-1">
-                  {item.navigationItem.map(subItem => (
+                  {item.children.map(subItem => (
                     <span key={subItem.name} onClick={closePanel}>
                       <Disclosure.Button
                         key={subItem.name}

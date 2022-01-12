@@ -31,7 +31,7 @@ export default function NpcTable({ rows }) {
               </thead>
               <tbody>
                 {rows.map((row, index) => (
-                  <tr key={row.level} className={classNames(index % 2 === 0 ? 'bg-white dark:bg-dark-100' : 'bg-gray-50 dark:bg-dark-200', 'hover:bg-gray-100 dark:hover:bg-dark-300')}>
+                  <tr key={row.id} className={classNames(index % 2 === 0 ? 'bg-white dark:bg-dark-100' : 'bg-gray-50 dark:bg-dark-200', 'hover:bg-gray-100 dark:hover:bg-dark-300')}>
                     <td className="px-6 py-2 whitespace-nowrap text-sm text-center text-gray-500 dark:text-gray-300 font-semibold">{row.totalPower}</td>
                     <td className="px-6 py-2 whitespace-nowrap text-sm text-center text-gray-500 dark:text-gray-300">{row.fortitude}</td>
                     <td className="px-6 py-2 whitespace-nowrap text-sm text-center text-gray-500 dark:text-gray-300">{row.agility}</td>

@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 import OverviewCard from '../../elements/cards/overview-card';
 
 const Corponations = ({ data, world }) => {
   return (
     <>
       <h2 className="heading">{data.metadata.title}</h2>
-      <RichText data={{ content: data.overview }} />
+      <MarkdownContent data={{ content: data.overview }} />
       {data.list.map(corp => {
         return (
           <Link key={corp.name} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${corp.slug}`}>

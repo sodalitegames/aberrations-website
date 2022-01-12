@@ -1,6 +1,9 @@
 ---
 name: Player Rules
 parent: Get Started__get-started
+sections:
+  - type: rules
+    rules: PLAYER_RULES
 metadata:
   title: Player Rules
   slug: player-rules

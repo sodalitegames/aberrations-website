@@ -1,4 +1,5 @@
-import RichText from './sections/rich-text';
+import MarkdownContent from './sections/markdown-content';
+import HtmlContent from './sections/html-content';
 import DigitalTool from './sections/digital-tool';
 import UnderConstruction from './sections/under-construction';
 import ContactForm from './sections/contact-form';
@@ -7,14 +8,15 @@ import HeroSection from './sections/hero-section';
 import FeaturesList from './sections/features-list';
 import FeatureSection from './sections/feature-section';
 import ColumnContent from './sections/column-content';
-import ColumnContentWithImage from './sections/image';
 import Buttons from './sections/buttons';
 import Heading from './sections/heading';
 import NavigationCards from './sections/navigation-cards';
+import RulesSection from './sections/rules-section';
 
 // Map page sections to section components
 const sectionComponents = {
-  // content: RichText,
+  // content: HtmlContent,
+  // content: MarkdownContent
   digitalTool: DigitalTool,
   underConstruction: UnderConstruction,
   contactForm: ContactForm,
@@ -26,6 +28,7 @@ const sectionComponents = {
   columnContent: ColumnContent,
   heading: Heading,
   buttons: Buttons,
+  rules: RulesSection,
 };
 
 // Display a section individually

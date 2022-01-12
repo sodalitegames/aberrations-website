@@ -1,4 +1,4 @@
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 
 import SpeciesCard from '../../elements/cards/species-card';
 
@@ -14,9 +14,9 @@ const SingleSpecies = ({ species }) => {
             {species.name} Lore on {world.name}
           </h4>
           <h5 className="heading">Current</h5>
-          <RichText data={{ content: current }} />
+          <MarkdownContent data={{ content: current }} />
           <h5 className="heading">Historical</h5>
-          <RichText data={{ content: history }} />
+          <MarkdownContent data={{ content: history }} />
         </div>
       ))}
     </>

@@ -1,16 +1,16 @@
 import Link from 'next/link';
 
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 import SmallGridItem from '../../elements/small-grid-item';
 
 const Belongings = ({ data, world }) => {
   return (
     <>
       <h2 className="heading">{data.metadata.title}</h2>
-      <RichText data={{ content: data.overview }} />
+      <MarkdownContent data={{ content: data.overview }} />
 
       <h2 className="heading">Weapons</h2>
-      <RichText data={{ content: data.weapons.overview }} />
+      <MarkdownContent data={{ content: data.weapons.overview }} />
       <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-6">
         {data.lists.weapons.map(weapon => (
           <Link key={weapon.name} href={`/worlds/${world.metadata.slug}/belongings/weapons/${weapon.metadata.slug}`}>
@@ -26,7 +26,7 @@ const Belongings = ({ data, world }) => {
       </Link>
 
       <h3 className="heading pt-8">Wearables</h3>
-      <RichText data={{ content: data.wearables.overview }} />
+      <MarkdownContent data={{ content: data.wearables.overview }} />
       <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-6">
         {data.lists.wearables.map(wearable => (
           <Link key={wearable.name} href={`/worlds/${world.metadata.slug}/belongings/wearables/${wearable.metadata.slug}`}>
@@ -42,7 +42,7 @@ const Belongings = ({ data, world }) => {
       </Link>
 
       <h3 className="heading pt-8">Consumables</h3>
-      <RichText data={{ content: data.consumables.overview }} />
+      <MarkdownContent data={{ content: data.consumables.overview }} />
       <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-6">
         {data.lists.consumables.map(consumable => (
           <Link key={consumable.name} href={`/worlds/${world.metadata.slug}/belongings/consumables/${consumable.metadata.slug}`}>
@@ -58,7 +58,7 @@ const Belongings = ({ data, world }) => {
       </Link>
 
       <h3 className="heading pt-8">Usables</h3>
-      <RichText data={{ content: data.usables.overview }} />
+      <MarkdownContent data={{ content: data.usables.overview }} />
       <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-6">
         {data.lists.usables.map(usable => (
           <Link key={usable.name} href={`/worlds/${world.metadata.slug}/belongings/usables/${usable.metadata.slug}`}>
@@ -90,7 +90,7 @@ export default Belongings;
 // // import Sections from '../../../components/sections';
 // // import Seo from '../../../components/elements/seo';
 
-// import RichText from '../../../components/sections/rich-text';
+// import MarkdownContent from '../../../components/sections/markdown-content';
 // import SmallGridItem from '../../../components/elements/small-grid-item';
 
 // const BelongingsPage = ({ world, belongings, lists, navigation, metadata }) => {

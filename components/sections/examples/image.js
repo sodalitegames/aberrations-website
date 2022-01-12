@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { CameraIcon } from '@heroicons/react/solid';
 
-import RichText from './rich-text';
+import MarkdownContent from '../markdown-content';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from '../../../utils/functions/classnames';
 
 export default function ColumnContentWithImage({ data }) {
   return (
@@ -35,7 +35,7 @@ export default function ColumnContentWithImage({ data }) {
               {/* END IMAGE CONTENT */}
               {/* TEXT CONTENT */}
               <div className="mt-8 lg:mt-0">
-                <RichText data={{ content: data.content }} />
+                <MarkdownContent data={{ content: data.content }} />
               </div>
               {/* END TEXT CONTENT */}
             </div>
@@ -54,7 +54,7 @@ export default function ColumnContentWithImage({ data }) {
                 <h2 className="leading-6 text-primary-light font-semibold tracking-wide uppercase">{data.subheading}</h2>
                 <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">{data.heading}</h3>
                 <div className={classNames('mt-8', data.imageSide === 'RIGHT' ? 'mr-12' : '')}>
-                  <RichText data={{ content: data.content }} />
+                  <MarkdownContent data={{ content: data.content }} />
                 </div>
               </div>
             </div>

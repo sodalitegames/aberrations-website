@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 import OverviewCard from '../../elements/cards/overview-card';
 
 const Overview = ({ data, world }) => {
   return (
     <>
       <h2 className="heading">{data.metadata.title}</h2>
-      <RichText data={{ content: data.overview }} />
+      <MarkdownContent data={{ content: data.overview }} />
       {data.sections.map(sect => {
         return (
           <Link key={sect.name} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${sect.slug}`}>

@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 
 const GeographyAndMaps = ({ data, world }) => {
   return (
     <>
       <h2 className="heading">{data.metadata.title}</h2>
-      <RichText data={{ content: data.overview }} />
+      <MarkdownContent data={{ content: data.overview }} />
 
       {data.maps.map(({ name, about, image }) => (
         <div key={name} className="prose">

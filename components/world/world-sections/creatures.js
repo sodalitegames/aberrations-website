@@ -1,21 +1,21 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 import CreatureCard from '../../elements/cards/creature-card';
 
 const Creatures = ({ data, world }) => {
   return (
     <>
       <h2 className="heading">{data.metadata.title}</h2>
-      <RichText data={{ content: data.overview }} />
+      <MarkdownContent data={{ content: data.overview }} />
       {data.creatureTypes.map(type => {
         return (
           <Fragment key={type.name}>
             <h3 id={type.metadata.slug} className="heading">
               {type.name} Creatures
             </h3>
-            <RichText data={{ content: type.description }} />
+            <MarkdownContent data={{ content: type.description }} />
 
             {data.creatures
               .filter(creature => creature.creatureTypes.find(creaType => creaType.name === type.name))

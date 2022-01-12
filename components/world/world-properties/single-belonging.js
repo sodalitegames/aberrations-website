@@ -1,4 +1,4 @@
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 
 import WeaponsSection from '../belonging-sections/weapons';
 import WearablesSection from '../belonging-sections/wearables';
@@ -9,7 +9,7 @@ const SingleBelonging = ({ belonging, world }) => {
   return (
     <>
       <h2 className="heading">About {belonging.title}</h2>
-      <RichText data={{ content: belonging.overview }} />
+      <MarkdownContent data={{ content: belonging.overview }} />
       <h2 className="heading">List of {belonging.title}</h2>
       {belonging.subType === 'WEAPONS' ? (
         <WeaponsSection weapons={belonging} world={world} />

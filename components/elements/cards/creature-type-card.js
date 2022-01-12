@@ -1,4 +1,4 @@
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 import CardContainer from '../card-container';
 
 export default function CreatureTypeCard({ type }) {
@@ -8,7 +8,7 @@ export default function CreatureTypeCard({ type }) {
         <div className="sm:col-span-2">
           <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Description</dt>
           <dd className="mt-1 text-sm space-y-4">
-            <RichText data={{ content: type.description }} />
+            <MarkdownContent data={{ content: type.description }} />
           </dd>
         </div>
       </dl>

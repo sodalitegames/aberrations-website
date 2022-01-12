@@ -450,6 +450,9 @@ collections:
               # Digital Tool
               { label: Digital Tool, name: digitalTool, widget: object, fields: [{ label: Tool, name: tool, widget: select, options: ['ROLL_DICE', 'GENERATE_INTERACTABLES'] }] },
 
+              # Rules
+              { label: Rules, name: rules, widget: object, fields: [{ label: Rules, name: rules, widget: select, options: ['PLAYER_RULES', 'CC_GUIDE', 'BETA_CHANGE_LOG'] }] },
+
               # Navigation Cards
               {
                 label: Navigation Cards,

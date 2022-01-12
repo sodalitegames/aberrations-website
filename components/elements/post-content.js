@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import Notice from './notice';
-import RichText from '../sections/rich-text';
+import MarkdownContent from '../sections/markdown-content';
 
 export const PostHeader = ({ post, notice }) => {
   return (
@@ -40,7 +40,7 @@ const PostContent = ({ post, notice }) => {
   return (
     <article>
       <PostHeader post={post} notice={notice} />
-      <RichText data={{ content: post.content }} />
+      <MarkdownContent data={{ content: post.content }} />
     </article>
   );
 };

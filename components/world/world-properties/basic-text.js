@@ -1,10 +1,10 @@
-import RichText from '../../sections/rich-text';
+import MarkdownContent from '../../sections/markdown-content';
 
 const BasicText = ({ data }) => {
   return (
     <>
       <h2 className="heading">{data.name}</h2>
-      <RichText data={{ content: data.about }} />
+      <MarkdownContent data={{ content: data.about }} />
     </>
   );
 };
