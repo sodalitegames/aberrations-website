@@ -8,23 +8,24 @@ import Religions from './world-sections/religions';
 import Species from './world-sections/species';
 import WorldHistory from './world-sections/world-history';
 
-// Map Strapi sections to section components
+// Map world sections to world section components
 const sectionComponents = {
-  ComponentWorldsBelongingsOverview: Belongings,
-  ComponentWorldsCorpoNations: Corponations,
-  ComponentWorldsCreatures: Creatures,
-  ComponentWorldsGeographyAndMaps: GeographyAndMaps,
-  ComponentWorldsOtherOrganizations: OtherOrganizations,
-  ComponentWorldsWorldOverview: Overview,
-  ComponentWorldsReligions: Religions,
-  ComponentWorldsSpecies: Species,
-  ComponentWorldsWorldHistory: WorldHistory,
+  belongings: Belongings,
+  corponations: Corponations,
+  creatures: Creatures,
+  'geography-and-maps': GeographyAndMaps,
+  'other-organizations': OtherOrganizations,
+  'world-overview': Overview,
+  religions: Religions,
+  species: Species,
+  'world-history': WorldHistory,
 };
 
 // Display a section individually
 const WorldSection = ({ section, world }) => {
+  console.log(section, world);
   // Prepare the component
-  const SectionComponent = sectionComponents[section.__typename];
+  const SectionComponent = sectionComponents[section.type];
 
   if (!SectionComponent) {
     return null;
@@ -35,15 +36,3 @@ const WorldSection = ({ section, world }) => {
 };
 
 export default WorldSection;
-
-// const apiSectionComponents = {
-//   'worlds.belongings-overview': Belongings,
-//   'worlds.corpo-nations': Corponations,
-//   'worlds.creatures': Creatures,
-//   'worlds.geography-and-maps': GeographyAndMaps,
-//   'worlds.other-organizations': OtherOrganizations,
-//   'worlds.world-overview': Overview,
-//   'worlds.religions': Religions,
-//   'worlds.species': Species,
-//   'worlds.world-history': WorldHistory,
-// };

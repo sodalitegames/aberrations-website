@@ -8,9 +8,9 @@ import UsablesSection from '../belonging-sections/usables';
 const SingleBelonging = ({ belonging, world }) => {
   return (
     <>
-      <h2 className="heading">About {belonging.title}</h2>
+      <h2 className="heading">About {belonging.metadata.title}</h2>
       <MarkdownContent data={{ content: belonging.overview }} />
-      <h2 className="heading">List of {belonging.title}</h2>
+      <h2 className="heading">List of {belonging.metadata.title}</h2>
       {belonging.subType === 'WEAPONS' ? (
         <WeaponsSection weapons={belonging} world={world} />
       ) : belonging.subType === 'WEARABLES' ? (

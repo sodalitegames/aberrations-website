@@ -906,125 +906,6 @@ export const QUERY_ALL_WORLDS_SECTION_PROPERTY_SLUGS = gql`
 export const QUERY_WORLD_NAVIGATION_DATA = gql`
   query WorldNavigationData($slug: String) {
     worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsWorldOverview {
-          metadata {
-            title
-            slug
-          }
-          sections {
-            name
-            slug
-          }
-        }
-        ... on ComponentWorldsSpecies {
-          metadata {
-            title
-            slug
-          }
-        }
-        ... on ComponentWorldsCreatures {
-          metadata {
-            title
-            slug
-          }
-        }
-        ... on ComponentWorldsBelongingsOverview {
-          metadata {
-            title
-            slug
-          }
-          weapons {
-            title
-            slug
-          }
-          wearables {
-            title
-            slug
-          }
-          consumables {
-            title
-            slug
-          }
-          usables {
-            title
-            slug
-          }
-        }
-        ... on ComponentWorldsCorpoNations {
-          metadata {
-            title
-            slug
-          }
-          list {
-            name
-            slug
-          }
-        }
-        ... on ComponentWorldsReligions {
-          metadata {
-            title
-            slug
-          }
-          list {
-            name
-            slug
-          }
-        }
-
-        ... on ComponentWorldsOtherOrganizations {
-          metadata {
-            title
-            slug
-          }
-          list {
-            name
-            slug
-          }
-        }
-
-        ... on ComponentWorldsGeographyAndMaps {
-          metadata {
-            title
-            slug
-          }
-          sections {
-            name
-            slug
-          }
-        }
-        ... on ComponentWorldsWorldHistory {
-          metadata {
-            title
-            slug
-          }
-          sections {
-            name
-            slug
-          }
-        }
-      }
-
-      creaturesList {
-        name
-        metadata {
-          title
-          slug
-        }
-        creatureTypes {
-          name
-          metadata {
-            title
-            slug
-          }
-        }
-      }
-
       speciesList {
         name
         metadata {
@@ -1032,49 +913,6 @@ export const QUERY_WORLD_NAVIGATION_DATA = gql`
           slug
         }
       }
-
-      weaponsList {
-        name
-        associatedStat
-        metadata {
-          title
-          slug
-        }
-      }
-
-      wearablesList {
-        name
-        bodyArea
-        metadata {
-          title
-          slug
-        }
-      }
-
-      consumablesList {
-        name
-        metadata {
-          title
-          slug
-        }
-        consumableCategories {
-          name
-          metadata {
-            title
-            slug
-          }
-        }
-      }
-
-      usablesList {
-        name
-        type
-        metadata {
-          title
-          slug
-        }
-      }
-
       creatureTypes {
         name
         metadata {
@@ -1082,7 +920,6 @@ export const QUERY_WORLD_NAVIGATION_DATA = gql`
           title
         }
       }
-
       consumableCategories {
         name
         metadata {

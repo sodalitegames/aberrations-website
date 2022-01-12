@@ -8,11 +8,11 @@ const Corponations = ({ data, world }) => {
     <>
       <h2 className="heading">{data.metadata.title}</h2>
       <MarkdownContent data={{ content: data.overview }} />
-      {data.list.map(corp => {
+      {data.sections.map(corp => {
         return (
-          <Link key={corp.name} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${corp.slug}`}>
+          <Link key={corp.metadata.title} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${corp.metadata.slug}`}>
             <a>
-              <OverviewCard heading={corp.name} overview={corp.metaDescription || corp.about.substring(0, 150)} />
+              <OverviewCard heading={corp.metadata.title} overview={corp.metadata.description || corp.about.substring(0, 150)} />
             </a>
           </Link>
         );
