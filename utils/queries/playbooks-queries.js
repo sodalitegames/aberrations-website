@@ -4,31 +4,6 @@ export const QUERY_SINGLE_PLAYBOOK = gql`
   query GetPlaybook($slug: String) {
     playbooks: worldPlaybooks(where: { slug: $slug }) {
       name
-      metadata {
-        title
-        slug
-        shareImage {
-          url
-        }
-        description
-        twitterUsername
-        twitterCardType
-      }
-      world {
-        name
-        metadata {
-          title
-          slug
-        }
-      }
-      overview
-      species
-      augmentations
-      weapons
-      consumables
-      creatures
-      worldRules
-      worldSummary
       consumableCategories {
         name
         description

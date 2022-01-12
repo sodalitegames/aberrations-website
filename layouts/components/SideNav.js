@@ -6,7 +6,7 @@ const SideNav = ({ navigation, classes, closePanel }) => {
   return (
     <nav className={classNames('space-y-1', classes)} aria-label="Sidebar">
       {navigation.map(item =>
-        !item.children.length ? (
+        !item.children?.length ? (
           <div key={item.name}>
             <a
               href={`#${item.idRef}`}
