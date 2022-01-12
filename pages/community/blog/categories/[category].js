@@ -78,7 +78,10 @@ export async function getStaticProps(context) {
     })
   );
 
-  const postsInCategory = allPosts.filter(post => {
+  // Only return published posts
+  let publishedPosts = allPosts.filter(post => post.state === 'Published');
+
+  const postsInCategory = publishedPosts.filter(post => {
     // Format includes text to match how the data string is stored in the posts relation property
     return post.categories.includes(`${metadata.title}__${metadata.slug}__${color}`);
   });
