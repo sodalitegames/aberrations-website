@@ -17,7 +17,7 @@ export default function FormSection({ heading, description, ariaTag, submitText,
           </div>
 
           <div className="px-4 py-3 bg-gray-50 dark:bg-dark-200 sm:px-6 flex justify-between items-center">
-            <span className="text-sm font-light text-gray-500 dark:text-gray-300">{submitDescription}</span>
+            <span className="text-sm font-base text-gray-500 dark:text-gray-300">{submitDescription}</span>
             <SubmitButton type={submitColor || 'secondary'} text={submitText} loading={processing} loadingText="Saving" notFull />
           </div>
         </div>
