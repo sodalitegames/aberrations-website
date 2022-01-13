@@ -1,17 +1,14 @@
 import Link from 'next/link';
 import ErrorPage from 'next/error';
-import { gql } from '@apollo/client';
-
-import client from '../../../lib/apollo-client';
 
 import PageLayout from '../../../layouts/PageLayout';
-import BlogPostCard from '../../../components/elements/blog-post-card';
+import BlogPostCard from '../../../components/blog/blog-post-card';
 import EmailCTA from '../../../components/elements/email-cta';
 
 const BlogPage = ({ posts, metadata }) => {
   // Check if the required data was provided
   if (!posts) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={500} />;
   }
 
   return (
@@ -25,9 +22,9 @@ const BlogPage = ({ posts, metadata }) => {
     >
       <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8 mt-2">
         {posts.map((post, index) => {
-          if (post.featuredPost) {
+          if (post.featured) {
             return (
-              <Link key={index} href={`/community/blog/${post.slug}`}>
+              <Link key={index} href={`/community/blog/${post.metadata.slug}`}>
                 <a className="p-6 rounded-md hover:bg-gray-50 dark:hover:bg-dark-150">
                   <BlogPostCard post={post} />
                 </a>
@@ -40,11 +37,11 @@ const BlogPage = ({ posts, metadata }) => {
       <EmailCTA ctaText="Get updates, tips, and tricks sent straight to your inbox." buttonText="Sign me up" />
       <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8 mt-8">
         {posts.map((post, index) => {
-          if (post.featuredPost) {
+          if (post.featured) {
             return null;
           }
           return (
-            <Link key={index} href={`/community/blog/${post.slug}`}>
+            <Link key={index} href={`/community/blog/${post.metadata.slug}`}>
               <a className="p-6 rounded-md hover:bg-gray-50 dark:hover:bg-dark-150">
                 <BlogPostCard post={post} />
               </a>
@@ -56,38 +53,29 @@ const BlogPage = ({ posts, metadata }) => {
   );
 };
 
-export async function getStaticProps(context) {
-  const { data } = await client.query({
-    query: gql`
-      query Posts {
-        posts(sort: "datePublished:desc") {
-          title
-          author
-          slug
-          datePublished
-          excerpt
-          featuredPost
-          restriction
-          categories {
-            name
-            slug
-            color
-          }
-        }
-      }
-    `,
-  });
+export async function getStaticProps() {
+  // Import blog page metadata
+  const page = await import('../../../content/pages/blog.md').catch(error => null);
+  const { metadata } = page.attributes;
 
-  // const posts = data.posts.filter(post => new Date(post.datePublished) < Date.now());
+  const slugs = (context => {
+    return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
+  })(require.context('../../../content/posts', true, /\.md$/));
+
+  const posts = await Promise.all(
+    slugs.map(async slug => {
+      const post = await import(`../../../content/posts/${slug}.md`).catch(error => null);
+      return { ...post.attributes, content: post.html };
+    })
+  );
+
+  // Only return published posts
+  let publishedPosts = posts.filter(post => post.state === 'Published');
 
   return {
     props: {
-      posts: data.posts,
-      metadata: {
-        title: 'Blog',
-        description: 'Explore our blog to learn more about role-playing, world building, game mastering (we call it CCing), creating campaigns, campaign stories, and more.',
-        slug: 'blog',
-      },
+      posts: publishedPosts,
+      metadata,
     },
   };
 }

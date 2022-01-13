@@ -223,12 +223,12 @@ export default function Account({ user }) {
             <p className="mt-2 text-sm text-red-600" id="verify-message">
               {emailSent && <p className={classNames('font-medium', emailSent.status === 'success' ? 'text-green-600' : 'text-red-600')}>{emailSent.message}</p>}
               {!emailSent && (
-                <p className="font-medium text-red-600">
+                <span className="font-medium text-red-600">
                   Your email is not verified. If you have not recieved a verfication email, you can{' '}
                   <span className="cursor-pointer underline hover:text-red-700" onClick={sendEmailVerificationHandler}>
                     send another one here.
                   </span>
-                </p>
+                </span>
               )}
             </p>
           )}

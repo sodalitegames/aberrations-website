@@ -8,7 +8,7 @@ import Sections from '../components/sections';
 const Home = ({ metadata, sections }) => {
   // Check if the required data was provided
   if (!sections?.length) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={500} />;
   }
 
   return (

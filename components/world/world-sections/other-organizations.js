@@ -8,11 +8,11 @@ const OtherOrganizations = ({ data, world }) => {
     <>
       <h2 className="heading">{data.metadata.title}</h2>
       <MarkdownContent data={{ content: data.overview }} />
-      {data.list.map(org => {
+      {data.sections.map(org => {
         return (
-          <Link key={org.name} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${org.slug}`}>
+          <Link key={org.metadata.title} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${org.metadata.slug}`}>
             <a>
-              <OverviewCard heading={org.name} overview={org.metaDescription || org.about.substring(0, 150)} />
+              <OverviewCard heading={org.metadata.title} overview={org.metadata.description || org.about.substring(0, 150)} />
             </a>
           </Link>
         );

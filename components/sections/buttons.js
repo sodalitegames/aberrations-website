@@ -4,7 +4,7 @@ import classNames from '../../utils/functions/classnames';
 
 const Buttons = ({ data }) => {
   return (
-    <div className="mt-8 inline-flex rounded-md shadow">
+    <div className="mt-4 space-x-2">
       {data.buttons.map((button, index) => {
         if (button.config !== 'STANDARD') {
           return <p>Not set up yet</p>;

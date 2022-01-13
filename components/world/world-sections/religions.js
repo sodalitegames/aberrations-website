@@ -8,11 +8,11 @@ const Religions = ({ data, world }) => {
     <>
       <h2 className="heading">{data.metadata.title}</h2>
       <MarkdownContent data={{ content: data.overview }} />
-      {data.list.map(rel => {
+      {data.sections.map(rel => {
         return (
-          <Link key={rel.name} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${rel.slug}`}>
+          <Link key={rel.metadata.title} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${rel.metadata.slug}`}>
             <a>
-              <OverviewCard heading={rel.name} overview={rel.metaDescription || rel.about.substring(0, 150)} />
+              <OverviewCard heading={rel.metadata.title} overview={rel.metadata.description || rel.about.substring(0, 150)} />
             </a>
           </Link>
         );

@@ -15,8 +15,8 @@ import RulesSection from './sections/rules-section';
 
 // Map page sections to section components
 const sectionComponents = {
-  // content: HtmlContent,
-  // content: MarkdownContent
+  htmlContent: HtmlContent,
+  content: MarkdownContent,
   digitalTool: DigitalTool,
   underConstruction: UnderConstruction,
   contactForm: ContactForm,

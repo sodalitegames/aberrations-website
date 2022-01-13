@@ -18,7 +18,7 @@ import { QUERY_SINGLE_PLAYBOOK } from '../../../utils/queries/playbooks-queries'
 const Playbook = ({ sections, data, metadata, navigation }) => {
   // Check if the required data was provided
   if (!sections || !data) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={500} />;
   }
 
   return (
@@ -116,9 +116,7 @@ export async function getStaticProps() {
 
   const playbook = await import(`../../../content/rules/avarice-world-playbook.md`).catch(error => null);
 
-  console.log(playbook.attributes);
-
-  const { name, navigation, metadata } = playbook.attributes;
+  const { navigation, metadata } = playbook.attributes;
 
   return {
     props: {

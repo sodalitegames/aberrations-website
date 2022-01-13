@@ -63,7 +63,7 @@ const Belongings = ({ data, world }) => {
         {data.lists.usables.map(usable => (
           <Link key={usable.name} href={`/worlds/${world.metadata.slug}/belongings/usables/${usable.metadata.slug}`}>
             <a>
-              <SmallGridItem primaryText={usable.name} secondaryText={usable.type} />
+              <SmallGridItem primaryText={usable.name} secondaryText={usable.type.replaceAll('_', ' ')} />
             </a>
           </Link>
         ))}
@@ -76,107 +76,3 @@ const Belongings = ({ data, world }) => {
 };
 
 export default Belongings;
-
-//import ErrorPage from 'next/error';
-// import Link from 'next/link';
-// import { gql } from '@apollo/client';
-
-// import client from '../../../lib/apollo-client';
-// import { QUERY_WORLDS_BELONGINGS } from '../../../utils/queries/worlds-queries';
-// import { getWorldNavigation } from '../../../utils/functions/get-world-navigation';
-
-// import PageLayout from '../../../layouts/PageLayout';
-// import WorldPageLayout from '../../../layouts/WorldPageLayout';
-// // import Sections from '../../../components/sections';
-// // import Seo from '../../../components/elements/seo';
-
-// import MarkdownContent from '../../../components/sections/markdown-content';
-// import SmallGridItem from '../../../components/elements/small-grid-item';
-
-// const BelongingsPage = ({ world, belongings, lists, navigation, metadata }) => {
-//   // Check if the required data was provided
-//   if (!world || !navigation || !belongings || !lists) {
-//     return <ErrorPage statusCode={404} />;
-//   }
-
-//   return (
-//     <PageLayout title={metadata.title} seo={metadata} custom>
-//       <WorldPageLayout
-//         heading={`Belongings of ${world.metadata.title}`}
-//         navigation={navigation}
-//         worldSlug={world.metadata.slug}
-//         breadcrumbs={[
-//           { name: 'Worlds', href: '/worlds' },
-//           { name: world.metadata.title, href: `/worlds/${world.metadata.slug}` },
-//           { name: 'Belongings', href: `/worlds/${world.metadata.slug}/belongings` },
-//         ]}
-//       >
-//
-//       </WorldPageLayout>
-//     </PageLayout>
-//   );
-// };
-
-// export async function getStaticPaths() {
-//   const { data } = await client.query({
-//     query: gql`
-//       query Worlds {
-//         worlds {
-//           metadata {
-//             slug
-//           }
-//         }
-//       }
-//     `,
-//   });
-
-//   const paths = data.worlds.map(world => ({
-//     params: {
-//       world: world.metadata.slug,
-//     },
-//   }));
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
-
-// export async function getStaticProps(context) {
-//   const { world } = context.params;
-
-//   const { data } = await client.query({
-//     query: QUERY_WORLDS_BELONGINGS,
-//     variables: { metadata: { slug: world } },
-//   });
-
-//   const currentWorld = data.worlds[0];
-
-//   const belongings = currentWorld.sections.find(section => section.__typename === 'ComponentWorldsBelongingsOverview');
-
-//   // GET WORLD NAVIGATION //
-//   const navigation = await getWorldNavigation(world, 'belongings');
-//   // END GET WORLD NAVIGATION //
-
-//   return {
-//     props: {
-//       world: {
-//         metadata: currentWorld.metadata,
-//       },
-//       belongings,
-//       metadata: {
-//         ...belongings.seoMetadata,
-//         title: `Belongings - ${currentWorld.metadata.title}`,
-//       },
-//       lists: {
-//         weapons: currentWorld.weaponsList,
-//         wearables: currentWorld.wearablesList,
-//         consumables: currentWorld.consumablesList,
-//         usables: currentWorld.usablesList,
-//       },
-//       navigation,
-//     },
-//   };
-// }
-
-// export default BelongingsPage;

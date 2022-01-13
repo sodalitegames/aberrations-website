@@ -1,9 +1,6 @@
 ---
 name: CC Guide
 parent: Get Started__get-started
-sections:
-  - type: rules
-    rules: CC_GUIDE
 metadata:
   title: CC Guide
   slug: cc-guide

@@ -6,7 +6,7 @@ import Sections from '../components/sections';
 const MainPage = ({ metadata, sections }) => {
   // Check if the required data was provided
   if (!sections) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={500} />;
   }
 
   return (
@@ -21,11 +21,7 @@ export const getStaticPaths = async () => {
     attributes: { paths: siteMap },
   } = await import('../content/settings/paths.md');
 
-  console.log(siteMap);
-
   const paths = siteMap.map(({ parent }) => ({ params: { main: parent } }));
-
-  console.log(paths);
 
   return {
     paths,
@@ -38,7 +34,7 @@ export const getStaticProps = async context => {
 
   const page = await import(`../content/pages/${main}.md`).catch(error => null);
 
-  const { name, metadata, sections = [] } = page.attributes;
+  const { metadata, sections = [] } = page.attributes;
 
   return {
     props: {

@@ -450,9 +450,6 @@ collections:
               # Digital Tool
               { label: Digital Tool, name: digitalTool, widget: object, fields: [{ label: Tool, name: tool, widget: select, options: ['ROLL_DICE', 'GENERATE_INTERACTABLES'] }] },
 
-              # Rules
-              { label: Rules, name: rules, widget: object, fields: [{ label: Rules, name: rules, widget: select, options: ['PLAYER_RULES', 'CC_GUIDE', 'BETA_CHANGE_LOG'] }] },
-
               # Navigation Cards
               {
                 label: Navigation Cards,
@@ -627,7 +624,8 @@ collections:
   - name: 'posts'
     label: 'Posts'
     label_singular: Post
-    identifier_field: name
+    summary: '{{name}}'
+    identifier_field: metadata.slug
     create: true
     folder: /content/posts
     fields:
@@ -651,7 +649,7 @@ collections:
           collection: 'categories',
           multiple: true,
           search_fields: ['metadata.slug'],
-          value_field: 'metadata.slug',
+          value_field: '{{metadata.title}}__{{metadata.slug}}__{{color}}',
           display_fields: ['name'],
         }
 
@@ -664,7 +662,7 @@ collections:
           multiple: true,
           required: false,
           search_fields: ['metadata.slug'],
-          value_field: 'metadata.slug',
+          value_field: metadata.slug,
           display_fields: ['name'],
         }
 
@@ -709,6 +707,19 @@ collections:
 
       # Color
       - { label: 'Color', name: 'color', widget: 'color' }
+
+      # Featured Posts
+      - {
+          label: 'Featured Posts',
+          name: 'featuredPosts',
+          widget: 'relation',
+          collection: 'posts',
+          multiple: true,
+          required: false,
+          search_fields: ['metadata.slug'],
+          value_field: '{{metadata.title}}__{{metadata.slug}}',
+          display_fields: ['name'],
+        }
 
       # Metadata
       - {

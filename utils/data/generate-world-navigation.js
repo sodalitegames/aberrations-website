@@ -1,187 +1,187 @@
 import { usablesTypes, weaponsAssociatedStats, wearableBodyAreas } from '../maps/belonging-categories';
 
-export const generateWorldNavigation = (world, current) => {
-  const navigation = world.sections.map(section => {
+export const generateWorldNavigation = (world, data, current) => {
+  const navigation = Object.entries(world).map(([key, section]) => {
     let children;
     const baseUrl = `/worlds/${world.metadata.slug}`;
 
-    switch (section.__typename) {
-      case 'ComponentWorldsWorldOverview':
+    switch (key) {
+      case 'worldOverview':
         // map sections as children
-        children = section.sections.map(el => ({ name: el.name, href: `${baseUrl}/world-overview/${el.slug}` }));
+        children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // create navigation object
         return {
-          name: 'World Overview',
+          name: section.metadata.title,
           icon: 'GlobeIcon',
-          current: !!(current === 'world-overview'),
-          href: `${baseUrl}/world-overview`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children,
         };
 
-      case 'ComponentWorldsSpecies':
+      case 'species':
         // map species as children
-        children = world.speciesList.map(spec => ({ name: spec.metadata.title, href: `${baseUrl}/species/${spec.metadata.slug}` }));
+        children = data.speciesList.map(spec => ({ name: spec.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${spec.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About Species', href: `${baseUrl}/species` });
+        children.unshift({ name: 'Species', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
-          name: 'Species',
+          name: section.metadata.title,
           icon: 'UserGroupIcon',
-          current: !!(current === 'species'),
-          href: `${baseUrl}/species`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children,
         };
 
-      case 'ComponentWorldsCreatures':
+      case 'creatures':
         // map creature types as children
-        children = world.creatureTypes.map(type => ({ name: type.name, href: `${baseUrl}/creatures#${type.metadata.slug}` }));
+        children = data.creatureTypes.map(type => ({ name: type.name, href: `${baseUrl}/${section.metadata.slug}#${type.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About Creatures', href: `${baseUrl}/creatures` });
+        children.unshift({ name: 'Creatures', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
           name: 'Creatures',
           icon: 'FolderOpenIcon',
-          current: !!(current === 'creatures'),
-          href: `${baseUrl}/creatures`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children,
         };
 
-      case 'ComponentWorldsBelongingsOverview':
+      case 'belongings':
         // map children of all four belongings
 
         // weapons
-        const weapons = weaponsAssociatedStats.map(stat => ({ name: stat, href: `${baseUrl}/belongings/weapons#${stat.toLowerCase()}` }));
+        const weapons = weaponsAssociatedStats.map(stat => ({ name: stat, href: `${baseUrl}/${section.metadata.slug}/weapons#${stat.toLowerCase()}` }));
         // add about to beginning of array
-        weapons.unshift({ name: 'About Weapons', href: `${baseUrl}/belongings/weapons` });
+        weapons.unshift({ name: 'Weapons', href: `${baseUrl}/${section.metadata.slug}/weapons` });
 
         // wearables
-        const wearables = wearableBodyAreas.map(area => ({ name: area, href: `${baseUrl}/belongings/wearables#${area.toLowerCase()}` }));
+        const wearables = wearableBodyAreas.map(area => ({ name: area, href: `${baseUrl}/${section.metadata.slug}/wearables#${area.toLowerCase()}` }));
         // add about to beginning of array
-        wearables.unshift({ name: 'About Wearables', href: `${baseUrl}/belongings/wearables` });
+        wearables.unshift({ name: 'Wearables', href: `${baseUrl}/${section.metadata.slug}/wearables` });
 
         // consumables
-        const consumables = world.consumableCategories.map(categ => ({ name: categ.name, href: `${baseUrl}/belongings/consumables#${categ.metadata.slug}` }));
+        const consumables = data.consumableCategories.map(categ => ({ name: categ.name, href: `${baseUrl}/${section.metadata.slug}/consumables#${categ.metadata.slug}` }));
         // add about to beginning of array
-        consumables.unshift({ name: 'About Consumables', href: `${baseUrl}/belongings/consumables` });
+        consumables.unshift({ name: 'Consumables', href: `${baseUrl}/${section.metadata.slug}/consumables` });
 
         // usables
-        const usables = usablesTypes.map(type => ({ name: type.replaceAll('_', ' '), href: `${baseUrl}/belongings/usables#${type.toLowerCase()}` }));
+        const usables = usablesTypes.map(type => ({ name: type.replaceAll('_', ' '), href: `${baseUrl}/${section.metadata.slug}/usables#${type.toLowerCase()}` }));
         // add about to beginning of array
-        usables.unshift({ name: 'About Usables', href: `${baseUrl}/belongings/usables` });
+        usables.unshift({ name: 'Usables', href: `${baseUrl}/${section.metadata.slug}/usables` });
 
         // create navigation object
         return {
-          name: 'Belongings',
+          name: section.metadata.title,
           icon: 'BriefcaseIcon',
-          current: !!(current === 'belongings'),
-          href: `${baseUrl}/belongings`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children: [
             {
-              name: 'About Belongings',
-              href: `${baseUrl}/belongings`,
+              name: 'Belongings',
+              href: `${baseUrl}/${section.metadata.slug}`,
             },
             {
-              name: section.weapons.title,
-              href: `${baseUrl}/belongings/weapons/${section.weapons.title}`,
+              name: section.weapons.metadata.title,
+              href: `${baseUrl}/${section.metadata.slug}/weapons/${section.weapons.metadata.slug}`,
               children: weapons,
             },
             {
-              name: section.wearables.title,
-              href: `${baseUrl}/belongings/wearables/${section.wearables.title}`,
+              name: section.wearables.metadata.title,
+              href: `${baseUrl}/${section.metadata.slug}/wearables/${section.wearables.metadata.slug}`,
               children: wearables,
             },
             {
-              name: section.consumables.title,
-              href: `${baseUrl}/belongings/consumables/${section.consumables.title}`,
+              name: section.consumables.metadata.title,
+              href: `${baseUrl}/${section.metadata.slug}/consumables/${section.consumables.metadata.slug}`,
               children: consumables,
             },
             {
-              name: section.usables.title,
-              href: `${baseUrl}/belongings/usables/${section.usables.title}`,
+              name: section.usables.metadata.title,
+              href: `${baseUrl}/${section.metadata.slug}/usables/${section.usables.metadata.slug}`,
               children: usables,
             },
           ],
         };
 
-      case 'ComponentWorldsCorpoNations':
+      case 'corponations':
         // map corponations as children
-        children = section.list.map(el => ({ name: el.name, href: `${baseUrl}/corponations/${el.slug}` }));
+        children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About CorpoNations', href: `${baseUrl}/corponations` });
+        children.unshift({ name: 'CorpoNations', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
-          name: 'CorpoNations',
+          name: section.metadata.title,
           icon: 'OfficeBuildingIcon',
-          current: !!(current === 'corponations'),
-          href: `${baseUrl}/corponations`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children,
         };
 
-      case 'ComponentWorldsReligions':
+      case 'religions':
         // map religions as children
-        children = section.list.map(el => ({ name: el.name, href: `${baseUrl}/religions/${el.slug}` }));
+        children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About Religions', href: `${baseUrl}/religions` });
+        children.unshift({ name: 'Religions', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
-          name: 'Religions',
+          name: section.metadata.title,
           icon: 'LibraryIcon',
-          current: !!(current === 'religions'),
-          href: `${baseUrl}/religions`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children,
         };
 
-      case 'ComponentWorldsOtherOrganizations':
+      case 'otherOrganizations':
         // map other organizations as children
-        children = section.list.map(el => ({ name: el.name, href: `${baseUrl}/other-organizations/${el.slug}` }));
+        children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About Other Orgs', href: `${baseUrl}/other-organizations` });
+        children.unshift({ name: 'Other Organizations', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
-          name: 'Other Orgs',
+          name: section.metadata.title,
           icon: 'IdentificationIcon',
-          current: !!(current === 'other-organizations'),
-          href: `${baseUrl}/other-organizations`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children,
         };
 
-      case 'ComponentWorldsGeographyAndMaps':
+      case 'geographyAndMaps':
         // map sections as children
-        children = section.sections.map(el => ({ name: el.name, href: `${baseUrl}/geography-and-maps/${el.slug}` }));
+        children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // add maps to beginning of array
-        children.unshift({ name: 'World Maps', href: `${baseUrl}/geography-and-maps` });
+        children.unshift({ name: 'World Maps', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
-          name: 'Geography & Maps',
+          name: section.metadata.title,
           icon: 'MapIcon',
-          current: !!(current === 'geography-and-maps'),
-          href: `${baseUrl}/geography-and-maps`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children,
         };
 
-      case 'ComponentWorldsWorldHistory':
+      case 'worldHistory':
         // map sections as children
-        children = section.sections.map(el => ({ name: el.name, href: `${baseUrl}/world-history/${el.slug}` }));
+        children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // create navigation object
         return {
-          name: 'World History',
+          name: section.metadata.title,
           icon: 'BookmarkAltIcon',
-          current: !!(current === 'world-history'),
-          href: `${baseUrl}/world-history`,
+          current: !!(current === section.metadata.slug),
+          href: `${baseUrl}/${section.metadata.slug}`,
           children,
         };
 
@@ -190,5 +190,5 @@ export const generateWorldNavigation = (world, current) => {
     }
   });
 
-  return navigation;
+  return { worldNav: navigation.filter(item => item), worldName: world.metadata.title };
 };

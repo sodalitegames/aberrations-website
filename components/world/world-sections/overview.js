@@ -10,9 +10,9 @@ const Overview = ({ data, world }) => {
       <MarkdownContent data={{ content: data.overview }} />
       {data.sections.map(sect => {
         return (
-          <Link key={sect.name} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${sect.slug}`}>
+          <Link key={sect.metadata.title} href={`/worlds/${world.metadata.slug}/${data.metadata.slug}/${sect.metadata.slug}`}>
             <a>
-              <OverviewCard heading={sect.name} overview={sect.metaDescription || sect.about.substring(0, 150)} noImage />
+              <OverviewCard heading={sect.metadata.title} overview={sect.metadata.description || sect.about.substring(0, 150)} noImage />
             </a>
           </Link>
         );

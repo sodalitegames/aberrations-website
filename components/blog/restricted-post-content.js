@@ -76,7 +76,9 @@ const RestrictedPostContent = ({ post, member, paidPlan }) => {
               <p className="md:ml-8 mt-8 py-8 text-xl text-center md:text-left font-medium italic">&quot;{post.excerpt}&quot;</p>
             </div>
           ) : null}
-          <div className="w-full md:w-1/2 mx-auto">{hasAccount ? <SigninForm redirectPath={`/community/blog/${post.slug}`} /> : <SignupForm redirectPath={`/community/blog/${post.slug}`} />}</div>
+          <div className="w-full md:w-1/2 mx-auto">
+            {hasAccount ? <SigninForm redirectPath={`/community/blog/${post.metadata.slug}`} /> : <SignupForm redirectPath={`/community/blog/${post.metadata.slug}`} />}
+          </div>
         </div>
       </div>
     </article>

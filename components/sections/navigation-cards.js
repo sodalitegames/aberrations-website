@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { getIcon } from '../../utility/get-icon';
+import { getIcon } from '../../utils/functions/get-icon';
 
 const NavigationCards = ({ data }) => {
   if (data.config === 'LIST') {
@@ -36,7 +36,7 @@ const NavigationCards = ({ data }) => {
 
   if (data.config === 'GRID') {
     return (
-      <div className="relative py-16">
+      <div className="relative">
         <div className="mx-auto px-4 text-center sm:px-6 lg:px-8">
           <div className="mt-12">
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">

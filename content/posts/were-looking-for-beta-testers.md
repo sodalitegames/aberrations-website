@@ -4,7 +4,7 @@ name: We're Looking for Beta Testers!
 author: Aberrations RPG
 date: 2021-10-13T20:44:36.153Z
 categories:
-  - announcements-and-updates
+  - Announcements & Updates__announcements-and-updates__#abab1a
 relatedPosts:
   - isle-saint-lemon-chapter-one
 featured: true

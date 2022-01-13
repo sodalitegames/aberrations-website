@@ -148,13 +148,13 @@ navigation:
   - name: Species
     idRef: species
   - name: Augmentations
-    idRef: augmentations
+    idRef: augmentation-groups
   - name: Weapons
     idRef: weapons
   - name: Consumables
-    idRef: consumables
+    idRef: consumable-categories
   - name: Creatures
-    idRef: creatures
+    idRef: creature-types
   - name: World Rules
     idRef: world-rules
   - name: World Summary
