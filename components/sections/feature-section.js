@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { ExternalLinkIcon } from '@heroicons/react/outline';
 
-import { getIcon } from '../../utility/get-icon';
+import { getIcon } from '../../utils/functions/get-icon';
 
 export default function FeatureWithScreenshot({ data }) {
   const icon = getIcon(data.iconRef);

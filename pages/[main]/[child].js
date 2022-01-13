@@ -3,7 +3,7 @@ import ErrorPage from 'next/error';
 import PageLayout from '../../layouts/PageLayout';
 import Sections from '../../components/sections';
 
-import { getParent } from '../../utility/split-data';
+import { getParent } from '../../utils/functions/split-data';
 
 const ChildPage = ({ parent, metadata, sections }) => {
   // Check if the required data was provided

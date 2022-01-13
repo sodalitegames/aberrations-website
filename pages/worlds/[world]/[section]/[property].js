@@ -1,4 +1,5 @@
 import ErrorPage from 'next/error';
+import { gql } from '@apollo/client';
 
 import client from '../../../../lib/apollo-client';
 
@@ -6,10 +7,10 @@ import { QUERY_WORLD_WEAPONS, QUERY_WORLD_WEARABLES, QUERY_WORLD_CONSUMABLES, QU
 import { QUERY_SINGLE_SPECIES } from '../../../../utils/queries/species-queries';
 import { QUERY_SINGLE_CREATURE } from '../../../../utils/queries/creature-queries';
 
-import { getSectionPropertySlugs } from '../../../../utils/functions/get-section-property-slugs';
-import { fetchWorldNavigationData } from '../../../../utils/functions/fetch-world-navigation-data';
+import { getPropertySlugs } from '../../../../utils/data/get-property-slugs';
+import { fetchWorldNavigationData } from '../../../../utils/data/fetch-world-navigation-data';
 import { generateWorldNavigation } from '../../../../utils/data/generate-world-navigation';
-import { getCurrentProperty } from '../../../../utils/functions/get-current-property';
+import { getCurrentProperty } from '../../../../utils/data/get-current-property';
 import { worldSections } from '../../../../utils/maps/world-sections';
 
 import PageLayout from '../../../../layouts/PageLayout';
@@ -50,33 +51,60 @@ export default function SingleProperty({ world, section, property, metadata, nav
 
 export async function getStaticPaths() {
   const { data } = await client.query({
-    query: QUERY_ALL_WORLDS_SECTION_PROPERTY_SLUGS,
+    query: gql`
+      query PropertySlugs {
+        worlds {
+          metadata {
+            slug
+          }
+          creaturesList {
+            metadata {
+              slug
+            }
+          }
+          speciesList {
+            metadata {
+              slug
+            }
+          }
+        }
+      }
+    `,
   });
 
-  let paths = [];
+  // get the slugs of all the worlds
+  const slugs = (context => {
+    return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
+  })(require.context('../../../../content/worlds', true, /\.md$/));
 
-  data.worlds.forEach(world => {
-    // create the routes for each world section
-    world.sections.forEach(sect => {
-      // get the list of section slugs and children/property slugs
-      const sectionContent = getSectionPropertySlugs(sect, world);
+  // map through the world slugs to create paths
+  let paths = await Promise.all(
+    slugs.map(async worldSlug => {
+      // import the markdown content for each world
+      const worldContent = await import(`../../../../content/worlds/${worldSlug}.md`).catch(error => null);
+      const worldData = data.worlds.find(world => world.metadata.slug === worldSlug);
 
-      if (!sectionContent.children) return null;
+      // map through each world section
+      return Object.entries(worldContent.attributes)
+        .filter(([key, section]) => section.metadata)
+        .map(([key, section]) => {
+          const propertyPaths = getPropertySlugs({ type: key, ...section }, worldData);
 
-      // create the routes for each item in a sections list of sub-sections
-      const propertyParams = sectionContent.children
-        .map(el => ({
-          params: {
-            world: world.metadata.slug,
-            section: sectionContent.slug,
-            property: el.slug,
-          },
-        }))
-        .filter(param => param && param.params.property);
+          // create routes for each property of each world section
+          return propertyPaths.map(property => ({
+            params: {
+              world: worldContent.attributes.metadata.slug,
+              section: section.metadata.slug,
+              property: property.slug,
+            },
+          }));
+        })
+        .reduce((oldArr, newArr) => [...oldArr, ...newArr], []);
+    })
+  );
 
-      paths = [...paths, ...propertyParams];
-    });
-  });
+  // combine the arrays into a single array
+  paths = paths.reduce((oldArr, newArr) => [...oldArr, ...newArr], []);
 
   return {
     paths,

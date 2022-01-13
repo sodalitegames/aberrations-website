@@ -4,7 +4,7 @@ import NewlineText from '../utility/newline-text';
 
 import CardContainer from '../elements/card-container';
 
-import { getPost } from '../../utility/split-data';
+import { getPost } from '../../utils/functions/split-data';
 
 export default function CategoryCard({ category }) {
   return (

@@ -6,7 +6,7 @@ import MarkdownContent from '../components/sections/markdown-content';
 
 import EmailCTA from '../components/elements/email-cta';
 
-import { parseDateShort } from '../utility/parse-date';
+import { parseDateShort } from '../utils/functions/parse-date';
 
 const BetaChangeLog = ({ changeLogs, metadata }) => {
   // Check if the required data was provided

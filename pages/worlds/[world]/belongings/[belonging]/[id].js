@@ -4,8 +4,9 @@ import { gql } from '@apollo/client';
 import client from '../../../../../lib/apollo-client';
 
 import { QUERY_SINGLE_WEAPON, QUERY_SINGLE_WEARABLE, QUERY_SINGLE_CONSUMABLE, QUERY_SINGLE_USABLE } from '../../../../../utils/queries/belonging-queries';
-import { getSectionPropertySlugs } from '../../../../../utils/functions/get-section-property-slugs';
-import { getWorldNavigation } from '../../../../../utils/functions/get-world-navigation';
+import { getPropertySlugs } from '../../../../../utils/data/get-property-slugs';
+import { fetchWorldNavigationData } from '../../../../../utils/data/fetch-world-navigation-data';
+import { generateWorldNavigation } from '../../../../../utils/data/generate-world-navigation';
 
 import PageLayout from '../../../../../layouts/PageLayout';
 import WorldPageLayout from '../../../../../layouts/WorldPageLayout';
@@ -23,25 +24,25 @@ const SingleBelonging = ({ belonging, belongingType, world, navigation, metadata
   return (
     <PageLayout title={metadata.title} seo={metadata} custom>
       <WorldPageLayout
-        heading={`${world.metadata.title} ${belongingType.title}: ${belonging.metadata.title}`}
+        heading={`${world.metadata.title} ${belongingType.metadata.title}: ${belonging.metadata.title}`}
         navigation={navigation}
         worldSlug={world.metadata.slug}
         breadcrumbs={[
           { name: 'Worlds', href: '/worlds' },
           { name: world.metadata.title, href: `/worlds/${world.metadata.slug}` },
           { name: 'Belongings', href: `/worlds/${world.metadata.slug}/belongings` },
-          { name: belongingType.title, href: `/worlds/${world.metadata.slug}/belongings/${belongingType.slug}` },
-          { name: belonging.metadata.title, href: `/worlds/${world.metadata.slug}/belongings/${belongingType.slug}/${belonging.metadata.slug}` },
+          { name: belongingType.metadata.title, href: `/worlds/${world.metadata.slug}/belongings/${belongingType.metadata.slug}` },
+          { name: belonging.metadata.title, href: `/worlds/${world.metadata.slug}/belongings/${belongingType.metadata.slug}/${belonging.metadata.slug}` },
         ]}
       >
         <h2 className="heading">{belonging.name} Info</h2>
-        {belongingType.type === 'WEAPONS' ? (
+        {belonging.__typename === 'Weapons' ? (
           <WeaponCard weapon={belonging} verbose />
-        ) : belongingType.type === 'WEARABLES' ? (
+        ) : belonging.__typename === 'Wearables' ? (
           <WearableCard wearable={belonging} />
-        ) : belongingType.type === 'CONSUMABLES' ? (
+        ) : belonging.__typename === 'Consumables' ? (
           <ConsumableCard consumable={belonging} />
-        ) : belongingType.type === 'USABLES' ? (
+        ) : belonging.__typename === 'Usables' ? (
           <UsableCard usable={belonging} />
         ) : null}
       </WorldPageLayout>
@@ -52,26 +53,10 @@ const SingleBelonging = ({ belonging, belongingType, world, navigation, metadata
 export async function getStaticPaths() {
   const { data } = await client.query({
     query: gql`
-      query Worlds {
+      query PropertySlugs {
         worlds {
           metadata {
             slug
-          }
-          sections {
-            ... on ComponentWorldsBelongingsOverview {
-              weapons {
-                slug
-              }
-              wearables {
-                slug
-              }
-              consumables {
-                slug
-              }
-              usables {
-                slug
-              }
-            }
           }
           weaponsList {
             metadata {
@@ -98,41 +83,55 @@ export async function getStaticPaths() {
     `,
   });
 
-  let paths = [];
+  // get the slugs of all the worlds
+  const slugs = (context => {
+    return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
+  })(require.context('../../../../../content/worlds', true, /\.md$/));
 
-  data.worlds.forEach(world => {
-    // get the four belonging routes slugs
-    const belSect = world.sections.find(sect => sect.__typename === 'ComponentWorldsBelongingsOverview');
+  // map through the world slugs to create paths
+  let paths = await Promise.all(
+    slugs.map(async worldSlug => {
+      // import the markdown content for each world
+      const worldContent = await import(`../../../../../content/worlds/${worldSlug}.md`).catch(error => null);
+      const worldData = data.worlds.find(world => world.metadata.slug === worldSlug);
 
-    // get the slugs
-    const belMetadata = getSectionPropertySlugs(belSect, world);
+      const propertyPaths = getPropertySlugs({ type: 'belongings', ...worldContent.attributes['belongings'] }, worldData);
 
-    // create the four belongings routes for each world
-    belMetadata.children.forEach(bel => {
-      // create each individual belonging route for each belonging type
-      const belongingParams = world[`${bel.slug}List`].map(indBel => ({
-        params: {
-          world: world.metadata.slug,
-          belonging: bel.slug,
-          id: indBel.metadata.slug,
-        },
-      }));
-      paths = [...paths, ...belongingParams];
-    });
-  });
+      // map through each belongings property
+      return propertyPaths
+        .map(property => {
+          // map through belongings list and create routes for each individual belonging
+          return worldData[`${property.slug}List`].map(indBel => ({
+            params: {
+              world: worldContent.attributes.metadata.slug,
+              belonging: property.slug,
+              id: indBel.metadata.slug,
+            },
+          }));
+        })
+        .reduce((oldArr, newArr) => [...oldArr, ...newArr], []);
+    })
+  );
+
+  console.log(paths);
+
+  // combine the arrays into a single array
+  paths = paths.reduce((oldArr, newArr) => [...oldArr, ...newArr], []);
+
+  console.log(paths);
 
   return {
-    paths: paths,
+    paths,
     fallback: false,
   };
 }
 
 export async function getStaticProps(context) {
-  const { world, belonging, id } = context.params;
+  const { world: _world_param, belonging: _belonging_param, id: _id_param } = context.params;
 
   let query;
 
-  switch (belonging) {
+  switch (_belonging_param) {
     case 'weapons':
       query = QUERY_SINGLE_WEAPON;
       break;
@@ -149,38 +148,38 @@ export async function getStaticProps(context) {
 
   const { data } = await client.query({
     query,
-    variables: { slug: id, worldSlug: world },
+    variables: { slug: _id_param },
   });
 
-  const currentBelonging = data[belonging][0];
+  const worldContent = await import(`../../../../../content/worlds/${_world_param}.md`).catch(error => null);
 
-  const currentWorld = data.worlds[0];
+  const worldMetadata = worldContent.attributes.metadata;
 
-  const belongingsSection = currentWorld.sections.filter(sect => sect.__typename === 'ComponentWorldsBelongingsOverview')[0];
+  const belongingType = worldContent.attributes.belongings[_belonging_param];
 
-  const belongingContent = {
-    title: belongingsSection[belonging].title,
-    slug: belonging,
-    type: belonging.toUpperCase(),
-    description: belongingsSection[belonging].metaDescription,
-  };
+  console.log('belonging type', belongingType);
+
+  const currentBelonging = data[_belonging_param][0];
+
+  console.log('current belonging', currentBelonging);
 
   // GET WORLD NAVIGATION //
-  const navigation = await getWorldNavigation(world, 'belongings');
+  const navigationData = await fetchWorldNavigationData(_world_param);
+  const navigation = generateWorldNavigation(worldContent.attributes, navigationData, 'belongings');
   // END GET WORLD NAVIGATION //
 
   return {
     props: {
       world: {
-        name: currentWorld.name,
-        metadata: currentWorld.metadata,
+        name: worldMetadata.title,
+        metadata: worldMetadata,
       },
-      belongingType: belongingContent,
+      belongingType,
       belonging: currentBelonging,
       metadata: {
         ...currentBelonging.metadata,
-        title: `${currentBelonging.metadata.title} - ${currentWorld.metadata.title} ${belongingContent.title}`,
-        description: currentBelonging.metadata.description || belongingContent.description,
+        title: `${currentBelonging.metadata.title} - ${worldMetadata.title} ${belongingType.metadata.title}`,
+        description: currentBelonging.metadata.description || belongingType.metadata.description,
       },
       navigation,
     },

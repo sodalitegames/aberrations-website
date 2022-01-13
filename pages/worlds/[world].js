@@ -1,6 +1,6 @@
 import ErrorPage from 'next/error';
 
-import { fetchWorldNavigationData } from '../../utils/functions/fetch-world-navigation-data';
+import { fetchWorldNavigationData } from '../../utils/data/fetch-world-navigation-data';
 import { generateWorldNavigation } from '../../utils/data/generate-world-navigation';
 
 import PageLayout from '../../layouts/PageLayout';

@@ -1,77 +1,11 @@
 import { gql } from '@apollo/client';
 
-// QUERY INDIVIDUAL SECTIONS
-
-export const QUERY_WORLD_OVERVIEW = gql`
-  query WorldOverview($slug: String) {
-    worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsWorldOverview {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-          sections {
-            name
-            slug
-            about
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-    }
-  }
-`;
+// QUERY WORLD SECTIONS
 
 export const QUERY_WORLD_SPECIES = gql`
   query WorldSpecies($slug: String) {
     worlds(where: { slug: $slug }) {
       name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsSpecies {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-        }
-      }
-
       speciesList {
         name
         metadata {
@@ -113,30 +47,6 @@ export const QUERY_WORLD_CREATURES = gql`
   query WorldCreatures($slug: String) {
     worlds(where: { slug: $slug }) {
       name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsCreatures {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-        }
-      }
-
       creaturesList {
         name
         metadata {
@@ -167,7 +77,6 @@ export const QUERY_WORLD_CREATURES = gql`
           description
         }
       }
-
       creatureTypes {
         name
         description
@@ -184,50 +93,6 @@ export const QUERY_WORLD_BELONGINGS = gql`
   query WorldBelongings($slug: String) {
     worlds(where: { slug: $slug }) {
       name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-          weapons {
-            overview
-            title
-            slug
-          }
-          wearables {
-            overview
-            title
-            slug
-          }
-          consumables {
-            overview
-            title
-            slug
-          }
-          usables {
-            overview
-            title
-            slug
-          }
-        }
-      }
-
       weaponsList {
         name
         metadata {
@@ -274,301 +139,12 @@ export const QUERY_WORLD_BELONGINGS = gql`
   }
 `;
 
-export const QUERY_WORLD_CORPONATIONS = gql`
-  query WorldCorponations($slug: String) {
-    worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsCorpoNations {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-          list {
-            name
-            slug
-            about
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_WORLD_RELIGIONS = gql`
-  query WorldReligions($slug: String) {
-    worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsReligions {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-          list {
-            name
-            slug
-            about
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_WORLD_OTHER_ORGANIZATIONS = gql`
-  query WorldOtherOrganizations($slug: String) {
-    worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsOtherOrganizations {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-          list {
-            name
-            slug
-            about
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_WORLD_GEOGRAPHY_AND_MAPS = gql`
-  query WorldGeographyAndMaps($slug: String) {
-    worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsGeographyAndMaps {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-          maps {
-            name
-            about
-            image {
-              url
-            }
-          }
-          sections {
-            name
-            slug
-            about
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_WORLD_HISTORY = gql`
-  query WorldHistory($slug: String) {
-    worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsWorldHistory {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            title
-            slug
-            shareImage {
-              url
-            }
-            description
-            twitterUsername
-            twitterCardType
-          }
-          sections {
-            name
-            slug
-            about
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-    }
-  }
-`;
-
-// INDIVIDUAL BELONGING PROPERTY QUERIES
-
-export const QUERY_WORLD_SPECIES_INDIVIDUAL = gql`
-  query WorldSpeciesIndividual($slug: String) {
-    worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsSpecies {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            description
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_WORLD_CREATURES_INDIVIDUAL = gql`
-  query WorldCreaturesIndividual($slug: String) {
-    worlds(where: { slug: $slug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsCreatures {
-          overview
-          metadata {
-            title
-            slug
-          }
-          seoMetadata {
-            description
-          }
-        }
-      }
-    }
-  }
-`;
+// QUERY WORLD BELONGINGS
 
 export const QUERY_WORLD_WEAPONS = gql`
   query WorldWeapons($slug: String) {
     worlds(where: { slug: $slug }) {
       name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          metadata {
-            title
-            slug
-          }
-          weapons {
-            overview
-            title
-            slug
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-
       weaponsList {
         name
         metadata {
@@ -593,30 +169,6 @@ export const QUERY_WORLD_WEARABLES = gql`
   query WorldWearables($slug: String) {
     worlds(where: { slug: $slug }) {
       name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          metadata {
-            title
-            slug
-          }
-          wearables {
-            overview
-            title
-            slug
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-
       wearablesList {
         name
         metadata {
@@ -641,29 +193,6 @@ export const QUERY_WORLD_CONSUMABLES = gql`
   query WorldConsumables($slug: String) {
     worlds(where: { slug: $slug }) {
       name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          metadata {
-            title
-            slug
-          }
-          consumables {
-            overview
-            title
-            slug
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
       consumablesList {
         name
         metadata {
@@ -682,7 +211,6 @@ export const QUERY_WORLD_CONSUMABLES = gql`
           description
         }
       }
-
       consumableCategories {
         name
         description
@@ -699,30 +227,6 @@ export const QUERY_WORLD_USABLES = gql`
   query WorldUsables($slug: String) {
     worlds(where: { slug: $slug }) {
       name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          metadata {
-            title
-            slug
-          }
-          usables {
-            overview
-            title
-            slug
-            metaDescription
-            metaShareImage {
-              url
-            }
-            metaTwitterUsername
-            metaTwitterCardType
-          }
-        }
-      }
-
       usablesList {
         name
         metadata {
@@ -733,168 +237,6 @@ export const QUERY_WORLD_USABLES = gql`
         type
         image {
           url
-        }
-      }
-    }
-  }
-`;
-
-// QUERY SECTION AND SECTION PROPERTY SLUGS
-
-export const QUERY_ALL_WORLDS_SECTION_SLUGS = gql`
-  query SectionSlugs {
-    worlds {
-      metadata {
-        slug
-      }
-      sections {
-        ... on ComponentWorldsWorldOverview {
-          metadata {
-            slug
-          }
-        }
-        ... on ComponentWorldsSpecies {
-          metadata {
-            slug
-          }
-        }
-        ... on ComponentWorldsCreatures {
-          metadata {
-            slug
-          }
-        }
-        ... on ComponentWorldsBelongingsOverview {
-          metadata {
-            slug
-          }
-        }
-        ... on ComponentWorldsCorpoNations {
-          metadata {
-            slug
-          }
-        }
-        ... on ComponentWorldsReligions {
-          metadata {
-            slug
-          }
-        }
-
-        ... on ComponentWorldsOtherOrganizations {
-          metadata {
-            slug
-          }
-        }
-
-        ... on ComponentWorldsGeographyAndMaps {
-          metadata {
-            slug
-          }
-        }
-        ... on ComponentWorldsWorldHistory {
-          metadata {
-            slug
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_ALL_WORLDS_SECTION_PROPERTY_SLUGS = gql`
-  query SectionPropertySlugs {
-    worlds {
-      metadata {
-        slug
-      }
-      sections {
-        ... on ComponentWorldsWorldOverview {
-          metadata {
-            slug
-          }
-          sections {
-            slug
-          }
-        }
-        ... on ComponentWorldsSpecies {
-          metadata {
-            slug
-          }
-        }
-        ... on ComponentWorldsCreatures {
-          metadata {
-            slug
-          }
-        }
-        ... on ComponentWorldsBelongingsOverview {
-          metadata {
-            slug
-          }
-          weapons {
-            slug
-          }
-          wearables {
-            slug
-          }
-          consumables {
-            slug
-          }
-          usables {
-            slug
-          }
-        }
-        ... on ComponentWorldsCorpoNations {
-          metadata {
-            slug
-          }
-          list {
-            slug
-          }
-        }
-        ... on ComponentWorldsReligions {
-          metadata {
-            slug
-          }
-          list {
-            slug
-          }
-        }
-
-        ... on ComponentWorldsOtherOrganizations {
-          metadata {
-            slug
-          }
-          list {
-            slug
-          }
-        }
-
-        ... on ComponentWorldsGeographyAndMaps {
-          metadata {
-            slug
-          }
-          sections {
-            slug
-          }
-        }
-        ... on ComponentWorldsWorldHistory {
-          metadata {
-            slug
-          }
-          sections {
-            slug
-          }
-        }
-      }
-
-      creaturesList {
-        metadata {
-          slug
-        }
-      }
-
-      speciesList {
-        metadata {
-          slug
         }
       }
     }

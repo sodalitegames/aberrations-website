@@ -11,7 +11,7 @@ import SectionDivider from '../../components/elements/section-divider';
 import Notice from '../../components/elements/notice';
 import NpcTable from '../../components/elements/npc-table';
 
-import { getSlug } from '../../utility/get-slug';
+import { getSlug } from '../../utils/functions/get-slug';
 
 const CCGuide = ({ ccGuide, presetNpcTypes, navigation, metadata }) => {
   // Check if the required data was provided

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { parseDate } from '../../utility/parse-date';
-import { getCategory } from '../../utility/split-data';
+import { parseDate } from '../../utils/functions/parse-date';
+import { getCategory } from '../../utils/functions/split-data';
 
 import HtmlContent from '../sections/html-content';
 

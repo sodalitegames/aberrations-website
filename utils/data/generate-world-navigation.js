@@ -24,7 +24,7 @@ export const generateWorldNavigation = (world, data, current) => {
         children = data.speciesList.map(spec => ({ name: spec.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${spec.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About Species', href: `${baseUrl}/${section.metadata.slug}` });
+        children.unshift({ name: 'Species', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
@@ -40,7 +40,7 @@ export const generateWorldNavigation = (world, data, current) => {
         children = data.creatureTypes.map(type => ({ name: type.name, href: `${baseUrl}/${section.metadata.slug}#${type.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About Creatures', href: `${baseUrl}/${section.metadata.slug}` });
+        children.unshift({ name: 'Creatures', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
@@ -57,22 +57,22 @@ export const generateWorldNavigation = (world, data, current) => {
         // weapons
         const weapons = weaponsAssociatedStats.map(stat => ({ name: stat, href: `${baseUrl}/${section.metadata.slug}/weapons#${stat.toLowerCase()}` }));
         // add about to beginning of array
-        weapons.unshift({ name: 'About Weapons', href: `${baseUrl}/${section.metadata.slug}/weapons` });
+        weapons.unshift({ name: 'Weapons', href: `${baseUrl}/${section.metadata.slug}/weapons` });
 
         // wearables
         const wearables = wearableBodyAreas.map(area => ({ name: area, href: `${baseUrl}/${section.metadata.slug}/wearables#${area.toLowerCase()}` }));
         // add about to beginning of array
-        wearables.unshift({ name: 'About Wearables', href: `${baseUrl}/${section.metadata.slug}/wearables` });
+        wearables.unshift({ name: 'Wearables', href: `${baseUrl}/${section.metadata.slug}/wearables` });
 
         // consumables
         const consumables = data.consumableCategories.map(categ => ({ name: categ.name, href: `${baseUrl}/${section.metadata.slug}/consumables#${categ.metadata.slug}` }));
         // add about to beginning of array
-        consumables.unshift({ name: 'About Consumables', href: `${baseUrl}/${section.metadata.slug}/consumables` });
+        consumables.unshift({ name: 'Consumables', href: `${baseUrl}/${section.metadata.slug}/consumables` });
 
         // usables
         const usables = usablesTypes.map(type => ({ name: type.replaceAll('_', ' '), href: `${baseUrl}/${section.metadata.slug}/usables#${type.toLowerCase()}` }));
         // add about to beginning of array
-        usables.unshift({ name: 'About Usables', href: `${baseUrl}/${section.metadata.slug}/usables` });
+        usables.unshift({ name: 'Usables', href: `${baseUrl}/${section.metadata.slug}/usables` });
 
         // create navigation object
         return {
@@ -82,7 +82,7 @@ export const generateWorldNavigation = (world, data, current) => {
           href: `${baseUrl}/${section.metadata.slug}`,
           children: [
             {
-              name: 'About Belongings',
+              name: 'Belongings',
               href: `${baseUrl}/${section.metadata.slug}`,
             },
             {
@@ -113,7 +113,7 @@ export const generateWorldNavigation = (world, data, current) => {
         children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About CorpoNations', href: `${baseUrl}/${section.metadata.slug}` });
+        children.unshift({ name: 'CorpoNations', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
@@ -129,7 +129,7 @@ export const generateWorldNavigation = (world, data, current) => {
         children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About Religions', href: `${baseUrl}/${section.metadata.slug}` });
+        children.unshift({ name: 'Religions', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
@@ -145,7 +145,7 @@ export const generateWorldNavigation = (world, data, current) => {
         children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // add about to beginning of array
-        children.unshift({ name: 'About Other Orgs', href: `${baseUrl}/${section.metadata.slug}` });
+        children.unshift({ name: 'Other Organizations', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {
@@ -161,7 +161,7 @@ export const generateWorldNavigation = (world, data, current) => {
         children = section.sections.map(el => ({ name: el.metadata.title, href: `${baseUrl}/${section.metadata.slug}/${el.metadata.slug}` }));
 
         // add maps to beginning of array
-        children.unshift({ name: 'World Maps', href: `${baseUrl}/${section.metadata.slug}/maps` });
+        children.unshift({ name: 'World Maps', href: `${baseUrl}/${section.metadata.slug}` });
 
         // create navigation object
         return {

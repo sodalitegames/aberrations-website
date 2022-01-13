@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_SINGLE_WEAPON = gql`
-  query SingleWeapon($slug: String, $worldSlug: String) {
+  query SingleWeapon($slug: String) {
     weapons(where: { slug: $slug }) {
       name
       metadata {
@@ -24,26 +24,11 @@ export const QUERY_SINGLE_WEAPON = gql`
         url
       }
     }
-    worlds(where: { slug: $worldSlug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          weapons {
-            title
-            metaDescription
-          }
-        }
-      }
-    }
   }
 `;
 
 export const QUERY_SINGLE_WEARABLE = gql`
-  query SingleWearable($slug: String, $worldSlug: String) {
+  query SingleWearable($slug: String) {
     wearables(where: { slug: $slug }) {
       name
       metadata {
@@ -66,26 +51,11 @@ export const QUERY_SINGLE_WEARABLE = gql`
         url
       }
     }
-    worlds(where: { slug: $worldSlug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          wearables {
-            title
-            metaDescription
-          }
-        }
-      }
-    }
   }
 `;
 
 export const QUERY_SINGLE_CONSUMABLE = gql`
-  query SingleConsumable($slug: String, $worldSlug: String) {
+  query SingleConsumable($slug: String) {
     consumables(where: { slug: $slug }) {
       name
       metadata {
@@ -110,26 +80,11 @@ export const QUERY_SINGLE_CONSUMABLE = gql`
         description
       }
     }
-    worlds(where: { slug: $worldSlug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          consumables {
-            title
-            metaDescription
-          }
-        }
-      }
-    }
   }
 `;
 
 export const QUERY_SINGLE_USABLE = gql`
-  query SingleUsable($slug: String, $worldSlug: String) {
+  query SingleUsable($slug: String) {
     usables(where: { slug: $slug }) {
       name
       metadata {
@@ -146,21 +101,6 @@ export const QUERY_SINGLE_USABLE = gql`
       type
       image {
         url
-      }
-    }
-    worlds(where: { slug: $worldSlug }) {
-      name
-      metadata {
-        title
-        slug
-      }
-      sections {
-        ... on ComponentWorldsBelongingsOverview {
-          usables {
-            title
-            metaDescription
-          }
-        }
       }
     }
   }

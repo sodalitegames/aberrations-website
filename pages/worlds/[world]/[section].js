@@ -4,7 +4,7 @@ import client from '../../../lib/apollo-client';
 
 import { QUERY_WORLD_SPECIES, QUERY_WORLD_CREATURES, QUERY_WORLD_BELONGINGS } from '../../../utils/queries/worlds-queries';
 
-import { fetchWorldNavigationData } from '../../../utils/functions/fetch-world-navigation-data';
+import { fetchWorldNavigationData } from '../../../utils/data/fetch-world-navigation-data';
 import { generateWorldNavigation } from '../../../utils/data/generate-world-navigation';
 import { worldSections } from '../../../utils/maps/world-sections';
 
