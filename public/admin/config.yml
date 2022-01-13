@@ -754,22 +754,6 @@ collections:
           # Navigation
           - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
 
-          # Metadata
-          - {
-              label: 'Metadata',
-              name: 'metadata',
-              widget: 'object',
-              fields:
-                [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Slug', name: slug, widget: string },
-                  { label: 'Description', name: 'description', widget: 'text' },
-                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
-                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
-                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
-                ],
-            }
-
       - file: 'content/rules/belongings-in-depth.md'
         label: 'Belongings In-Depth'
         name: 'belongingsInDepth'
@@ -782,22 +766,6 @@ collections:
 
           # Navigation
           - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
-
-          # Metadata
-          - {
-              label: 'Metadata',
-              name: 'metadata',
-              widget: 'object',
-              fields:
-                [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Slug', name: slug, widget: string },
-                  { label: 'Description', name: 'description', widget: 'text' },
-                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
-                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
-                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
-                ],
-            }
 
       - file: 'content/rules/cc-guide.md'
         label: 'CC Guide'
@@ -812,94 +780,12 @@ collections:
           # Navigation
           - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
 
-          # Metadata
-          - {
-              label: 'Metadata',
-              name: 'metadata',
-              widget: 'object',
-              fields:
-                [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Slug', name: slug, widget: string },
-                  { label: 'Description', name: 'description', widget: 'text' },
-                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
-                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
-                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
-                ],
-            }
-
-      - file: 'content/rules/avarice-world-playbook.md'
-        label: 'Avarice World Playbook'
-        name: 'avariceWorldPlaybook'
-        fields:
-          # Name
-          - { label: 'Name', name: 'name', widget: 'string' }
-
-          # Overview
-          - { label: 'Overview', name: 'overview', widget: 'markdown' }
-
-          # Species
-          - { label: 'Species', name: 'species', widget: 'markdown' }
-
-          # Augmentations
-          - { label: 'Augmentations', name: 'augmentations', widget: 'markdown' }
-
-          # Weapons
-          - { label: 'Weapons', name: 'weapons', widget: 'markdown' }
-
-          # Consumables
-          - { label: 'Consumables', name: 'consumables', widget: 'markdown' }
-
-          # Creatures
-          - { label: 'Creatures', name: 'creatures', widget: 'markdown' }
-
-          # World Rules
-          - { label: 'World Rules', name: 'worldRules', widget: 'markdown' }
-
-          # World Summary
-          - { label: 'World Summary', name: 'worldSummary', widget: 'markdown' }
-
-          # Navigation
-          - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
-
-          # Metadata
-          - {
-              label: 'Metadata',
-              name: 'metadata',
-              widget: 'object',
-              fields:
-                [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Slug', name: slug, widget: string },
-                  { label: 'Description', name: 'description', widget: 'text' },
-                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
-                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
-                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
-                ],
-            }
-
       - file: 'content/rules/beta-change-log.md'
         label: 'Beta Change Log'
         name: 'betaChangeLog'
         fields:
           # Name
           - { label: 'Name', name: 'name', widget: 'string' }
-
-          # Metadata
-          - {
-              label: 'Metadata',
-              name: 'metadata',
-              widget: 'object',
-              fields:
-                [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { label: 'Slug', name: slug, widget: string },
-                  { label: 'Description', name: 'description', widget: 'text' },
-                  { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
-                  { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
-                  { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
-                ],
-            }
 
           # Change Logs
           - {
@@ -922,7 +808,7 @@ collections:
     label: 'Worlds'
     files:
       - file: 'content/worlds/avarice.md'
-        label: 'Avarice'
+        label: 'World of Avarice'
         name: 'avarice'
         fields:
           # Name
@@ -1421,3 +1307,58 @@ collections:
                   },
                 ],
             }
+
+  # Playbooks
+  - name: playbooks
+    label: Playbooks
+    label_singular: Playbook
+    summary: '{{name}}'
+    identifier_field: metadata.slug
+    create: true
+    folder: /content/playbooks
+    fields:
+      # Name
+      - { label: 'Name', name: 'name', widget: 'string' }
+
+        # Metadata
+      - {
+          label: 'Metadata',
+          name: 'metadata',
+          widget: 'object',
+          fields:
+            [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Slug', name: slug, widget: string },
+              { label: 'Description', name: 'description', widget: 'text' },
+              { label: 'Share Image', name: 'shareImage', widget: 'image', required: false },
+              { label: 'Twitter Username', name: 'twitterUsername', widget: 'string', required: false },
+              { label: 'Twitter Card Type', name: 'twitterCardType', widget: 'select', options: ['summary', 'summary_large_image', 'app', 'player'], required: false },
+            ],
+        }
+
+      # Overview
+      - { label: 'Overview', name: 'overview', widget: 'markdown' }
+
+      # Species
+      - { label: 'Species', name: 'species', widget: 'markdown' }
+
+      # Augmentations
+      - { label: 'Augmentations', name: 'augmentations', widget: 'markdown' }
+
+      # Weapons
+      - { label: 'Weapons', name: 'weapons', widget: 'markdown' }
+
+      # Consumables
+      - { label: 'Consumables', name: 'consumables', widget: 'markdown' }
+
+      # Creatures
+      - { label: 'Creatures', name: 'creatures', widget: 'markdown' }
+
+      # World Rules
+      - { label: 'World Rules', name: 'worldRules', widget: 'markdown' }
+
+      # World Summary
+      - { label: 'World Summary', name: 'worldSummary', widget: 'markdown' }
+
+      # Navigation
+      - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }

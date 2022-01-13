@@ -108,13 +108,32 @@ const Playbook = ({ sections, data, metadata, navigation }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getStaticPaths() {
+  const slugs = (context => {
+    return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
+  })(require.context('../../../content/playbooks', true, /\.md$/));
+
+  const paths = slugs.map(slug => ({
+    params: {
+      playbook: slug,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(context) {
+  const { playbook: _playbook_param } = context.params;
+
   const { data } = await client.query({
     query: QUERY_SINGLE_PLAYBOOK,
-    variables: { slug: 'avarice' },
+    variables: { slug: _playbook_param },
   });
 
-  const playbook = await import(`../../../content/rules/avarice-world-playbook.md`).catch(error => null);
+  const playbook = await import(`../../../content/playbooks/${_playbook_param}.md`).catch(error => null);
 
   const { navigation, metadata } = playbook.attributes;
 

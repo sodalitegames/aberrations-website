@@ -1,5 +1,10 @@
 ---
 name: Avarice World Playbook
+metadata:
+  title: Avarice World Playbook
+  slug: avarice
+  description: This World Playbook is for the world of Avarice, a cyberpunk-ishly
+    capitalistically dystopian tech world.
 overview: "This World Playbook is for the world of Avarice. The Avarice World
   Playbook contains: Species, Augmentation Groups, Weapons, Consumable
   Categories, Creature Types, Optional World-Specific Rules you can choose to
@@ -159,9 +164,4 @@ navigation:
     idRef: world-rules
   - name: World Summary
     idRef: world-summary
-metadata:
-  title: Avarice World Playbook
-  slug: avarice
-  description: This World Playbook is for the world of Avarice, a cyberpunk-ishly
-    capitalistically dystopian tech world.
 ---

@@ -53,9 +53,12 @@ export async function getStaticProps() {
   const { metadata } = page.attributes;
   const { changeLogs } = changeLog.attributes;
 
+  // Sort change logs by date
+  const sortedChangeLogs = changeLogs.sort((prev, curr) => new Date(curr.date) - new Date(prev.date));
+
   return {
     props: {
-      changeLogs,
+      changeLogs: sortedChangeLogs,
       metadata,
     },
   };

@@ -4,7 +4,7 @@ import api from '../../lib/strapi-api';
 
 import PageLayout from '../../layouts/PageLayout';
 
-import HtmlContent from '../../components/sections/html-content';
+import MarkdownContent from '../../components/sections/markdown-content';
 
 import SectionDivider from '../../components/elements/section-divider';
 import Notice from '../../components/elements/notice';
@@ -36,11 +36,11 @@ const PlayerRulesPage = ({ playerRules, belongingsInDepth, actionsAndTests, navi
 
       <SectionDivider heading="Player Rules" id="player-rules" nomargin />
 
-      <HtmlContent data={{ content: playerRules }} />
+      <MarkdownContent data={{ content: playerRules }} />
 
       <SectionDivider heading="Belongings In-Depth" id="belongings-in-depth-section" />
 
-      <HtmlContent data={{ content: belongingsInDepth }} />
+      <MarkdownContent data={{ content: belongingsInDepth }} />
 
       <SectionDivider heading="Actions and Tests" id="actions-and-tests" />
       <h2 className="heading" id="free-actions">
@@ -128,8 +128,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      playerRules: playerRules.html,
-      belongingsInDepth: belongingsInDepth.html,
+      playerRules: playerRules.body,
+      belongingsInDepth: belongingsInDepth.body,
       actionsAndTests,
       navigation,
       metadata,

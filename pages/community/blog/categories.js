@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import ErrorPage from 'next/error';
 
 import PageLayout from '../../../layouts/PageLayout';
@@ -23,13 +22,7 @@ const CategoriesPage = ({ categories, metadata }) => {
     >
       <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8">
         {categories.map((category, index) => {
-          return (
-            <Link key={index} href={`/community/blog/categories/${category.metadata.slug}`}>
-              <a>
-                <CategoryCard category={category} />
-              </a>
-            </Link>
-          );
+          return <CategoryCard key={index} category={category} />;
         })}
       </div>
     </PageLayout>

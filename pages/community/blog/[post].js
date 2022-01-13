@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import ErrorPage from 'next/error';
 
 import { useAuth } from '../../../contexts/auth';
@@ -39,13 +38,7 @@ const PostPage = ({ post, relatedPosts, metadata }) => {
 
         <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
           {relatedPosts.map((post, index) => {
-            return (
-              <Link key={index} href={`/community/blog/${post.slug}`}>
-                <a className="p-6 rounded-md hover:bg-gray-50 dark:hover:bg-dark-150">
-                  <BlogPostCard post={post} />
-                </a>
-              </Link>
-            );
+            return <BlogPostCard key={index} post={post} />;
           })}
         </div>
       </div>
@@ -80,13 +73,13 @@ export async function getStaticProps(context) {
   const relatedPostsContent = await Promise.all(
     relatedPosts.map(async slug => {
       const post = await import(`../../../content/posts/${slug}.md`).catch(error => null);
-      return { ...post.attributes, content: post.html };
+      return { ...post.attributes, content: post.body };
     })
   );
 
   return {
     props: {
-      post: { ...postContent.attributes, content: postContent.html },
+      post: { ...postContent.attributes, content: postContent.body },
       relatedPosts: relatedPostsContent,
       metadata,
     },

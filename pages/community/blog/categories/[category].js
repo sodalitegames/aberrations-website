@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import ErrorPage from 'next/error';
 
 import PageLayout from '../../../../layouts/PageLayout';
@@ -29,13 +28,7 @@ const CategoryPage = ({ posts, category, metadata }) => {
       <h2 className="heading">Posts in this Category</h2>
       <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
         {posts.map((post, index) => {
-          return (
-            <Link key={index} href={`/community/blog/${post.slug}`}>
-              <a className="p-6 rounded-md hover:bg-gray-50 dark:hover:bg-dark-150">
-                <BlogPostCard post={post} />
-              </a>
-            </Link>
-          );
+          return <BlogPostCard key={index} post={post} />;
         })}
       </div>
     </PageLayout>
@@ -74,7 +67,7 @@ export async function getStaticProps(context) {
   const allPosts = await Promise.all(
     postSlugs.map(async slug => {
       const post = await import(`../../../../content/posts/${slug}.md`).catch(error => null);
-      return { ...post.attributes, content: post.html };
+      return { ...post.attributes, content: post.body };
     })
   );
 
@@ -86,10 +79,13 @@ export async function getStaticProps(context) {
     return post.categories.includes(`${metadata.title}__${metadata.slug}__${color}`);
   });
 
+  // Sort posts by date
+  const sortedPosts = postsInCategory.sort((prev, curr) => new Date(curr.date) - new Date(prev.date));
+
   return {
     props: {
       category: categoryContent.attributes,
-      posts: postsInCategory,
+      posts: sortedPosts,
       metadata,
     },
   };

@@ -4,7 +4,6 @@ import api from '../../lib/strapi-api';
 
 import PageLayout from '../../layouts/PageLayout';
 
-import HtmlContent from '../../components/sections/html-content';
 import MarkdownContent from '../../components/sections/markdown-content';
 
 import SectionDivider from '../../components/elements/section-divider';
@@ -38,7 +37,7 @@ const CCGuide = ({ ccGuide, presetNpcTypes, navigation, metadata }) => {
       <Notice status="warn" message="The CC Guide is not currently available, but will be soon. We apologize and thank you for your patience as we get it ready for you." accent />
 
       <SectionDivider heading="CC Guide" id="cc-guide" nomargin />
-      <HtmlContent data={{ content: ccGuide }} />
+      <MarkdownContent data={{ content: ccGuide }} />
 
       <SectionDivider heading="Preset NPC Types" id="preset-npc-types" />
       <MarkdownContent data={{ content: presetNpcTypes.overview }} />
@@ -76,7 +75,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      ccGuide: ccGuide.html,
+      ccGuide: ccGuide.body,
       presetNpcTypes,
       navigation,
       metadata,
