@@ -46,7 +46,6 @@ const Section = ({ sectionData }) => {
 
 // Display the list of sections
 const Sections = ({ sections }) => {
-  console.log('Sections', sections);
   return (
     <>
       {/* Show the actual sections */}

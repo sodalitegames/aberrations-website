@@ -122,8 +122,6 @@ export async function getStaticProps(context) {
   // find the current section by the slug
   let currentSection = { type: _section_param, ...worldContent.attributes[worldSections[_section_param]] };
 
-  console.log(currentSection);
-
   // get the current property
   let currentProperty;
 
@@ -219,8 +217,6 @@ export async function getStaticProps(context) {
   const navigationData = await fetchWorldNavigationData(_world_param);
   const navigation = generateWorldNavigation(worldContent.attributes, navigationData, _section_param);
   // END GET WORLD NAVIGATION //
-
-  console.log(currentProperty);
 
   return {
     props: {
