@@ -82,8 +82,6 @@ export async function getStaticProps(context) {
   // find the current section by the slug
   let currentSection = { type: _section_param, ...worldContent.attributes[worldSections[_section_param]] };
 
-  console.log(currentSection);
-
   // if species section, add species list to it
   if (_section_param === 'species') {
     // query species

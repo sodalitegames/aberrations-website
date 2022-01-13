@@ -23,7 +23,6 @@ const sectionComponents = {
 
 // Display a section individually
 const WorldSection = ({ section, world }) => {
-  console.log(section, world);
   // Prepare the component
   const SectionComponent = sectionComponents[section.type];
 

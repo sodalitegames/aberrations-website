@@ -113,12 +113,8 @@ export async function getStaticPaths() {
     })
   );
 
-  console.log(paths);
-
   // combine the arrays into a single array
   paths = paths.reduce((oldArr, newArr) => [...oldArr, ...newArr], []);
-
-  console.log(paths);
 
   return {
     paths,
@@ -157,11 +153,7 @@ export async function getStaticProps(context) {
 
   const belongingType = worldContent.attributes.belongings[_belonging_param];
 
-  console.log('belonging type', belongingType);
-
   const currentBelonging = data[_belonging_param][0];
-
-  console.log('current belonging', currentBelonging);
 
   // GET WORLD NAVIGATION //
   const navigationData = await fetchWorldNavigationData(_world_param);

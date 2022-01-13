@@ -58,14 +58,10 @@ export async function getStaticProps(context) {
   const { worldSummary } = playbook.attributes;
   const { metadata } = worldContent.attributes;
 
-  console.log(worldContent.attributes);
-
   // GET WORLD NAVIGATION //
   const navigationData = await fetchWorldNavigationData(_world_param);
   const navigation = generateWorldNavigation(worldContent.attributes, navigationData, '');
   // END GET WORLD NAVIGATION //
-
-  console.log(navigation);
 
   return {
     props: {
