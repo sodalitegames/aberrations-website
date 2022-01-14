@@ -54,9 +54,8 @@ export async function getStaticPaths() {
     query: gql`
       query PropertySlugs {
         worlds {
-          metadata {
-            slug
-          }
+          name
+          slug
           creaturesList {
             metadata {
               slug
@@ -82,7 +81,7 @@ export async function getStaticPaths() {
     slugs.map(async worldSlug => {
       // import the markdown content for each world
       const worldContent = await import(`../../../../content/worlds/${worldSlug}.md`).catch(error => null);
-      const worldData = data.worlds.find(world => world.metadata.slug === worldSlug);
+      const worldData = data.worlds.find(world => world.slug === worldSlug);
 
       // map through each world section
       return Object.entries(worldContent.attributes)

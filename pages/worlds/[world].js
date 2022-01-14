@@ -53,7 +53,7 @@ export async function getStaticProps(context) {
   const { world: _world_param } = context.params;
 
   const worldContent = await import(`../../content/worlds/${_world_param}.md`).catch(error => null);
-  const playbook = await import(`../../content/rules/${_world_param}-world-playbook.md`).catch(error => null);
+  const playbook = await import(`../../content/playbooks/${_world_param}.md`).catch(error => null);
 
   const { worldSummary } = playbook.attributes;
   const { metadata } = worldContent.attributes;
