@@ -11,15 +11,10 @@ const SingleBelonging = ({ belonging, world }) => {
       <h2 className="heading">About {belonging.metadata.title}</h2>
       <MarkdownContent data={{ content: belonging.overview }} />
       <h2 className="heading">List of {belonging.metadata.title}</h2>
-      {belonging.subType === 'WEAPONS' ? (
-        <WeaponsSection weapons={belonging} world={world} />
-      ) : belonging.subType === 'WEARABLES' ? (
-        <WearablesSection wearables={belonging} world={world} />
-      ) : belonging.subType === 'CONSUMABLES' ? (
-        <ConsumablesSection consumables={belonging} world={world} />
-      ) : belonging.subType === 'USABLES' ? (
-        <UsablesSection usables={belonging} world={world} />
-      ) : null}
+      {belonging.subType === 'weapons' ? <WeaponsSection weapons={belonging} world={world} /> : null}
+      {belonging.subType === 'wearables' ? <WearablesSection wearables={belonging} world={world} /> : null}
+      {belonging.subType === 'consumables' ? <ConsumablesSection consumables={belonging} world={world} /> : null}
+      {belonging.subType === 'usables' ? <UsablesSection usables={belonging} world={world} /> : null}
     </>
   );
 };

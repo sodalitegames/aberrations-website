@@ -9,7 +9,7 @@ export const getCurrentProperty = (section, property) => {
       const content = section.sections.find(sect => sect.metadata.slug === property);
       return {
         ...content,
-        type: 'LISTABLE',
+        type: 'listable',
       };
 
     case 'belongings':

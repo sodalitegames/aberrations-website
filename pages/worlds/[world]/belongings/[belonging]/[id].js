@@ -34,15 +34,10 @@ const SingleBelonging = ({ belonging, belongingType, world, navigation, metadata
         ]}
       >
         <h2 className="heading">{belonging.name} Info</h2>
-        {belonging.__typename === 'Weapons' ? (
-          <WeaponCard weapon={belonging} verbose />
-        ) : belonging.__typename === 'Wearables' ? (
-          <WearableCard wearable={belonging} />
-        ) : belonging.__typename === 'Consumables' ? (
-          <ConsumableCard consumable={belonging} />
-        ) : belonging.__typename === 'Usables' ? (
-          <UsableCard usable={belonging} />
-        ) : null}
+        {belongingType.type === 'weapons' ? <WeaponCard weapon={belonging} verbose /> : null}
+        {belongingType.type === 'wearables' ? <WearableCard wearable={belonging} /> : null}
+        {belongingType.type === 'consumables' ? <ConsumableCard consumable={belonging} /> : null}
+        {belongingType.type === 'usables' ? <UsableCard usable={belonging} /> : null}
       </WorldPageLayout>
     </PageLayout>
   );
@@ -116,7 +111,7 @@ export async function getStaticProps(context) {
         name: worldMetadata.title,
         metadata: worldMetadata,
       },
-      belongingType,
+      belongingType: { type: _belonging_param, ...belongingType },
       belonging: currentBelonging,
       metadata: {
         ...currentBelonging.metadata,
