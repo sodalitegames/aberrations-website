@@ -35,10 +35,10 @@ export default function SingleProperty({ world, section, property, metadata, nav
           { name: property.metadata.title, href: `/worlds/${world.metadata.slug}/${section.metadata.slug}/${property.metadata.slug}` },
         ]}
       >
-        {property.__typename === 'Specie' ? <SingleSpecies species={property} /> : null}
-        {property.__typename === 'Creatures' ? <SingleCreature creature={property} /> : null}
-        {property.type && property.type === 'LISTABLE' ? <BasicText data={property} /> : null}
-        {property.type && property.type === 'BELONGING' ? <SingleBelonging belonging={property} world={world} /> : null}
+        {property.type && property.type === 'species' ? <SingleSpecies species={property} /> : null}
+        {property.type && property.type === 'creatures' ? <SingleCreature creature={property} /> : null}
+        {property.type && property.type === 'listable' ? <BasicText data={property} /> : null}
+        {property.type && property.type === 'belongings' ? <SingleBelonging belonging={property} world={world} /> : null}
       </WorldPageLayout>
     </PageLayout>
   );
@@ -105,7 +105,10 @@ export async function getStaticProps(context) {
     // fetch the current species or creature
     const { data } = await api.get(`/${_section_param}?slug=${_property_param}`);
 
-    currentProperty = data[0];
+    currentProperty = {
+      ...data[0],
+      type: _section_param,
+    };
   } else if (_section_param === 'belongings') {
     if (_property_param === 'weapons') {
       // fetch the weapons list
@@ -115,8 +118,8 @@ export async function getStaticProps(context) {
       currentProperty = {
         ...currentSection[_property_param],
         list: filteredWeapons,
-        type: 'BELONGING',
-        subType: _property_param.toUpperCase(),
+        type: _section_param,
+        subType: _property_param,
       };
     }
 
@@ -128,8 +131,8 @@ export async function getStaticProps(context) {
       currentProperty = {
         ...currentSection[_property_param],
         list: filteredWearables,
-        type: 'BELONGING',
-        subType: _property_param.toUpperCase(),
+        type: _section_param,
+        subType: _property_param,
       };
     }
 
@@ -145,8 +148,8 @@ export async function getStaticProps(context) {
       currentProperty = {
         ...currentSection[_property_param],
         list: filteredConsumables,
-        type: 'BELONGING',
-        subType: _property_param.toUpperCase(),
+        type: _section_param,
+        subType: _property_param,
         categories: filteredConsumableCategories,
       };
     }
@@ -159,8 +162,8 @@ export async function getStaticProps(context) {
       currentProperty = {
         ...currentSection[_property_param],
         list: filteredUsables,
-        type: 'BELONGING',
-        subType: _property_param.toUpperCase(),
+        type: _section_param,
+        subType: _property_param,
       };
     }
   } else {
@@ -183,7 +186,7 @@ export async function getStaticProps(context) {
         type: currentSection.type,
         metadata: currentSection.metadata,
       },
-      property: currentProperty,
+      property: { type: _property_param, ...currentProperty },
       metadata: currentProperty.metadata,
       navigation,
     },
