@@ -1,13 +1,8 @@
-import client from '../../lib/apollo-client';
-
-import { QUERY_WORLD_NAVIGATION_DATA } from '../queries/worlds-queries';
+import api from '../../lib/strapi-api';
 
 export const fetchWorldNavigationData = async worldSlug => {
-  // QUERY FOR THE WORLD NAVIGATION //
-  const { data } = await client.query({
-    query: QUERY_WORLD_NAVIGATION_DATA,
-    variables: { slug: worldSlug },
-  });
+  // fetch the worlds list from api
+  const { data: worldData } = await api.get(`/worlds?slug=${worldSlug}`);
 
-  return data.worlds[0];
+  return worldData[0];
 };

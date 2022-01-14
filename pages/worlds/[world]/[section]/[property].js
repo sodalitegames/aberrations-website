@@ -1,11 +1,6 @@
 import ErrorPage from 'next/error';
-import { gql } from '@apollo/client';
 
-import client from '../../../../lib/apollo-client';
-
-import { QUERY_WORLD_WEAPONS, QUERY_WORLD_WEARABLES, QUERY_WORLD_CONSUMABLES, QUERY_WORLD_USABLES, QUERY_ALL_WORLDS_SECTION_PROPERTY_SLUGS } from '../../../../utils/queries/worlds-queries';
-import { QUERY_SINGLE_SPECIES } from '../../../../utils/queries/species-queries';
-import { QUERY_SINGLE_CREATURE } from '../../../../utils/queries/creature-queries';
+import api from '../../../../lib/strapi-api';
 
 import { getPropertySlugs } from '../../../../utils/data/get-property-slugs';
 import { fetchWorldNavigationData } from '../../../../utils/data/fetch-world-navigation-data';
@@ -50,27 +45,8 @@ export default function SingleProperty({ world, section, property, metadata, nav
 }
 
 export async function getStaticPaths() {
-  const { data } = await client.query({
-    query: gql`
-      query PropertySlugs {
-        worlds {
-          metadata {
-            slug
-          }
-          creaturesList {
-            metadata {
-              slug
-            }
-          }
-          speciesList {
-            metadata {
-              slug
-            }
-          }
-        }
-      }
-    `,
-  });
+  // fetch the worlds list from api
+  const { data: worldsApiData } = await api.get(`/worlds`);
 
   // get the slugs of all the worlds
   const slugs = (context => {
@@ -82,7 +58,7 @@ export async function getStaticPaths() {
     slugs.map(async worldSlug => {
       // import the markdown content for each world
       const worldContent = await import(`../../../../content/worlds/${worldSlug}.md`).catch(error => null);
-      const worldData = data.worlds.find(world => world.metadata.slug === worldSlug);
+      const worldData = worldsApiData.find(world => world.slug === worldSlug);
 
       // map through each world section
       return Object.entries(worldContent.attributes)
@@ -125,85 +101,64 @@ export async function getStaticProps(context) {
   // get the current property
   let currentProperty;
 
-  if (_section_param === 'species') {
-    const {
-      data: { species },
-    } = await client.query({
-      query: QUERY_SINGLE_SPECIES,
-      variables: { slug: _property_param },
-    });
+  if (_section_param === 'species' || _section_param === 'creatures') {
+    // fetch the current species or creature
+    const { data } = await api.get(`/${_section_param}?slug=${_property_param}`);
 
-    currentProperty = species[0];
-  } else if (_section_param === 'creatures') {
-    const {
-      data: { creatures },
-    } = await client.query({
-      query: QUERY_SINGLE_CREATURE,
-      variables: { slug: _property_param },
-    });
-
-    currentProperty = creatures[0];
+    currentProperty = data[0];
   } else if (_section_param === 'belongings') {
     if (_property_param === 'weapons') {
-      const {
-        data: { worlds },
-      } = await client.query({
-        query: QUERY_WORLD_WEAPONS,
-        variables: { slug: _world_param },
-      });
+      // fetch the weapons list
+      const { data: weapons } = await api.get(`/weapons`);
+      const filteredWeapons = weapons.filter(weap => weap.worlds.find(world => world.slug === _world_param));
 
       currentProperty = {
         ...currentSection[_property_param],
-        list: worlds[0].weaponsList,
+        list: filteredWeapons,
         type: 'BELONGING',
         subType: _property_param.toUpperCase(),
       };
     }
 
     if (_property_param === 'wearables') {
-      const {
-        data: { worlds },
-      } = await client.query({
-        query: QUERY_WORLD_WEARABLES,
-        variables: { slug: _world_param },
-      });
+      // fetch the wearables list
+      const { data: wearables } = await api.get(`/wearables`);
+      const filteredWearables = wearables.filter(wear => wear.worlds.find(world => world.slug === _world_param));
 
       currentProperty = {
         ...currentSection[_property_param],
-        list: worlds[0].wearablesList,
+        list: filteredWearables,
         type: 'BELONGING',
         subType: _property_param.toUpperCase(),
       };
     }
 
     if (_property_param === 'consumables') {
-      const {
-        data: { worlds },
-      } = await client.query({
-        query: QUERY_WORLD_CONSUMABLES,
-        variables: { slug: _world_param },
-      });
+      // fetch the consumables list
+      const { data: consumables } = await api.get(`/consumables`);
+      const filteredConsumables = consumables.filter(cons => cons.worlds.find(world => world.slug === _world_param));
+
+      // fetch the consumable categories list
+      const { data: consumableCategories } = await api.get(`/consumables-categories`);
+      const filteredConsumableCategories = consumableCategories.filter(categ => categ.worlds.find(world => world.slug === _world_param));
 
       currentProperty = {
         ...currentSection[_property_param],
-        list: worlds[0].consumablesList,
+        list: filteredConsumables,
         type: 'BELONGING',
         subType: _property_param.toUpperCase(),
-        categories: worlds[0].consumableCategories,
+        categories: filteredConsumableCategories,
       };
     }
 
     if (_property_param === 'usables') {
-      const {
-        data: { worlds },
-      } = await client.query({
-        query: QUERY_WORLD_USABLES,
-        variables: { slug: _world_param },
-      });
+      // fetch the usables list
+      const { data: usables } = await api.get(`/usables`);
+      const filteredUsables = usables.filter(usab => usab.worlds.find(world => world.slug === _world_param));
 
       currentProperty = {
         ...currentSection[_property_param],
-        list: worlds[0].usablesList,
+        list: filteredUsables,
         type: 'BELONGING',
         subType: _property_param.toUpperCase(),
       };

@@ -1,12 +1,10 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
-import { ApolloProvider } from '@apollo/client';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 
 import { DefaultSeo } from 'next-seo';
 
-import client from '../lib/apollo-client';
 import * as gtag from '../lib/gtag';
 
 import { AuthProvider } from '../contexts/auth';
@@ -63,11 +61,10 @@ function MyApp({ Component, pageProps }) {
           `,
         }}
       />
-      <ApolloProvider client={client}>
-        <AuthProvider>
-          <Component {...pageProps} />
-        </AuthProvider>
-      </ApolloProvider>
+
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </>
   );
 }

@@ -1,5 +1,4 @@
 import MarkdownContent from './sections/markdown-content';
-import HtmlContent from './sections/html-content';
 import DigitalTool from './sections/digital-tool';
 import UnderConstruction from './sections/under-construction';
 import ContactForm from './sections/contact-form';
@@ -15,7 +14,6 @@ import RulesSection from './sections/rules-section';
 
 // Map page sections to section components
 const sectionComponents = {
-  htmlContent: HtmlContent,
   content: MarkdownContent,
   digitalTool: DigitalTool,
   underConstruction: UnderConstruction,

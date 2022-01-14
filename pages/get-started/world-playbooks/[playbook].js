@@ -1,6 +1,6 @@
 import ErrorPage from 'next/error';
 
-import client from '../../../lib/apollo-client';
+import api from '../../../lib/strapi-api';
 
 import PageLayout from '../../../layouts/PageLayout';
 
@@ -12,8 +12,6 @@ import SpeciesCard from '../../../components/elements/cards/species-card';
 import WeaponCard from '../../../components/elements/cards/weapon-card';
 import ConsumableCategoryCard from '../../../components/elements/cards/consumable-category-card';
 import CreatureTypeCard from '../../../components/elements/cards/creature-type-card';
-
-import { QUERY_SINGLE_PLAYBOOK } from '../../../utils/queries/playbooks-queries';
 
 const Playbook = ({ sections, data, metadata, navigation }) => {
   // Check if the required data was provided
@@ -108,19 +106,35 @@ const Playbook = ({ sections, data, metadata, navigation }) => {
   );
 };
 
-export async function getStaticProps() {
-  const { data } = await client.query({
-    query: QUERY_SINGLE_PLAYBOOK,
-    variables: { slug: 'avarice' },
-  });
+export async function getStaticPaths() {
+  const slugs = (context => {
+    return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
+  })(require.context('../../../content/playbooks', true, /\.md$/));
 
-  const playbook = await import(`../../../content/rules/avarice-world-playbook.md`).catch(error => null);
+  const paths = slugs.map(slug => ({
+    params: {
+      playbook: slug,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(context) {
+  const { playbook: _playbook_param } = context.params;
+
+  const { data } = await api.get(`/world-playbooks?slug=${_playbook_param}`);
+
+  const playbook = await import(`../../../content/playbooks/${_playbook_param}.md`).catch(error => null);
 
   const { navigation, metadata } = playbook.attributes;
 
   return {
     props: {
-      data: data.playbooks[0],
+      data: data[0],
       sections: playbook.attributes,
       navigation,
       metadata,

@@ -1,11 +1,5 @@
 ---
 name: Beta Change Logs
-metadata:
-  title: Beta Change Logs
-  description: While Aberrations RPG is in beta, things might be changing. Here
-    you can read the details on what has been updated, and when it has been
-    updated.
-  slug: beta-change-log
 changeLogs:
   - emailNotificationSent: false
     date: 2021-10-06T15:07:04.513Z

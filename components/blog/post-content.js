@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { parseDate } from '../../utils/functions/parse-date';
 import { getCategory } from '../../utils/functions/split-data';
 
-import HtmlContent from '../sections/html-content';
+import MarkdownContent from '../sections/markdown-content';
 
 import Notice from '../elements/notice';
 
@@ -45,7 +45,7 @@ const PostContent = ({ post, notice }) => {
   return (
     <article>
       <PostHeader post={post} notice={notice} />
-      <HtmlContent data={{ content: post.content }} />
+      <MarkdownContent data={{ content: post.content }} />
     </article>
   );
 };

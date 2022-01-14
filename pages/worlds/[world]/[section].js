@@ -1,8 +1,6 @@
 import ErrorPage from 'next/error';
 
-import client from '../../../lib/apollo-client';
-
-import { QUERY_WORLD_SPECIES, QUERY_WORLD_CREATURES, QUERY_WORLD_BELONGINGS } from '../../../utils/queries/worlds-queries';
+import api from '../../../lib/strapi-api';
 
 import { fetchWorldNavigationData } from '../../../utils/data/fetch-world-navigation-data';
 import { generateWorldNavigation } from '../../../utils/data/generate-world-navigation';
@@ -84,54 +82,59 @@ export async function getStaticProps(context) {
 
   // if species section, add species list to it
   if (_section_param === 'species') {
-    // query species
-    const { data } = await client.query({
-      query: QUERY_WORLD_SPECIES,
-      variables: { slug: _world_param },
-    });
+    // fetch the species list
+    const { data: species } = await api.get(`/species`);
 
-    const { speciesList } = data.worlds[0];
+    const filteredSpecies = species.filter(spec => spec.worlds.find(world => world.slug === _world_param));
 
     currentSection = {
       ...currentSection,
-      species: speciesList,
+      species: filteredSpecies,
     };
   }
 
   // if creatures section, add creatures list to it
   if (_section_param === 'creatures') {
-    // query creatures
-    const { data } = await client.query({
-      query: QUERY_WORLD_CREATURES,
-      variables: { slug: _world_param },
-    });
+    // fetch the creatures list
+    const { data: creatures } = await api.get(`/creatures`);
+    const filteredCreatures = creatures.filter(crea => crea.worlds.find(world => world.slug === _world_param));
 
-    const { creaturesList, creatureTypes } = data.worlds[0];
+    // fetch the creature types list
+    const { data: creatureTypes } = await api.get(`/creature-types`);
+    const filteredCreatureTypes = creatureTypes.filter(type => type.worlds.find(world => world.slug === _world_param));
 
     currentSection = {
       ...currentSection,
-      creatures: creaturesList,
-      creatureTypes: creatureTypes,
+      creatures: filteredCreatures,
+      creatureTypes: filteredCreatureTypes,
     };
   }
 
   // if belongings section, add the four belongings lists to it
   if (_section_param === 'belongings') {
-    // query creatures
-    const { data } = await client.query({
-      query: QUERY_WORLD_BELONGINGS,
-      variables: { slug: _world_param },
-    });
+    // fetch the weapons list
+    const { data: weapons } = await api.get(`/weapons`);
+    const filteredWeapons = weapons.filter(weap => weap.worlds.find(world => world.slug === _world_param));
 
-    const { weaponsList, wearablesList, consumablesList, usablesList } = data.worlds[0];
+    // fetch the wearables list
+    const { data: wearables } = await api.get(`/wearables`);
+    const filteredWearables = wearables.filter(wear => wear.worlds.find(world => world.slug === _world_param));
+
+    // fetch the consumables list
+    const { data: consumables } = await api.get(`/consumables`);
+    const filteredConsumables = consumables.filter(cons => cons.worlds.find(world => world.slug === _world_param));
+
+    // fetch the usables list
+    const { data: usables } = await api.get(`/usables`);
+    const filteredUsables = usables.filter(usab => usab.worlds.find(world => world.slug === _world_param));
 
     currentSection = {
       ...currentSection,
       lists: {
-        weapons: weaponsList,
-        wearables: wearablesList,
-        consumables: consumablesList,
-        usables: usablesList,
+        weapons: filteredWeapons,
+        wearables: filteredWearables,
+        consumables: filteredConsumables,
+        usables: filteredUsables,
       },
     };
   }

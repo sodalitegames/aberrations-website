@@ -1,5 +1,5 @@
 ---
-name: Avarice
+name: World of Avarice
 metadata:
   title: Avarice
   slug: avarice
@@ -297,11 +297,11 @@ worldOverview:
 
         - Damage: 10"
 species:
-  overview: 'Avarice has limitless sentient species. There are six that are known.
+  overview: "Avarice has limitless sentient species. There are six that are known.
     These sentient species live in every CorpoNation and serve in many roles.
     There are some CorpoNations that have a higher demographic of certain
     species, but this most often is due to history or geography, and not
-    anything intentional. '
+    anything intentional. "
   metadata:
     title: Species
     slug: species
@@ -318,10 +318,10 @@ creatures:
     description: Learn what creatures live on the world of Avarice, what they look
       like, and the other information you need to know.
 belongings:
-  overview: 'Belongings are split into four categories: weapons, wearables,
+  overview: "Belongings are split into four categories: weapons, wearables,
     consumables, and usables. This section will go over what kinds of each of
     these belongings you are likely to find on Avarice, and how to use them and
-    find them.'
+    find them."
   metadata:
     title: Belongings
     slug: belongings

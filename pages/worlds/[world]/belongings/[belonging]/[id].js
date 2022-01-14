@@ -1,9 +1,7 @@
 import ErrorPage from 'next/error';
-import { gql } from '@apollo/client';
 
-import client from '../../../../../lib/apollo-client';
+import api from '../../../../../lib/strapi-api';
 
-import { QUERY_SINGLE_WEAPON, QUERY_SINGLE_WEARABLE, QUERY_SINGLE_CONSUMABLE, QUERY_SINGLE_USABLE } from '../../../../../utils/queries/belonging-queries';
 import { getPropertySlugs } from '../../../../../utils/data/get-property-slugs';
 import { fetchWorldNavigationData } from '../../../../../utils/data/fetch-world-navigation-data';
 import { generateWorldNavigation } from '../../../../../utils/data/generate-world-navigation';
@@ -51,37 +49,8 @@ const SingleBelonging = ({ belonging, belongingType, world, navigation, metadata
 };
 
 export async function getStaticPaths() {
-  const { data } = await client.query({
-    query: gql`
-      query PropertySlugs {
-        worlds {
-          metadata {
-            slug
-          }
-          weaponsList {
-            metadata {
-              slug
-            }
-          }
-          wearablesList {
-            metadata {
-              slug
-            }
-          }
-          consumablesList {
-            metadata {
-              slug
-            }
-          }
-          usablesList {
-            metadata {
-              slug
-            }
-          }
-        }
-      }
-    `,
-  });
+  // fetch the worlds list from api
+  const { data: worldsApiData } = await api.get(`/worlds`);
 
   // get the slugs of all the worlds
   const slugs = (context => {
@@ -93,7 +62,7 @@ export async function getStaticPaths() {
     slugs.map(async worldSlug => {
       // import the markdown content for each world
       const worldContent = await import(`../../../../../content/worlds/${worldSlug}.md`).catch(error => null);
-      const worldData = data.worlds.find(world => world.metadata.slug === worldSlug);
+      const worldData = worldsApiData.find(world => world.slug === worldSlug);
 
       const propertyPaths = getPropertySlugs({ type: 'belongings', ...worldContent.attributes['belongings'] }, worldData);
 
@@ -125,27 +94,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { world: _world_param, belonging: _belonging_param, id: _id_param } = context.params;
 
-  let query;
-
-  switch (_belonging_param) {
-    case 'weapons':
-      query = QUERY_SINGLE_WEAPON;
-      break;
-    case 'wearables':
-      query = QUERY_SINGLE_WEARABLE;
-      break;
-    case 'consumables':
-      query = QUERY_SINGLE_CONSUMABLE;
-      break;
-    case 'usables':
-      query = QUERY_SINGLE_USABLE;
-      break;
-  }
-
-  const { data } = await client.query({
-    query,
-    variables: { slug: _id_param },
-  });
+  // fetch the current belonging
+  const { data } = await api.get(`/${_belonging_param}?slug=${_id_param}`);
 
   const worldContent = await import(`../../../../../content/worlds/${_world_param}.md`).catch(error => null);
 
@@ -153,7 +103,7 @@ export async function getStaticProps(context) {
 
   const belongingType = worldContent.attributes.belongings[_belonging_param];
 
-  const currentBelonging = data[_belonging_param][0];
+  const currentBelonging = data[0];
 
   // GET WORLD NAVIGATION //
   const navigationData = await fetchWorldNavigationData(_world_param);

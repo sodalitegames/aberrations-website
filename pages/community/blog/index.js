@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import ErrorPage from 'next/error';
 
 import PageLayout from '../../../layouts/PageLayout';
@@ -23,13 +22,7 @@ const BlogPage = ({ posts, metadata }) => {
       <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8 mt-2">
         {posts.map((post, index) => {
           if (post.featured) {
-            return (
-              <Link key={index} href={`/community/blog/${post.metadata.slug}`}>
-                <a className="p-6 rounded-md hover:bg-gray-50 dark:hover:bg-dark-150">
-                  <BlogPostCard post={post} />
-                </a>
-              </Link>
-            );
+            return <BlogPostCard key={index} post={post} />;
           }
           return null;
         })}
@@ -40,13 +33,7 @@ const BlogPage = ({ posts, metadata }) => {
           if (post.featured) {
             return null;
           }
-          return (
-            <Link key={index} href={`/community/blog/${post.metadata.slug}`}>
-              <a className="p-6 rounded-md hover:bg-gray-50 dark:hover:bg-dark-150">
-                <BlogPostCard post={post} />
-              </a>
-            </Link>
-          );
+          return <BlogPostCard key={index} post={post} />;
         })}
       </div>
     </PageLayout>
@@ -65,16 +52,19 @@ export async function getStaticProps() {
   const posts = await Promise.all(
     slugs.map(async slug => {
       const post = await import(`../../../content/posts/${slug}.md`).catch(error => null);
-      return { ...post.attributes, content: post.html };
+      return { ...post.attributes, content: post.body };
     })
   );
 
   // Only return published posts
-  let publishedPosts = posts.filter(post => post.state === 'Published');
+  const publishedPosts = posts.filter(post => post.state === 'Published');
+
+  // Sort posts by date
+  const sortedPosts = publishedPosts.sort((prev, curr) => new Date(curr.date) - new Date(prev.date));
 
   return {
     props: {
-      posts: publishedPosts,
+      posts: sortedPosts,
       metadata,
     },
   };
