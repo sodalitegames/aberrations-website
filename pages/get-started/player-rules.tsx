@@ -2,16 +2,36 @@ import ErrorPage from 'next/error';
 
 import api from '../../lib/strapi-api';
 
+import { Metadata, SideNavItem } from '../../utils/types/page-types';
+
 import PageLayout from '../../layouts/PageLayout';
 
 import MarkdownContent from '../../components/sections/markdown-content';
 
 import SectionDivider from '../../components/elements/section-divider';
-import Notice from '../../components/elements/notice';
+import Notice, { NoticeStatus } from '../../components/elements/notice';
 
 import ActionCard from '../../components/elements/cards/action-card';
 
-const PlayerRulesPage = ({ playerRules, belongingsInDepth, actionsAndTests, navigation, metadata }) => {
+type Action = {
+  name: string;
+  description: string;
+};
+
+interface PlayerRulesPageProps {
+  playerRules: string;
+  belongingsInDepth: string;
+  actionsAndTests: {
+    freeActions: Action[];
+    minorActions: Action[];
+    majorActions: Action[];
+    contestedTests: Action[];
+  };
+  navigation: SideNavItem[];
+  metadata: Metadata;
+}
+
+const PlayerRulesPage: React.FC<PlayerRulesPageProps> = ({ playerRules, belongingsInDepth, actionsAndTests, navigation, metadata }) => {
   // Check if the required data was provided
   if (!playerRules || !belongingsInDepth || !actionsAndTests) {
     return <ErrorPage statusCode={500} />;
@@ -28,7 +48,7 @@ const PlayerRulesPage = ({ playerRules, belongingsInDepth, actionsAndTests, navi
       ]}
     >
       <Notice
-        status="info"
+        status={NoticeStatus.Info}
         message="While the game is in beta, only the most updated rules will be displayed. If you wish to see what changes we are making,"
         link={{ text: 'visit our beta change log.', href: '/beta-change-log', inline: true }}
         accent
@@ -46,7 +66,7 @@ const PlayerRulesPage = ({ playerRules, belongingsInDepth, actionsAndTests, navi
       <h2 className="heading" id="free-actions">
         Free Actions
       </h2>
-      <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8">
+      <div className="grid gap-4 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
         {actionsAndTests.freeActions.map(action => (
           <ActionCard key={action.name} action={action} />
         ))}
@@ -55,7 +75,7 @@ const PlayerRulesPage = ({ playerRules, belongingsInDepth, actionsAndTests, navi
       <h2 className="heading" id="minor-actions">
         Minor Actions
       </h2>
-      <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8">
+      <div className="grid gap-4 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
         {actionsAndTests.minorActions.map(action => (
           <ActionCard key={action.name} action={action} />
         ))}
@@ -64,7 +84,7 @@ const PlayerRulesPage = ({ playerRules, belongingsInDepth, actionsAndTests, navi
       <h2 className="heading" id="major-actions">
         Major Actions
       </h2>
-      <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8">
+      <div className="grid gap-4 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
         {actionsAndTests.majorActions.map(action => (
           <ActionCard key={action.name} action={action} />
         ))}
@@ -86,6 +106,10 @@ export async function getStaticProps() {
   const page = await import(`../../content/pages/player-rules.md`).catch(error => null);
   const playerRules = await import(`../../content/rules/player-rules.md`).catch(error => null);
   const belongingsInDepth = await import(`../../content/rules/belongings-in-depth.md`).catch(error => null);
+
+  if (!page || !playerRules || !belongingsInDepth) {
+    return {};
+  }
 
   const { data: actionsAndTests } = await api.get('/actions-and-tests');
 
