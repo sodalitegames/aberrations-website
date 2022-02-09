@@ -8,15 +8,27 @@ import SiteBanner from './components/SiteBanner';
 import DarkModeToggle from './components/DarkModeToggle';
 import Seo from './components/Seo';
 
-export default function PageLayout({ seo, sideNav, custom, full, title, heading, breadcrumbs, children }) {
+import { Metadata, SideNavItem, Breadcrumb } from '../utils/types/page-types';
+
+interface PageLayoutProps {
+  title?: string;
+  heading?: string;
+  seo: Metadata;
+  breadcrumbs?: Breadcrumb[];
+  sideNav?: SideNavItem[];
+  custom?: boolean;
+  full?: boolean;
+}
+
+const PageLayout: React.FC<PageLayoutProps> = ({ seo, sideNav, custom, full, title, heading, breadcrumbs, children }) => {
   return (
     <>
       <Seo metadata={seo} />
-      <div className="min-h-screen bg-white dark:bg-black dark:text-gray-300 relative flex flex-col justify-between">
+      <div className="relative flex flex-col justify-between min-h-screen bg-white dark:bg-black dark:text-gray-300">
         <div>
           <SiteBanner />
           <Header />
-          <div className="max-w-7xl mx-auto">
+          <div className="mx-auto max-w-7xl">
             {!custom && !full ? (
               <ContentLayout title={title} heading={heading} breadcrumbs={breadcrumbs}>
                 {sideNav ? <SideNavPageLayout sideNav={sideNav}>{children}</SideNavPageLayout> : children}
@@ -36,4 +48,6 @@ export default function PageLayout({ seo, sideNav, custom, full, title, heading,
       </div>
     </>
   );
-}
+};
+
+export default PageLayout;
