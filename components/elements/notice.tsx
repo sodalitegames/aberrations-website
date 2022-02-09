@@ -5,19 +5,46 @@ import { CheckCircleIcon, XCircleIcon, ExclamationIcon, InformationCircleIcon, X
 
 import classNames from '../../utils/functions/classnames';
 
-const NoticeIcon = ({ status }) => {
+export enum NoticeStatus {
+  Success = 'success',
+  Warn = 'warn',
+  Info = 'info',
+  Alert = 'alert',
+  Error = 'error',
+  Fail = 'fail',
+}
+
+interface NoticeLink {
+  href: string;
+  text: string;
+  external?: boolean;
+  inline?: boolean;
+}
+
+interface NoticeProps {
+  status: NoticeStatus;
+  heading?: string;
+  message: string | string[];
+  link?: NoticeLink;
+  accent?: boolean;
+  hideable?: boolean;
+  noIcon?: boolean;
+  classes?: string;
+}
+
+const NoticeIcon: React.FC<{ status: NoticeStatus }> = ({ status }) => {
   return (
     <>
-      {status === 'success' ? <CheckCircleIcon className="h-5 w-5 text-green-400 dark:text-green-500" aria-hidden="true" /> : null}
-      {status === 'info' ? <InformationCircleIcon className="h-5 w-5 text-blue-400 dark:text-blue-500" aria-hidden="true" /> : null}
-      {status === 'warn' ? <ExclamationIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" /> : null}
-      {status === 'error' || status === 'fail' ? <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" /> : null}
+      {status === 'success' ? <CheckCircleIcon className="w-5 h-5 text-green-400 dark:text-green-500" aria-hidden="true" /> : null}
+      {status === 'info' ? <InformationCircleIcon className="w-5 h-5 text-blue-400 dark:text-blue-500" aria-hidden="true" /> : null}
+      {status === 'warn' ? <ExclamationIcon className="w-5 h-5 text-yellow-400" aria-hidden="true" /> : null}
+      {status === 'error' || status === 'fail' ? <XCircleIcon className="w-5 h-5 text-red-400" aria-hidden="true" /> : null}
     </>
   );
 };
 
-const NoticeText = ({ status, message, link, bold, heading }) => {
-  if (heading) {
+const NoticeText: React.FC<{ status: NoticeStatus; heading?: string; message?: string | string[]; link?: NoticeLink; bold?: boolean }> = ({ status, message, link, bold, heading }) => {
+  if (heading || !message) {
     return (
       <h3
         className={classNames(
@@ -34,7 +61,7 @@ const NoticeText = ({ status, message, link, bold, heading }) => {
   }
 
   return (
-    <p
+    <div
       className={classNames(
         status === 'success' ? 'text-green-700 dark:text-green-400' : '',
         status === 'info' ? 'text-blue-700 dark:text-blue-400' : '',
@@ -44,18 +71,26 @@ const NoticeText = ({ status, message, link, bold, heading }) => {
         'text-sm'
       )}
     >
-      {message}
+      {typeof message !== 'string' ? (
+        <ul className="pl-5 space-y-1 list-disc">
+          {message.map((line, index) => (
+            <li key={index}>{line}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>{message}</p>
+      )}
       {link ? (
         <>
           {' '}
-          <NoticeLink status={status} link={link} />
+          <NoticeLinkComp status={status} link={link} />
         </>
       ) : null}
-    </p>
+    </div>
   );
 };
 
-const NoticeLink = ({ status, link, arrow }) => {
+const NoticeLinkComp: React.FC<{ status: NoticeStatus; link: NoticeLink; arrow?: boolean }> = ({ status, link, arrow }) => {
   if (link.external) {
     return (
       <a
@@ -102,7 +137,7 @@ const NoticeLink = ({ status, link, arrow }) => {
   );
 };
 
-const NoticeButton = ({ status, link }) => {
+const NoticeButton: React.FC<{ status: NoticeStatus; link: NoticeLink }> = ({ status, link }) => {
   if (link.external) {
     return (
       <a
@@ -154,10 +189,11 @@ const NoticeButton = ({ status, link }) => {
   );
 };
 
-const NoticeCloseButton = ({ status, setShowNotice }) => {
+const NoticeCloseButton: React.FC<{ status: NoticeStatus; setShowNotice: (bool: boolean) => void }> = ({ status, setShowNotice }) => {
   return (
     <button
       type="button"
+      data-testid="close-notice-button"
       onClick={() => setShowNotice(false)}
       className={classNames(
         status === 'success'
@@ -174,12 +210,12 @@ const NoticeCloseButton = ({ status, setShowNotice }) => {
       )}
     >
       <span className="sr-only">Dismiss</span>
-      <XIcon className="h-5 w-5" aria-hidden="true" />
+      <XIcon className="w-5 h-5" aria-hidden="true" />
     </button>
   );
 };
 
-export default function Notice({ message, status = 'info', link, accent, heading, hideable }) {
+const Notice: React.FC<NoticeProps> = ({ message, status = NoticeStatus.Info, link, accent, heading, hideable, noIcon, classes }) => {
   const [showNotice, setShowNotice] = useState(true);
 
   if (!showNotice) {
@@ -198,14 +234,17 @@ export default function Notice({ message, status = 'info', link, accent, heading
         status === 'warn' && accent ? 'border-l-4 border-yellow-400 dark:border-yellow-500' : '',
         (status === 'error' && accent) || (status === 'fail' && accent) ? 'border-l-4 border-red-400 dark:border-red-500' : '',
         !accent ? 'rounded-md' : '',
-        'p-4 my-1'
+        'p-4 my-1',
+        classes
       )}
     >
       <div className="flex">
         {/* Icon */}
-        <div className="flex-shrink-0">
-          <NoticeIcon status={status} />
-        </div>
+        {!noIcon ? (
+          <div className="shrink-0">
+            <NoticeIcon status={status} />
+          </div>
+        ) : null}
 
         {/* If heading was provided */}
         {heading ? (
@@ -230,10 +269,10 @@ export default function Notice({ message, status = 'info', link, accent, heading
             <NoticeText status={status} message={message} link={link} />
           </div>
         ) : !heading && link ? (
-          <div className="ml-3 flex-1 md:flex md:justify-between">
+          <div className="flex-1 ml-3 md:flex md:justify-between">
             <NoticeText status={status} message={message} />
             <p className="mt-3 text-sm md:mt-0 md:ml-6">
-              <NoticeLink status={status} link={link} arrow />
+              <NoticeLinkComp status={status} link={link} arrow />
             </p>
           </div>
         ) : !heading ? (
@@ -244,7 +283,7 @@ export default function Notice({ message, status = 'info', link, accent, heading
 
         {/* If configure to be hideable */}
         {hideable ? (
-          <div className="ml-auto pl-6">
+          <div className="pl-6 ml-auto">
             <div className="-mx-1.5 -my-1.5">
               <NoticeCloseButton status={status} setShowNotice={setShowNotice} />
             </div>
@@ -253,4 +292,6 @@ export default function Notice({ message, status = 'info', link, accent, heading
       </div>
     </div>
   );
-}
+};
+
+export default Notice;

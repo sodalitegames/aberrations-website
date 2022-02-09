@@ -1,6 +1,12 @@
 import classNames from '../../utils/functions/classnames';
 
-export default function SectionDivider({ heading, id, nomargin }) {
+interface SectionDividerProps {
+  heading: string;
+  id: string;
+  nomargin?: boolean;
+}
+
+const SectionDivider: React.FC<SectionDividerProps> = ({ heading, id, nomargin }) => {
   return (
     <div className={classNames('relative', !nomargin ? 'mt-12' : '')}>
       <div className="absolute inset-0 flex items-center" aria-hidden="true">
@@ -13,4 +19,6 @@ export default function SectionDivider({ heading, id, nomargin }) {
       </div>
     </div>
   );
-}
+};
+
+export default SectionDivider;
