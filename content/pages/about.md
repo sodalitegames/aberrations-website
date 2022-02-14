@@ -4,7 +4,7 @@ sections:
   - type: heading
     theme: PRIMARY
     centered: false
-    heading: Why make Aberration RPG?
+    heading: Why make Aberrations RPG?
     subheading: About
   - type: columnContent
     leftColumn:
