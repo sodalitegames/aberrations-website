@@ -46,10 +46,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           handle: global.defaultMetadata.twitterUsername,
         }}
       />
+      {/* Netlify CMS Script Tag */}
+      <Script strategy="beforeInteractive" src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
+
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
-      {/* eslint-disable-next-line @next/next/inline-script-id */}
       <Script
+        id="google-analytics-script"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
@@ -60,6 +63,21 @@ function MyApp({ Component, pageProps }: AppProps) {
               page_path: window.location.pathname,
             });
           `,
+        }}
+      />
+
+      {/* MailerLite Script Tag */}
+      <Script
+        id="mailerlite-script"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          (function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
+          var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
+          f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
+          var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
+          _.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
+          var ml_account = ml('accounts', '3705686', 'd2m1d8e0x9', 'load');`,
         }}
       />
 

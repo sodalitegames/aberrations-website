@@ -1,6 +1,4 @@
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
-
 import ErrorPage from 'next/error';
 
 import { Metadata } from '../utils/types/page-types';
@@ -20,15 +18,9 @@ const HomePage: React.FC<HomePageProps> = ({ metadata, sections }) => {
   }
 
   return (
-    <>
-      <Head>
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-      </Head>
-      <PageLayout full title={metadata.title} seo={metadata}>
-        <Sections sections={sections} />
-      </PageLayout>
-    </>
+    <PageLayout full title={metadata.title} seo={metadata}>
+      <Sections sections={sections} />
+    </PageLayout>
   );
 };
 
