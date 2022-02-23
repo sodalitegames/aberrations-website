@@ -1,7 +1,22 @@
+import { GetStaticProps, NextPage } from 'next';
+
 import PageLayout from '../layouts/PageLayout';
 import FullContentMessage from '../layouts/components/FullContentMessage';
 
-const NotFound = ({ data, metadata }) => {
+import { Metadata } from 'utils/types/page-types';
+
+type NotFoundProps = {
+  metadata: Metadata;
+  data: {
+    heading: string;
+    subheading: string;
+    message: string;
+    linkText: string;
+    linkHref: string;
+  };
+};
+
+const NotFound: NextPage<NotFoundProps> = ({ data, metadata }) => {
   return (
     <PageLayout title={metadata.title} seo={metadata} full>
       <FullContentMessage data={data} />
@@ -9,7 +24,7 @@ const NotFound = ({ data, metadata }) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = () => {
   return {
     props: {
       metadata: {
@@ -25,6 +40,6 @@ export async function getStaticProps() {
       },
     },
   };
-}
+};
 
 export default NotFound;
