@@ -3,7 +3,7 @@ name: Beta Change Logs
 changeLogs:
   - emailNotificationSent: false
     date: 2022-03-05T18:12:17.676Z
-    betaVersion: Beta-4.0
+    betaVersion: "4.0"
     log: >-
       ### Player Rules Updates
 
