@@ -2,29 +2,96 @@
 name: Beta Change Logs
 changeLogs:
   - emailNotificationSent: false
+    date: 2022-03-05T18:12:17.676Z
+    betaVersion: Beta-4.0
+    log: >-
+      ### Player Rules Updates
+
+
+      #### Stats
+
+
+      * Changed maximum natural stat score from 10 to 15
+
+      * You gain one experience point if *at least* half your roll is successes (changed from *more than* half)
+
+      * *Dodge Value* removed and replaced with *Shield Value*, which is equal to your Agility stat and reduces damage intake by its amount
+
+      * Extra experience points now are stored in an *Advantage Pool*, which can be optionally used when rolling to give yourself advantage on your rolls
+
+
+      #### Criticals
+
+
+      * Critical successes no longer give you an extra experience point
+
+      * Critical failures no longer give your injured or disturbed
+
+
+      #### Combat
+
+
+      * Headshots removed
+
+      * Define a round of combat and updated delaying description
+
+
+      #### Resting
+
+
+      * Slumber heal you to max health, naps heal you by half health
+
+
+      #### Alternate Rules
+
+
+      * High Risk, High Reward - critical successes give you an extra experience and critical fails remove an experience
+
+      * Hardcore Mode - slumbers only heal your health equal to your fortitude stat, and naps heal health equal to half your fortitude stat rounded down
+
+
+      #### Actions
+
+
+      * Run renamed to Sprint
+
+      * Disarm contested test description added
+
+
+      #### Belongings In-Depth
+
+
+      * Weapon levels updated. Level 1 = unarmed. Level 2 = improvised weapons. Standard and custom weapons are levels 3 - 5.
+
+      * Usables are now tracked in *units*, which are basically just units of measurements (gallons, feet, pounds, etc.)
+
+
+      ### World Playbook Updates
+
+
+      #### Avarice World Playbook
+
+
+      * Shield, SMG, Bolas, and Nun-chucks weapon abilities updated/clarified
+
+      * Healers and Rations consumable categories have been swapped (healers removed injured, rations heal health)
+
+      * The Mover Augmentation group augmentations updated to fit with new rule changes
+  - emailNotificationSent: false
     date: 2022-01-07T16:11:40.287Z
     betaVersion: "3.1"
-    log: "### Player Rules Updates\r
+    log: |-
+      ### Player Rules Updates
 
-      \r
+      * Minor wording, clarifying, and grammatical changes
 
-      - Minor wording, clarifying, and grammatical changes\r
+      ### World Playbook Updates
 
-      \r
+      #### Avarice World Playbook
 
-      ### World Playbook Updates\r
-
-      \r
-
-      #### Avarice World Playbook\r
-
-      \r
-
-      - Updated Kuma ability to work with new rules on death\r
-
-      - Updated the world summary\r
-
-      - Minor wording and grammatical changes"
+      * Updated Kuma ability to work with new rules on death
+      * Updated the world summary
+      * Minor wording and grammatical changes
   - emailNotificationSent: false
     date: 2021-12-12T16:11:40.005Z
     betaVersion: "3.0"
