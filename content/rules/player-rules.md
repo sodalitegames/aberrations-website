@@ -42,8 +42,7 @@ navigation:
   - idRef: death
     name: Death
 ---
-
-### Version: Beta-0.0.5
+### Version: Beta-4.0
 
 ### Campaign Captain (CC)
 
@@ -92,67 +91,67 @@ Your Character Description is what you look like on the outside. Here you will d
 
 ### Active Stats
 
-Your Stats determine how good you are at actions in the game. There are 4 total Active Stats in Aberrations RPG. Below is a list of the 4, and what actions might be associated with them.
+Your Active Stats determine how good you are at actions in the game. There are 4 total Active Stats in Aberrations RPG. Below is a list of the 4, and what actions might be associated with them.
 
 ##### Fortitude (FOR)
 
 Your health, endurance, strength of will, strength of body, and overall hardiness.
 
-- Holding your breath
-- Remaining coherent after drinking alcoholic beverages
-- Endurance based challenges
-- Strength of will
-- Surviving extreme climates
-- Lifting or moving heavy objects
-- Climbing
-- Throwing (see [Actions & Tests](#actions-and-tests))
-- Tests of strength, such as arm wrestling
+* Holding your breath
+* Remaining coherent after drinking alcoholic beverages
+* Endurance based challenges
+* Strength of will
+* Surviving extreme climates
+* Lifting or moving heavy objects
+* Climbing
+* Throwing (see [Actions & Tests](#actions-and-tests))
+* Tests of strength, such as arm wrestling
 
 ##### Agility (AGL)
 
 How quickly you can react to things, how quickly you can move, and your movement speed.
 
-- Initiative (see [Combat](#combat))
-- Catching an object
-- Stealth (see [Actions & Tests](#actions-and-tests))
-- Pickpocketing (see [Actions & Tests](#actions-and-tests))
-- Acrobatics
-- Dashing (see [Actions & Tests](#actions-and-tests))
+* Initiative (see [Combat](#combat))
+* Catching an object
+* Stealth (see [Actions & Tests](#actions-and-tests))
+* Pickpocketing (see [Actions & Tests](#actions-and-tests))
+* Acrobatics
+* Dashing (see [Actions & Tests](#actions-and-tests))
 
 ##### Persona (PER)
 
 Your ability to perform in front of an audience, your vocabulary and elocution (ability to pick what words to use to elicit specific responses), and your awareness.
 
-- Bluffing & Lying (see [Actions & Tests](#actions-and-tests))
-- Magic Tricks
-- Musical Performance
-- Dancing
-- Public speaking
-- Persuasion (see [Actions & Tests](#actions-and-tests))
-- Deception (see [Actions & Tests](#actions-and-tests))
-- Bartering
-- Bribery
-- Smooth Talking
-- Threatening
-- Insight (see [Actions & Tests](#actions-and-tests))
+* Bluffing & Lying (see [Actions & Tests](#actions-and-tests))
+* Magic Tricks
+* Musical Performance
+* Dancing
+* Public speaking
+* Persuasion (see [Actions & Tests](#actions-and-tests))
+* Deception (see [Actions & Tests](#actions-and-tests))
+* Bartering
+* Bribery
+* Smooth Talking
+* Threatening
+* Insight (see [Actions & Tests](#actions-and-tests))
 
 ##### Aptitude (APT)
 
 Your academic (taught in classroom or book) and practical (on the job or in the moment) knowledge, and how well you can use that knowledge.
 
-- Foreign Languages
-- Medicine & Surgery
-- Technology & Hacking
-- Piloting Aerial or Aquatic Craft
-- Academic Checks
-- Animal Handling
-- Driving
-- Survival
-- Investigation(see [Actions & Tests](#actions-and-tests))
-- Explosives
-- Lock Picking
+* Foreign Languages
+* Medicine & Surgery
+* Technology & Hacking
+* Piloting Aerial or Aquatic Craft
+* Academic Checks
+* Animal Handling
+* Driving
+* Survival
+* Investigation(see [Actions & Tests](#actions-and-tests))
+* Explosives
+* Lock Picking 
 
-> _There may be times when an action that normally falls under one stat might fall under another. The CC has the power to change the Stat used at any time._
+> *There may be times when an action that normally falls under one stat might fall under another. The CC has the power to change the Stat used at any time.*  
 
 ### Using Your Stats
 
@@ -164,9 +163,9 @@ Prior to your roll, the CC not only would have determined the associated Stat bu
 
 Stat Tests are ways to determine your character’s ability to perform that action. Therefore, after making the Stat Test, you cannot roll to perform that same action again unless the circumstances surrounding that action change. Your CC is the one who determines what a constitutes a change in circumstances. If you fail the Stat Test, you must somehow make the action easier, by changing circumstances, to re-attempt the action. If you succeed on the Stat Test, you can automatically continue to perform the same action unless there are circumstances that make the Stat Test more difficult or different enough to warrant a new Stat Test.
 
-> _Many things will have a predetermined associated stat to roll for, such as Weapons, items, and Augmentations._
-
-> _There may be times when you want to apply less successes than your result. You may choose to declare how many of your rolled successes you are applying to your action before that action is completed. This cannot be used to gain critical successes, or critical failures, if you did not otherwise roll them._
+> *Many things will have a predetermined associated stat to roll for, such as Weapons, items, and Augmentations.*
+>
+> *There may be times when you want to apply less successes than your result. You may choose to declare how many of your rolled successes you are applying to your action before that action is completed. This cannot be used to gain critical successes, or critical failures, if you did not otherwise roll them.*
 
 ##### Contested Stat Test
 
@@ -174,19 +173,30 @@ When performing a test against another creature's ability, such as pickpocketing
 
 ##### Stat Score
 
-Your Stat Score refers to how many points you have in a specific Stat. You have a maximum Stat Score of 10 for each Stat, however, your equipped belongings and/or Augmentations can additionally modify your Stat Score up to 5 points in either direction. This makes your true maximum Stat Score 15 points.
+Your Stat Score refers to how many points you have in a specific Stat. You have a maximum Stat Score of 15 for each Stat, however, your equipped wearables can additionally modify your Stat Score up to 5 points in either direction. This makes your true maximum Stat Score 20 points.
 
-We refer to these two types of Stat Points as Natural Stats and Modified Stats. Your starting Natural Stat points are determined by your chosen Species. Your Modified Stat points, as stated, are determined by your equipped belongings and Augmentations.
+We refer to these two types of Stat Points as Natural Stats and Modified Stats. Your starting Natural Stat points are determined by your chosen Species and can be leveled up as you play. Your Modified Stat points are determined by your equipped wearables.
 
 ##### Experience
 
-When more than half of your Stat Test roll is made up of successes, you gain one Experience in the associated Stat you rolled for. You gain one Experience even if you did not roll well enough to perform your attempted action. Experience is represented by the bubbles underneath your Stat on the Character Sheet.
+When **at least** half of your Stat Test roll is made up of successes, you gain one Experience in the associated Stat you rolled for. You gain one Experience even if you did not roll well enough to perform your attempted action.
+
+##### Advantage Pool
+
+Your Advantage Pool is your collection of Advantage Points. Advantage Points are earned by having extra Experience when upgrading a stat. You can use any number of Advantage Points at any time to give yourself advantage on a roll (one advantage point equals one advantage given).
 
 ##### Upgrading Stats
 
-When you get the chance to slumber (see [Resting](#resting)), look at your Experience. If your Experience is equal to or greater than your Stat Score in the associated Stat, then reset your Experience to 0 and increase the associated Stat Score by 1. When you level up a Stat, you also gain one Upgrade Point (see [Upgrade Points](#upgrade-points)).
+When you get the chance to slumber (see [Resting](#resting)), look at your Experience. If your Experience is equal to or greater than your Stat Score in the associated Stat, you are able to upgrade your stat.  
 
-> _When leveling up your Stats, your Stat Score is both your Natural and Modified Stat Scores together. If you need to take off your helmet to get that level up, then be our guest._
+To upgrade your stat, do the following: 
+
+1. Determine your Advantage Points and add them to your Advantage Pool. This is the difference between your experience and your stat score. Example: Your Stat Score is an 8 in Fortitude, and have 10 Experience in Fortitude; This means you have 2 Advantage Points (10 - 8 = 2). 
+2. Reset your Experience to 0. 
+3. Increase the associated Stat Score by 1. 
+4. Gain one Upgrade Point (see Upgrade points). 
+
+> *When leveling up your Stats, your Stat Score is both your Natural and Modified Stat Scores together. If you need to take off your helmet to get that level up, then be our guest.*
 
 ##### Temporary Modifiers
 
@@ -216,19 +226,19 @@ Your passive stats are stats that are calculated from your four main Stats: Fort
 
 **Max Health (MAX HP):** MAX HP is how much health you can have at once. You cannot heal past this amount.
 
-> _Your MAX HP is determined by your Fortitude (FOR) Stat x 5 (if FOR = 4 then MAX HP = 20)._
+> *Your MAX HP is determined by your Fortitude (FOR) Stat x 10 (if FOR = 4 then MAX HP = 40).*
 
-**Dodge Value (DV):** Your DV is how many hits you can dodge when you are being attacked (see [Combat](#combat)).
+**Shield Value (SV):** When taking most types of external damage, you may reduce that damage by your Shield Value (see [Combat](#combat)).
 
-> _Your DV is determined by Agility (AGL) Stat / 3 (rounded down)._
+> *Your SV is determined by your Agility (AGL).*
 
-**Initiative (IN):** Your IN determines your turn order when combat is initiated. The character with the highest initiative takes the first turn (see [Initiative](#initiative)).
+**Initiative (IN):** Determines your turn order when combat is initiated. The character with the highest initiative gets first pick as to where they would like to be in the combat order, the next highest gets second pick, etc. Once the combat order has been determined, it cannot be changed (see [Initiative](#initiative)).
 
-> _Your IN is determined by Persona (PER) Stat._
+> *Your IN is determined by Persona (PER) Stat.*
 
-**Support (SP):** Your SP determines how much Advantage you can add to an ally’s roll when you use the Assist action (see [Actions & Tests](#actions-and-tests)).
+**Support (SP):** Determines how much Advantage you can add to an ally’s roll when you use the Assist action (see [Actions & Tests](#actions-and-tests)).
 
-> _Your SP is determined by Aptitude (APT) Stat / 2 (rounded down)._
+> *Your SP is determined by Aptitude (APT) Stat / 2 (rounded down).*
 
 ##### Power
 
@@ -256,21 +266,21 @@ Conditions allow you to track any adjustments you need to make in your Stats or 
 
 There are currently four different conditions you might gain: Slowed, Injured, Disturbed, and Agony. Each condition has its own way of removing points once you have gained them.
 
-**Slowed:** For every point you have in Slowed, your movement and Dodge Value are reduced by one space. If you have more than 5 Slowed, you cannot move without running, and each point in Slowed above 5 is subtracted from your successes when you take the Run action. If you have the same or more Slowed than Dodge Value, your Dodge Value is 0. You can remove Slowed by eliminating whatever it is that is causing your condition, such as breaking free of your restraints, the drug wearing off, or using certain Consumables or Usables.
+**Slowed:** For every point you have in Slowed, your movement and Shield Value are reduced by one space/point. If you have more Slowed than the base movement speed, you cannot move without running, and each point in Slowed above base movement is subtracted from your successes when you take the Sprint action. If you have the same or more Slowed than Shield Value, your Shield Value is 0. You can remove Slowed by eliminating whatever it is that is causing your condition, such as breaking free of your restraints, the drug wearing off, or using certain Consumables or Usables.
 
-> _Reasons for gaining Slowed include, but are not limited to, when you are restrained, after certain attacks, use of certain Consumables or Usables._
+> *Reasons for gaining Slowed include, but are not limited to, when you are restrained, after certain attacks, use of certain Consumables or Usables.*
 
 **Injured:** When making a PHYSICAL Stat Test (Fortitude or Agility), your roll gets negative Advantage equal to the number of points you have in Injured. You can remove Injured through rest or taking certain Consumables.
 
-> _Reasons for increasing your Injured total include rolling a critical failure in Fortitude or Agility, receiving low health conditions, and potentially other role-playing consequences as determined by your CC (like sticking your arm in a hole full of snakes, or licking a flagpole in sub-zero temperatures)._
+> *Reasons for increasing your Injured total include rolling a critical failure in Fortitude or Agility, receiving low health conditions, and potentially other role-playing consequences as determined by your CC (like sticking your arm in a hole full of snakes, or licking a flagpole in sub-zero temperatures).*
 
 **Disturbed:** When making a MENTAL Stat Test (Persona or Aptitude), your roll gets negative Advantage equal to the number of points you have in Disturbed. You can remove Disturbed through rest or taking certain Consumables.
 
-> _Reasons for increasing your Disturbed total include rolling a critical failure in Persona or Aptitude, something traumatizing happening to your character, and potentially other role-playing consequences as determined by your CC (like being terrified of a creature, distracted by some bad news, etc.)._
+> *Reasons for increasing your Disturbed total include rolling a critical failure in Persona or Aptitude, something traumatizing happening to your character, and potentially other role-playing consequences as determined by your CC (like being terrified of a creature, distracted by some bad news, etc.).*
 
 **Agony:** At the beginning of each of your turns, you are dealt damage equal to your Agony. If play is not operating in turn order, your CC will set a time interval (such as every 5 minutes) that you will be dealt the damage in. You can remove Agony by removing or stopping whatever is giving you the Agony, such as putting out the fire on your back, taking an antidote while poisoned, or getting to the surface when drowning.
 
-> _Reasons for increasing your Agony can vary. Your Agony may increase if you are on fire, poisoned, drowning, freezing, etc. It is possible to have multiple reasons at once that you are in Agony. You are in charge of tracking what is causing your Agony (and how much Agony it is causing) and finding ways to put a stop to it._
+> *Reasons for increasing your Agony can vary. Your Agony may increase if you are on fire, poisoned, drowning, freezing, etc. It is possible to have multiple reasons at once that you are in Agony. You are in charge of tracking what is causing your Agony (and how much Agony it is causing) and finding ways to put a stop to it.*
 
 ### Augmentations
 
@@ -286,13 +296,13 @@ Belongings are split into four categories: Weapons, Wearables, Consumables, and 
 
 **Weapons:** Any belonging whose main purpose is to inflict damage. You can have 2 Weapons equipped on your person at any given time.
 
-> _Every Weapon will have an associated Stat, which is the type of Stat Test you make when attempting to use it._
+> *Every Weapon will have an associated Stat, which is the type of Stat Test you make when attempting to use it.*
 
 **Wearables:** Any belonging that you can wear. You can have 7 Wearables equipped at any given time, one in each of the following areas: Head, Face, Torso, Arms, Hands, Legs, and Feet.
 
 **Consumables:** Any belonging that has a limited number of uses, whether through use or eating. You can have 3 separate Consumables on your person at any given time.
 
-> _Having 2 of the same Consumable is not the same as having a Consumable with 2 uses; therefore, in the former example, you would use 2 slots to carry the 2 copies of that Consumable on your person._
+> *Having 2 of the same Consumable is not the same as having a Consumable with 2 uses; therefore, in the former example, you would use 2 slots to carry the 2 copies of that Consumable on your person.*
 
 **Usables:** Any belonging that you can use, is not destroyed by use, and does not fall into any of the above categories. You can have 3 separate Usables on your person at any given time.
 
@@ -322,9 +332,13 @@ There are three categories that any action can be classified down to: Major Acti
 
 When performing an action, there is always a possibility of rolling either a critical success or a critical failure.
 
-**Critical Success:** When more than half of the dice that you roll are 6s, you can act as if all of dice that you rolled were a success. When doing so, gain 2 experience points instead of 1.
+**Critical Success:** When at least half of the dice that you roll are 6s, you can act as if all of dice that you rolled were a success. Depending on the situation, your CC *MAY* allow something truly exceptional to happen as a reward.
 
-**Critical Failure:** When more than half of the dice that you roll are 1s, you act as if all the dice rolled were failures and you automatically fail the test. You also gain one point in either the Injured (Fortitude/Agility) or Disturbed (Persona/Aptitude) condition, depending on which Stat you rolled for.
+**Critical Failure:** When at least half of the dice that you roll are 1s, you act as if all the dice rolled were failures and you automatically fail the test. Depending on the riskiness of the task, the CC MAY describe an unintentional consequence to the roll made.
+
+> *There will be times when the number of 1s and 6s rolled are equal. If this happens, roll 1 additional die. If the result is 1-3 the roll is a critical failure, if the result is 4-6 the result is a critical success.*  
+
+***ALTERNATE RULES: HIGH RISK, HIGH REWARD*** – If you choose to implement this optional rule, Critical successes grant you an additional experience and Critical Failures remove an experience when rolled. 
 
 ### Advantage
 
@@ -346,6 +360,10 @@ There may come a time when you need to fight. When there comes a point where one
 
 While in combat, you have 1 Major Action Points and 1 Minor Action Point to use each turn. You may choose to use both, one, or none of these actions. You also have unlimited free actions that can be performed at any time during your turn, or on another character’s turn.
 
+##### Rounds of Combat
+
+A round of combat is individual to each character. A new round of combat starts at the beginning of each of your turns.
+
 ##### Initiative
 
 When combat is initiated, everyone checks their Initiative passive stat value. Combat is then initiated in order of highest to lowest in reference to each character’s Initiative. If there is a tie, player characters beat non-player characters. If there is a tie between players, then the tied players may choose which order to play in.
@@ -354,11 +372,9 @@ When combat is initiated, everyone checks their Initiative passive stat value. C
 
 You may use a Major Action on your turn to attack. Attacking uses a Weapon to deal damage to another creature. When attacking, declare a target and roll a Stat Test for the associated stat of the Weapon you are using. Tally up your successes from that roll and subtract the target’s Dodge Value. The remaining number is how many times you hit your target. Multiply that number by your Weapons damage, and that is how much damage your target takes.
 
-> _You make an attack with a Strength Weapon that has a damage of 1 against a target with a Dodge Value of 2. You have 5 Strength. You roll 4 successes. Target dodges 2 attacks and is hit by 2 attacks. Since your Weapon has a damage of 1, you deal 2 damage to your target._
+> *You make an attack with a Strength Weapon that has a damage of 1 against a target with a Dodge Value of 2. You have 5 Strength. You roll 4 successes. Target dodges 2 attacks and is hit by 2 attacks. Since your Weapon has a damage of 1, you deal 2 damage to your target.*
 
 **Surprise Attacks:** When a target is surprised by the attack, they do not have enough time to react and dodge the attack. Therefore, when making a surprise or sneak attack, you do not subtract the target’s Dodge Value from your total Successes.
-
-**Headshot:** At any time, when making an attack (including melee attacks), a character may attempt to make a headshot. When making a headshot, the defending character’s Dodge Value is doubled. If your rolled successes are more than the defending character’s adjusted Dodge Value, then the attack is treated as if you rolled all successes. The defending character’s unmodified Dodge Value is still considered when calculating damage dealt. If your rolled successes are equal to or less than your target’s Dodge Value, then no damage is dealt. Any kind of attack specified against a specific area of a target’s body uses this same principal, with varying amounts of damage delt, up to the discretion of the CC. If making a surprise attack, the character’s Dodge Value is treated as if the attacker was making a normal attack.
 
 **Taking Aim:** Taking a minor action to simply aim your Weapon at a specific target gives you +1 Advantage on your next attack against that target as long as the they do not move out of your line of sight and you are not attacked or otherwise distracted before that attack. Using a major action gives you +2 Advantage to your next attack. If you use both your minor and major action to take aim, you may gain +1 die to your next attack roll instead of gaining Advantage.
 
@@ -366,18 +382,19 @@ You may use a Major Action on your turn to attack. Attacking uses a Weapon to de
 
 **Attacks Against Inanimate Objects:** Similarly, inanimate objects do not typically have a Dodge Value and therefore you do not subtract their Dodge Value from your attack. The exception being if you are attacking a vehicle that is being controlled by another character and is therefore maneuverable.
 
-**Delaying:** Delaying allows you to perform the remainder of your turn after another character in the combat order, or after a specific variable occurs. Delaying cannot be used to interrupt another character’s turn unless you specifically define your intended action(s) when declaring your intention to check (i.e., aiming for a door and saying you will shoot anything that comes through the door). If for whatever reason, the chosen character cannot perform their turn, or if the variable does not occur, then you lose the remainder of your turn. The act of delaying is considered a free action, but whatever action points you use while delaying are expended normally.
+**Delaying:** Delaying allows you to perform the remainder of your turn after an ally in the combat order, or after a specific variable occurs. Delaying cannot be used to interrupt another character’s turn unless you specifically define your intended action(s) when declaring your intention to delay (i.e., aiming for a door and saying you will shoot anything that comes through the door). If for whatever reason, the chosen character cannot perform their turn, or if the variable does not occur, then you lose the remainder of your turn. After an action is declared, you must follow through on the action, regardless of the result (I.e. if a friendly creature enters the door that you were previously aiming at). The act of delaying is considered a free action, but whatever action points you use while delaying are expended normally.
 
 ##### Advantage in Combat
 
 There are specific scenarios that will give a character Advantage while attacking in combat. It is important to remember that Advantage in combat only affects accuracy rolls. It is even more important to remember that these combat advantages also apply to NPCS.
 
-- **Flanking:** +1 Advantage for every friendly character who is also in combat and is adjacent to the enemy that you are attacking (this includes ranged attacks).
-- **High Ground:** +1 Advantage if you are at least 5 feet above your target.
-- **Prone:** +1 advantage if your target is laying on the ground.
-- **Pinned:** +1 Advantage if your target is pinned.
-- **Multitasking:** -1 Advantage if a character is using 1 Action Point to perform 2 actions.
-- **Cover:** -3 Advantage if target isn’t visible behind cover. -2 Advantage if target is behind cover and less than 25% of them is visible. -1 Advantage if they are 50%-75% visible behind cover.
+* **Flanking:** +1 Advantage for every friendly character who is also in combat and is adjacent to the enemy that you are attacking (this includes ranged attacks).
+* **High Ground:** +1 Advantage for every 5 feet you are above your target.
+* **Low Ground:** -1 Advantage for every 5 feet you are below your target.
+* **Prone:** +1 advantage if your target is laying on the ground.
+* **Pinned:** +1 Advantage if your target is pinned.
+* **Multitasking:** -1 Advantage if a character is using 1 Action Point to perform 2 actions.
+* **Cover:** -3 Advantage if target isn’t visible behind cover. -2 Advantage if target is behind cover and less than 25% of them is visible. -1 Advantage if they are 50%-75% visible behind cover.
 
 ### Low Health Conditions
 
@@ -395,11 +412,13 @@ The party may have a rotating watch during a rest, but you may not perform any o
 
 Rests are broken down into two categories: Slumbers and Naps.
 
-**Slumber:** A slumber is an uninterrupted rest that lasts for 8 hours or more. During a slumber, you recover Health points equal to your Fortitude stat, you may level up your stats if possible, and all your points in Injured and Disturbed are removed.
+**Slumber:** A slumber is an uninterrupted rest that lasts for 8 hours or more. During a slumber, you recover all your Health Points, you may level up your stats if possible, and all your points in Injured and Disturbed are removed.
 
-**Naps:** Naps are rests that last less than 8 hours, but more than 1 hour. Naps will allow you to recover Health points equal to half your Fortitude stat (rounded down), as well as remove 1 point of Injured, OR 1 point of Disturbed. You cannot level up your Stats during a nap.
+**Naps:** Naps are rests that last less than 8 hours, but more than 1 hour. Naps will allow you to recover Health points equal to half your health as well as remove 1 point of Injured, and 1 point of Disturbed. You cannot level up your stats during a nap.
 
 **Lack of Rest:** If your character goes 24 hours in-game time without resting, you gain 1 point in the Disturbed condition. You gain another point in the Disturbed condition every 12 hours after that, until your character finally rests.
+
+***ALTERNATE RULESET: HARDCORE MODE*** – As an alternate rule, you may only be able to recover health points equal to your Fortitude stat during a slumber and equal to half of your fortitude stat during a nap. When using these alternate rules, any excess experience after leveling up a stat is converted to health points. You cannot heal past full health.
 
 ### Death
 
@@ -407,22 +426,22 @@ When you reach 0 health points or below, your character becomes Nearly Dead. Whi
 
 When your character becomes Nearly Dead, you must immediately add one point to your Mortality. You are out of commission until the end of combat (unless an Augmentation allows otherwise). When combat has officially ended (as declared by your CC), any surviving non-player or player characters can choose to revive you, whether friend or foe. Characters that also became Nearly Dead this combat cannot help revive any of the other characters. If your character is not revived at the end of combat, you become Totally Dead.
 
-> _While we refer to combat specifically, there are other situations that may cause Near Death but may not necessarily qualify as combat (such as falling off a building). In these instances, you can be revived right away, as long as other characters can get to you within a reasonable amount of time._
+> *While we refer to combat specifically, there are other situations that may cause Near Death but may not necessarily qualify as combat (such as falling off a building). In these instances, you can be revived right away, as long as other characters can get to you within a reasonable amount of time.*
 
 **Revival Roll:** When an attempt to revive you is made, roll a number of dice equal to your unmodified Fortitude Stat. This roll determines whether you can recover from your major injuries, or you become Totally Dead. If you roll a number of successes equal to or more than your Mortality, you are able to recover. Upon recovery, you regain consciousness and have an amount of health equal to the number of successes you rolled.
 
-> _Each character that is attempting to revive you may choose to add +1 Advantage to your roll. This means that if you have three characters attempting to revive you, you get up to +3 Advantage. If you have 10 characters attempting to revive you, you get up to +10 Advantage, and so on._
+> *Each character that is attempting to revive you may choose to add +1 Advantage to your roll. This means that if you have three characters attempting to revive you, you get up to +3 Advantage. If you have 10 characters attempting to revive you, you get up to +10 Advantage, and so on.*
 
 **Inspire:** While Nearly Dead, you may choose to inspire a character of your choosing. When you inspire a character, they gain Advantage equal to your Mortality on their next roll. You may only inspire a character one time per Near Death experience.
 
-> _Two Nearly Dead characters can inspire the same character, and can even inspire them at the same time, resulting in Advantage given equal to both Mortalities combined on the inspired characters next roll._
+> *Two Nearly Dead characters can inspire the same character, and can even inspire them at the same time, resulting in Advantage given equal to both Mortalities combined on the inspired characters next roll.*
 
 **Revival Roll:** Each character that is attempting to revive you may choose to add +1 Advantage to your roll. This means that if you have three characters attempting to revive you, you get up to +3 Advantage. If you have 10 characters attempting to revive you, you get up to +10 Advantage, and so on.
 
 **Totally Dead:** If you do not roll enough successes on your Fortitude Stat Test, then you are Totally Dead. At this point, your character is out of the game and your inventory can be looted by other characters. A new character can now be created if you wish to continue playing in the campaign.
 
-> _The more you become Nearly Dead, the harder it gets to recover, and your chances of becoming Totally Dead increase._
+> *The more you become Nearly Dead, the harder it gets to recover, and your chances of becoming Totally Dead increase.*
 
 **Instant Death:** If the final blow that causes death inflicts so much damage that your resulting Current HP is less than or equal to the negative value of your Max HP, then you are immediately deemed Totally Dead, and have no chance to recover.
 
-> _There are certain abilities and items that can bring characters back from Total Death, but they are rare, full of stipulations, and often come at a heavy price._
+> *There are certain abilities and items that can bring characters back from Total Death, but they are rare, full of stipulations, and often come at a heavy price.*
