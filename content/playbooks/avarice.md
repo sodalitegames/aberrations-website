@@ -22,13 +22,11 @@ augmentations: "Below are the five augmentation groups, with their Augmentations
   \r
 
   *Remember: it takes 6 in-game hours for an augmentation to fully activate.*"
-weapons: "The following are the types of weapons currently available on
-  Avarice.\r
+weapons: >-
+  The following are the types of weapons currently available on Avarice.
 
-  \r
 
-  Weapon ranges are labeled as follows: Close (0 – 1 spaces), Short (2 – 4
-  spaces), Long (4 – 6 spaces), and Far (6 – 10 spaces). "
+  Weapon ranges are labeled as follows: Close (0 – 1 spaces), Short (2 – 4 spaces), Long (4 – 6 spaces), and Far (6 – 10 spaces). Attacking a target outside of your weapons range gives you –1 Advantage for each space outside the range that you are.
 consumables: The following are the categories of consumables that are currently
   available on Avarice.
 creatures: "This section is for CC’s (and curious players) to help guide the

@@ -10,7 +10,6 @@ navigation:
   - name: Usables
     idRef: usables
 ---
-
 Belongings are split into four categories: Weapons, Wearables, Consumables, and Usables. Whenever you acquire a new belonging, through whatever means, think through each of these to determine what it is.
 
 1. Is its main purpose to fight? If yes, it is a Weapon.
@@ -25,13 +24,17 @@ You can have 2 Weapons equipped on your person at any given time. Any other Weap
 
 Weapons are defined by a name, description, Weapon type, Weapon level, range, damage, associated stat, and ability.
 
-- **Name:** The name of the weapon.
-- **Description:** The physical description of the weapon. It can be pointy, shiny, square, blue, etc.
-- **Type:** The Weapons that are available for use is dependent on the world you are playing on. Each world has 16 different Weapons, which we refer to as Standard Weapons. This typically results in two ranged and melee Weapons for each stat. You can find the list of these Standard Weapons and their details in the [World Playbook](/get-started/world-playbooks) of the world you are playing on.
-- **Level:** Your Weapon’s level determines how much damage is dealt for every successful hit you land when attacking. The level of your Weapon is determined by your CC, and can range from level 0 to level 10. Higher level Weapons can be purchased, and lower-level Weapons can be upgraded.
-- **Range:** Every Weapon will have a minimum and maximum effective range. When attacking within this range, you roll as normal. For every space outside of the effective range you are attempting to hit, gain -1 Advantage to attack. Weapon ranges are listed as follows: Close (0 – 1 spaces), Short (2 – 4 spaces), Long (4 – 6 spaces), and Far (6 – 10 spaces).
-- **Associated Stat:** The Associated Stat determines what Stat Test you roll for when making an attack with the Weapon.
-- **Ability:** Each of the 16 Standard Weapons comes with a unique ability you can perform when in combat. These abilities are described on the Weapons Reference of the [World Playbook](/get-started/world-playbooks) of the world you are playing on.
+* **Name:** The name of the weapon.
+* **Description:** The physical description of the weapon. It can be pointy, shiny, square, blue, etc.
+* **Type:** The Weapons that are available for use is dependent on the world you are playing on. Each world has 16 different Weapons, which we refer to as Standard Weapons. This typically results in two ranged and melee Weapons for each stat. You can find the list of these Standard Weapons and their details in the [World Playbook](/get-started/world-playbooks) of the world you are playing on.
+* **Level:** Your Weapon’s level determines how much damage is dealt for every successful hit you land when attacking. The level of your Weapon is determined by your CC, and can range from level 1-5. Higher level Weapons can be purchased, and lower-level Weapons can be upgraded.
+
+  * Unarmed attacks are considered to be made with level 1 weapons.
+  * Improvised weapons are by default level 2 weapons unless otherwise determined by the CC
+  * Normal weapons range from being level 3 - 5 weapons.
+* **Range:** Every Weapon will have a minimum and maximum effective range. When attacking within this range, you roll as normal. For every space outside of the effective range you are attempting to hit, gain -1 Advantage to attack. Weapon ranges are listed as follows: Close (0 – 1 spaces), Short (2 – 4 spaces), Long (4 – 6 spaces), and Far (6 – 10 spaces).
+* **Associated Stat:** The Associated Stat determines what Stat Test you roll for when making an attack with the Weapon.
+* **Ability:** Each of the 16 Standard Weapons comes with a unique ability you can perform when in combat. These abilities are described on the Weapons Reference of the [World Playbook](/get-started/world-playbooks) of the world you are playing on.
 
 ##### Ammulator
 
@@ -43,11 +46,11 @@ We said there are 16 total Weapon types on each world you can play on, but that 
 
 **Custom Weapons:** A common Weapon is just what it sounds. It is a Weapon created specifically for or by you. Do you want a crossbow? A flail? A double-sided spear? A throwing shield? Well, you can have it... as long as your CC allows it, that is.
 
-> _A custom Weapons damage, range, optional ability(s), and associated stat are all determined by your CC, as well as how and if you acquire one._
+> *A custom Weapons damage, range, optional ability(s), and associated stat are all determined by your CC, as well as how and if you acquire one.*
 
 **Improvised Weapons:** An improvised Weapon is anything you are trying to deal damage with, that is not already a Weapon. Improvised Weapons can be temporary (such as hitting somebody with a book), or permanent (such as strapping a book to the end of a stick and using it as your main Weapon). A temporary improvised Weapon returns to its normal status after a single use, whereas a permanent improvised Weapon remains a Weapon in your belongings from the point of creation.
 
-> _Both a temporary and permanent Weapons damage, range, and associated stat are determined by your CC. Improvised Weapons do not have an ability._
+> *Both a temporary and permanent Weapons damage, range, and associated stat are determined by your CC. Improvised Weapons do not have an ability.*
 
 ##### Creating Your Weapons
 
@@ -59,10 +62,10 @@ You can have 7 Wearables equipped at any given time, one in each of the followin
 
 Wearables are defined by a name, description, body area, and stat modifier.
 
-- **Name:** The name of the Wearable.
-- **Description:** A physical description of the Wearable. It can be heavy, hot, stylish, ragged, etc.
-- **Body Area:** Where on your person you can wear this Wearable. You cannot wear two Wearables on the same body area.
-- **Stat Modifier:** The stat that this Wearable modifies. Wearables can increase or decrease a stat. This will then be used to determine your Modified Stat Score (see [Using Your Stats](#using-your-stats)).
+* **Name:** The name of the Wearable.
+* **Description:** A physical description of the Wearable. It can be heavy, hot, stylish, ragged, etc.
+* **Body Area:** Where on your person you can wear this Wearable. You cannot wear two Wearables on the same body area.
+* **Stat Modifier:** The stat that this Wearable modifies. Wearables can increase or decrease a stat. This will then be used to determine your Modified Stat Score (see [Using Your Stats](#using-your-stats)).
 
 ##### Creating Your Wearables
 
@@ -74,11 +77,11 @@ You can have 3 separate Consumables on your person at any given time. Any Items 
 
 Consumables are defined by a name, description, categories, level, and uses.
 
-- **Name:** This is the name of the Consumable.
-- **Description:** The description of the Consumable.
-- **Categories:** One or more categories that describes what the Consumable does. The different available categories and their definitions are explained in the [World Playbook](/get-started/world-playbooks) of the world you are playing on.
-- **Level:** Level from 1 – 10 that determines how powerful the category effect is. You multiply the category effect by this number.
-- **Uses:** How many times you can use the Consumable before it is destroyed/useless. Consumable uses cannot be restored unless otherwise stated.
+* **Name:** This is the name of the Consumable.
+* **Description:** The description of the Consumable.
+* **Categories:** One or more categories that describes what the Consumable does. The different available categories and their definitions are explained in the [World Playbook](/get-started/world-playbooks) of the world you are playing on.
+* **Level:** Level from 1 – 10 that determines how powerful the category effect is. You multiply the category effect by this number.
+* **Uses:** How many times you can use the Consumable before it is destroyed/useless. Consumable uses cannot be restored unless otherwise stated.
 
 ##### Creating Your Consumables
 
@@ -90,10 +93,11 @@ You can have 3 separate Usables on your person at any given time. Any Usables th
 
 Usables are defined by a name, and description, type, and equipable option.
 
-- **Name:** This is the name of the Usable.
-- **Description:** The description of the Usable.
-- **Type:** This helps determine the value of the Usable, as well as likelihood that you will run into one. The options are common, semi-common, rare, collectable, and one-of-a-kind.
-- **Equipable:** Whether you can equip this Usable or not. An example of a non-equipable Usable would be a vehicle. Your CC ultimately determines whether a Usable can be equipped.
+* **Name:** This is the name of the Usable.
+* **Description:** The description of the Usable.
+* **Type:** This helps determine the value of the Usable, as well as likelihood that you will run into one. The options are common, semi-common, rare, collectable, and one-of-a-kind.
+* **Units:** This refers to the unit of measurement for the Usable. This can be feet, pounds, bottles, scoops, handfuls, truckloads, etc.
+* **Equipable:** Whether you can equip this Usable or not. An example of a non-equipable Usable would be a vehicle. Your CC ultimately determines whether a Usable can be equipped.
 
 ##### Creating Your Usables
 
