@@ -1,9 +1,9 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 import classNames from 'utils/functions/classnames';
 
-class MailerLiteForm extends React.Component<{ classes?: string; type?: 'primary' | 'secondary' }> {
-  componentDidMount() {
+const MailerLiteForm: React.VFC<{ classes?: string; type?: 'primary' | 'secondary' }> = ({ type, classes }) => {
+  useEffect(() => {
     const script = document.createElement('script');
 
     script.innerHTML = `
@@ -17,21 +17,21 @@ class MailerLiteForm extends React.Component<{ classes?: string; type?: 'primary
     script.async = true;
 
     document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  });
+
+  if (process.env.NODE_ENV !== 'production') {
+    return <p className="w-full mt-4 text-center text-gray-400">Subscription form hidden while in development mode.</p>;
   }
 
-  render() {
-    const { classes, type } = this.props;
-
-    // if (process.env.NODE_ENV !== 'production') {
-    //   return <p className="w-full mt-4 text-center text-gray-400">Subscription form hidden while in development mode.</p>;
-    // }
-
-    if (type === 'secondary') {
-      return <div className={classNames('ml-form-embed', classes)} data-account="3705686:d2m1d8e0x9" data-form="5513480:t6r0s5"></div>;
-    }
-
-    return <div className={classNames('ml-form-embed', classes)} data-account="3705686:d2m1d8e0x9" data-form="5225651:y8o3z3" />;
+  if (type === 'secondary') {
+    return <div className={classNames('ml-form-embed', classes)} data-account="3705686:d2m1d8e0x9" data-form="5513480:t6r0s5"></div>;
   }
-}
+
+  return <div className={classNames('ml-form-embed', classes)} data-account="3705686:d2m1d8e0x9" data-form="5225651:y8o3z3" />;
+};
 
 export default MailerLiteForm;
