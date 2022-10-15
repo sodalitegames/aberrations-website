@@ -19,22 +19,20 @@ const BlogPage = ({ posts, metadata }) => {
         { name: metadata.title, href: `/community/${metadata.slug}` },
       ]}
     >
-      <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8 mt-2">
-        {posts.map((post, index) => {
-          if (post.featured) {
+      <div className="grid gap-4 mt-2 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
+        {posts
+          .filter(post => post.featured)
+          .map((post, index) => {
             return <BlogPostCard key={index} post={post} />;
-          }
-          return null;
-        })}
+          })}
       </div>
       <EmailCTA ctaText="Get updates, tips, and tricks sent straight to your inbox." buttonText="Sign me up" />
-      <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8 mt-8">
-        {posts.map((post, index) => {
-          if (post.featured) {
-            return null;
-          }
-          return <BlogPostCard key={index} post={post} />;
-        })}
+      <div className="grid gap-4 mt-8 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
+        {posts
+          .filter(post => !post.featured)
+          .map((post, index) => {
+            return <BlogPostCard key={index} post={post} />;
+          })}
       </div>
     </PageLayout>
   );
@@ -45,9 +43,11 @@ export async function getStaticProps() {
   const page = await import('../../../content/pages/blog.md').catch(error => null);
   const { metadata } = page.attributes;
 
-  const slugs = (context => {
-    return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
-  })(require.context('../../../content/posts', true, /\.md$/));
+  const postsContext = require.context('../../../content/posts', true, /^\.\/.*\.md$/);
+
+  const slugs = postsContext.keys().map(key => {
+    return key.replace(/^.*[\\\/]/, '').slice(0, -3);
+  });
 
   const posts = await Promise.all(
     slugs.map(async slug => {
