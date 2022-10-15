@@ -18,26 +18,42 @@ export default function SpeciesCard({ species }) {
           </dd>
         </div>
         <div className="sm:col-span-2">
-          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Ability</dt>
+          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Activated Ability</dt>
           <dd className="mt-1 text-sm">
-            <NewlineText text={species.ability} />
+            <NewlineText text={species.abilities.activated} />
           </dd>
         </div>
+        <div className="sm:col-span-2">
+          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Passive Abilities</dt>
+          <dd className="mt-1 text-sm">
+            <NewlineText text={species.abilities.passive} />
+          </dd>
+        </div>
+        <div className="sm:col-span-2">
+          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Detraction</dt>
+          <dd className="mt-1 text-sm">
+            <NewlineText text={species.abilities.detraction} />
+          </dd>
+        </div>
+        <div className="sm:col-span-2">
+          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Health</dt>
+          <dd className="mt-1 text-sm">{species.health}</dd>
+        </div>
         <div className="sm:col-span-1">
-          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Fortitude</dt>
-          <dd className="mt-1 text-sm">{species.stats.fortitude}</dd>
+          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Strength</dt>
+          <dd className="mt-1 text-sm">D{species.stats.strength}</dd>
         </div>
         <div className="sm:col-span-1">
           <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Agility</dt>
-          <dd className="mt-1 text-sm">{species.stats.agility}</dd>
+          <dd className="mt-1 text-sm">D{species.stats.agility}</dd>
         </div>
         <div className="sm:col-span-1">
           <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Persona</dt>
-          <dd className="mt-1 text-sm">{species.stats.persona}</dd>
+          <dd className="mt-1 text-sm">D{species.stats.persona}</dd>
         </div>
         <div className="sm:col-span-1">
           <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Aptitude</dt>
-          <dd className="mt-1 text-sm">{species.stats.aptitude}</dd>
+          <dd className="mt-1 text-sm">D{species.stats.aptitude}</dd>
         </div>
       </dl>
     </CardContainer>

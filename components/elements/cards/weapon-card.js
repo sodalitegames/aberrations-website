@@ -28,8 +28,8 @@ export default function WeaponCard({ weapon, verbose }) {
               <dd className="mt-1 text-sm">{weapon.associatedStat}</dd>
             </div>
             <div className="sm:col-span-1">
-              <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Level &amp; Damage</dt>
-              <dd className="mt-1 text-sm">{weapon.levelDamage}</dd>
+              <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Damage Modifier</dt>
+              <dd className="mt-1 text-sm">{weapon.damageModifier}</dd>
             </div>
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Type</dt>
