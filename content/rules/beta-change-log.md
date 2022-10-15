@@ -2,6 +2,22 @@
 name: Beta Change Logs
 changeLogs:
   - emailNotificationSent: false
+    date: 2022-10-15T21:50:53.086Z
+    betaVersion: Beta-5.0
+    log: >-
+      ### P﻿layer Rules
+
+
+      * M﻿assive overhaul of all the rules to work with a new system. Nearly everything was changed or tweaked, noting especially the new way to track Stats, perform Stat Tests, and the addition of Milestones. 
+
+
+      ### A﻿varice World Playbook
+
+
+      * U﻿pdated Species, Weapons, Consumable Categories to fit the new rule system.
+
+      * N﻿ote: Augmentation Groups and Creature Types are still outdated and need to be updated.
+  - emailNotificationSent: false
     date: 2022-03-05T18:12:17.676Z
     betaVersion: "4.0"
     log: >-
