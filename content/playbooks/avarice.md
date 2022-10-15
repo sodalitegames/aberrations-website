@@ -13,15 +13,14 @@ overview: "This World Playbook is for the world of Avarice. The Avarice World
   have to go searching through the lore for what you need. If you are
   interested, you can [find the Lore of Avarice here](/worlds/avarice)."
 species: The following are the currently known sentient and playable species on Avarice.
-augmentations: "Below are the five augmentation groups, with their Augmentations
-  and the associated cost. When you are downloading an augmentation, you must
-  spend the listed number of upgrade points to purchase it. You may download
-  augmentations from any group and level at any time as long as you have the
-  upgrade points to do so.  \r
+augmentations: >-
+  Below are the five augmentation groups, with their Augmentations and the
+  associated cost. When you are downloading an augmentation, you must spend the
+  listed number of Experience to purchase it. You may download augmentations
+  from any group and level during a Milestone event. 
 
-  \r
 
-  *Remember: it takes 6 in-game hours for an augmentation to fully activate.*"
+  *Remember: it takes 6 in-game hours for an augmentation to fully activate.*
 weapons: >-
   The following are the types of weapons currently available on Avarice.
 

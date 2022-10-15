@@ -24,8 +24,8 @@ export default function CreatureCard({ creature }) {
           <dd className="mt-1 text-sm">{creature.damageLevel}</dd>
         </div>
         <div className="sm:col-span-1">
-          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Fortitude</dt>
-          <dd className="mt-1 text-sm">{creature.stats.fortitude}</dd>
+          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Strength</dt>
+          <dd className="mt-1 text-sm">{creature.stats.strength}</dd>
         </div>
         <div className="sm:col-span-1">
           <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Agility</dt>

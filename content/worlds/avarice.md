@@ -70,7 +70,7 @@ worldOverview:
         bash (turning into the attack) will use Agility, a trick shot (something
         with jumps, flips, or otherwise abusing your vehicle) will use persona,
         and a force of vehicular strength (Pulling, or trying to tear something
-        apart) will use Fortitude. Vehicles have extreme destructive potential.
+        apart) will use Strength. Vehicles have extreme destructive potential.
         However, when attacking with a vehicle, the vehicle takes half damage
         (rounded down). \r
 
@@ -160,7 +160,7 @@ worldOverview:
 
         - Aptitude: Speed: Level 5 \r
 
-        - Fortitude: Health: Level 1 \r
+        - Strength: Health: Level 1 \r
 
         - Maneuvering: +2 Adv \r
 
@@ -191,7 +191,7 @@ worldOverview:
 
         - Aptitude: Speed: Level 2 \r
 
-        - Fortitude: Health: Level 2 \r
+        - Strength: Health: Level 2 \r
 
         - Maneuvering: 0 Adv \r
 
@@ -223,7 +223,7 @@ worldOverview:
 
         - Aptitude: Speed: Level 4 \r
 
-        - Fortitude: Health: Level 2 \r
+        - Strength: Health: Level 2 \r
 
         - Maneuvering: -2 Adv \r
 
@@ -255,7 +255,7 @@ worldOverview:
 
         - Aptitude: Speed: Level 2 \r
 
-        - Fortitude: Health: Level 4 \r
+        - Strength: Health: Level 4 \r
 
         - Maneuvering: +2 Adv \r
 
@@ -287,7 +287,7 @@ worldOverview:
 
         - Aptitude: Speed: Level 1 \r
 
-        - Fortitude: Health: Level 5 \r
+        - Strength: Health: Level 5 \r
 
         - Maneuvering: -1 Adv \r
 
@@ -297,11 +297,11 @@ worldOverview:
 
         - Damage: 10"
 species:
-  overview: "Avarice has limitless sentient species. There are six that are known.
+  overview: 'Avarice has limitless sentient species. There are six that are known.
     These sentient species live in every CorpoNation and serve in many roles.
     There are some CorpoNations that have a higher demographic of certain
     species, but this most often is due to history or geography, and not
-    anything intentional. "
+    anything intentional. '
   metadata:
     title: Species
     slug: species
@@ -318,10 +318,10 @@ creatures:
     description: Learn what creatures live on the world of Avarice, what they look
       like, and the other information you need to know.
 belongings:
-  overview: "Belongings are split into four categories: weapons, wearables,
+  overview: 'Belongings are split into four categories: weapons, wearables,
     consumables, and usables. This section will go over what kinds of each of
     these belongings you are likely to find on Avarice, and how to use them and
-    find them."
+    find them.'
   metadata:
     title: Belongings
     slug: belongings
