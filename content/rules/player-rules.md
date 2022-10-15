@@ -285,9 +285,11 @@ Free Actions are actions that require no effort and can be easily performed whil
 
 ##### Attacking
 
-You may use a Major Action on your turn to attack. Attacking uses a Weapon to deal damage to another creature. When attacking, declare a target and roll a Test for the associated stat of the Weapon you are using. Add any applicable modifiers to your roll and subtract the defender’s SHIELD VALUE. The Result is how much damage you deal.
+You may use a Major Action on your turn to attack. Attacking uses a Weapon to deal damage to another creature. When attacking, declare a target and roll a Stat Test for the associated stat of the Weapon you are using. Add any applicable damage modifiers to your roll and subtract the defender’s SHIELD VALUE. The Result is how much damage you deal.
 
-> _You make an attack with a Shotgun that has a Modifier of +2, you roll a d10 for strength and get a 5. Your total is 7. Your target has a Shield Value of 4. You deal 3 damage._
+> _You make an attack with a Shotgun that has a Damage Modifier of +2, you roll a d10 for strength and get a 5. Your total is 7. Your target has a Shield Value of 4. You deal 3 damage._
+
+**Unarmed Attacks:** Unarmed Attacks don't have any inherent Damange Modifiers and deal half damage.
 
 **Surprise Attacks:** When attacking a character that is unaware, they do not have enough time to react and dodge the attack. This is called a Surprise Attack. When making a surprise attack, you do not subtract the target’s Shield Value from your result.
 
@@ -322,8 +324,6 @@ Resting allows you to recover some Health and remove conditions. Rests are broke
 ##### Lack of Rest
 
 If your character goes 24 hours in-game time without resting, you gain 1 level in the Disturbed condition. You gain another point in the Disturbed condition every 12 hours after that, until your character finally rests.
-
-**_ALTERNATE RULESET: HARDCORE MODE_** – As an alternate rule, you may only be able to recover health points equal to your Fortitude stat during a slumber and equal to half of your fortitude stat during a nap. When using these alternate rules, any excess experience after leveling up a stat is converted to health points. You cannot heal past full health.
 
 ### Death
 

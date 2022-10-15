@@ -13,27 +13,16 @@ import Notice, { NoticeStatus } from '../../components/elements/notice';
 
 import ActionCard from '../../components/elements/cards/action-card';
 
-type Action = {
-  name: string;
-  description: string;
-};
-
 interface PlayerRulesPageProps {
   playerRules: string;
   belongingsInDepth: string;
-  actionsAndTests: {
-    freeActions: Action[];
-    minorActions: Action[];
-    majorActions: Action[];
-    contestedTests: Action[];
-  };
   navigation: SideNavItem[];
   metadata: Metadata;
 }
 
-const PlayerRulesPage: React.FC<PlayerRulesPageProps> = ({ playerRules, belongingsInDepth, actionsAndTests, navigation, metadata }) => {
+const PlayerRulesPage: React.FC<PlayerRulesPageProps> = ({ playerRules, belongingsInDepth, navigation, metadata }) => {
   // Check if the required data was provided
-  if (!playerRules || !belongingsInDepth || !actionsAndTests) {
+  if (!playerRules || !belongingsInDepth) {
     return <ErrorPage statusCode={500} />;
   }
 
@@ -61,43 +50,6 @@ const PlayerRulesPage: React.FC<PlayerRulesPageProps> = ({ playerRules, belongin
       <SectionDivider heading="Belongings In-Depth" id="belongings-in-depth-section" />
 
       <MarkdownContent data={{ content: belongingsInDepth }} />
-
-      <SectionDivider heading="Actions and Tests" id="actions-and-tests" />
-      <h2 className="heading" id="free-actions">
-        Free Actions
-      </h2>
-      <div className="grid gap-4 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
-        {actionsAndTests.freeActions.map(action => (
-          <ActionCard key={action.name} action={action} />
-        ))}
-      </div>
-
-      <h2 className="heading" id="minor-actions">
-        Minor Actions
-      </h2>
-      <div className="grid gap-4 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
-        {actionsAndTests.minorActions.map(action => (
-          <ActionCard key={action.name} action={action} />
-        ))}
-      </div>
-
-      <h2 className="heading" id="major-actions">
-        Major Actions
-      </h2>
-      <div className="grid gap-4 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
-        {actionsAndTests.majorActions.map(action => (
-          <ActionCard key={action.name} action={action} />
-        ))}
-      </div>
-
-      <h2 className="heading" id="contested-tests">
-        Contested Tests
-      </h2>
-      <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
-        {actionsAndTests.contestedTests.map(action => (
-          <ActionCard key={action.name} action={action} />
-        ))}
-      </div>
     </PageLayout>
   );
 };
@@ -110,8 +62,6 @@ export async function getStaticProps() {
   if (!page || !playerRules || !belongingsInDepth) {
     return {};
   }
-
-  const { data: actionsAndTests } = await api.get('/actions-and-tests');
 
   const { name, metadata } = page.attributes;
 
@@ -126,35 +76,12 @@ export async function getStaticProps() {
       idRef: 'belongings-in-depth',
       children: belongingsInDepth.attributes.navigation,
     },
-    {
-      name: 'Actions and Tests',
-      idRef: 'actions-and-tests',
-      children: [
-        {
-          name: 'Free Actions',
-          idRef: 'free-actions',
-        },
-        {
-          name: 'Minor Actions',
-          idRef: 'minor-actions',
-        },
-        {
-          name: 'Major Actions',
-          idRef: 'major-actions',
-        },
-        {
-          name: 'Contested Tests',
-          idRef: 'contested-tests',
-        },
-      ],
-    },
   ];
 
   return {
     props: {
       playerRules: playerRules.body,
       belongingsInDepth: belongingsInDepth.body,
-      actionsAndTests,
       navigation,
       metadata,
     },
