@@ -14,6 +14,8 @@ export default function Dashboard({ metadata }) {
   const router = useRouter();
   const { user, loading } = useAuth();
 
+  console.log(user);
+
   useEffect(() => {
     if (!loading && !user) {
       router.push('/auth/signin');

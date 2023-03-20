@@ -7,10 +7,11 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadUserFromCookies() {
+      console.log('I RAN');
       const token = Cookies.get('token');
       if (token) {
         api.defaults.headers.Authorization = `Bearer ${token}`;
@@ -19,13 +20,21 @@ export const AuthProvider = ({ children }) => {
           const user = data.data.user;
           if (user) setUser(user);
         } catch (e) {
-          logout();
+          console.log(e);
+          // logout();
         }
       }
       setLoading(false);
     }
-    loadUserFromCookies();
-  }, []);
+
+    const token = Cookies.get('token');
+
+    console.log(token);
+
+    if (!user) {
+      loadUserFromCookies();
+    }
+  }, [user]);
 
   const setCookie = (user, token, path) => {
     Cookies.set('token', token, { expires: 60 });
@@ -36,7 +45,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password, path) => {
     try {
-      const { data } = await api.post('/auth/login', { email, password });
+      const { data } = await api.post('/auth/password_login', { email, password });
+      console.log(data);
       if (data.token && data.data.user) {
         setCookie(data.data.user, data.token, path || '/dashboard');
       } else {
@@ -106,11 +116,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const verifyEmail = async verificationToken => {
+  const verifyEmailStart = async email => {
     try {
-      const { data } = await api.get(`/auth/verifyEmail/${verificationToken}`);
+      const { data } = await api.post(`/auth/verify_email_start`, { email });
+      console.log('verify email start:', data);
+      return { status: 'success', message: 'Verification email has been sent. Please check your inbox.' };
+    } catch (e) {
+      console.log(e);
+      console.log(e.response);
+      return { status: 'fail', message: 'Something went wrong, please try again later.' };
+    }
+  };
+
+  const verifyEmail = async token => {
+    try {
+      const { data } = await api.post(`/auth/verify_email`, { token });
+      console.log('verfiy email:', data);
       return data;
     } catch (e) {
+      console.log(e);
+      console.log(e.response);
       return { status: 'fail', message: 'Invalid or expired token. Please try again later.' };
     }
   };
@@ -183,6 +208,7 @@ export const AuthProvider = ({ children }) => {
         verifyEmailUpdate,
         updateUser,
         updateUserPassword,
+        verifyEmailStart,
       }}
     >
       {children}
