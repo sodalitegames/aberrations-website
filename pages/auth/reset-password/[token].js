@@ -10,7 +10,7 @@ import SubmitButton from '../../../components/elements/submit-button';
 
 import Loader from '../../../components/dashboard/components/Loader';
 
-export default function ResetPassword() {
+export default function ResetPasswords() {
   const { resetPassword, user, loading } = useAuth();
   const router = useRouter();
 
@@ -63,12 +63,12 @@ export default function ResetPassword() {
   return (
     <PageLayout title="Reset password" seo={{ title: 'Reset password' }} full>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold">Reset password</h2>
-        <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">Enter your new password and password confirmation below.</p>
+        <h2 className="mt-6 text-3xl font-extrabold text-center">Reset password</h2>
+        <p className="mt-2 text-sm text-center text-gray-600 dark:text-gray-300">Enter your new password and password confirmation below.</p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white dark:bg-dark-200 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="px-4 py-8 bg-white shadow dark:bg-dark-200 sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={submitHandler}>
             <div>
               <label htmlFor="password" className="block text-sm font-medium">
@@ -82,7 +82,7 @@ export default function ResetPassword() {
                   value={password}
                   autoComplete="current-password"
                   required
-                  className="input-primary w-full border border-gray-300 dark:border-gray-800 rounded-md"
+                  className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                   onChange={e => setPassword(e.target.value)}
                 />
               </div>
@@ -100,7 +100,7 @@ export default function ResetPassword() {
                   value={passwordConfirm}
                   autoComplete="confirm-password"
                   required
-                  className="input-primary w-full border border-gray-300 dark:border-gray-800 rounded-md"
+                  className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                   onChange={e => setPasswordConfirm(e.target.value)}
                 />
               </div>

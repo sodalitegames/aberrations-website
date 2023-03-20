@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useStytchUser } from '@stytch/nextjs';
 
 import PageLayout from '../../layouts/PageLayout';
 import DashboardLayout from '../../layouts/DashboardLayout';
@@ -8,33 +9,31 @@ import DashboardHome from '../../components/dashboard/dashboard-pages/dashboard-
 
 import Loader from '../../components/dashboard/components/Loader';
 
-import { useAuth } from '../../contexts/auth.js';
-
 export default function Dashboard({ metadata }) {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, isInitialized } = useStytchUser();
 
   console.log(user);
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (isInitialized && user === null) {
       router.push('/auth/signin');
     }
-  }, [user, loading, router]);
+  }, [user, isInitialized, router]);
 
-  if (!user) {
+  if (user) {
     return (
       <PageLayout title={metadata.title} seo={metadata} custom>
-        <Loader />
+        <DashboardLayout heading={metadata.title} active="">
+          <DashboardHome user={user} />
+        </DashboardLayout>
       </PageLayout>
     );
   }
 
   return (
     <PageLayout title={metadata.title} seo={metadata} custom>
-      <DashboardLayout heading={metadata.title} active="">
-        <DashboardHome user={user} />
-      </DashboardLayout>
+      <Loader />
     </PageLayout>
   );
 }

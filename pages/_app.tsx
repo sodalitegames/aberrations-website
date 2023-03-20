@@ -6,9 +6,12 @@ import type { AppProps } from 'next/app';
 
 import { DefaultSeo } from 'next-seo';
 
-import * as gtag from '../lib/gtag';
+import { StytchProvider } from '@stytch/nextjs';
 
-import { AuthProvider } from '../contexts/auth';
+import * as gtag from '../lib/gtag';
+import { stytch } from '../lib/stytch';
+
+// import { AuthProvider } from '../contexts/auth';
 
 import { attributes as global } from '../content/settings/global.md';
 
@@ -66,9 +69,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
 
-      <AuthProvider>
+      <StytchProvider stytch={stytch}>
         <Component {...pageProps} />
-      </AuthProvider>
+      </StytchProvider>
     </>
   );
 }
