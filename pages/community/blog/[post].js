@@ -1,6 +1,5 @@
 import ErrorPage from 'next/error';
-
-import { useAuth } from '../../../contexts/auth';
+import { useStytchUser } from '@stytch/nextjs';
 
 import PageLayout from '../../../layouts/PageLayout';
 
@@ -8,7 +7,7 @@ import DisplayBlogPost from '../../../components/blog/display-blog-post';
 import BlogPostCard from '../../../components/blog/blog-post-card';
 
 const PostPage = ({ post, relatedPosts, metadata }) => {
-  const { user, loading } = useAuth();
+  const { user, isInitialized } = useStytchUser();
 
   // Check if the required data was provided
   if (!post) {
@@ -30,11 +29,11 @@ const PostPage = ({ post, relatedPosts, metadata }) => {
       ]}
     >
       {/* Display the blog post */}
-      <DisplayBlogPost post={post} loading={loading} user={user} />
+      <DisplayBlogPost post={post} isInitialized={isInitialized} user={user} />
       {/* End blog post */}
 
       <div className="mt-12">
-        <h3 className="heading border-t border-b py-4 dark:border-gray-700">More posts you might like</h3>
+        <h3 className="py-4 border-t border-b heading dark:border-gray-700">More posts you might like</h3>
 
         <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
           {relatedPosts.map((post, index) => {

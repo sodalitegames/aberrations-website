@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-import api from '../../lib/strapi-api';
-
-import { useAuth } from '../../contexts/auth.js';
+import { useStytchUser } from '@stytch/nextjs';
 
 import PageLayout from '../../layouts/PageLayout';
 import DashboardLayout from '../../layouts/DashboardLayout';
@@ -17,30 +14,32 @@ import Loader from '../../components/dashboard/components/Loader';
 
 export default function DashboardSection({ resources, digitalTools, pricingPlans, metadata }) {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, isInitialized } = useStytchUser();
+
+  console.log(user);
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (isInitialized && user === null) {
       router.push('/auth/signin');
     }
-  }, [user, loading, router]);
+  }, [user, isInitialized, router]);
 
-  if (!user) {
+  if (user) {
     return (
-      <PageLayout title={metadata.title} custom>
-        <Loader />
+      <PageLayout title={metadata.title} seo={metadata} custom>
+        <DashboardLayout heading={metadata.title} active={metadata.slug}>
+          {metadata.slug === 'account-settings' && <Account user={user} />}
+          {metadata.slug === 'plan-and-billing' && <PlanAndBilling user={user} pricingPlans={pricingPlans} />}
+          {metadata.slug === 'resources' && <Resources user={user} resources={resources} />}
+          {metadata.slug === 'digital-tools' && <DigitalTools user={user} digitalTools={digitalTools} />}
+        </DashboardLayout>
       </PageLayout>
     );
   }
 
   return (
-    <PageLayout title={metadata.title} seo={metadata} custom>
-      <DashboardLayout heading={metadata.title} active={metadata.slug}>
-        {metadata.slug === 'account-settings' && <Account user={user} />}
-        {metadata.slug === 'plan-and-billing' && <PlanAndBilling user={user} pricingPlans={pricingPlans} />}
-        {metadata.slug === 'resources' && <Resources user={user} resources={resources} />}
-        {metadata.slug === 'digital-tools' && <DigitalTools user={user} digitalTools={digitalTools} />}
-      </DashboardLayout>
+    <PageLayout title={metadata.title} custom>
+      <Loader />
     </PageLayout>
   );
 }
