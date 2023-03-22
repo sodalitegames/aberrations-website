@@ -34,15 +34,15 @@ export default function Signin({ metadata }) {
     config: {
       products: [Products.emailMagicLinks, Products.passwords],
       emailMagicLinksOptions: {
-        loginRedirectURL: 'http://localhost:3000/auth/login',
+        loginRedirectURL: 'http://localhost:3000/auth/authenticate',
         loginExpirationMinutes: login_expiration_minutes,
-        signupRedirectURL: 'http://localhost:3000/auth/signup',
+        signupRedirectURL: 'http://localhost:3000/auth/authenticate',
         signupExpirationMinutes: signup_expiration_minutes,
         createUserAsPending: true,
       },
       passwordOptions: {
         loginExpirationMinutes: login_expiration_minutes,
-        loginRedirectURL: 'http://localhost:3000/auth/login',
+        loginRedirectURL: 'http://localhost:3000/auth/authenticate',
         resetPasswordExpirationMinutes: reset_password_expiration_minutes,
         resetPasswordRedirectURL: 'http://localhost:3000/auth/reset-password',
       },
