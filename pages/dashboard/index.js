@@ -13,11 +13,17 @@ export default function Dashboard({ metadata }) {
   const router = useRouter();
   const { user, isInitialized } = useStytchUser();
 
-  console.log(user);
+  console.log('user:', user);
 
   useEffect(() => {
     if (isInitialized && user === null) {
       router.push('/auth/signin');
+    }
+
+    if (isInitialized && user) {
+      if (!user.trusted_metadata.mongo_id) {
+        router.push('/auth/account-setup');
+      }
     }
   }, [user, isInitialized, router]);
 
