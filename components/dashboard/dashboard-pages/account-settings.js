@@ -1,7 +1,7 @@
 import { Fragment, useState, useCallback } from 'react';
 import { useStytch } from '@stytch/nextjs';
 
-import { login_expiration_minutes, session_duration_minutes } from '../../../lib/stytch';
+import { login_expiration_minutes, session_duration_minutes, BASE_URL } from '../../../lib/stytch';
 
 import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid';
 
@@ -54,8 +54,8 @@ export default function Account({ user }) {
   const sendMagicLink = useCallback(
     async email => {
       return await stytch.magicLinks.email.send(email, {
-        login_magic_link_url: 'http://localhost:3000/auth/verify-email',
-        signup_magic_link_url: 'http://localhost:3000/auth/verify-email',
+        login_magic_link_url: `${BASE_URL}/auth/verify-email`,
+        signup_magic_link_url: `${BASE_URL}/auth/verify-email`,
         login_expiration_minutes,
       });
     },

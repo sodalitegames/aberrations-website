@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Products } from '@stytch/vanilla-js';
 import { StytchPasswordReset, useStytchSession } from '@stytch/nextjs';
 
-import { login_expiration_minutes, reset_password_expiration_minutes } from '../../lib/stytch';
+import { login_expiration_minutes, reset_password_expiration_minutes, BASE_URL } from '../../lib/stytch';
 
 import PageLayout from '../../layouts/PageLayout';
 
@@ -27,9 +27,9 @@ export default function ResetPassword({ metadata }) {
     config: {
       passwordOptions: {
         loginExpirationMinutes: login_expiration_minutes,
-        loginRedirectURL: 'http://localhost:3000/auth/authenticate',
+        loginRedirectURL: `${BASE_URL}/auth/authenticate`,
         resetPasswordExpirationMinutes: reset_password_expiration_minutes,
-        resetPasswordRedirectURL: 'http://localhost:3000/auth/reset-password',
+        resetPasswordRedirectURL: `${BASE_URL}/auth/reset-password`,
       },
       products: [Products.passwords],
     },

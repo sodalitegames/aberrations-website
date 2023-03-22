@@ -1,24 +1,24 @@
 import { StytchLogin } from '@stytch/nextjs';
 import { Products } from '@stytch/vanilla-js';
 
-import { login_expiration_minutes, signup_expiration_minutes, reset_password_expiration_minutes } from '../../lib/stytch';
+import { login_expiration_minutes, signup_expiration_minutes, reset_password_expiration_minutes, BASE_URL } from '../../lib/stytch';
 
 export default function AuthenticateForm() {
   const props = {
     config: {
       products: [Products.emailMagicLinks, Products.passwords],
       emailMagicLinksOptions: {
-        loginRedirectURL: 'http://localhost:3000/auth/authenticate',
+        loginRedirectURL: `${BASE_URL}/auth/authenticate`,
         loginExpirationMinutes: login_expiration_minutes,
-        signupRedirectURL: 'http://localhost:3000/auth/authenticate',
+        signupRedirectURL: `${BASE_URL}/auth/authenticate`,
         signupExpirationMinutes: signup_expiration_minutes,
         createUserAsPending: true,
       },
       passwordOptions: {
         loginExpirationMinutes: login_expiration_minutes,
-        loginRedirectURL: 'http://localhost:3000/auth/authenticate',
+        loginRedirectURL: `${BASE_URL}/auth/authenticate`,
         resetPasswordExpirationMinutes: reset_password_expiration_minutes,
-        resetPasswordRedirectURL: 'http://localhost:3000/auth/reset-password',
+        resetPasswordRedirectURL: `${BASE_URL}/auth/reset-password`,
       },
     },
     styles: {
