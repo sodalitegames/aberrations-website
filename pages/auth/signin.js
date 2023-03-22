@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { StytchLogin, useStytchUser } from '@stytch/nextjs';
 import { Products } from '@stytch/vanilla-js';
 
+import { login_expiration_minutes, signup_expiration_minutes, reset_password_expiration_minutes } from '../../lib/stytch';
+
 import PageLayout from '../../layouts/PageLayout';
 
 import Loader from '../../components/dashboard/components/Loader';
@@ -33,22 +35,21 @@ export default function Signin({ metadata }) {
       products: [Products.emailMagicLinks, Products.passwords],
       emailMagicLinksOptions: {
         loginRedirectURL: 'http://localhost:3000/auth/login',
-        loginExpirationMinutes: 30,
+        loginExpirationMinutes: login_expiration_minutes,
         signupRedirectURL: 'http://localhost:3000/auth/signup',
-        signupExpirationMinutes: 30,
+        signupExpirationMinutes: signup_expiration_minutes,
         createUserAsPending: true,
       },
       passwordOptions: {
-        loginExpirationMinutes: 30,
+        loginExpirationMinutes: login_expiration_minutes,
         loginRedirectURL: 'http://localhost:3000/auth/login',
-        resetPasswordExpirationMinutes: 30,
+        resetPasswordExpirationMinutes: reset_password_expiration_minutes,
         resetPasswordRedirectURL: 'http://localhost:3000/auth/reset-password',
       },
     },
     styles: {
-      container: { width: '321px' },
-      colors: { primary: '#0577CA' },
-      fontFamily: '"Helvetica New", Helvetica, sans-serif',
+      hideHeaderText: true,
+      fontFamily: '"Kanit", sans-serif',
     },
     callbacks: {
       onEvent: message => console.log(message),
@@ -70,7 +71,7 @@ export default function Signin({ metadata }) {
         </p>
       </div>
       {/* Sign in form */}
-      <StytchLogin config={stytchProps.config} callbacks={stytchProps.callbacks} />
+      <StytchLogin config={stytchProps.config} styles={stytchProps.styles} callbacks={stytchProps.callbacks} />
       {/* End sign in form */}
     </PageLayout>
   );
