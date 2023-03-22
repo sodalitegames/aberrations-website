@@ -11,8 +11,6 @@ import { StytchProvider } from '@stytch/nextjs';
 import * as gtag from '../lib/gtag';
 import { stytch } from '../lib/stytch';
 
-// import { AuthProvider } from '../contexts/auth';
-
 import { attributes as global } from '../content/settings/global.md';
 
 import '../styles/globals.css';
