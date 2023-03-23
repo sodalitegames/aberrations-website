@@ -1,7 +1,7 @@
 import { CheckIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 
-import api from '../../../lib/auth-api';
+import { createPortalSession, createCheckoutSession } from '../../../lib/auth-api';
 import { getStripe } from '../../../lib/stripe-client';
 
 import classNames from '../../../utils/functions/classnames';
@@ -13,7 +13,7 @@ export default function Pricing({ active, plans, subscriptionInterval, paidPlan 
     if (paidPlan) {
       // if paid plan, redirect to customer portal
       try {
-        const { data } = await api.post('/users/create-portal-session');
+        const { data } = await createPortalSession();
         window.open(data.url);
       } catch (error) {
         return alert(error.message);
@@ -21,9 +21,9 @@ export default function Pricing({ active, plans, subscriptionInterval, paidPlan 
     } else {
       // otherwise, create a checkout session
       try {
-        const { data } = await api.post('/users/create-checkout-session', {
-          lookup_key: lookupId,
-        });
+        const { data } = await createCheckoutSession(lookupId);
+
+        console.log(data);
 
         const { sessionId } = data;
 
@@ -71,7 +71,7 @@ export default function Pricing({ active, plans, subscriptionInterval, paidPlan 
             )}
           >
             <div className="p-6">
-              <h2 className="text-lg leading-6 font-medium dark:text-gray-200">{tier.name}</h2>
+              <h2 className="text-lg font-medium leading-6 dark:text-gray-200">{tier.name}</h2>
               <p className="mt-4 text-sm text-gray-500 dark:text-gray-300">{tier.description}</p>
               <p className="mt-8">
                 <span className="text-4xl font-extrabold dark:text-gray-200">{interval === 'month' ? tier.priceMonthly : tier.priceYearly}</span>{' '}
@@ -95,30 +95,30 @@ export default function Pricing({ active, plans, subscriptionInterval, paidPlan 
               </button>
             </div>
 
-            <div className="pt-6 pb-8 px-6">
-              <h3 className="text-sm font-medium tracking-wide uppercase text-gray-700 dark:text-gray-300">What&apos;s included</h3>
+            <div className="px-6 pt-6 pb-8">
+              <h3 className="text-sm font-medium tracking-wide text-gray-700 uppercase dark:text-gray-300">What&apos;s included</h3>
               <ul role="list" className="mt-6 space-y-4">
                 {tier.includedFeatures.map(({ feature }) => (
                   <li key={feature} className="flex space-x-3">
-                    <CheckIcon className="flex-shrink-0 h-5 w-5 text-green-500" aria-hidden="true" />
+                    <CheckIcon className="flex-shrink-0 w-5 h-5 text-green-500" aria-hidden="true" />
                     <span className="text-sm text-gray-500 dark:text-gray-300">{feature}</span>
                   </li>
                 ))}
               </ul>
-              {/* <h3 className="text-sm font-medium tracking-wide uppercase text-gray-700 dark:text-gray-300 pt-6">Aberrations RPG Sheets</h3>
+              {/* <h3 className="pt-6 text-sm font-medium tracking-wide text-gray-700 uppercase dark:text-gray-300">Aberrations RPG Sheets</h3>
               <ul role="list" className="mt-6 space-y-4">
                 {tier.sheetsFeatures.map(({ feature }) => (
                   <li key={feature} className="flex space-x-3">
-                    <CheckIcon className="flex-shrink-0 h-5 w-5 text-green-500" aria-hidden="true" />
+                    <CheckIcon className="flex-shrink-0 w-5 h-5 text-green-500" aria-hidden="true" />
                     <span className="text-sm text-gray-500 dark:text-gray-300">{feature}</span>
                   </li>
                 ))}
               </ul> */}
-              <h3 className="text-sm font-medium tracking-wide uppercase text-gray-700 dark:text-gray-300 pt-6">Features coming soon</h3>
+              <h3 className="pt-6 text-sm font-medium tracking-wide text-gray-700 uppercase dark:text-gray-300">Features coming soon</h3>
               <ul role="list" className="mt-6 space-y-4">
                 {tier.comingSoon.map(({ feature }) => (
                   <li key={feature} className="flex space-x-3">
-                    <CheckIcon className="flex-shrink-0 h-5 w-5 text-green-500" aria-hidden="true" />
+                    <CheckIcon className="flex-shrink-0 w-5 h-5 text-green-500" aria-hidden="true" />
                     <span className="text-sm text-gray-500 dark:text-gray-300">{feature}</span>
                   </li>
                 ))}

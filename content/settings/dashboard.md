@@ -31,6 +31,7 @@ pricingPlans:
     sheetsFeatures:
       - feature: Free basic Aberrations RPG Sheets account
     priceYearly: Free
+    testProductId: free
     lookupIdMonthly: free-forever
     includedFeatures:
       - feature: Free character sheet PDF
@@ -40,12 +41,14 @@ pricingPlans:
     comingSoon:
       - feature: More features coming soon
     description: Get access to exclusive content, game resources, and digital tools.
+    liveProductId: free
     lookupIdYearly: free-forever
   - priceMonthly: $2.50
     name: Starter Plan
     sheetsFeatures:
       - feature: Aberrations RPG Sheets Starter account
     priceYearly: $25
+    testProductId: prod_KW9xNUm6Ov4i8k
     lookupIdMonthly: starter-plan-monthly
     includedFeatures:
       - feature: All features of Free Forever plan
@@ -54,12 +57,14 @@ pricingPlans:
       - feature: Access to Pre-built campaigns
       - feature: More features coming soon
     description: Unlock premium content, resources and digital tools.
+    liveProductId: prod_KFmObXhSDhtL7d
     lookupIdYearly: starter-plan-yearly
   - priceMonthly: $5
     name: Pro Plan
     sheetsFeatures:
       - feature: More features coming soon
     priceYearly: $50
+    testProductId: prod_KWATwTCWX7BJyl
     lookupIdMonthly: pro-plan-monthly
     includedFeatures:
       - feature: More features coming soon
@@ -67,5 +72,6 @@ pricingPlans:
       - feature: More features coming soon
     description: Unlimited access to all our current and future premium content,
       resources and digital tools.
+    liveProductId: prod_KW8XPWz4WbWAMy
     lookupIdYearly: pro-plan-yearly
 ---
