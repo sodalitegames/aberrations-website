@@ -19,13 +19,10 @@ export default function VerifyEmail() {
             session_duration_minutes,
           });
 
-          console.log(resp);
-
           if (resp) {
             router.push('/dashboard');
           }
         } catch (e) {
-          console.log(e);
           router.push('/dashboard');
         }
       }

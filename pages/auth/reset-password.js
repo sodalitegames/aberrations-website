@@ -19,10 +19,6 @@ export default function ResetPassword({ metadata }) {
 
   const { token } = router.query;
 
-  console.log(token);
-
-  console.log('HELLO');
-
   const props = {
     config: {
       passwordOptions: {

@@ -23,8 +23,6 @@ export default function Pricing({ active, plans, subscriptionInterval, paidPlan 
       try {
         const { data } = await createCheckoutSession(lookupId);
 
-        console.log(data);
-
         const { sessionId } = data;
 
         const stripe = await getStripe();

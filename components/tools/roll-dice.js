@@ -19,7 +19,6 @@ const RollDice = () => {
 
   const rollDice = () => {
     const results = roll(die, +advantage, +modifier);
-    console.log(results);
     setResults(results);
     setCount(count + 1);
   };

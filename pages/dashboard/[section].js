@@ -16,8 +16,6 @@ export default function DashboardSection({ resources, digitalTools, pricingPlans
   const router = useRouter();
   const { user, isInitialized } = useStytchUser();
 
-  console.log(user);
-
   useEffect(() => {
     if (isInitialized && user === null) {
       router.push('/auth/signin');

@@ -29,14 +29,10 @@ export default function AccountSetupForm({ user }) {
     try {
       const resp = await setupAccount({ firstName, lastName, subscribe });
 
-      console.log(resp);
-
       if (resp) {
         stytch.user.get();
       }
     } catch (e) {
-      console.log(e);
-      console.log(e.response);
       setMessage({ status: 'error', message: 'Something went wrong. Please try again later.' });
       setProcessing(false);
     }

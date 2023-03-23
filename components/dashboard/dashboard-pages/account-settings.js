@@ -65,8 +65,6 @@ export default function Account({ user }) {
   const sendEmailVerification = async email => {
     const resp = await sendMagicLink(email);
 
-    console.log('HERE', resp);
-
     if (resp) {
       setEmailSent({ status: 'success', message: 'Verification email has been sent. Please check your onbox and follow the instructions on the email.' });
     }
@@ -91,8 +89,6 @@ export default function Account({ user }) {
 
     const resp = await updateUser({ name: { first_name: firstName, last_name: lastName } });
 
-    console.log(resp);
-
     if (resp) {
       setSettingsMessage({ status: 'success', message: 'Updates successfully applied.' });
       setFirstName(resp.user.name.first_name);
@@ -113,8 +109,6 @@ export default function Account({ user }) {
     }
 
     const resp = await sendMagicLink(email);
-
-    console.log(resp);
 
     if (resp) {
       setEmailMessage({ status: 'success', message: 'Please check your inbox to verify your new email address.' });

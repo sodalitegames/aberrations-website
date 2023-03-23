@@ -12,8 +12,6 @@ export default function AccountSetup({ metadata }) {
   const router = useRouter();
   const { user, isInitialized } = useStytchUser();
 
-  console.log(user);
-
   useEffect(() => {
     if (isInitialized && user === null) {
       router.push('/auth/signin');

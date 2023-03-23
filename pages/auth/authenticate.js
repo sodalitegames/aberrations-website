@@ -11,14 +11,11 @@ export default function Authenticate() {
   const stytch = useStytch();
   const { session } = useStytchSession();
 
-  console.log('session:', session);
-
   useEffect(() => {
     if (session) {
       router.push('/dashboard');
     } else {
       const { token } = router.query;
-      console.log('token: ', token);
       alert(token);
       if (token) {
         stytch.magicLinks.authenticate(token, {

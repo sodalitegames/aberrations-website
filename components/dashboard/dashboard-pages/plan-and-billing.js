@@ -9,8 +9,6 @@ import Pricing from '../components/Pricing';
 import Notice from '../../elements/notice';
 
 export default function PlanAndBilling({ user, pricingPlans }) {
-  console.log('plans:', pricingPlans);
-
   const [notice, setNotice] = useState(null);
 
   const customerId = user.trusted_metadata.stripe_customer_id;
@@ -55,10 +53,8 @@ export default function PlanAndBilling({ user, pricingPlans }) {
 
     try {
       const { data } = await createPortalSession();
-      console.log(data);
       window.open(data.url);
     } catch (error) {
-      console.log(error);
       return alert(error.message);
     }
   };
