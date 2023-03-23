@@ -1,7 +1,7 @@
 import { StytchLogin } from '@stytch/nextjs';
 import { Products } from '@stytch/vanilla-js';
 
-import { login_expiration_minutes, signup_expiration_minutes, reset_password_expiration_minutes, BASE_URL } from '../../lib/stytch';
+import { login_expiration_minutes, signup_expiration_minutes, reset_password_expiration_minutes, BASE_URL, session_duration_minutes } from '../../lib/stytch';
 
 export default function AuthenticateForm() {
   const props = {
@@ -19,6 +19,9 @@ export default function AuthenticateForm() {
         loginRedirectURL: `${BASE_URL}/auth/authenticate`,
         resetPasswordExpirationMinutes: reset_password_expiration_minutes,
         resetPasswordRedirectURL: `${BASE_URL}/auth/reset-password`,
+      },
+      sessionOptions: {
+        sessionDurationMinutes: session_duration_minutes,
       },
     },
     styles: {

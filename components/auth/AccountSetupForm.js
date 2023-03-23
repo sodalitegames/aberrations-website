@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useStytch } from '@stytch/nextjs';
 
 import { setupAccount } from '../../lib/auth-api';
 
@@ -6,6 +7,8 @@ import Notice from '../elements/notice';
 import SubmitButton from '../elements/submit-button';
 
 export default function AccountSetupForm({ user }) {
+  const stytch = useStytch();
+
   const [firstName, setFirstName] = useState(user.name.first_name);
   const [lastName, setLastName] = useState(user.name.last_name);
   const [subscribe, setSubscribe] = useState(true);
@@ -24,15 +27,12 @@ export default function AccountSetupForm({ user }) {
     }
 
     try {
-      const message = await setupAccount({ firstName, lastName, subscribe });
+      const resp = await setupAccount({ firstName, lastName, subscribe });
 
-      console.log(message);
+      console.log(resp);
 
-      // TODO: Take data I get back and figure out how to notify the user, then refresh the page because it was successfull
-
-      if (message) {
-        setMessage(message);
-        setProcessing(false);
+      if (resp) {
+        stytch.user.get();
       }
     } catch (e) {
       console.log(e);

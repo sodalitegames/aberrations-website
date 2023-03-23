@@ -266,63 +266,65 @@ export default function Account({ user }) {
         </>
       </FormSection>
 
-      <FormSection
-        heading="Password Change"
-        description="Change your password."
-        ariaTag="change-password"
-        submitText="Save changes"
-        submitDescription="For your security, you must enter your current password first in order to change it."
-        submitHandler={resetPasswordHandler}
-        processing={!!(processing === 'reset-password')}
-      >
-        <>
-          <div className="my-3 md:w-6/12">
-            <label htmlFor="new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Current password
-            </label>
-            <input
-              type="password"
-              name="current-password"
-              id="current-password"
-              value={passwordCurrent}
-              autoComplete="current-password"
-              className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
-              onChange={e => setPasswordCurrent(e.target.value)}
-            />
-          </div>
+      {user.password && (
+        <FormSection
+          heading="Password Change"
+          description="Change your password."
+          ariaTag="change-password"
+          submitText="Save changes"
+          submitDescription="For your security, you must enter your current password first in order to change it."
+          submitHandler={resetPasswordHandler}
+          processing={!!(processing === 'reset-password')}
+        >
+          <>
+            <div className="my-3 md:w-6/12">
+              <label htmlFor="new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Current password
+              </label>
+              <input
+                type="password"
+                name="current-password"
+                id="current-password"
+                value={passwordCurrent}
+                autoComplete="current-password"
+                className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
+                onChange={e => setPasswordCurrent(e.target.value)}
+              />
+            </div>
 
-          <div className="my-3 md:w-6/12">
-            <label htmlFor="new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              New password
-            </label>
-            <input
-              type="password"
-              name="new-password"
-              id="new-password"
-              value={password}
-              autoComplete="new-password"
-              className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
-              onChange={e => setPassword(e.target.value)}
-            />
-          </div>
+            <div className="my-3 md:w-6/12">
+              <label htmlFor="new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                New password
+              </label>
+              <input
+                type="password"
+                name="new-password"
+                id="new-password"
+                value={password}
+                autoComplete="new-password"
+                className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
 
-          <div className="my-3 md:w-6/12">
-            <label htmlFor="confirm-new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Confirm new password
-            </label>
-            <input
-              type="password"
-              name="confirm-new-password"
-              id="confirm-new-password"
-              value={passwordConfirm}
-              autoComplete="confirm-new-password"
-              className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
-              onChange={e => setPasswordConfirm(e.target.value)}
-            />
-          </div>
-          {passwordMessage ? <Notice status={passwordMessage.status} message={passwordMessage.message} hideable /> : null}
-        </>
-      </FormSection>
+            <div className="my-3 md:w-6/12">
+              <label htmlFor="confirm-new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Confirm new password
+              </label>
+              <input
+                type="password"
+                name="confirm-new-password"
+                id="confirm-new-password"
+                value={passwordConfirm}
+                autoComplete="confirm-new-password"
+                className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
+                onChange={e => setPasswordConfirm(e.target.value)}
+              />
+            </div>
+            {passwordMessage ? <Notice status={passwordMessage.status} message={passwordMessage.message} hideable /> : null}
+          </>
+        </FormSection>
+      )}
     </>
   );
 }
