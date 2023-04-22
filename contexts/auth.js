@@ -1,8 +1,10 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { onAuthStateChanged, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { onAuthStateChanged, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 import firebase from '../lib/firebase';
+
+import { forgotPassword as _forgotPassword, setupAccount as _setupAccount, sendEmailVerification as _sendEmailVerification } from '../lib/auth-api';
 
 const auth = getAuth(firebase);
 const firestore = getFirestore(firebase);
@@ -36,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
       console.log('Result:', result);
 
-      await setDoc(doc(firestore, 'users', result.uid), { email }, { merge: true });
+      // await setDoc(doc(firestore, 'users', result.uid), { email }, { merge: true });
     } catch (err) {
       console.log(err);
       error = { status: 'error', message: 'Something went wrong. Please try again later.' };
@@ -79,7 +81,7 @@ export const AuthProvider = ({ children }) => {
     let error = null;
 
     try {
-      // const resp = await setupAccount({name, subscribe})
+      result = await _setupAccount({ name, subscribe });
     } catch (err) {
       console.log(err);
       error = { status: 'error', message: 'Something went wrong. Please try again later.' };
@@ -88,7 +90,37 @@ export const AuthProvider = ({ children }) => {
     return { result, error };
   };
 
-  return <AuthContext.Provider value={{ user, loading, signin, signup, signout, setupAccount }}>{children}</AuthContext.Provider>;
+  const forgotPassword = async email => {
+    let result = null;
+    let error = null;
+
+    try {
+      const resp = await _forgotPassword(email);
+      result = resp.data;
+    } catch (err) {
+      console.log(err);
+      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+    }
+
+    return { result, error };
+  };
+
+  const sendEmailVerification = async () => {
+    let result = null;
+    let error = null;
+
+    try {
+      const resp = await _sendEmailVerification();
+      result = resp.data;
+    } catch (err) {
+      console.log(err);
+      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+    }
+
+    return { result, error };
+  };
+
+  return <AuthContext.Provider value={{ user, loading, signin, signup, signout, setupAccount, forgotPassword, sendEmailVerification }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

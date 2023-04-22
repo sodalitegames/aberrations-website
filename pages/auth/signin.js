@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../../contexts/auth';
 
 import PageLayout from '../../layouts/PageLayout';
-import SigninForm from '../../components/auth/SigninForm';
 
+import SigninForm from '../../components/auth/SigninForm';
 import Loader from '../../components/dashboard/components/Loader';
 
 export default function Signin({ metadata }) {
