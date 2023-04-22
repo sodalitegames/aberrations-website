@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { onAuthStateChanged, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 import firebase from '../lib/firebase';
 
@@ -14,9 +14,10 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
+    const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
-        setUser(user);
+        const userSnap = await getDoc(doc(firestore, 'users', user.uid));
+        setUser({ ...user, data: userSnap.data() });
       } else {
         setUser(null);
       }
@@ -35,10 +36,10 @@ export const AuthProvider = ({ children }) => {
 
       console.log('Result:', result);
 
-      // await setDoc(doc(firestore, 'users', result.uid), {}, {merge: true})
-    } catch (e) {
-      console.log(e);
-      error = e;
+      await setDoc(doc(firestore, 'users', result.uid), { email }, { merge: true });
+    } catch (err) {
+      console.log(err);
+      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
     }
 
     return { result, error };
@@ -50,8 +51,11 @@ export const AuthProvider = ({ children }) => {
 
     try {
       result = await signInWithEmailAndPassword(auth, email, password);
-    } catch (e) {
-      error = e;
+
+      console.log('Result:', result);
+    } catch (err) {
+      console.log(err);
+      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
     }
 
     return { result, error };
@@ -70,7 +74,21 @@ export const AuthProvider = ({ children }) => {
     return { result, error };
   };
 
-  return <AuthContext.Provider value={{ user, loading, signin, signup, signout }}>{children}</AuthContext.Provider>;
+  const setupAccount = async (name, subscribe) => {
+    let result = null;
+    let error = null;
+
+    try {
+      // const resp = await setupAccount({name, subscribe})
+    } catch (err) {
+      console.log(err);
+      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+    }
+
+    return { result, error };
+  };
+
+  return <AuthContext.Provider value={{ user, loading, signin, signup, signout, setupAccount }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

@@ -6,13 +6,13 @@ import { useAuth } from '../../contexts/auth';
 import Notice from '../elements/notice';
 import SubmitButton from '../elements/submit-button';
 
-export default function SigninForm({ redirectPath }) {
+export default function SigninForm() {
   const { signin } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
 
+  const [message, setMessage] = useState('');
   const [processing, setProcessing] = useState(false);
 
   const submitHandler = async e => {
@@ -29,16 +29,13 @@ export default function SigninForm({ redirectPath }) {
     const { result, error } = await signin(email, password);
 
     if (error) {
-      return console.log(error);
+      setMessage(error);
+      setProcessing(false);
+      return;
     }
 
     console.log(result);
     setProcessing(false);
-
-    // if (message) {
-    //   setMessage(message);
-    //   setProcessing(false);
-    // }
   };
 
   return (
@@ -79,31 +76,16 @@ export default function SigninForm({ redirectPath }) {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary dark:focus:ring-primary-fade dark:bg-dark-400 dark:border-gray-800"
-                checked
-              />
-              <label htmlFor="remember-me" className="block ml-2 text-sm">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <Link href="/auth/forgot-password">
-                <a className="text-link-accent3">Forgot your password?</a>
-              </Link>
-            </div>
-          </div>
-
           {message ? <Notice message={message.message} status={message.status} /> : null}
 
           <div>
             <SubmitButton type="primary" text="Sign in" loading={processing} />
+          </div>
+
+          <div className="text-sm text-center">
+            <Link href="/auth/forgot-password">
+              <a className="text-link-accent3">Forgot your password?</a>
+            </Link>
           </div>
         </form>
       </div>

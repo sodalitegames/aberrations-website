@@ -1,22 +1,26 @@
 import { useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useAuth } from '../../contexts/auth';
 
 import PageLayout from '../../layouts/PageLayout';
-import SigninForm from '../../components/auth/SigninForm';
+import AccountSetupForm from '../../components/auth/AccountSetupForm';
 
 import Loader from '../../components/dashboard/components/Loader';
 
-export default function Signin({ metadata }) {
+export default function Signup({ metadata }) {
   const router = useRouter();
   const { user, loading } = useAuth();
 
   useEffect(() => {
-    // if user is logged in, redirect to dashboard
+    if (!loading && !user) {
+      router.push('/auth/signup');
+    }
+
     if (!loading && user) {
-      router.push('/dashboard');
+      if (user?.data?.mongo_id) {
+        router.push('/dashboard');
+      }
     }
   }, [user, loading, router]);
 
@@ -31,18 +35,12 @@ export default function Signin({ metadata }) {
   return (
     <PageLayout title={metadata.title} seo={metadata} full>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-3xl font-extrabold text-center">Sign in to Aberrations RPG</h2>
-        <p className="mt-2 text-sm text-center text-gray-600 dark:text-gray-300">
-          Or{' '}
-          <Link href="/auth/signup">
-            <a className="font-normal text-link-accent3">create an account</a>
-          </Link>{' '}
-          if you haven&lsquo;t already
-        </p>
+        <h2 className="mt-6 text-3xl font-extrabold text-center">Finish setting up my account</h2>
+        <p className="mt-2 text-sm text-center text-gray-600 dark:text-gray-300">This is an important step if you want to use any of our digital products.</p>
       </div>
-      {/* Sign in form */}
-      <SigninForm />
-      {/* End sign in form */}
+      {/* Account setup form */}
+      <AccountSetupForm />
+      {/* End set up form */}
     </PageLayout>
   );
 }
@@ -51,8 +49,8 @@ export async function getStaticProps() {
   return {
     props: {
       metadata: {
-        title: 'Sign in',
-        slug: '/auth/signin',
+        title: 'Account setup',
+        slug: '/auth/account-setup',
       },
     },
   };
