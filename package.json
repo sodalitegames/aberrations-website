@@ -19,6 +19,7 @@
     "@heroicons/react": "^1.0.5",
     "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.21.4",
+    "firebase": "^9.20.0",
     "frontmatter-markdown-loader": "^3.6.3",
     "js-cookie": "^3.0.1",
     "netlify-cms-app": "^2.15.63",

@@ -33,17 +33,19 @@ export default function SignupForm({ redirectPath }) {
       return;
     }
 
-    const message = await signup(name, email, password, passwordConfirm, subscribe, redirectPath);
+    const { result, error } = await signup(email, password);
 
-    if (message) {
-      setMessage(message);
-      setProcessing(false);
+    if (error) {
+      return console.log(error);
     }
+
+    console.log(result);
+    setProcessing(false);
   };
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div className="bg-white dark:bg-dark-200 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="px-4 py-8 bg-white shadow dark:bg-dark-200 sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={submitHandler}>
           <div>
             <label htmlFor="name" className="block text-sm font-medium">
@@ -56,7 +58,7 @@ export default function SignupForm({ redirectPath }) {
                 type="text"
                 value={name}
                 autoComplete="name"
-                className="input-primary w-full border border-gray-300 dark:border-gray-800 rounded-md"
+                className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                 onChange={e => setName(e.target.value)}
               />
             </div>
@@ -73,7 +75,7 @@ export default function SignupForm({ redirectPath }) {
                 type="email"
                 value={email}
                 autoComplete="email"
-                className="input-primary w-full border border-gray-300 dark:border-gray-800 rounded-md"
+                className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                 onChange={e => setEmail(e.target.value)}
               />
             </div>
@@ -90,7 +92,7 @@ export default function SignupForm({ redirectPath }) {
                 type="password"
                 value={password}
                 autoComplete="current-password"
-                className="input-primary w-full border border-gray-300 dark:border-gray-800 rounded-md"
+                className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                 onChange={e => setPassword(e.target.value)}
               />
             </div>
@@ -107,7 +109,7 @@ export default function SignupForm({ redirectPath }) {
                 type="password"
                 value={passwordConfirm}
                 autoComplete="confirm-password"
-                className="input-primary w-full border border-gray-300 dark:border-gray-800 rounded-md"
+                className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                 onChange={e => setPasswordConfirm(e.target.value)}
               />
             </div>
@@ -119,11 +121,11 @@ export default function SignupForm({ redirectPath }) {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-primary focus:ring-primary dark:focus:ring-primary-fade dark:bg-dark-400 border-gray-300 dark:border-gray-800 rounded"
+                className="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary dark:focus:ring-primary-fade dark:bg-dark-400 dark:border-gray-800"
                 checked={subscribe}
                 onChange={() => setSubscribe(!subscribe)}
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm">
+              <label htmlFor="remember-me" className="block ml-2 text-sm">
                 Sign me up for the mailing list
               </label>
             </div>

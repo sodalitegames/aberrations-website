@@ -7,7 +7,7 @@ import Notice from '../elements/notice';
 import SubmitButton from '../elements/submit-button';
 
 export default function SigninForm({ redirectPath }) {
-  const { login } = useAuth();
+  const { signin } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,17 +26,24 @@ export default function SigninForm({ redirectPath }) {
       return;
     }
 
-    const message = await login(email, password, redirectPath);
+    const { result, error } = await signin(email, password);
 
-    if (message) {
-      setMessage(message);
-      setProcessing(false);
+    if (error) {
+      return console.log(error);
     }
+
+    console.log(result);
+    setProcessing(false);
+
+    // if (message) {
+    //   setMessage(message);
+    //   setProcessing(false);
+    // }
   };
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div className="bg-white dark:bg-dark-200 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="px-4 py-8 bg-white shadow dark:bg-dark-200 sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={submitHandler}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium">
@@ -49,7 +56,7 @@ export default function SigninForm({ redirectPath }) {
                 type="email"
                 value={email}
                 autoComplete="email"
-                className="input-primary w-full border border-gray-300 dark:border-gray-800 rounded-md"
+                className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                 onChange={e => setEmail(e.target.value)}
               />
             </div>
@@ -66,7 +73,7 @@ export default function SigninForm({ redirectPath }) {
                 type="password"
                 value={password}
                 autoComplete="current-password"
-                className="input-primary w-full border border-gray-300 dark:border-gray-800 rounded-md"
+                className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                 onChange={e => setPassword(e.target.value)}
               />
             </div>
@@ -78,10 +85,10 @@ export default function SigninForm({ redirectPath }) {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-primary focus:ring-primary dark:focus:ring-primary-fade dark:bg-dark-400 border-gray-300 dark:border-gray-800 rounded"
+                className="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary dark:focus:ring-primary-fade dark:bg-dark-400 dark:border-gray-800"
                 checked
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm">
+              <label htmlFor="remember-me" className="block ml-2 text-sm">
                 Remember me
               </label>
             </div>
