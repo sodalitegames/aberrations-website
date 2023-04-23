@@ -33,6 +33,8 @@ export default function DashboardSection({ resources, digitalTools, pricingPlans
     );
   }
 
+  console.log(user);
+
   return (
     <PageLayout title={metadata.title} seo={metadata} custom>
       <DashboardLayout heading={metadata.title} active={metadata.slug}>

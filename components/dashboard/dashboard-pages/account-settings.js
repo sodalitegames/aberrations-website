@@ -9,16 +9,18 @@ import FormSection from '../components/FormSection';
 import { useAuth } from '../../../contexts/auth';
 import Notice from '../../elements/notice';
 
-export default function Account({ user }) {
-  const { setUser, updateUser, updateUserEmail, updateUserPassword, sendVerificationEmail } = useAuth();
+export default function Account() {
+  const { user, updateUser, updateEmail, updatePassword, sendVerificationEmail } = useAuth();
+
+  console.log(user);
 
   // account settings
-  const [name, setName] = useState(user.name);
+  const [name, setName] = useState(user.displayName);
 
   // email change
   const [email, setEmail] = useState(user.email);
   const [emailSent, setEmailSent] = useState(false);
-  const [emailVerified, setEmailVerified] = useState(true);
+  const [emailVerified, setEmailVerified] = useState(user.emailVerified);
 
   // password change
   const [passwordCurrent, setPasswordCurrent] = useState('');
@@ -40,21 +42,15 @@ export default function Account({ user }) {
     }
   }, []);
 
-  useEffect(() => {
-    // set verify message if user's email has been verified
-    if (!user.isEmailVerified) {
-      setEmailVerified(false);
-    }
-  }, [user.isEmailVerified]);
-
   const sendEmailVerificationHandler = async () => {
-    const message = await sendVerificationEmail();
+    const { result, error } = await sendVerificationEmail();
 
-    if (message.status === 'success') {
-      setEmailSent({ status: 'success', message: 'Verification email has been sent. Please check your email and follow the instructions on the email.' });
-    } else {
-      setEmailSent(message);
+    if (error) {
+      setEmailSent(error);
+      return;
     }
+
+    setEmailSent(result);
   };
 
   const updateAccountDetailsHandler = async e => {
@@ -68,20 +64,24 @@ export default function Account({ user }) {
       return;
     }
 
-    if (name === user.name) {
+    if (name === user.displayName) {
       setSettingsMessage({ status: 'info', message: 'There are no changes to apply.' });
       setProcessing(false);
       return;
     }
 
-    const data = await updateUser({ name });
+    const { result, error } = await updateUser(name);
 
-    if (data) {
-      setSettingsMessage({ status: data.status, message: data.message });
-      setName(data.data.user.name);
-      setUser(data.data.user);
+    console.log(result);
+
+    if (error) {
+      setSettingsMessage(error);
       setProcessing(false);
+      return;
     }
+
+    setSettingsMessage(result);
+    setProcessing(false);
   };
 
   const updateEmailHandler = async e => {
@@ -101,17 +101,18 @@ export default function Account({ user }) {
       return;
     }
 
-    const data = await updateUserEmail(user.email, email);
+    const { result, error } = await updateEmail(email);
 
-    if (data) {
-      setEmailMessage({ status: data.status, message: data.message });
+    console.log(result);
 
-      if (data.stats === 'success') {
-        setEmail(user.email);
-      }
-
+    if (error) {
+      setEmailMessage(error);
       setProcessing(false);
+      return;
     }
+
+    setEmailMessage(result);
+    setProcessing(false);
   };
 
   const updatePasswordHandler = async e => {
@@ -143,12 +144,22 @@ export default function Account({ user }) {
       return;
     }
 
-    const message = await updateUserPassword(passwordCurrent, password, passwordConfirm);
+    const { result, error } = await updatePassword(password);
 
-    if (message) {
-      setPasswordMessage(message);
+    console.log(result);
+
+    if (error) {
+      setPasswordMessage(error);
       setProcessing(false);
+      return;
     }
+
+    setPasswordMessage(result);
+    setProcessing(false);
+
+    setPassword('');
+    setPasswordCurrent('');
+    setPasswordConfirm('');
   };
 
   return (
@@ -175,7 +186,7 @@ export default function Account({ user }) {
               id="name"
               value={name}
               autoComplete="cc-given-name"
-              className="input-secondary mt-1 w-full border border-gray-300 dark:border-transparent shadow-sm"
+              className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
               onChange={e => setName(e.target.value)}
             />
           </div>
@@ -198,18 +209,18 @@ export default function Account({ user }) {
               Email address
             </label>
 
-            <div className="mt-1 relative rounded-md shadow-sm">
+            <div className="relative mt-1 rounded-md shadow-sm">
               <input
                 type="email"
                 name="email-address"
                 id="email-address"
                 value={email}
                 autoComplete="email"
-                className="input-secondary w-full border border-gray-300 dark:border-transparent shadow-sm"
+                className="w-full border border-gray-300 shadow-sm input-secondary dark:border-transparent"
                 onChange={e => setEmail(e.target.value)}
               />
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                {emailVerified ? <CheckCircleIcon className="h-5 w-5 text-green-500" aria-hidden="true" /> : <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />}
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                {emailVerified ? <CheckCircleIcon className="w-5 h-5 text-green-500" aria-hidden="true" /> : <ExclamationCircleIcon className="w-5 h-5 text-red-500" aria-hidden="true" />}
               </div>
             </div>
           </div>
@@ -221,11 +232,12 @@ export default function Account({ user }) {
             </p>
           ) : (
             <p className="mt-2 text-sm text-red-600" id="verify-message">
-              {emailSent && <p className={classNames('font-medium', emailSent.status === 'success' ? 'text-green-600' : 'text-red-600')}>{emailSent.message}</p>}
-              {!emailSent && (
+              {emailSent ? (
+                <span className={classNames('font-medium', emailSent.status === 'success' ? 'text-green-600' : 'text-red-600')}>{emailSent.message}</span>
+              ) : (
                 <span className="font-medium text-red-600">
                   Your email is not verified. If you have not recieved a verfication email, you can{' '}
-                  <span className="cursor-pointer underline hover:text-red-700" onClick={sendEmailVerificationHandler}>
+                  <span className="underline cursor-pointer hover:text-red-700" onClick={sendEmailVerificationHandler}>
                     send another one here.
                   </span>
                 </span>
@@ -258,7 +270,7 @@ export default function Account({ user }) {
               id="current-password"
               value={passwordCurrent}
               autoComplete="current-password"
-              className="input-secondary mt-1 w-full border border-gray-300 dark:border-transparent shadow-sm"
+              className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
               onChange={e => setPasswordCurrent(e.target.value)}
             />
           </div>
@@ -273,7 +285,7 @@ export default function Account({ user }) {
               id="new-password"
               value={password}
               autoComplete="new-password"
-              className="input-secondary mt-1 w-full border border-gray-300 dark:border-transparent shadow-sm"
+              className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
               onChange={e => setPassword(e.target.value)}
             />
           </div>
@@ -288,7 +300,7 @@ export default function Account({ user }) {
               id="confirm-new-password"
               value={passwordConfirm}
               autoComplete="confirm-new-password"
-              className="input-secondary mt-1 w-full border border-gray-300 dark:border-transparent shadow-sm"
+              className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
               onChange={e => setPasswordConfirm(e.target.value)}
             />
           </div>

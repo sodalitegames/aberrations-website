@@ -1,5 +1,14 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { onAuthStateChanged, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  onAuthStateChanged,
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  updatePassword as _updatePassword,
+  updateEmail as _updateEmail,
+} from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 import firebase from '../lib/firebase';
@@ -15,11 +24,15 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const setUserWithData = async user => {
+    const userSnap = await getDoc(doc(firestore, 'users', user.uid));
+    setUser({ ...user, data: userSnap.data() });
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
-        const userSnap = await getDoc(doc(firestore, 'users', user.uid));
-        setUser({ ...user, data: userSnap.data() });
+        setUserWithData(user);
       } else {
         setUser(null);
       }
@@ -120,7 +133,59 @@ export const AuthProvider = ({ children }) => {
     return { result, error };
   };
 
-  return <AuthContext.Provider value={{ user, loading, signin, signup, signout, setupAccount, forgotPassword, sendEmailVerification }}>{children}</AuthContext.Provider>;
+  const updateUser = async displayName => {
+    let result = null;
+    let error = null;
+
+    try {
+      await updateProfile(auth.currentUser, { displayName });
+      setUserWithData(auth.currentUser);
+      result = { status: 'success', message: 'Profile successfully updated.' };
+    } catch (err) {
+      console.log(err);
+      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+    }
+
+    return { result, error };
+  };
+
+  const updatePassword = async newPassword => {
+    let result = null;
+    let error = null;
+
+    try {
+      await _updatePassword(auth.currentUser, newPassword);
+      setUserWithData(auth.currentUser);
+      result = { status: 'success', message: 'You password has been successfully updated.' };
+    } catch (err) {
+      console.log(err);
+      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+    }
+
+    return { result, error };
+  };
+
+  const updateEmail = async newEmail => {
+    let result = null;
+    let error = null;
+
+    try {
+      await _updateEmail(auth.currentUser, newEmail);
+      setUserWithData(auth.currentUser);
+      result = { status: 'success', message: 'Profile successfully updated.' };
+    } catch (err) {
+      console.log(err);
+      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+    }
+
+    return { result, error };
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, loading, signin, signup, signout, setupAccount, forgotPassword, sendEmailVerification, updatePassword, updateEmail, updateUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => useContext(AuthContext);

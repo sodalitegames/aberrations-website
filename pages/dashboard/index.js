@@ -18,6 +18,10 @@ export default function Dashboard({ metadata }) {
     if (!loading && !user) {
       router.push('/auth/signin');
     }
+
+    if (!loading && !user?.data?.mongo_id) {
+      router.push('/auth/account-setup');
+    }
   }, [user, loading, router]);
 
   if (!user) {
@@ -27,6 +31,8 @@ export default function Dashboard({ metadata }) {
       </PageLayout>
     );
   }
+
+  console.log(user);
 
   return (
     <PageLayout title={metadata.title} seo={metadata} custom>

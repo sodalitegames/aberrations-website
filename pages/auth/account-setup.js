@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../../contexts/auth';
 
 import PageLayout from '../../layouts/PageLayout';
-import AccountSetupForm from '../../components/auth/AccountSetupForm';
 
+import AccountSetupForm from '../../components/auth/AccountSetupForm';
 import Loader from '../../components/dashboard/components/Loader';
 
 export default function Signup({ metadata }) {
@@ -13,10 +13,12 @@ export default function Signup({ metadata }) {
   const { user, loading } = useAuth();
 
   useEffect(() => {
+    // If user is not logged in, redirect to signup
     if (!loading && !user) {
       router.push('/auth/signup');
     }
 
+    // If account is already set up, redirect to dashboard
     if (!loading && user) {
       if (user?.data?.mongo_id) {
         router.push('/dashboard');
