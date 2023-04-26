@@ -5,7 +5,6 @@ import databaseMiddleware from './database';
 export function createHandler(...middleware) {
   return nextConnect({
     onError: (err, req, res, next) => {
-      console.error(err.stack);
       res.status(500).end({ message: 'An error occurred while accessing this route.', error: err });
     },
     onNoMatch: (req, res) => {
