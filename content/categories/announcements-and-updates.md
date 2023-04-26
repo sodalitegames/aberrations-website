@@ -1,8 +1,8 @@
 ---
 name: Announcements & Updates
-color: "#abab1a"
+color: '#abab1a'
 featuredPosts:
-  - We're Looking for Beta Testers!__were-looking-for-beta-testers
+  - We're Looking for Alpha Testers!__were-looking-for-alpha-testers
 metadata:
   title: Announcements & Updates
   slug: announcements-and-updates

@@ -1,14 +1,14 @@
 ---
-name: Contact
+name: Community > Contact
 parent: Community__community
 sections:
-  - theme: SECONDARY
+  - heading: Get in touch
+    theme: SECONDARY
     text: We would love to hear from you! Ask us questions, give us feedback, or
       just say hi if you want.
-    formTitle: ''
-    heading: Get in touch
+    formTitle: ""
     formButton: Send message
-    phoneNumber: ''
+    phoneNumber: ""
     type: contactForm
     email: support@aberrations-rpg.com
     formHeading: Send us an email

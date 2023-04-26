@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const apiUrl = `${process.env.STRAPI_API_URL}`;
+const apiUrl = `${process.env.DATABASE_API_URL}`;
 
 const api = Axios.create({
   baseURL: apiUrl,

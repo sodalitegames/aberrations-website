@@ -4,8 +4,6 @@ paths:
   - parent: get-started
     children:
       - child: world-playbooks
-  - parent: worlds
-    children: []
   - parent: digital-tools
     children:
       - child: roll-dice
@@ -14,6 +12,4 @@ paths:
     children:
       - child: mailing-list
       - child: contact
-  - parent: legal
-  - parent: company
 ---

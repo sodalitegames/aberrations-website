@@ -7,7 +7,7 @@ categories:
   - Campaign Stories__campaign-stories__#2aa1d3
   - Isle Saint Lemon__isle-saint-lemon__#eae726
 relatedPosts:
-  - were-looking-for-beta-testers
+  - were-looking-for-alpha-testers
   - isle-saint-lemon-chapter-one
 featured: false
 restriction: NONE
@@ -17,7 +17,8 @@ metadata:
   slug: isle-saint-lemon-chapter-two
   description: Isle Saint Lemon Chapter Two
 ---
-*This is Chapter 2 of the Isle Saint Lemon Campaign Story. This is an ongoing, official campaign of Aberrations RPG, played on the world of Avarice. This series will be ongoing, with chapters slated to be released every two-weeks, if all goes according to plan. You can [read Chapter 1 here.](/community/blog/isle-saint-lemon-chapter-two)*
+
+_This is Chapter 2 of the Isle Saint Lemon Campaign Story. This is an ongoing, official campaign of Aberrations RPG, played on the world of Avarice. This series will be ongoing, with chapters slated to be released every two-weeks, if all goes according to plan. You can [read Chapter 1 here.](/community/blog/isle-saint-lemon-chapter-two)_
 
 ### Players this session
 

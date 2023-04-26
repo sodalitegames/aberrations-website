@@ -17,7 +17,7 @@ const CategoryPage = ({ posts, category, metadata }) => {
       breadcrumbs={[
         { name: 'Community', href: '/community' },
         { name: 'Blog', href: '/community/blog' },
-        { name: 'Blog Categories', href: '/community/blog/categories' },
+        { name: 'Categories', href: '/community/blog/categories' },
         { name: metadata.title, href: `/community/blog/categories/${metadata.slug}` },
       ]}
     >
@@ -38,7 +38,7 @@ const CategoryPage = ({ posts, category, metadata }) => {
 export async function getStaticPaths() {
   const slugs = (context => {
     return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
-  })(require.context('../../../../content/categories', true, /\.md$/));
+  })(require.context('../../../../content/categories', true, /^\.\/.*\.md$/));
 
   const paths = slugs.map(slug => ({
     params: {
@@ -62,7 +62,7 @@ export async function getStaticProps(context) {
   // Import all posts
   const postSlugs = (context => {
     return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
-  })(require.context('../../../../content/posts', true, /\.md$/));
+  })(require.context('../../../../content/posts', true, /^\.\/.*\.md$/));
 
   const allPosts = await Promise.all(
     postSlugs.map(async slug => {

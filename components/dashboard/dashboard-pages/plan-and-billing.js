@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import api from '../../../lib/auth-api';
+import api from '../../../apis/auth';
 
 import Section from '../components/Section';
 import FormSection from '../components/FormSection';

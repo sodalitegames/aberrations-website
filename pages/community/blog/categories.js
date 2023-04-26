@@ -36,7 +36,7 @@ export async function getStaticProps() {
 
   const slugs = (context => {
     return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
-  })(require.context('../../../content/categories', true, /\.md$/));
+  })(require.context('../../../content/categories', true, /^\.\/.*\.md$/));
 
   const categories = await Promise.all(
     slugs.map(async slug => {

@@ -1,5 +1,5 @@
 ---
-name: Roll Dice
+name: Digital Tools > Roll Dice
 parent: Digital Tools__digital-tools
 sections:
   - type: digitalTool

@@ -6,12 +6,6 @@ export default function SpeciesCard({ species }) {
     <CardContainer heading={species.name}>
       <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Basic Info</dt>
-          <dd className="mt-1 text-sm">
-            <NewlineText text={species.basicInfo} />
-          </dd>
-        </div>
-        <div className="sm:col-span-2">
           <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Appearance</dt>
           <dd className="mt-1 text-sm">
             <NewlineText text={species.appearance} />
@@ -35,9 +29,13 @@ export default function SpeciesCard({ species }) {
             <NewlineText text={species.abilities.detraction} />
           </dd>
         </div>
-        <div className="sm:col-span-2">
+        <div className="sm:col-span-1">
           <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Health</dt>
-          <dd className="mt-1 text-sm">{species.health}</dd>
+          <dd className="mt-1 text-sm">{species.health.starting}</dd>
+        </div>
+        <div className="sm:col-span-1">
+          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Increment</dt>
+          <dd className="mt-1 text-sm">{species.health.increment}</dd>
         </div>
         <div className="sm:col-span-1">
           <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Strength</dt>

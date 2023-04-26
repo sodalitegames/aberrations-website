@@ -57,7 +57,7 @@ There are options beyond Standard Weapons. Any other weapons will either be clas
 
 ##### Creating Your Weapons
 
-You can find a list of Weapons available to use on your world in your world’s [World Playbook](/get-started/world-playbooks). This list consists of the 16 Standard Weapons. There can be other types of Weapons, but those are treated as custom or improvised Weapons that you or your CC create for yourselves. The [Lore of the world you are playing on](/worlds) is a great place to go for inspiration on possible custom or improvised Weapons.
+You can find a list of Weapons available to use on your world in your world’s [World Playbook](/get-started/world-playbooks). This list consists of the 16 Standard Weapons. There can be other types of Weapons, but those are treated as custom or improvised Weapons that you or your CC create for yourselves. The Lore of the world you are playing on is a great place to go for inspiration on possible custom or improvised Weapons.
 
 ### Wearables
 
@@ -76,7 +76,7 @@ Wearables are defined by a name, description, body area, modifier, speed adjustm
 
 ##### Creating Your Wearables
 
-It is mainly up to you and your CC to create the Wearables you will be using. The [Lore of the world you play on](/worlds) will provide information on Wearables, such as fashion and what stat modifiers are likely to be on them. There also may be a list of Wearables to inspire creativity, but, ultimately, it is up to you and your CC to create Wearables that fit your character.
+It is mainly up to you and your CC to create the Wearables you will be using. The Lore of the world you play on will provide information on Wearables, such as fashion and what stat modifiers are likely to be on them. There also may be a list of Wearables to inspire creativity, but, ultimately, it is up to you and your CC to create Wearables that fit your character.
 
 ### Consumables
 
@@ -94,7 +94,7 @@ Consumables are defined by a name, description, categories, level, and uses.
 
 ##### Creating Your Consumables
 
-You can find a list of Consumable Categories in your world's [World Playbook](/get-started/world-playbooks). These categories explain exactly what a Consumable does, and how well it does it. When creating a Consumable, you first choose one or more of these categories, but then it is up to your creativity to determine what the exact item is. The [Lore of the world you are playing on](/worlds) is a great way to find inspiration when creating your Consumables. Most of the time, it is your CC who will create these Consumables for you to find or buy, but they may also allow you to create your own at times.
+You can find a list of Consumable Categories in your world's [World Playbook](/get-started/world-playbooks). These categories explain exactly what a Consumable does, and how well it does it. When creating a Consumable, you first choose one or more of these categories, but then it is up to your creativity to determine what the exact item is. The Lore of the world you are playing on is a great way to find inspiration when creating your Consumables. Most of the time, it is your CC who will create these Consumables for you to find or buy, but they may also allow you to create your own at times.
 
 ### Usables
 
@@ -109,4 +109,4 @@ Usables are defined by a name, and description, type, and units.
 
 ##### Creating Your Usables
 
-Usables describe anything from a flash drive to a piece of parchment to an microwave. Therefore, almost every Usable that you or your CC create is going to be custom. When creating a Usable, the most important thing to fill out is its type. This determines its value, based on the economy of your world. You will be able to find information on what Usables would be what types (as well as what Usables would even be available) in the [Lore of the world you are playing on](/worlds).
+Usables describe anything from a flash drive to a piece of parchment to an microwave. Therefore, almost every Usable that you or your CC create is going to be custom. When creating a Usable, the most important thing to fill out is its type. This determines its value, based on the economy of your world. You will be able to find information on what Usables would be what types (as well as what Usables would even be available) in the Lore of the world you are playing on.

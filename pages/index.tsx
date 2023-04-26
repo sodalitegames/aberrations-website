@@ -13,7 +13,7 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ metadata, sections }) => {
   // Check if the required data was provided
-  if (!sections?.length) {
+  if (!sections) {
     return <ErrorPage statusCode={500} />;
   }
 
