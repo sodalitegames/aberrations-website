@@ -1,5 +1,5 @@
 ---
-name: World Playbooks
+name: Get Started > World Playbooks
 parent: Get Started__get-started
 sections:
   - type: navigationCards
@@ -8,8 +8,8 @@ sections:
     cards:
       - externalLink: false
         name: Avarice World Playbook
-        description: This World Playbook is for the world of Avarice, a cyberpunk-ishly
-          capitalistically dystopian tech world.
+        description: Avarice is a futuristic dystopia of corporation rule and science,
+          with a litte bit of cyberpunk, all rolled into one.
         iconRef: BookOpenIcon
         href: /get-started/world-playbooks/avarice
 metadata:

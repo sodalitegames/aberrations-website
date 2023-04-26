@@ -1,6 +1,6 @@
 import ErrorPage from 'next/error';
 
-import api from '../../lib/strapi-api';
+import api from '../../apis/database';
 
 import PageLayout from '../../layouts/PageLayout';
 
@@ -10,11 +10,11 @@ import SectionDivider from '../../components/elements/section-divider';
 import Notice from '../../components/elements/notice';
 import NpcTable from '../../components/elements/npc-table';
 
-import { getSlug } from '../../utils/functions/get-slug';
+import { slugify } from '../../utils/functions/slugify';
 
-const CCGuide = ({ ccGuide, presetNpcTypes, navigation, metadata }) => {
+const CCGuide = ({ ccGuide, npcTypes, navigation, metadata }) => {
   // Check if the required data was provided
-  if (!ccGuide || !presetNpcTypes) {
+  if (!ccGuide || !npcTypes) {
     return <ErrorPage statusCode={500} />;
   }
 
@@ -39,13 +39,11 @@ const CCGuide = ({ ccGuide, presetNpcTypes, navigation, metadata }) => {
       <SectionDivider heading="CC Guide" id="cc-guide" nomargin />
       <MarkdownContent data={{ content: ccGuide }} />
 
-      <SectionDivider heading="Preset NPC Types" id="preset-npc-types" />
-      <MarkdownContent data={{ content: presetNpcTypes.overview }} />
-
-      {presetNpcTypes.npcTable.map(table => (
-        <div key={table.npcType} id={getSlug(table.npcType)}>
-          <h2 className="heading">{table.npcType}</h2>
-          <NpcTable rows={table.level} />
+      <SectionDivider heading="Npc Types" id="npc-types" />
+      {npcTypes.map(type => (
+        <div key={type.id} id={slugify(type.name)}>
+          <h4 className="heading">{type.name}</h4>
+          <NpcTable rows={type.levels} />
         </div>
       ))}
     </PageLayout>
@@ -56,7 +54,9 @@ export async function getStaticProps() {
   const page = await import(`../../content/pages/cc-guide.md`).catch(error => null);
   const ccGuide = await import(`../../content/rules/cc-guide.md`).catch(error => null);
 
-  const { data: presetNpcTypes } = await api.get(`/preset-npc-types`);
+  const {
+    data: { docs: npcTypes },
+  } = await api.get('/npc-types?limit=100');
 
   const { name, metadata } = page.attributes;
 
@@ -67,16 +67,16 @@ export async function getStaticProps() {
       children: ccGuide.attributes.navigation,
     },
     {
-      name: 'Preset NPC Types',
-      idRef: 'preset-npc-types',
-      children: presetNpcTypes.npcTable.map(table => ({ name: table.npcType, idRef: getSlug(table.npcType) })),
+      name: 'Npc Types',
+      idRef: 'npc-types',
+      children: npcTypes.map(type => ({ name: type.name, idRef: slugify(type.name) })),
     },
   ];
 
   return {
     props: {
       ccGuide: ccGuide.body,
-      presetNpcTypes,
+      npcTypes,
       navigation,
       metadata,
     },

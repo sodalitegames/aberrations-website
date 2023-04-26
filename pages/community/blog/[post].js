@@ -34,7 +34,7 @@ const PostPage = ({ post, relatedPosts, metadata }) => {
       {/* End blog post */}
 
       <div className="mt-12">
-        <h3 className="heading border-t border-b py-4 dark:border-gray-700">More posts you might like</h3>
+        <h3 className="py-4 border-t border-b heading dark:border-gray-700">More posts you might like</h3>
 
         <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
           {relatedPosts.map((post, index) => {
@@ -49,7 +49,7 @@ const PostPage = ({ post, relatedPosts, metadata }) => {
 export async function getStaticPaths() {
   const slugs = (context => {
     return context.keys().map(key => key.replace(/^.*[\\\/]/, '').slice(0, -3));
-  })(require.context('../../../content/posts', true, /\.md$/));
+  })(require.context('../../../content/posts', true, /^\.\/.*\.md$/));
 
   const paths = slugs.map(slug => ({
     params: {

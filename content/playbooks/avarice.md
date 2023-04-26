@@ -1,5 +1,6 @@
 ---
-name: Avarice World Playbook
+name: Avarice
+id: 6448d38875ddd9cbee681070
 metadata:
   title: Avarice World Playbook
   slug: avarice
@@ -149,13 +150,13 @@ navigation:
     idRef: overview
   - name: Species
     idRef: species
-  - name: Augmentations
+  - name: Augmentation Groups
     idRef: augmentation-groups
   - name: Weapons
     idRef: weapons
-  - name: Consumables
+  - name: Consumable Categories
     idRef: consumable-categories
-  - name: Creatures
+  - name: Creature Types
     idRef: creature-types
   - name: World Rules
     idRef: world-rules

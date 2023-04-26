@@ -38,6 +38,6 @@ const ICON_MAP = {
 
 export const getIcon = iconRef => {
   const icon = { icon: ICON_MAP[iconRef] };
-  if (!icon) icon.icon = DocumentTextIcon;
+  if (!icon.icon) icon.icon = DocumentTextIcon;
   return icon;
 };

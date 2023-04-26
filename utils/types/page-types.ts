@@ -1,5 +1,6 @@
 export interface Metadata {
   title: string;
+  slug: string;
   description?: string;
   // ... add in rest
 }

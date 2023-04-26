@@ -28,17 +28,6 @@ headerNavigation:
           to get all the required information like species, creatures,
           belongings, and more.
   - showInChildList: No
-    name: Worlds
-    description: Explore all the playable worlds and find the one you like most.
-    iconRef: CubeTransparentIcon
-    children:
-      - name: Avarice
-        iconRef: FingerPrintIcon
-        description: Explore the world of Avarice. A futuristic dystopia of corporation
-          rule and science, with a litte bit of cyberpunk, all rolled into one.
-        path: avarice
-    path: worlds
-  - showInChildList: No
     name: Digital Tools
     description: Explore the digital tools we provide to improve your gameplay.
     iconRef: DesktopComputerIcon
@@ -87,9 +76,6 @@ footerNavigation:
       - externalLink: false
         name: About
         href: /about
-      - externalLink: false
-        name: Worlds
-        href: /worlds
   - name: Get Started
     navigationItems:
       - externalLink: false

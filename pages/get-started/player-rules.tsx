@@ -1,7 +1,5 @@
 import ErrorPage from 'next/error';
 
-import api from '../../lib/strapi-api';
-
 import { Metadata, SideNavItem } from '../../utils/types/page-types';
 
 import PageLayout from '../../layouts/PageLayout';
@@ -10,8 +8,6 @@ import MarkdownContent from '../../components/sections/markdown-content';
 
 import SectionDivider from '../../components/elements/section-divider';
 import Notice, { NoticeStatus } from '../../components/elements/notice';
-
-import ActionCard from '../../components/elements/cards/action-card';
 
 interface PlayerRulesPageProps {
   playerRules: string;

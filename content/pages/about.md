@@ -14,7 +14,7 @@ sections:
     rightColumn:
       - type: image
         config: CONTAINED
-        image: images/uploads/insp-for-aberrations.jpg
+        image: assets/uploads/insp-for-aberrations.jpg
   - type: heading
     theme: PRIMARY
     centered: false
