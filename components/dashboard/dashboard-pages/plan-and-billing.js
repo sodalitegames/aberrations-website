@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import api from '../../../apis/auth';
+import api from '../../../apis/internal';
 
 import Section from '../components/Section';
 import FormSection from '../components/FormSection';
@@ -113,18 +113,18 @@ export default function PlanAndBilling({ user, pricingPlans }) {
           submitColor="primary"
           submitHandler={redirectToCustomerPortal}
         >
-          <div className="rounded-md bg-gray-50 dark:bg-dark-200 border-gray-200 dark:border-gray-800 relative border p-4 flex flex-col md:pl-4 md:pr-6 md:grid md:grid-cols-3 focus:outline-none">
+          <div className="relative flex flex-col p-4 border border-gray-200 rounded-md bg-gray-50 dark:bg-dark-200 dark:border-gray-800 md:pl-4 md:pr-6 md:grid md:grid-cols-3 focus:outline-none">
             <div className="flex items-center text-sm">
               <span className="ml-3 font-medium">{subscriptionData.name}</span>
             </div>
 
-            <div className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
+            <div className="pl-1 ml-6 text-sm md:ml-0 md:pl-0 md:text-center">
               <span className="font-medium">
                 {subscriptionData.price} / {subscriptionData.interval}
               </span>
             </div>
 
-            <div className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right">
+            <div className="pl-1 ml-6 text-sm md:ml-0 md:pl-0 md:text-right">
               {user.subscription.cancel_at_period_end ? 'expires' : 'renews'} on {subscriptionData.renews}
             </div>
           </div>

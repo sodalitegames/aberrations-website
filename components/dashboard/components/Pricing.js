@@ -1,7 +1,7 @@
 import { CheckIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 
-import api from '../../../apis/auth';
+import api from '../../../apis/internal';
 import { getStripe } from '../../../lib/stripe';
 
 import classNames from '../../../utils/functions/classnames';

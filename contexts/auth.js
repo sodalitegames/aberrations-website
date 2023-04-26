@@ -13,7 +13,7 @@ import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 import firebase from '../lib/firebase';
 
-import { forgotPassword as _forgotPassword, setupAccount as _setupAccount, sendEmailVerification as _sendEmailVerification } from '../apis/auth';
+import api, { forgotPassword as _forgotPassword, setupAccount as _setupAccount, sendEmailVerification as _sendEmailVerification } from '../apis/internal';
 
 const auth = getAuth(firebase);
 const firestore = getFirestore(firebase);
@@ -24,6 +24,8 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [token, setToken] = useState(null);
+
   const setUserWithData = async user => {
     const userSnap = await getDoc(doc(firestore, 'users', user.uid));
     setUser({ ...user, data: userSnap.data() });
@@ -32,15 +34,22 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
+        const idToken = await user.getIdToken();
         setUserWithData(user);
+        setToken(idToken);
       } else {
         setUser(null);
+        setToken(null);
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+  }, [token]);
 
   const signup = async (email, password) => {
     let result = null;
@@ -94,7 +103,8 @@ export const AuthProvider = ({ children }) => {
     let error = null;
 
     try {
-      result = await _setupAccount({ name, subscribe });
+      const resp = await _setupAccount({ name, subscribe });
+      result = resp.data;
     } catch (err) {
       console.log(err);
       error = { status: 'error', message: 'Something went wrong. Please try again later.' };
