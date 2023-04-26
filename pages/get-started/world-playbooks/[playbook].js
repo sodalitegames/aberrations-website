@@ -32,14 +32,14 @@ const Playbook = ({ playbook, resources, metadata, navigation }) => {
     >
       <Notice
         status="info"
-        message="While the game is in beta, only the most updated rules will be displayed. If you wish to see what changes we are making,"
-        link={{ text: 'visit our beta change log.', href: '/beta-change-log', inline: true }}
+        message="While the game is in alpha, only the most updated rules will be displayed. If you wish to see what changes we are making,"
+        link={{ text: 'visit our change log.', href: '/change-log', inline: true }}
         accent
       />
       <Notice
         status="info"
-        message="Important: This playbook only contains what is necessary to play. The rest of the world lore is located elsewhere."
-        link={{ text: 'Take me to the lore', href: `/worlds/${metadata.slug}` }}
+        message="Important: This playbook only contains what is necessary to play. The rest of the world lore is currently in progress."
+        link={{ text: "Let me know when it's ready", href: '/community/mailing-list' }}
         accent
       />
 

@@ -34,8 +34,8 @@ const PlayerRulesPage: React.FC<PlayerRulesPageProps> = ({ playerRules, belongin
     >
       <Notice
         status={NoticeStatus.Info}
-        message="While the game is in beta, only the most updated rules will be displayed. If you wish to see what changes we are making,"
-        link={{ text: 'visit our beta change log.', href: '/beta-change-log', inline: true }}
+        message="While the game is in alpha, only the most updated rules will be displayed. If you wish to see what changes we are making,"
+        link={{ text: 'visit our change log.', href: '/change-log', inline: true }}
         accent
       />
 

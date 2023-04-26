@@ -30,8 +30,8 @@ const CCGuide = ({ ccGuide, npcTypes, navigation, metadata }) => {
     >
       <Notice
         status="info"
-        message="While the game is in beta, only the most updated rules will be displayed. If you wish to see what changes we are making,"
-        link={{ text: 'visit our beta change log.', href: '/beta-change-log', inline: true }}
+        message="While the game is in alpha, only the most updated rules will be displayed. If you wish to see what changes we are making,"
+        link={{ text: 'visit our change log.', href: '/change-log', inline: true }}
         accent
       />
       <Notice status="warn" message="The CC Guide is not currently available, but will be soon. We apologize and thank you for your patience as we get it ready for you." accent />

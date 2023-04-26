@@ -12,7 +12,7 @@ overview: "This World Playbook is for the world of Avarice. The Avarice World
   play by, and a World Summary of the world of Avarice. This playbook is
   condensed to only contain what is necessary to play on Avarice, so you don't
   have to go searching through the lore for what you need. If you are
-  interested, you can [find the Lore of Avarice here](/worlds/avarice)."
+  interested, you can [sign up for our mailing list](/community/mailing-list) to be informed of when we finish writing the lore."
 species: The following are the currently known sentient and playable species on Avarice.
 augmentations: >-
   Below are the five augmentation groups, with their Augmentations and the
@@ -102,49 +102,19 @@ worldRules: "### SURONIS in World Lore \r
   - *Version 8:* Version 8 of the SURONIS only has the ability to store up to
   9 copies of the same item, because it still used a physical screen, and there
   was not enough space on the screen to allow for double digits. "
-worldSummary: "*The following is a general summary of Avarice, to give you an
-  idea of what kind of world it is. If you are looking for [more in-depth and
-  detailed information on Avarice](/worlds/avarice), then you can find that in
-  our collection of world lore. There is still a lot of lore to write, and a lot
-  of it is in draft state, but everything that we have available is on our
-  website for your reading pleasure, and the rest will be coming as soon as we
-  can get it out.*\r
+worldSummary: >-
+  *The following is a general summary of Avarice, to give you an idea of what
+  kind of world it is. More in-depth and detailed information and lore on
+  Avarice, is in the works. We are working hard to get it written, and are looking forward to its release. If you want to stay in the loop, you can [sign up for our mailing list](/community/mailing-list)*
 
-  \r
 
-  Avarice was almost a utopia. There was a moment, after a period of seemingly
-  endless war, where it appeared that everyone might be able to come to a
-  consensus and unify under one flag. The invention of the Formulator, a
-  molecular 3D printer with the ability to create virtually anything out of the
-  molecules in the air, could have eliminated poverty, famine, war, and sickness
-  overnight. Instead, Ambrosia Apparatus Incorporated bought the patent and
-  privatized Formulators for their own personal use, now only leasing them out
-  to others for insanely high prices or using them for grandiose acts of charity
-  (which are truly just thinly-veiled marketing stunts.) \r
+  Avarice was almost a utopia. There was a moment, after a period of seemingly endless war, where it appeared that everyone might be able to come to a consensus and unify under one flag. The invention of the Formulator, a molecular 3D printer with the ability to create virtually anything out of the molecules in the air, could have eliminated poverty, famine, war, and sickness overnight. Instead, Ambrosia Apparatus Incorporated bought the patent and privatized Formulators for their own personal use, now only leasing them out to others for insanely high prices or using them for grandiose acts of charity (which are truly just thinly-veiled marketing stunts.) 
 
-  \r
 
-  The tragedy of the Formulator is not unique. Throughout the years, Avarice
-  has been on the cusp of creating a paradise for its inhabitants countless
-  times, only to have these humanitarian efforts destroyed by the goals and
-  ambitions of the wealthy. Corpo-Nations have replaced traditional countries
-  and created a society of haves and have nots. Cleverly-written tax laws,
-  unfettered nepotism, unbalanced wages, and a lack of labor laws have created a
-  disjointed reality. This reality mimics the social structure of feudal age
-  Europe, with a powerful but small upper class overseeing a large lower class
-  that struggles just to get by. Thousands die during battles over who cheated
-  in a tennis match as the richest of the rich (called the Chief Officers)
-  typically regard lower-class life with gross apathy. \r
+  The tragedy of the Formulator is not unique. Throughout the years, Avarice has been on the cusp of creating a paradise for its inhabitants countless times, only to have these humanitarian efforts destroyed by the goals and ambitions of the wealthy. Corpo-Nations have replaced traditional countries and created a society of haves and have nots. Cleverly-written tax laws, unfettered nepotism, unbalanced wages, and a lack of labor laws have created a disjointed reality. This reality mimics the social structure of feudal age Europe, with a powerful but small upper class overseeing a large lower class that struggles just to get by. Thousands die during battles over who cheated in a tennis match as the richest of the rich (called the Chief Officers) typically regard lower-class life with gross apathy. 
 
-  \r
 
-  Law enforcement is controlled by the Chief Officers of various cities,
-  resulting in little-to-no official police presence outside of the cities
-  themselves. Instead, nomads and raiders roam the lands, pillaging whatever
-  they can and returning their bounties to the warlords who they’ve pledged
-  their lives to. Whether it be in the cities, or outside their walls, people’s
-  lives are ever determined by the whims of vanity or the boredom of those in
-  power."
+  Law enforcement is controlled by the Chief Officers of various cities, resulting in little-to-no official police presence outside of the cities themselves. Instead, nomads and raiders roam the lands, pillaging whatever they can and returning their bounties to the warlords who they’ve pledged their lives to. Whether it be in the cities, or outside their walls, people’s lives are ever determined by the whims of vanity or the boredom of those in power.
 navigation:
   - name: Overview
     idRef: overview

@@ -62,12 +62,6 @@ sections:
         description: Get a solid understanding of what you need to know to play this game.
         href: /get-started
       - externalLink: false
-        iconRef: GlobeIcon
-        name: Worlds
-        description: Learn everything you need to know about the lore of Aberrations
-          RPG, and why things are they way they are.
-        href: /worlds
-      - externalLink: false
         iconRef: DesktopComputerIcon
         name: Digital Tools
         description: Explore the digital tools we provide to improve your gameplay.

@@ -780,9 +780,9 @@ collections:
           # Navigation
           - { label: Navigation, label_singular: Item, name: navigation, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Id Ref, name: idRef, widget: string }] }
 
-      - file: 'content/rules/beta-change-log.md'
-        label: 'Beta Change Log'
-        name: 'betaChangeLog'
+      - file: 'content/rules/change-log.md'
+        label: 'Change Log'
+        name: 'changeLog'
         fields:
           # Name
           - { label: 'Name', name: 'name', widget: 'string' }
@@ -792,12 +792,12 @@ collections:
               label: 'Change Logs',
               label_singular: Version,
               name: 'changeLogs',
-              summary: 'Beta-{{betaVersion}}',
+              summary: 'Alpha-{{version}}',
               widget: 'list',
               fields:
                 [
                   { label: Date, name: date, widget: date },
-                  { label: Beta Version, name: betaVersion, widget: string },
+                  { label: Version, name: version, widget: string },
                   { label: Email Notification Sent, name: emailNotificationSent, widget: boolean, default: false },
                   { label: Change Log, name: log, widget: markdown },
                 ],
