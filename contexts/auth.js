@@ -13,7 +13,7 @@ import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 import firebase from '../lib/firebase';
 
-import { forgotPassword as _forgotPassword, setupAccount as _setupAccount, sendEmailVerification as _sendEmailVerification } from '../lib/auth-api';
+import { forgotPassword as _forgotPassword, setupAccount as _setupAccount, sendEmailVerification as _sendEmailVerification } from '../apis/auth';
 
 const auth = getAuth(firebase);
 const firestore = getFirestore(firebase);

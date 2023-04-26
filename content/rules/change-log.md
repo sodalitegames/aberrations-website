@@ -1,9 +1,9 @@
 ---
-name: Beta Change Logs
+name: Change Logs
 changeLogs:
   - emailNotificationSent: false
     date: 2022-10-15T21:50:53.086Z
-    betaVersion: Beta-5.0
+    version: '5.0'
     log: >-
       ### P﻿layer Rules
 
@@ -19,7 +19,7 @@ changeLogs:
       * N﻿ote: Augmentation Groups and Creature Types are still outdated and need to be updated.
   - emailNotificationSent: false
     date: 2022-03-05T18:12:17.676Z
-    betaVersion: "4.0"
+    version: '4.0'
     log: >-
       ### Player Rules Updates
 
@@ -95,7 +95,7 @@ changeLogs:
       * The Mover Augmentation group augmentations updated to fit with new rule changes
   - emailNotificationSent: false
     date: 2022-01-07T16:11:40.287Z
-    betaVersion: "3.1"
+    version: '3.1'
     log: |-
       ### Player Rules Updates
 
@@ -110,7 +110,7 @@ changeLogs:
       * Minor wording and grammatical changes
   - emailNotificationSent: false
     date: 2021-12-12T16:11:40.005Z
-    betaVersion: "3.0"
+    version: '3.0'
     log: "### Player Rules Updates\r
 
       \r
@@ -216,7 +216,7 @@ changeLogs:
       - Added in a world summary section"
   - emailNotificationSent: false
     date: 2021-11-29T16:11:35.842Z
-    betaVersion: "2.0"
+    version: '2.0'
     log: "### Player Rules Updates\r
 
       \r
@@ -339,7 +339,7 @@ changeLogs:
       conditions and the new Passive Stats"
   - emailNotificationSent: false
     date: 2021-10-13T15:11:08.176Z
-    betaVersion: "1.1"
+    version: '1.1'
     log: "### Player Rules Updates\r
 
       \r
@@ -351,7 +351,7 @@ changeLogs:
       - Added explanation of usable types"
   - emailNotificationSent: false
     date: 2021-10-06T15:07:04.513Z
-    betaVersion: "1.0"
+    version: '1.0'
     log: "### Player Rules Updates\r
 
       - Passive stats changed: removed Awareness and Switch Dodge value

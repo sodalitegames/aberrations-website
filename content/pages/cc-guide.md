@@ -1,5 +1,5 @@
 ---
-name: CC Guide
+name: Get Started > CC Guide
 parent: Get Started__get-started
 metadata:
   title: CC Guide

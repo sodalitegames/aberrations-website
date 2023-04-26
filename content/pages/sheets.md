@@ -1,5 +1,5 @@
 ---
-name: Aberrations RPG Sheets (Alpha)
+name: Digital Tools > Aberrations RPG Sheets (Alpha)
 parent: Digital Tools__digital-tools
 sections:
   - type: feature
@@ -15,7 +15,7 @@ sections:
       on your character sheets. For campaign sheets, keep track of NPCs,
       players, environments, and other interactables.
     image:
-      image: images/uploads/aberrations-rpg-sheets-screenshot-v0.png
+      image: assets/uploads/aberrations-rpg-sheets-screenshot-v0.png
       side: RIGHT
   - type: featuresList
     theme: PRIMARY

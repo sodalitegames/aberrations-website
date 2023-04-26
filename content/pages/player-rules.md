@@ -1,5 +1,5 @@
 ---
-name: Player Rules
+name: Get Started > Player Rules
 parent: Get Started__get-started
 metadata:
   title: Player Rules

@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import api from '../../lib/strapi-api';
-
 import { useAuth } from '../../contexts/auth.js';
 
 import PageLayout from '../../layouts/PageLayout';

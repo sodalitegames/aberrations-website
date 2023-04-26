@@ -45,7 +45,7 @@ navigation:
     name: Death
 ---
 
-### Version: Beta-5.0
+### Version: Alpha-5.0
 
 ### Welcome to Aberrations RPG
 

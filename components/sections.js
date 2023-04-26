@@ -10,7 +10,6 @@ import ColumnContent from './sections/column-content';
 import Buttons from './sections/buttons';
 import Heading from './sections/heading';
 import NavigationCards from './sections/navigation-cards';
-import RulesSection from './sections/rules-section';
 
 // Map page sections to section components
 const sectionComponents = {
@@ -26,7 +25,6 @@ const sectionComponents = {
   columnContent: ColumnContent,
   heading: Heading,
   buttons: Buttons,
-  rules: RulesSection,
 };
 
 // Display a section individually

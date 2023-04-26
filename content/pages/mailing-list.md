@@ -1,5 +1,5 @@
 ---
-name: Mailing List
+name: Community > Mailing List
 parent: Community__community
 sections:
   - type: mailingList

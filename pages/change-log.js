@@ -8,7 +8,7 @@ import EmailCTA from '../components/elements/email-cta';
 
 import { parseDateShort } from '../utils/functions/parse-date';
 
-const BetaChangeLog = ({ changeLogs, metadata }) => {
+const ChangeLog = ({ changeLogs, metadata }) => {
   // Check if the required data was provided
   if (!changeLogs) {
     return <ErrorPage statusCode={500} />;
@@ -17,13 +17,13 @@ const BetaChangeLog = ({ changeLogs, metadata }) => {
   return (
     <PageLayout title={metadata.title} seo={metadata} breadcrumbs={[{ name: metadata.title, href: `/${metadata.slug}` }]}>
       <ul>
-        {changeLogs.map(({ date, betaVersion, log, emailNotificationSent }, index) => (
+        {changeLogs.map(({ date, version, log, emailNotificationSent }, index) => (
           <div key={index}>
             {index === 0 ? (
               <>
                 <div className="pb-2">
                   <h2 className="heading">
-                    {parseDateShort(date)} - Version: Beta-{betaVersion}
+                    {parseDateShort(date)} - Version: Alpha-{version}
                   </h2>
                   <p>Notified: {emailNotificationSent ? 'Yes' : 'No'}</p>
                   <MarkdownContent data={{ content: log }} />
@@ -33,7 +33,7 @@ const BetaChangeLog = ({ changeLogs, metadata }) => {
             ) : (
               <div className="border-b dark:border-gray-800 py-6">
                 <h2 className="heading">
-                  {parseDateShort(date)} - Version: Beta-{betaVersion}
+                  {parseDateShort(date)} - Version: Alpha-{version}
                 </h2>
                 <p>Notified: {emailNotificationSent ? 'Yes' : 'No'}</p>
                 <MarkdownContent data={{ content: log }} />
@@ -47,8 +47,8 @@ const BetaChangeLog = ({ changeLogs, metadata }) => {
 };
 
 export async function getStaticProps() {
-  const page = await import('../content/pages/beta-change-log.md').catch(error => null);
-  const changeLog = await import('../content/rules/beta-change-log.md').catch(error => null);
+  const page = await import('../content/pages/change-log.md').catch(error => null);
+  const changeLog = await import('../content/rules/change-log.md').catch(error => null);
 
   const { metadata } = page.attributes;
   const { changeLogs } = changeLog.attributes;
@@ -64,4 +64,4 @@ export async function getStaticProps() {
   };
 }
 
-export default BetaChangeLog;
+export default ChangeLog;
