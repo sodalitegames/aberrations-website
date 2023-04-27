@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateProfile,
+  updateProfile as _updateProfile,
   updatePassword as _updatePassword,
   updateEmail as _updateEmail,
   reauthenticateWithCredential,
@@ -15,7 +15,7 @@ import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 import firebase from '../lib/firebase';
 
-import api, { forgotPassword as _forgotPassword, setupAccount as _setupAccount, sendEmailVerification as _sendEmailVerification } from '../apis/internal';
+import api, { sendPasswordReset as _sendPasswordReset, setupAccount as _setupAccount, sendEmailVerification as _sendEmailVerification } from '../apis/internal';
 
 const auth = getAuth(firebase);
 const firestore = getFirestore(firebase);
@@ -24,10 +24,16 @@ const AuthContext = createContext({});
 
 const handleLoginError = code => {
   switch (code) {
+    case 'auth/user-not-found':
+      return { status: 'error', message: 'No account found. Please sign up.' };
     case 'auth/wrong-password':
       return { status: 'error', message: 'Invalid password. Please try again.' };
+    case 'auth/invalid-email':
+      return { status: 'error', message: 'Email is invalid. Please try again.' };
+    case 'auth/missing-password':
+      return { status: 'error', message: 'You must provide a password. Please try again.' };
     default:
-      return { status: 'error', message: 'Something went wrong. Please try again later.' };
+      return { status: 'error', message: 'An error occurred. Please try again later.' };
   }
 };
 
@@ -45,7 +51,9 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
+      console.log('on auth state changed!');
       if (user) {
+        console.log('user condition triggered!');
         const idToken = await user.getIdToken();
         const userData = await fetchData(user.uid);
         setUser(user);
@@ -71,14 +79,31 @@ export const AuthProvider = ({ children }) => {
     let error = null;
 
     try {
-      result = await createUserWithEmailAndPassword(auth, email, password);
-
-      console.log('Result:', result);
-
-      // await setDoc(doc(firestore, 'users', result.uid), { email }, { merge: true });
+      await createUserWithEmailAndPassword(auth, email, password);
+      result = { status: 'success', message: 'You have successfully signed up.' };
     } catch (err) {
       console.log(err);
-      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+      console.log(err.code);
+      switch (err.code) {
+        case 'auth/email-already-in-use':
+          error = { status: 'error', message: 'There is already an account associated with that email.' };
+          break;
+        case 'auth/weak-password':
+          error = { status: 'error', message: 'Passwords must be at least 6 characters long.' };
+          break;
+        case 'auth/invalid-email':
+          error = { status: 'error', message: 'Email is invalid. Please try again.' };
+          break;
+        case 'auth/missing-email':
+          error = { status: 'error', message: 'You must provide an email. Please try again.' };
+          break;
+        case 'auth/missing-password':
+          error = { status: 'error', message: 'You must provide a password. Please try again.' };
+          break;
+        default:
+          error = { status: 'error', message: 'An error occurred. Please try again later.' };
+          break;
+      }
     }
 
     return { result, error };
@@ -89,29 +114,18 @@ export const AuthProvider = ({ children }) => {
     let error = null;
 
     try {
-      result = await signInWithEmailAndPassword(auth, email, password);
-
-      console.log('Result:', result);
+      await signInWithEmailAndPassword(auth, email, password);
+      result = { status: 'success', message: 'You have successfully signed in.' };
     } catch (err) {
       console.log(err);
-      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+      console.log(err.code);
+      error = handleLoginError(err.code);
     }
 
     return { result, error };
   };
 
-  const signout = async () => {
-    let result = null;
-    let error = null;
-
-    try {
-      result = await signOut(auth);
-    } catch (err) {
-      error = err;
-    }
-
-    return { result, error };
-  };
+  const signout = async () => await signOut(auth);
 
   const setupAccount = async (name, subscribe) => {
     let result = null;
@@ -134,15 +148,21 @@ export const AuthProvider = ({ children }) => {
     return { result, error };
   };
 
-  const forgotPassword = async email => {
+  const sendPasswordReset = async email => {
     let result = null;
     let error = null;
 
     try {
-      const resp = await _forgotPassword(email);
+      const resp = await _sendPasswordReset(email);
       result = resp.data;
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
+
+      if (err.response) {
+        error = err.response.data;
+        return { result, error };
+      }
+
       error = { status: 'error', message: 'An error occurred. Please try again later.' };
     }
 
@@ -170,12 +190,12 @@ export const AuthProvider = ({ children }) => {
     return { result, error };
   };
 
-  const updateUser = async displayName => {
+  const updateProfile = async displayName => {
     let result = null;
     let error = null;
 
     try {
-      await updateProfile(auth.currentUser, { displayName });
+      await _updateProfile(auth.currentUser, { displayName });
       result = { status: 'success', message: 'Profile successfully updated.' };
     } catch (err) {
       console.log(err.code);
@@ -185,7 +205,7 @@ export const AuthProvider = ({ children }) => {
     return { result, error };
   };
 
-  const updatePassword = async (oldPassword, newPassword) => {
+  const updatePassword = async (oldPassword, newPassword, retry) => {
     let result = null;
     let error = null;
 
@@ -196,15 +216,24 @@ export const AuthProvider = ({ children }) => {
       console.log(err.code);
       switch (err.code) {
         case 'auth/requires-recent-login':
+          if (retry) {
+            error = { status: 'error', message: 'You must reauthenticate to perform this action.' };
+            break;
+          }
+
           try {
             const credential = EmailAuthProvider.credential(auth.currentUser.email, oldPassword);
             await reauthenticateWithCredential(auth.currentUser, credential);
-            await _updatePassword(auth.currentUser, newPassword);
-            result = { status: 'success', message: 'You password has been successfully updated.' };
+            const { result: _result, error: _error } = await updatePassword(auth.currentUser, newPassword, true);
+            result = _result;
+            error = _error;
           } catch (err) {
             console.log(err.code);
             error = handleLoginError(err.code);
           }
+          break;
+        case 'auth/weak-password':
+          error = { status: 'error', message: 'Passwords must be at least 6 characters long.' };
           break;
         default:
           error = { status: 'error', message: 'An error occurred. Please try again later.' };
@@ -215,24 +244,80 @@ export const AuthProvider = ({ children }) => {
     return { result, error };
   };
 
-  const updateEmail = async newEmail => {
+  const updateEmail = async (password, newEmail, retry) => {
     let result = null;
     let error = null;
 
     try {
+      if (!newEmail) {
+        error = { status: 'error', message: 'You must provide an email. Please try again.' };
+        return { result, error };
+      }
+
+      const prevEmail = auth.currentUser.email;
+
       await _updateEmail(auth.currentUser, newEmail);
-      await auth.currentUser.reload();
-      result = { status: 'success', message: 'Profile successfully updated.' };
+
+      // DO STUFF
+      const nextEmail = auth.currentUser.email;
+
+      console.log('prev:', prevEmail, 'next:', nextEmail);
+
+      try {
+      } catch (err) {
+        console.log(err);
+
+        if (err.response) {
+          console.log(err.response);
+        }
+
+        error = { status: 'error', message: 'An error occurred. Please try again later.' };
+        return;
+      }
+
+      result = { status: 'success', message: 'Your email has been successfully updated.' };
     } catch (err) {
       console.log(err);
-      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+      console.log(err.code);
+      switch (err.code) {
+        case 'auth/requires-recent-login':
+          if (retry) {
+            error = { status: 'error', message: 'You must reauthenticate to perform this action.' };
+            break;
+          }
+
+          try {
+            const credential = EmailAuthProvider.credential(auth.currentUser.email, password);
+            await reauthenticateWithCredential(auth.currentUser, credential);
+            const { result: _result, error: _error } = await updateEmail(password, newEmail, true);
+            result = _result;
+            error = _error;
+          } catch (err) {
+            console.log(err.code);
+            error = handleLoginError(err.code);
+
+            console.log(error);
+          }
+          break;
+        case 'auth/invalid-email':
+          error = { status: 'error', message: 'Email is invalid. Please try again.' };
+          break;
+        case 'auth/email-already-in-use':
+          error = { status: 'error', message: 'There is already an account associated with that email.' };
+          break;
+        default:
+          error = { status: 'error', message: 'An error occurred. Please try again later.' };
+          break;
+      }
     }
+
+    console.log(error);
 
     return { result, error };
   };
 
   return (
-    <AuthContext.Provider value={{ user, data, loading, signin, signup, signout, setupAccount, forgotPassword, sendEmailVerification, updatePassword, updateEmail, updateUser }}>
+    <AuthContext.Provider value={{ user, data, loading, signin, signup, signout, setupAccount, sendPasswordReset, sendEmailVerification, updatePassword, updateEmail, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );

@@ -10,7 +10,7 @@ import { useAuth } from '../../../contexts/auth';
 import Notice from '../../elements/notice';
 
 export default function Account() {
-  const { user, updateUser, updateEmail, updatePassword, sendEmailVerification } = useAuth();
+  const { user, updateProfile, updateEmail, updatePassword, sendEmailVerification } = useAuth();
 
   console.log(user);
 
@@ -19,12 +19,13 @@ export default function Account() {
 
   // email change
   const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState('');
   const [emailSent, setEmailSent] = useState(false);
 
   // password change
   const [passwordCurrent, setPasswordCurrent] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
 
   // feedback
   const [settingsMessage, setSettingsMessage] = useState(null);
@@ -60,7 +61,7 @@ export default function Account() {
       return;
     }
 
-    const { result, error } = await updateUser(name);
+    const { result, error } = await updateProfile(name);
 
     console.log(result);
 
@@ -85,15 +86,19 @@ export default function Account() {
       return;
     }
 
+    if (!password) {
+      setEmailMessage({ status: 'error', message: 'You must provide a password.' });
+      setProcessing(false);
+      return;
+    }
+
     if (email === user.email) {
       setEmailMessage({ status: 'info', message: 'There are no changes to apply.' });
       setProcessing(false);
       return;
     }
 
-    const { result, error } = await updateEmail(email);
-
-    console.log(result);
+    const { result, error } = await updateEmail(password, email);
 
     if (error) {
       setEmailMessage(error);
@@ -101,8 +106,12 @@ export default function Account() {
       return;
     }
 
+    console.log(result);
+
     setEmailMessage(result);
     setProcessing(false);
+
+    setPassword('');
   };
 
   const updatePasswordHandler = async e => {
@@ -116,25 +125,25 @@ export default function Account() {
       return;
     }
 
-    if (!password || !passwordConfirm) {
+    if (!newPassword || !newPasswordConfirm) {
       setPasswordMessage({ message: 'You must provide both a password and a password confirmation.', status: 'error' });
       setProcessing(false);
       return;
     }
 
-    if (password !== passwordConfirm) {
+    if (newPassword !== newPasswordConfirm) {
       setPasswordMessage({ status: 'error', message: 'Passwords do not match.' });
       setProcessing(false);
       return;
     }
 
-    if (passwordCurrent === password) {
+    if (passwordCurrent === newPassword) {
       setPasswordMessage({ status: 'info', message: 'There are no changes to apply.' });
       setProcessing(false);
       return;
     }
 
-    const { result, error } = await updatePassword(passwordCurrent, password);
+    const { result, error } = await updatePassword(passwordCurrent, newPassword);
 
     console.log(result);
 
@@ -147,9 +156,9 @@ export default function Account() {
     setPasswordMessage(result);
     setProcessing(false);
 
-    setPassword('');
     setPasswordCurrent('');
-    setPasswordConfirm('');
+    setNewPassword('');
+    setNewPasswordConfirm('');
   };
 
   return (
@@ -161,7 +170,7 @@ export default function Account() {
         submitText="Save changes"
         submitDescription="Please enter your full name, or a display name you are comfortable with."
         submitHandler={updateAccountDetailsHandler}
-        submitDisabled={name === user.displayName}
+        submitDisabled={name === user.displayName || !name}
         processing={!!(processing === 'account-details')}
       >
         <>
@@ -188,12 +197,27 @@ export default function Account() {
         description="This is the email address you will use to log in."
         ariaTag="your-email"
         submitText="Save changes"
-        submitDescription="We will email you to verify the change."
+        submitDescription="For your security, you must enter your current password first in order to change your email."
         submitHandler={updateEmailHandler}
-        submitDisabled={email === user.email}
+        submitDisabled={email === user.email || !email || !password}
         processing={!!(processing === 'email-change')}
       >
         <>
+          <div className="my-3 md:w-6/12">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              autoComplete="password"
+              className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
+
           <div className="my-3 md:w-6/12">
             <label htmlFor="email-address" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Email address
@@ -236,7 +260,7 @@ export default function Account() {
           )}
 
           {/* Email change feedback */}
-          {emailMessage ? <Notice status={emailMessage.status} message={emailMessage.message} hideable /> : null}
+          {emailMessage ? <Notice status={emailMessage.status} message={emailMessage.message} classes="mt-4" hideable /> : null}
         </>
       </FormSection>
 
@@ -247,12 +271,12 @@ export default function Account() {
         submitText="Save changes"
         submitDescription="For your security, you must enter your current password first in order to change it."
         submitHandler={updatePasswordHandler}
-        submitDisabled={!passwordCurrent || !password || !passwordConfirm || password !== passwordConfirm}
+        submitDisabled={!passwordCurrent || !newPassword || !newPasswordConfirm || newPassword !== newPasswordConfirm}
         processing={!!(processing === 'password-change')}
       >
         <>
           <div className="my-3 md:w-6/12">
-            <label htmlFor="new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label htmlFor="current-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Current password
             </label>
             <input
@@ -274,10 +298,10 @@ export default function Account() {
               type="password"
               name="new-password"
               id="new-password"
-              value={password}
+              value={newPassword}
               autoComplete="new-password"
               className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
-              onChange={e => setPassword(e.target.value)}
+              onChange={e => setNewPassword(e.target.value)}
             />
           </div>
 
@@ -289,10 +313,10 @@ export default function Account() {
               type="password"
               name="confirm-new-password"
               id="confirm-new-password"
-              value={passwordConfirm}
+              value={newPasswordConfirm}
               autoComplete="confirm-new-password"
               className="w-full mt-1 border border-gray-300 shadow-sm input-secondary dark:border-transparent"
-              onChange={e => setPasswordConfirm(e.target.value)}
+              onChange={e => setNewPasswordConfirm(e.target.value)}
             />
           </div>
           {passwordMessage ? <Notice status={passwordMessage.status} message={passwordMessage.message} hideable /> : null}

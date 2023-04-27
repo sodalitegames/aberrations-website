@@ -7,7 +7,7 @@ import Notice from '../elements/notice';
 import SubmitButton from '../elements/submit-button';
 
 export default function ForgotPasswordForm() {
-  const { forgotPassword } = useAuth();
+  const { sendPasswordReset } = useAuth();
 
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState(null);
@@ -25,7 +25,7 @@ export default function ForgotPasswordForm() {
 
     console.log(email);
 
-    const { result, error } = await forgotPassword(email);
+    const { result, error } = await sendPasswordReset(email);
 
     if (error) {
       setMessage(error);
@@ -33,8 +33,10 @@ export default function ForgotPasswordForm() {
       return;
     }
 
+    console.log(result);
     setMessage(result);
     setProcessing(false);
+    setEmail('');
   };
 
   return (

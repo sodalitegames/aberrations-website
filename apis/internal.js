@@ -11,7 +11,7 @@ const api = Axios.create({
 });
 
 export const setupAccount = ({ name, subscribe }) => api.post('/auth/setup-account', { name, subscribe });
-export const forgotPassword = email => api.post('/auth/forgot-password', { email });
+export const sendPasswordReset = email => api.post('/auth/send-password-reset', { email });
 export const sendEmailVerification = () => api.post('/auth/send-email-verification');
 
 export const createPortalSession = () => api.post('/stripe/create-portal-session', {});

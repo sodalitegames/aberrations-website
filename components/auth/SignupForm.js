@@ -40,6 +40,7 @@ export default function SignupForm() {
     }
 
     console.log(result);
+    setMessage(result);
     setProcessing(false);
   };
 
