@@ -92,7 +92,7 @@ handler.post(async (req, res) => {
     }
 
     // Create player in MongoDB
-    const { player, data } = await createPlayer(req.auth.uid, req.auth.email);
+    const { data } = await createPlayer(req.auth.uid, req.auth.email);
 
     // Update the user in auth
     const auth = await firebase.auth().updateUser(req.auth.uid, { displayName: req.body.name });
@@ -101,34 +101,42 @@ handler.post(async (req, res) => {
     const userRef = firestore.collection('users').doc(req.auth.uid);
 
     await userRef.set({
-      email: req.auth.email,
+      email: auth.email,
       subscribe: req.body.subscribe,
       ...data,
     });
 
+    let metadata = {};
+
     const user = (await userRef.get()).data();
 
-    let metadata = {};
+    console.log(user);
 
     try {
       // Subscribe them to the appropriate Mailerlite lists
-      metadata.subscribed = await subscribeUserToEmailGroups(req.body.name, req.auth.email, req.body.subscribe);
+      metadata.subscribed = await subscribeUserToEmailGroups(auth.displayName, auth.email, user.subscribe);
+
+      // Generate verification link
+      const link = await firebase.auth().generateEmailVerificationLink(auth.email);
+
+      // Send the verification email
+      metadata.verification = await sendEmailVerification(auth.email, auth.displayName, link);
 
       // Send myself an email alert
       metadata.notified = await sendNotification(
         process.env.NOTIFICATION_EMAIL,
         'An Aberrations RPG Account has been set up',
-        `${req.body.name} (${req.auth.email}) has set up an Aberrations RPG account.`
+        `${auth.displayName} (${auth.email}) has set up an Aberrations RPG account.`
       );
     } catch (err) {
       console.error(err);
       metadata.error = err;
     }
 
-    res.status(201).json({ auth, user, player, metadata });
+    res.status(201).json({ status: 'success', message: 'Your account has been successfully set up.', metadata });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ status: 'error', message: 'An error occurred while setting up your account. Please try again later.', error: err });
+    res.status(500).json({ status: 'error', message: 'An error occurred while setting up your account. Please try again later.' });
   }
 });
 
