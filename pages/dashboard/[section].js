@@ -6,10 +6,10 @@ import { useAuth } from '../../contexts/auth.js';
 import PageLayout from '../../layouts/PageLayout';
 import DashboardLayout from '../../layouts/DashboardLayout';
 
-import Account from '../../components/dashboard/dashboard-pages/account-settings';
-import PlanAndBilling from '../../components/dashboard/dashboard-pages/plan-and-billing';
-import Resources from '../../components/dashboard/dashboard-pages/resources';
-import DigitalTools from '../../components/dashboard/dashboard-pages/digital-tools';
+import Account from '../../components/dashboard/pages/account-settings.js';
+import PlanAndBilling from '../../components/dashboard/pages/plan-and-billing.js';
+import Resources from '../../components/dashboard/pages/resources.js';
+import DigitalTools from '../../components/dashboard/pages/digital-tools.js';
 
 import Loader from '../../components/dashboard/components/Loader';
 
@@ -36,7 +36,7 @@ export default function DashboardSection({ resources, digitalTools, pricingPlans
   return (
     <PageLayout title={metadata.title} seo={metadata} custom>
       <DashboardLayout heading={metadata.title} active={metadata.slug}>
-        {metadata.slug === 'account-settings' && <Account user={user} />}
+        {metadata.slug === 'account-settings' && <Account />}
         {metadata.slug === 'plan-and-billing' && <PlanAndBilling user={user} pricingPlans={pricingPlans} />}
         {metadata.slug === 'resources' && <Resources user={user} resources={resources} />}
         {metadata.slug === 'digital-tools' && <DigitalTools user={user} digitalTools={digitalTools} />}

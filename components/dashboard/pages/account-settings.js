@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid';
 
@@ -10,7 +10,7 @@ import { useAuth } from '../../../contexts/auth';
 import Notice from '../../elements/notice';
 
 export default function Account() {
-  const { user, updateUser, updateEmail, updatePassword, sendVerificationEmail } = useAuth();
+  const { user, updateUser, updateEmail, updatePassword, sendEmailVerification } = useAuth();
 
   console.log(user);
 
@@ -20,7 +20,6 @@ export default function Account() {
   // email change
   const [email, setEmail] = useState(user.email);
   const [emailSent, setEmailSent] = useState(false);
-  const [emailVerified, setEmailVerified] = useState(user.emailVerified);
 
   // password change
   const [passwordCurrent, setPasswordCurrent] = useState('');
@@ -32,18 +31,9 @@ export default function Account() {
   const [emailMessage, setEmailMessage] = useState(null);
   const [passwordMessage, setPasswordMessage] = useState(null);
   const [processing, setProcessing] = useState(null);
-  const [notice, setNotice] = useState(null);
-
-  useEffect(() => {
-    // Check to see if this is a reload from changing their password
-    const query = new URLSearchParams(window.location.search);
-    if (query.get('password') === 'success') {
-      setNotice({ status: 'success', message: 'Your password has been successfully updated.' });
-    }
-  }, []);
 
   const sendEmailVerificationHandler = async () => {
-    const { result, error } = await sendVerificationEmail();
+    const { result, error } = await sendEmailVerification();
 
     if (error) {
       setEmailSent(error);
@@ -144,7 +134,7 @@ export default function Account() {
       return;
     }
 
-    const { result, error } = await updatePassword(password);
+    const { result, error } = await updatePassword(passwordCurrent, password);
 
     console.log(result);
 
@@ -164,8 +154,6 @@ export default function Account() {
 
   return (
     <>
-      {notice ? <Notice status={notice.status} message={notice.message} hideable /> : null}
-
       <FormSection
         heading="Account Details"
         description="Update your account information."
@@ -173,6 +161,7 @@ export default function Account() {
         submitText="Save changes"
         submitDescription="Please enter your full name, or a display name you are comfortable with."
         submitHandler={updateAccountDetailsHandler}
+        submitDisabled={name === user.displayName}
         processing={!!(processing === 'account-details')}
       >
         <>
@@ -201,6 +190,7 @@ export default function Account() {
         submitText="Save changes"
         submitDescription="We will email you to verify the change."
         submitHandler={updateEmailHandler}
+        submitDisabled={email === user.email}
         processing={!!(processing === 'email-change')}
       >
         <>
@@ -220,13 +210,13 @@ export default function Account() {
                 onChange={e => setEmail(e.target.value)}
               />
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                {emailVerified ? <CheckCircleIcon className="w-5 h-5 text-green-500" aria-hidden="true" /> : <ExclamationCircleIcon className="w-5 h-5 text-red-500" aria-hidden="true" />}
+                {user.emailVerified ? <CheckCircleIcon className="w-5 h-5 text-green-500" aria-hidden="true" /> : <ExclamationCircleIcon className="w-5 h-5 text-red-500" aria-hidden="true" />}
               </div>
             </div>
           </div>
 
           {/* If email is verified */}
-          {emailVerified ? (
+          {user.emailVerified ? (
             <p className="mt-2 text-sm text-green-600" id="verify-message">
               Your email is verified.
             </p>
@@ -257,6 +247,7 @@ export default function Account() {
         submitText="Save changes"
         submitDescription="For your security, you must enter your current password first in order to change it."
         submitHandler={updatePasswordHandler}
+        submitDisabled={!passwordCurrent || !password || !passwordConfirm || password !== passwordConfirm}
         processing={!!(processing === 'password-change')}
       >
         <>

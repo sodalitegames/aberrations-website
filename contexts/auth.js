@@ -8,6 +8,8 @@ import {
   updateProfile,
   updatePassword as _updatePassword,
   updateEmail as _updateEmail,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
@@ -19,6 +21,15 @@ const auth = getAuth(firebase);
 const firestore = getFirestore(firebase);
 
 const AuthContext = createContext({});
+
+const handleLoginError = code => {
+  switch (code) {
+    case 'auth/wrong-password':
+      return { status: 'error', message: 'Invalid password. Please try again.' };
+    default:
+      return { status: 'error', message: 'Something went wrong. Please try again later.' };
+  }
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -108,11 +119,16 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const resp = await _setupAccount({ name, subscribe });
-      await auth.currentUser.reload();
       result = resp.data;
     } catch (err) {
-      console.log(err);
-      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+      console.log(err.response);
+
+      if (err.response) {
+        error = err.response.data;
+        return { result, error };
+      }
+
+      error = { status: 'error', message: 'An error occurred. Please try again later.' };
     }
 
     return { result, error };
@@ -127,7 +143,7 @@ export const AuthProvider = ({ children }) => {
       result = resp.data;
     } catch (err) {
       console.log(err);
-      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+      error = { status: 'error', message: 'An error occurred. Please try again later.' };
     }
 
     return { result, error };
@@ -141,8 +157,14 @@ export const AuthProvider = ({ children }) => {
       const resp = await _sendEmailVerification();
       result = resp.data;
     } catch (err) {
-      console.log(err);
-      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+      console.log(err.response);
+
+      if (err.response) {
+        error = err.response.data;
+        return { result, error };
+      }
+
+      error = { status: 'error', message: 'An error occurred. Please try again later.' };
     }
 
     return { result, error };
@@ -154,27 +176,40 @@ export const AuthProvider = ({ children }) => {
 
     try {
       await updateProfile(auth.currentUser, { displayName });
-      await auth.currentUser.reload();
       result = { status: 'success', message: 'Profile successfully updated.' };
     } catch (err) {
-      console.log(err);
-      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+      console.log(err.code);
+      error = { status: 'error', message: 'An error occurred. Please try again later.' };
     }
 
     return { result, error };
   };
 
-  const updatePassword = async newPassword => {
+  const updatePassword = async (oldPassword, newPassword) => {
     let result = null;
     let error = null;
 
     try {
       await _updatePassword(auth.currentUser, newPassword);
-      await auth.currentUser.reload();
       result = { status: 'success', message: 'You password has been successfully updated.' };
     } catch (err) {
-      console.log(err);
-      error = { status: 'error', message: 'Something went wrong. Please try again later.' };
+      console.log(err.code);
+      switch (err.code) {
+        case 'auth/requires-recent-login':
+          try {
+            const credential = EmailAuthProvider.credential(auth.currentUser.email, oldPassword);
+            await reauthenticateWithCredential(auth.currentUser, credential);
+            await _updatePassword(auth.currentUser, newPassword);
+            result = { status: 'success', message: 'You password has been successfully updated.' };
+          } catch (err) {
+            console.log(err.code);
+            error = handleLoginError(err.code);
+          }
+          break;
+        default:
+          error = { status: 'error', message: 'An error occurred. Please try again later.' };
+          break;
+      }
     }
 
     return { result, error };

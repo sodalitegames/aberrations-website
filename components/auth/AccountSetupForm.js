@@ -38,7 +38,7 @@ export default function AccountSetupForm() {
     console.log(result);
     setProcessing(false);
 
-    router.reload();
+    router.push('/dashboard?setup=success');
   };
 
   return (

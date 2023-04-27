@@ -88,7 +88,7 @@ handler.post(async (req, res) => {
   try {
     // Make sure the account has not already been set up
     if (req.user && req.user.player_id) {
-      return res.status(409).json({ message: 'Your account has already been set up.' });
+      return res.status(409).json({ status: 'error', message: 'Your account has already been set up.' });
     }
 
     // Create player in MongoDB
@@ -128,7 +128,7 @@ handler.post(async (req, res) => {
     res.status(201).json({ auth, user, player, metadata });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: 'An error occurred while accessing this route.', error: err });
+    res.status(500).json({ status: 'error', message: 'An error occurred while setting up your account. Please try again later.', error: err });
   }
 });
 
