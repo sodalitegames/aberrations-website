@@ -10,7 +10,7 @@ import Loader from '../../components/dashboard/components/Loader';
 
 export default function Signup({ metadata }) {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, data, loading } = useAuth();
 
   useEffect(() => {
     // If user is not logged in, redirect to signup
@@ -19,12 +19,12 @@ export default function Signup({ metadata }) {
     }
 
     // If account is already set up, redirect to dashboard
-    if (!loading && user) {
-      if (user?.data?.mongo_id) {
+    if (!loading && user && data) {
+      if (data.player_id) {
         router.push('/dashboard');
       }
     }
-  }, [user, loading, router]);
+  }, [user, data, loading, router]);
 
   if (loading) {
     return (

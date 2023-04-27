@@ -12,17 +12,17 @@ import { useAuth } from '../../contexts/auth.js';
 
 export default function Dashboard({ metadata }) {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, data, loading } = useAuth();
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/auth/signin');
     }
 
-    if (!loading && !user?.data?.mongo_id) {
+    if (!loading && (!data || (data && !data.player_id))) {
       router.push('/auth/account-setup');
     }
-  }, [user, loading, router]);
+  }, [user, data, loading, router]);
 
   if (!user) {
     return (
@@ -32,7 +32,8 @@ export default function Dashboard({ metadata }) {
     );
   }
 
-  console.log(user);
+  console.log('user:', user);
+  console.log('data:', data);
 
   return (
     <PageLayout title={metadata.title} seo={metadata} custom>

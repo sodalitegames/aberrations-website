@@ -22,23 +22,27 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const [token, setToken] = useState(null);
 
-  const setUserWithData = async user => {
-    const userSnap = await getDoc(doc(firestore, 'users', user.uid));
-    setUser({ ...user, data: userSnap.data() });
+  const fetchData = async uid => {
+    const userSnap = await getDoc(doc(firestore, 'users', uid));
+    return userSnap.data();
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
         const idToken = await user.getIdToken();
-        setUserWithData(user);
+        const userData = await fetchData(user.uid);
+        setUser(user);
+        setData(userData);
         setToken(idToken);
       } else {
         setUser(null);
+        setData(null);
         setToken(null);
       }
       setLoading(false);
@@ -104,6 +108,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const resp = await _setupAccount({ name, subscribe });
+      await auth.currentUser.reload();
       result = resp.data;
     } catch (err) {
       console.log(err);
@@ -149,7 +154,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       await updateProfile(auth.currentUser, { displayName });
-      setUserWithData(auth.currentUser);
+      await auth.currentUser.reload();
       result = { status: 'success', message: 'Profile successfully updated.' };
     } catch (err) {
       console.log(err);
@@ -165,7 +170,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       await _updatePassword(auth.currentUser, newPassword);
-      setUserWithData(auth.currentUser);
+      await auth.currentUser.reload();
       result = { status: 'success', message: 'You password has been successfully updated.' };
     } catch (err) {
       console.log(err);
@@ -181,7 +186,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       await _updateEmail(auth.currentUser, newEmail);
-      setUserWithData(auth.currentUser);
+      await auth.currentUser.reload();
       result = { status: 'success', message: 'Profile successfully updated.' };
     } catch (err) {
       console.log(err);
@@ -192,7 +197,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signin, signup, signout, setupAccount, forgotPassword, sendEmailVerification, updatePassword, updateEmail, updateUser }}>
+    <AuthContext.Provider value={{ user, data, loading, signin, signup, signout, setupAccount, forgotPassword, sendEmailVerification, updatePassword, updateEmail, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
