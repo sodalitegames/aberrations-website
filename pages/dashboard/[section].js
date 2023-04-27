@@ -38,7 +38,7 @@ export default function DashboardSection({ resources, digitalTools, pricingPlans
       <DashboardLayout heading={metadata.title} active={metadata.slug}>
         {metadata.slug === 'account-settings' && <Account />}
         {metadata.slug === 'plan-and-billing' && <PlanAndBilling user={user} pricingPlans={pricingPlans} />}
-        {metadata.slug === 'resources' && <Resources user={user} resources={resources} />}
+        {metadata.slug === 'resources' && <Resources resources={resources} />}
         {metadata.slug === 'digital-tools' && <DigitalTools user={user} digitalTools={digitalTools} />}
       </DashboardLayout>
     </PageLayout>
