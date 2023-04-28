@@ -9,7 +9,7 @@ const authenticateMiddleware = async (req, res, next) => {
   }
 
   if (!token) {
-    return res.status(401).json({ message: 'No authorization token was provided.' });
+    return res.status(401).json({ status: 'error', message: 'No authorization token was provided.' });
   }
 
   let decoded;
@@ -18,7 +18,11 @@ const authenticateMiddleware = async (req, res, next) => {
   try {
     decoded = await firebase.auth().verifyIdToken(token);
   } catch (err) {
-    return res.status(500).json({ message: 'You are not authorized to access this route', error: err });
+    if (err.code === 'auth/id-token-expired') {
+      return res.status(500).json({ status: 'error', message: 'Your authorization has expired.' });
+    }
+
+    return res.status(500).json({ status: 'error', message: 'You are not authorized to access this route.' });
   }
 
   let auth;
@@ -29,7 +33,7 @@ const authenticateMiddleware = async (req, res, next) => {
     auth = await firebase.auth().getUser(decoded.uid);
     user = await firestore.collection('users').doc(auth.uid).get();
   } catch (err) {
-    return res.status(500).json({ message: 'An error occured fetching user data', error: err });
+    return res.status(500).json({ status: 'error', message: 'An error occured fetching user data.' });
   }
 
   // Save auth, user data and decoded token to req.body

@@ -1,3 +1,5 @@
+// MailerLite API cannot be used directly on the client side -- it must be used from the server //
+
 import axios from 'axios';
 
 const apiUrl = process.env.MAILER_LITE_API_URL || '';
@@ -19,6 +21,8 @@ export const GROUP_IDS = {
 };
 
 export const subscribeEmailToGroup = async (groupId, { name, email, fields }) => {
+  if (process.env.NODE_ENV !== 'production') return true;
+
   try {
     await api.post(`/groups/${groupId}/subscribers`, {
       email,
@@ -31,7 +35,21 @@ export const subscribeEmailToGroup = async (groupId, { name, email, fields }) =>
   }
 };
 
+export const getSubscriber = async email => {
+  if (process.env.NODE_ENV !== 'production') return {};
+
+  try {
+    const { data: subscriber } = await api.get(`/subscribers/${email}`);
+    if (subscriber.error) return false;
+    return subscriber;
+  } catch (err) {
+    return false;
+  }
+};
+
 export const updateSubscriber = async (email, body) => {
+  if (process.env.NODE_ENV !== 'production') return true;
+
   try {
     await api.put(`/subscribers/${email}`, body);
     return true;
@@ -41,6 +59,8 @@ export const updateSubscriber = async (email, body) => {
 };
 
 export const deleteSubscriber = async email => {
+  if (process.env.NODE_ENV !== 'production') return true;
+
   try {
     await api.delete(`/subscribers/${email}`);
     return true;
@@ -50,9 +70,11 @@ export const deleteSubscriber = async email => {
 };
 
 export const getSubscribersGroups = async email => {
+  if (process.env.NODE_ENV !== 'production') return [];
+
   try {
-    const { data } = await api.get(`/subscribers/${email}/groups`);
-    return data;
+    const { data: groups } = await api.get(`/subscribers/${email}/groups`);
+    return groups;
   } catch (err) {
     return false;
   }

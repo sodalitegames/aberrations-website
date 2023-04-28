@@ -7,7 +7,7 @@ import {
   signOut,
   updateProfile as _updateProfile,
   updatePassword as _updatePassword,
-  updateEmail as _updateEmail,
+  updateEmail as _updateEmailFB,
   reauthenticateWithCredential,
   EmailAuthProvider,
 } from 'firebase/auth';
@@ -15,7 +15,13 @@ import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 import firebase from '../lib/firebase';
 
-import api, { sendPasswordReset as _sendPasswordReset, setupAccount as _setupAccount, sendEmailVerification as _sendEmailVerification } from '../apis/internal';
+import api, {
+  sendPasswordReset as _sendPasswordReset,
+  setupAccount as _setupAccount,
+  sendEmailVerification as _sendEmailVerification,
+  updateEmail as _updateEmailAPI,
+  updateSubscriber,
+} from '../apis/internal';
 
 const auth = getAuth(firebase);
 const firestore = getFirestore(firebase);
@@ -82,8 +88,6 @@ export const AuthProvider = ({ children }) => {
       await createUserWithEmailAndPassword(auth, email, password);
       result = { status: 'success', message: 'You have successfully signed up.' };
     } catch (err) {
-      console.log(err);
-      console.log(err.code);
       switch (err.code) {
         case 'auth/email-already-in-use':
           error = { status: 'error', message: 'There is already an account associated with that email.' };
@@ -117,8 +121,6 @@ export const AuthProvider = ({ children }) => {
       await signInWithEmailAndPassword(auth, email, password);
       result = { status: 'success', message: 'You have successfully signed in.' };
     } catch (err) {
-      console.log(err);
-      console.log(err.code);
       error = handleLoginError(err.code);
     }
 
@@ -135,8 +137,6 @@ export const AuthProvider = ({ children }) => {
       const resp = await _setupAccount({ name, subscribe });
       result = resp.data;
     } catch (err) {
-      console.log(err.response);
-
       if (err.response) {
         error = err.response.data;
         return { result, error };
@@ -156,8 +156,6 @@ export const AuthProvider = ({ children }) => {
       const resp = await _sendPasswordReset(email);
       result = resp.data;
     } catch (err) {
-      console.log(err.response);
-
       if (err.response) {
         error = err.response.data;
         return { result, error };
@@ -177,8 +175,6 @@ export const AuthProvider = ({ children }) => {
       const resp = await _sendEmailVerification();
       result = resp.data;
     } catch (err) {
-      console.log(err.response);
-
       if (err.response) {
         error = err.response.data;
         return { result, error };
@@ -196,9 +192,9 @@ export const AuthProvider = ({ children }) => {
 
     try {
       await _updateProfile(auth.currentUser, { displayName });
+      await updateSubscriber({ name: displayName });
       result = { status: 'success', message: 'Profile successfully updated.' };
     } catch (err) {
-      console.log(err.code);
       error = { status: 'error', message: 'An error occurred. Please try again later.' };
     }
 
@@ -213,7 +209,6 @@ export const AuthProvider = ({ children }) => {
       await _updatePassword(auth.currentUser, newPassword);
       result = { status: 'success', message: 'You password has been successfully updated.' };
     } catch (err) {
-      console.log(err.code);
       switch (err.code) {
         case 'auth/requires-recent-login':
           if (retry) {
@@ -228,7 +223,6 @@ export const AuthProvider = ({ children }) => {
             result = _result;
             error = _error;
           } catch (err) {
-            console.log(err.code);
             error = handleLoginError(err.code);
           }
           break;
@@ -249,36 +243,33 @@ export const AuthProvider = ({ children }) => {
     let error = null;
 
     try {
+      // If no email, return error
       if (!newEmail) {
         error = { status: 'error', message: 'You must provide an email. Please try again.' };
         return { result, error };
       }
 
+      // Set prev email
       const prevEmail = auth.currentUser.email;
 
-      await _updateEmail(auth.currentUser, newEmail);
+      // Update email in firebase auth
+      await _updateEmailFB(auth.currentUser, newEmail);
 
-      // DO STUFF
+      // Set next email
       const nextEmail = auth.currentUser.email;
 
-      console.log('prev:', prevEmail, 'next:', nextEmail);
-
+      // Update email in firestore and mongodb
       try {
+        const resp = await _updateEmailAPI({ prevEmail, nextEmail });
+        result = resp.data;
       } catch (err) {
-        console.log(err);
-
-        if (err.response) {
-          console.log(err.response);
-        }
-
-        error = { status: 'error', message: 'An error occurred. Please try again later.' };
-        return;
+        error = { status: 'error', message: 'Your email was updated, but an error occurred propogating the changes.' };
+        return { result, error };
       }
 
+      // Set success message
       result = { status: 'success', message: 'Your email has been successfully updated.' };
     } catch (err) {
-      console.log(err);
-      console.log(err.code);
       switch (err.code) {
         case 'auth/requires-recent-login':
           if (retry) {
@@ -293,10 +284,7 @@ export const AuthProvider = ({ children }) => {
             result = _result;
             error = _error;
           } catch (err) {
-            console.log(err.code);
             error = handleLoginError(err.code);
-
-            console.log(error);
           }
           break;
         case 'auth/invalid-email':
@@ -310,8 +298,6 @@ export const AuthProvider = ({ children }) => {
           break;
       }
     }
-
-    console.log(error);
 
     return { result, error };
   };

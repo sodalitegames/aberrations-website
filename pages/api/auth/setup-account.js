@@ -27,7 +27,6 @@ const createPlayer = async (uid, email) => {
 
     // Collect data from previous user
     if (existingPlayer.stripeCustomerId) {
-      console.log('ite worked!');
       stripe = {
         stripe_customer_id: existingPlayer.stripeCustomerId,
       };
@@ -54,8 +53,6 @@ const createPlayer = async (uid, email) => {
     player_id: player._id.toString(),
   };
 
-  console.log(stripe);
-
   if (stripe) {
     data = {
       ...data,
@@ -67,8 +64,6 @@ const createPlayer = async (uid, email) => {
 };
 
 const subscribeUserToEmailGroups = async (name, email, subscribe) => {
-  if (process.env.NODE_ENV !== 'production') return false;
-
   const account = await subscribeEmailToGroup(GROUP_IDS.ACCOUNT_HOLDERS, { email, name, fields: { source: 'Account Creation' } });
 
   let mailing;
@@ -110,8 +105,6 @@ handler.post(async (req, res) => {
 
     const user = (await userRef.get()).data();
 
-    console.log(user);
-
     try {
       // Subscribe them to the appropriate Mailerlite lists
       metadata.subscribed = await subscribeUserToEmailGroups(auth.displayName, auth.email, user.subscribe);
@@ -135,7 +128,6 @@ handler.post(async (req, res) => {
 
     res.status(201).json({ status: 'success', message: 'Your account has been successfully set up.', metadata });
   } catch (err) {
-    console.log(err);
     res.status(500).json({ status: 'error', message: 'An error occurred while setting up your account. Please try again later.' });
   }
 });
