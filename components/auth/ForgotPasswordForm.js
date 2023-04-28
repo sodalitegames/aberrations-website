@@ -23,8 +23,6 @@ export default function ForgotPasswordForm() {
       return;
     }
 
-    console.log(email);
-
     const { result, error } = await sendPasswordReset(email);
 
     if (error) {
@@ -33,7 +31,6 @@ export default function ForgotPasswordForm() {
       return;
     }
 
-    console.log(result);
     setMessage(result);
     setProcessing(false);
     setEmail('');

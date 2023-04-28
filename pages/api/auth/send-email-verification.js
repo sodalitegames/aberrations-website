@@ -29,8 +29,6 @@ handler.post(async (req, res) => {
       message: 'Email has been sent. Please check your inbox.',
     });
   } catch (err) {
-    console.log(err);
-
     if (err.code === 'auth/internal-error') {
       return res.status(500).json({ status: 'error', message: 'You need to wait a while before you can send another email.' });
     }

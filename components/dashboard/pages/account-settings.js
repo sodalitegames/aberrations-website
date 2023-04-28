@@ -12,8 +12,6 @@ import Notice from '../../elements/notice';
 export default function Account() {
   const { user, updateProfile, updateEmail, updatePassword, sendEmailVerification } = useAuth();
 
-  console.log(user);
-
   // account settings
   const [name, setName] = useState(user.displayName);
 
@@ -63,8 +61,6 @@ export default function Account() {
 
     const { result, error } = await updateProfile(name);
 
-    console.log(result);
-
     if (error) {
       setSettingsMessage(error);
       setProcessing(false);
@@ -106,8 +102,6 @@ export default function Account() {
       return;
     }
 
-    console.log(result);
-
     setEmailMessage(result);
     setProcessing(false);
 
@@ -144,8 +138,6 @@ export default function Account() {
     }
 
     const { result, error } = await updatePassword(passwordCurrent, newPassword);
-
-    console.log(result);
 
     if (error) {
       setPasswordMessage(error);

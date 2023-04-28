@@ -39,7 +39,6 @@ export default function SignupForm() {
       return;
     }
 
-    console.log(result);
     setMessage(result);
     setProcessing(false);
   };

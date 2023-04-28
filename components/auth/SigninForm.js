@@ -34,7 +34,6 @@ export default function SigninForm() {
       return;
     }
 
-    console.log(result);
     setMessage(result);
     setProcessing(false);
   };

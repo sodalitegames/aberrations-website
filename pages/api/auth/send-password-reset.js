@@ -22,9 +22,6 @@ handler.post(async (req, res) => {
       message: 'Email has been sent. Please check your inbox.',
     });
   } catch (err) {
-    console.log(err);
-    console.log(err.code);
-
     switch (err.code) {
       case 'auth/email-not-found':
         return res.status(404).json({ status: 'error', message: 'No user with that email can be found.' });
