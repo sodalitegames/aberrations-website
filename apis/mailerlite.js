@@ -21,7 +21,7 @@ export const GROUP_IDS = {
 };
 
 export const subscribeEmailToGroup = async (groupId, { name, email, fields }) => {
-  if (process.env.NODE_ENV !== 'production') return true;
+  if (process.env.NODE_ENV !== 'production') return false;
 
   try {
     await api.post(`/groups/${groupId}/subscribers`, {
@@ -36,7 +36,7 @@ export const subscribeEmailToGroup = async (groupId, { name, email, fields }) =>
 };
 
 export const getSubscriber = async email => {
-  if (process.env.NODE_ENV !== 'production') return {};
+  if (process.env.NODE_ENV !== 'production') return false;
 
   try {
     const { data: subscriber } = await api.get(`/subscribers/${email}`);
@@ -48,7 +48,7 @@ export const getSubscriber = async email => {
 };
 
 export const updateSubscriber = async (email, body) => {
-  if (process.env.NODE_ENV !== 'production') return true;
+  if (process.env.NODE_ENV !== 'production') return false;
 
   try {
     await api.put(`/subscribers/${email}`, body);
@@ -59,7 +59,7 @@ export const updateSubscriber = async (email, body) => {
 };
 
 export const deleteSubscriber = async email => {
-  if (process.env.NODE_ENV !== 'production') return true;
+  if (process.env.NODE_ENV !== 'production') return false;
 
   try {
     await api.delete(`/subscribers/${email}`);
@@ -70,7 +70,7 @@ export const deleteSubscriber = async email => {
 };
 
 export const getSubscribersGroups = async email => {
-  if (process.env.NODE_ENV !== 'production') return [];
+  if (process.env.NODE_ENV !== 'production') return false;
 
   try {
     const { data: groups } = await api.get(`/subscribers/${email}/groups`);

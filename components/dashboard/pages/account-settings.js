@@ -2,11 +2,12 @@ import { useState } from 'react';
 
 import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid';
 
+import { useAuth } from '../../../contexts/auth';
+
 import classNames from '../../../utils/functions/classnames';
 
 import FormSection from '../components/FormSection';
 
-import { useAuth } from '../../../contexts/auth';
 import Notice from '../../elements/notice';
 
 export default function Account() {

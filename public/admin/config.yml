@@ -288,6 +288,8 @@ collections:
                 [
                   { label: 'Name', name: name, widget: string },
                   { label: 'Description', name: 'description', widget: text },
+                  { label: 'Live - Product Id', name: 'liveProductId', widget: string },
+                  { label: 'Test - Product Id', name: 'testProductId', widget: string },
                   { label: 'Monthly - Price', name: priceMonthly, widget: string },
                   { label: 'Monthly - Lookup Id', name: lookupIdMonthly, widget: string },
                   { label: 'Yearly - Price', name: priceYearly, widget: string },

@@ -23,7 +23,7 @@
     "firebase": "^9.20.0",
     "firebase-admin": "^11.7.0",
     "frontmatter-markdown-loader": "^3.6.3",
-    "js-cookie": "^3.0.1",
+    "micro": "^10.0.1",
     "mongoose": "^7.0.5",
     "netlify-cms-app": "^2.15.63",
     "next": "^12.1.0",
@@ -34,7 +34,7 @@
     "react-markdown": "^7.0.1",
     "rehype-slug": "^5.0.1",
     "remark-gfm": "^3.0.1",
-    "stripe": "^8.195.0"
+    "stripe": "^8.222.0"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.0",
