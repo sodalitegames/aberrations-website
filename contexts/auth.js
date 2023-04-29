@@ -48,6 +48,9 @@ export const AuthProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  console.log('user', user);
+  console.log('data', data);
+
   const [token, setToken] = useState(null);
 
   const fetchData = async uid => {
@@ -137,12 +140,16 @@ export const AuthProvider = ({ children }) => {
       const resp = await _setupAccount({ name, subscribe });
       result = resp.data;
     } catch (err) {
+      console.log(err);
+      console.log(err.response);
+
       if (err.response) {
         error = err.response.data;
-        return { result, error };
       }
 
-      error = { status: 'error', message: 'An error occurred. Please try again later.' };
+      if (!error) {
+        error = { status: 'error', message: 'An error occurred. Please try again later.' };
+      }
     }
 
     return { result, error };
@@ -156,12 +163,16 @@ export const AuthProvider = ({ children }) => {
       const resp = await _sendPasswordReset(email);
       result = resp.data;
     } catch (err) {
+      console.log(err);
+      console.log(err.response);
+
       if (err.response) {
         error = err.response.data;
-        return { result, error };
       }
 
-      error = { status: 'error', message: 'An error occurred. Please try again later.' };
+      if (!error) {
+        error = { status: 'error', message: 'An error occurred. Please try again later.' };
+      }
     }
 
     return { result, error };
@@ -175,12 +186,16 @@ export const AuthProvider = ({ children }) => {
       const resp = await _sendEmailVerification();
       result = resp.data;
     } catch (err) {
+      console.log(err);
+      console.log(err.response);
+
       if (err.response) {
         error = err.response.data;
-        return { result, error };
       }
 
-      error = { status: 'error', message: 'An error occurred. Please try again later.' };
+      if (!error) {
+        error = { status: 'error', message: 'An error occurred. Please try again later.' };
+      }
     }
 
     return { result, error };
