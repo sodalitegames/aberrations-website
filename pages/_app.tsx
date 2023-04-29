@@ -6,13 +6,13 @@ import type { AppProps } from 'next/app';
 
 import { DefaultSeo } from 'next-seo';
 
-import * as gtag from '../lib/gtag';
+import * as gtag from 'lib/gtag';
 
-import { AuthProvider } from '../contexts/auth';
+import { AuthProvider } from 'contexts/auth';
 
-import { attributes as global } from '../content/settings/global.md';
+import { attributes as global } from 'content/settings/global.md';
 
-import '../styles/globals.css';
+import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

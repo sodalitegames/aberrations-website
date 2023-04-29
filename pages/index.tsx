@@ -1,10 +1,10 @@
 import { GetStaticProps } from 'next';
 import ErrorPage from 'next/error';
 
-import { Metadata } from '../utils/types/page-types';
+import { Metadata } from 'utils/types/page-types';
 
-import PageLayout from '../layouts/PageLayout';
-import Sections from '../components/sections';
+import PageLayout from 'layouts/PageLayout';
+import Sections from 'components/sections';
 
 interface HomePageProps {
   sections: any[];

@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { createPortalSession } from '../../../apis/internal';
+import { createPortalSession } from 'apis/internal';
 
-import { useAuth } from '../../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import Section from '../components/Section';
-import FormSection from '../components/FormSection';
-import Pricing from '../components/Pricing';
+import Section from 'components/dashboard/components/Section';
+import FormSection from 'components/dashboard/components/FormSection';
+import Pricing from 'components/dashboard/components/Pricing';
 
-import Notice from '../../elements/notice';
+import Notice from 'components/elements/notice';
 
 export default function PlanAndBilling({ pricingPlans }) {
   const router = useRouter();

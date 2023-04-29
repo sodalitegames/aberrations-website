@@ -1,8 +1,8 @@
 import Stripe from 'stripe';
 
-import { createHandler } from '../../../middleware';
+import { createHandler } from 'middleware';
 
-import authenticateMiddleware from '../../../middleware/authenticate';
+import authenticateMiddleware from 'middleware/authenticate';
 
 const handler = createHandler(authenticateMiddleware);
 

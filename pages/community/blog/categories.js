@@ -1,8 +1,8 @@
 import ErrorPage from 'next/error';
 
-import PageLayout from '../../../layouts/PageLayout';
+import PageLayout from 'layouts/PageLayout';
 
-import CategoryCard from '../../../components/blog/category-card';
+import CategoryCard from 'components/blog/category-card';
 
 const CategoriesPage = ({ categories, metadata }) => {
   // Check if the required data was provided
@@ -20,7 +20,7 @@ const CategoriesPage = ({ categories, metadata }) => {
         { name: metadata.title, href: `/community/blog/${metadata.slug}` },
       ]}
     >
-      <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6 mb-8">
+      <div className="grid gap-4 mb-8 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
         {categories.map((category, index) => {
           return <CategoryCard key={index} category={category} />;
         })}

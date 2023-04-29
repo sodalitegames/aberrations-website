@@ -1,10 +1,10 @@
 import { CheckIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 
-import { createPortalSession, createCheckoutSession } from '../../../apis/internal';
-import { getStripe } from '../../../lib/stripe';
+import { createPortalSession, createCheckoutSession } from 'apis/internal';
+import { getStripe } from 'lib/stripe';
 
-import classNames from '../../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 export default function Pricing({ active, plans, subscriptionInterval, customerId }) {
   const [interval, setInterval] = useState('month');

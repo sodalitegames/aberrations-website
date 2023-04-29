@@ -1,4 +1,4 @@
-import CardContainer from '../card-container';
+import CardContainer from 'components/elements/card-container';
 
 export default function AugGroupCard({ group }) {
   return (

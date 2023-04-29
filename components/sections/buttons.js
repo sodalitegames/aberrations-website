@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 const Buttons = ({ data }) => {
   return (

@@ -1,5 +1,5 @@
-import NewlineText from '../../utility/newline-text';
-import CardContainer from '../card-container';
+import NewlineText from 'components/utility/newline-text';
+import CardContainer from 'components/elements/card-container';
 
 export default function WeaponCard({ weapon }) {
   return (

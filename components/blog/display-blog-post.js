@@ -1,5 +1,5 @@
-import RestrictedPostContent from './restricted-post-content';
-import PostContent from './post-content';
+import RestrictedPostContent from 'components/blog/restricted-post-content';
+import PostContent from 'components/blog/post-content';
 
 const DisplayBlogPost = ({ post, member, subscription }) => {
   if (post.restriction === 'FREE') {

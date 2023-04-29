@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import PageLayout from '../../layouts/PageLayout';
+import PageLayout from 'layouts/PageLayout';
 
-import SigninForm from '../../components/auth/SigninForm';
-import Loader from '../../components/dashboard/components/Loader';
+import SigninForm from 'components/auth/SigninForm';
+import Loader from 'components/dashboard/components/Loader';
 
 export default function Signin({ metadata }) {
   const router = useRouter();

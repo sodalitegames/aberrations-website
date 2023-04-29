@@ -10,10 +10,10 @@ import { DesktopComputerIcon, UserGroupIcon, DocumentTextIcon, BookOpenIcon, Cub
 
 import PopoverCustom from './PopoverCustom';
 
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import { attributes as global } from '../../content/settings/global.md';
-import { attributes as navigation } from '../../content/settings/navigation.md';
+import { attributes as global } from 'content/settings/global.md';
+import { attributes as navigation } from 'content/settings/navigation.md';
 
 const ICON_MAP = {
   DesktopComputerIcon: DesktopComputerIcon,

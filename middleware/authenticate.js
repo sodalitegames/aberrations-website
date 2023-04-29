@@ -1,4 +1,4 @@
-import { firebase, firestore } from '../lib/firebase-admin';
+import { firebase, firestore } from 'lib/firebase-admin';
 
 const authenticateMiddleware = async (req, res, next) => {
   let token;

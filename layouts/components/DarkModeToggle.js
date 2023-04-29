@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Switch } from '@headlessui/react';
 
-import useDarkMode from '../../hooks/useDarkMode';
+import useDarkMode from 'hooks/useDarkMode';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 export default function DarkModeToggle() {
   const [theme, setTheme] = useDarkMode();
@@ -45,7 +45,7 @@ export default function DarkModeToggle() {
           className={classNames(enabled ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200', 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity')}
           aria-hidden="true"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-accent3-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-accent3-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -58,7 +58,7 @@ export default function DarkModeToggle() {
           className={classNames(enabled ? 'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100', 'absolute inset-0 h-full w-full flex items-center justify-center transition-opacity')}
           aria-hidden="true"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
         </span>

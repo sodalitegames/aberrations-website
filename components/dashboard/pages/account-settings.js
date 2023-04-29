@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid';
 
-import { useAuth } from '../../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import classNames from '../../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
-import FormSection from '../components/FormSection';
+import FormSection from 'components/dashboard/components/FormSection';
 
-import Notice from '../../elements/notice';
+import Notice from 'components/elements/notice';
 
 export default function Account() {
   const { user, updateProfile, updateEmail, updatePassword, sendEmailVerification } = useAuth();

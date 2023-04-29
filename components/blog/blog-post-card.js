@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { parseDate } from '../../utils/functions/parse-date';
-import { getCategory } from '../../utils/functions/split-data';
+import { parseDate } from 'utils/functions/parse-date';
+import { getCategory } from 'utils/functions/split-data';
 
 export default function BlogPostCard({ post }) {
   return (

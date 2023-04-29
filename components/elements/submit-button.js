@@ -1,6 +1,6 @@
 import LoadingSpinner from './loading-spinner';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 const SubmitButton = ({ type, text, loadingText, loading, classes, disabled, notFull }) => {
   return (

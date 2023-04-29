@@ -1,4 +1,4 @@
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 export default function NpcTable({ rows }) {
   return (

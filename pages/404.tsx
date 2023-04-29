@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from 'next';
 
-import PageLayout from '../layouts/PageLayout';
-import FullContentMessage from '../layouts/components/FullContentMessage';
+import PageLayout from 'layouts/PageLayout';
+import FullContentMessage from 'layouts/components/FullContentMessage';
 
 import { Metadata } from 'utils/types/page-types';
 

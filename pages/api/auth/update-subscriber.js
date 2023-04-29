@@ -1,8 +1,8 @@
-import { createHandler } from '../../../middleware';
+import { createHandler } from 'middleware';
 
-import authenticateMiddleware from '../../../middleware/authenticate';
+import authenticateMiddleware from 'middleware/authenticate';
 
-import { updateSubscriber } from '../../../apis/mailerlite';
+import { updateSubscriber } from 'apis/mailerlite';
 
 const handler = createHandler(authenticateMiddleware);
 

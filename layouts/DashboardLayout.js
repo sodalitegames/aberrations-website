@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { BellIcon, CogIcon, CreditCardIcon, DocumentTextIcon, DesktopComputerIcon } from '@heroicons/react/outline';
 
-import classNames from '../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
-import ContentLayout from './ContentLayout';
+import ContentLayout from 'layouts/ContentLayout';
 
 const subNavigation = [
   { name: 'Dashboard', href: '', icon: BellIcon },
@@ -19,7 +19,7 @@ export default function DashboardLayout({ active, children, heading }) {
       <div className="relative">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
           {/****** NAVIGATION ******/}
-          <aside className="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3">
+          <aside className="px-2 py-6 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3">
             <nav className="space-y-1">
               {subNavigation.map(item => (
                 <Link key={item.name} href={`/dashboard/${item.href}`}>

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-import { parseDate } from '../../utils/functions/parse-date';
-import { getCategory } from '../../utils/functions/split-data';
+import { parseDate } from 'utils/functions/parse-date';
+import { getCategory } from 'utils/functions/split-data';
 
-import MarkdownContent from '../sections/markdown-content';
+import MarkdownContent from 'components/sections/markdown-content';
 
-import Notice from '../elements/notice';
+import Notice from 'components/elements/notice';
 
 export const PostHeader = ({ post, notice }) => {
   return (
@@ -18,7 +18,7 @@ export const PostHeader = ({ post, notice }) => {
         </Link>
       </div>
 
-      <div className="font-semibold italic py-4 mb-4">
+      <div className="py-4 mb-4 italic font-semibold">
         <p>
           Published on {parseDate(post.date)} by {post.author}
         </p>

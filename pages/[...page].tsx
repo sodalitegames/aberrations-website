@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import ErrorPage from 'next/error';
 
-import { Breadcrumb, Metadata } from '../utils/types/page-types';
+import { Breadcrumb, Metadata } from 'utils/types/page-types';
 
-import PageLayout from '../layouts/PageLayout';
-import Sections from '../components/sections';
+import PageLayout from 'layouts/PageLayout';
+import Sections from 'components/sections';
 
 type ConfigPath = {
   parent: string;

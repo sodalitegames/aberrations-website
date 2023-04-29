@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import PageLayout from '../../layouts/PageLayout';
+import PageLayout from 'layouts/PageLayout';
 
-import ForgotPasswordForm from '../../components/auth/ForgotPasswordForm';
-import Loader from '../../components/dashboard/components/Loader';
+import ForgotPasswordForm from 'components/auth/ForgotPasswordForm';
+import Loader from 'components/dashboard/components/Loader';
 
 export default function ForgotPassword({ metadata }) {
   const router = useRouter();

@@ -1,5 +1,5 @@
-import Section from '../components/Section';
-import Action from '../components/Action';
+import Section from 'components/dashboard/components/Section';
+import Action from 'components/dashboard/components/Action';
 
 export default function Resources({ resources }) {
   return (

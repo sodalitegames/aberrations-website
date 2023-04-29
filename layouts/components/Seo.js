@@ -1,6 +1,6 @@
 import { NextSeo } from 'next-seo';
 
-import { attributes as global } from '../../content/settings/global.md';
+import { attributes as global } from 'content/settings/global.md';
 
 const Seo = ({ metadata }) => {
   const { siteTitle } = global;

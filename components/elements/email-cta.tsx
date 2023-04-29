@@ -1,4 +1,4 @@
-import MailerLiteForm from './mailer-lite-form';
+import MailerLiteForm from 'components/elements/mailer-lite-form';
 
 export default function EmailCTA({ ctaText }: { ctaText: string }) {
   return (

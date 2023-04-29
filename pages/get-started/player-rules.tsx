@@ -1,13 +1,13 @@
 import ErrorPage from 'next/error';
 
-import { Metadata, SideNavItem } from '../../utils/types/page-types';
+import { Metadata, SideNavItem } from 'utils/types/page-types';
 
-import PageLayout from '../../layouts/PageLayout';
+import PageLayout from 'layouts/PageLayout';
 
-import MarkdownContent from '../../components/sections/markdown-content';
+import MarkdownContent from 'components/sections/markdown-content';
 
-import SectionDivider from '../../components/elements/section-divider';
-import Notice, { NoticeStatus } from '../../components/elements/notice';
+import SectionDivider from 'components/elements/section-divider';
+import Notice, { NoticeStatus } from 'components/elements/notice';
 
 interface PlayerRulesPageProps {
   playerRules: string;

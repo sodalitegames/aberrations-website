@@ -1,12 +1,12 @@
 import ErrorPage from 'next/error';
 
-import PageLayout from '../layouts/PageLayout';
+import PageLayout from 'layouts/PageLayout';
 
-import MarkdownContent from '../components/sections/markdown-content';
+import MarkdownContent from 'components/sections/markdown-content';
 
-import EmailCTA from '../components/elements/email-cta';
+import EmailCTA from 'components/elements/email-cta';
 
-import { parseDateShort } from '../utils/functions/parse-date';
+import { parseDateShort } from 'utils/functions/parse-date';
 
 const ChangeLog = ({ changeLogs, metadata }) => {
   // Check if the required data was provided
@@ -31,7 +31,7 @@ const ChangeLog = ({ changeLogs, metadata }) => {
                 <EmailCTA ctaText="Have change log updates sent straight to your email, so you never have to worry about missing anything." buttonText="Keep me in the loop" />
               </>
             ) : (
-              <div className="border-b dark:border-gray-800 py-6">
+              <div className="py-6 border-b dark:border-gray-800">
                 <h2 className="heading">
                   {parseDateShort(date)} - Version: Alpha-{version}
                 </h2>

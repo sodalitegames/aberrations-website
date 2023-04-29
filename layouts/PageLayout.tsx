@@ -1,14 +1,14 @@
-import ContentLayout from './ContentLayout';
-import FullPageLayout from './FullPageLayout';
-import SideNavPageLayout from './SideNavPageLayout';
+import ContentLayout from 'layouts/ContentLayout';
+import FullPageLayout from 'layouts/FullPageLayout';
+import SideNavPageLayout from 'layouts/SideNavPageLayout';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import SiteBanner from './components/SiteBanner';
-import DarkModeToggle from './components/DarkModeToggle';
-import Seo from './components/Seo';
+import Header from 'layouts/components/Header';
+import Footer from 'layouts/components/Footer';
+import SiteBanner from 'layouts/components/SiteBanner';
+import DarkModeToggle from 'layouts/components/DarkModeToggle';
+import Seo from 'layouts/components/Seo';
 
-import { Metadata, SideNavItem, Breadcrumb } from '../utils/types/page-types';
+import { Metadata, SideNavItem, Breadcrumb } from 'utils/types/page-types';
 
 interface PageLayoutProps {
   title?: string;

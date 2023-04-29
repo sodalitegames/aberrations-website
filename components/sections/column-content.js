@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 // import { CameraIcon } from '@heroicons/react/solid';
 
-import MarkdownContent from './markdown-content';
+import MarkdownContent from 'components/sections/markdown-content';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 const ColumnContent = ({ data }) => {
   return (
@@ -30,7 +30,7 @@ const Column = ({ sections }) => {
               <div className="aspect-w-12 aspect-h-7 lg:aspect-none">
                 <img className={classNames('object-cover object-center', section.config === 'CONTAINED' ? 'rounded-lg shadow-lg' : '')} src={section.image} alt="" width={1184} height={1376} />
               </div>
-              {/* <figcaption className="mt-3 flex text-sm text-gray-500">
+              {/* <figcaption className="flex mt-3 text-sm text-gray-500">
                 <CameraIcon className="flex-none w-5 h-5 text-gray-400" aria-hidden="true" />
                 <span className="ml-2">Photo by Marcus O'Leary</span>
               </figcaption> */}

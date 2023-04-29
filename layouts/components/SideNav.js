@@ -1,6 +1,6 @@
 import { Disclosure } from '@headlessui/react';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 const SideNav = ({ navigation, classes, closePanel }) => {
   return (
@@ -52,7 +52,7 @@ const SideNav = ({ navigation, classes, closePanel }) => {
                         key={subItem.name}
                         as="a"
                         href={`#${subItem.idRef}`}
-                        className="group w-full flex items-center pl-6 pr-2 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-md hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-dark-200"
+                        className="flex items-center w-full py-2 pl-6 pr-2 text-sm font-medium text-gray-600 rounded-md group dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-dark-200"
                       >
                         {subItem.name}
                       </Disclosure.Button>
