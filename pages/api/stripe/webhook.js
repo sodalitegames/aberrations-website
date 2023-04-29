@@ -17,6 +17,10 @@ export const config = {
 const handler = createHandler();
 
 handler.post(async (req, res) => {
+  if (req.query.test) {
+    return res.status(200).json({ status: 'success', message: 'Webhook operations skipped -- test mode.' });
+  }
+
   try {
     let event;
 
@@ -31,7 +35,7 @@ handler.post(async (req, res) => {
       event = stripe.webhooks.constructEvent(buf, signature, process.env.STRIPE_WEBHOOK_SECRET);
     } catch (err) {
       console.log(`⚠️ Webhook signature verification failed.`, err.message);
-      return res.sendStatus(400);
+      return res.status(400).json({ status: 'error', message: '⚠️ Webhook signature verification failed.', error: err.message });
     }
 
     const subscription = event?.data?.object;
@@ -111,7 +115,7 @@ handler.post(async (req, res) => {
     res.status(200).send({ subscription });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ status: 'error', message: 'Stripe webhook failed!', error: err });
+    res.status(500).json({ status: 'error', message: 'Webhook operations failed.', error: err.message });
   }
 });
 
