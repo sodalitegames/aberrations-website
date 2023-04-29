@@ -15,7 +15,7 @@ import Loader from '../../components/dashboard/components/Loader';
 
 export default function DashboardSection({ resources, digitalTools, pricingPlans, metadata }) {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, data, loading } = useAuth();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -23,7 +23,7 @@ export default function DashboardSection({ resources, digitalTools, pricingPlans
     }
   }, [user, loading, router]);
 
-  if (!user) {
+  if (!user || !data) {
     return (
       <PageLayout title={metadata.title} custom>
         <Loader />
@@ -37,9 +37,9 @@ export default function DashboardSection({ resources, digitalTools, pricingPlans
     <PageLayout title={metadata.title} seo={metadata} custom>
       <DashboardLayout heading={metadata.title} active={metadata.slug}>
         {metadata.slug === 'account-settings' && <Account />}
-        {metadata.slug === 'plan-and-billing' && <PlanAndBilling user={user} pricingPlans={pricingPlans} />}
+        {metadata.slug === 'plan-and-billing' && <PlanAndBilling pricingPlans={pricingPlans} />}
         {metadata.slug === 'resources' && <Resources resources={resources} />}
-        {metadata.slug === 'digital-tools' && <DigitalTools user={user} digitalTools={digitalTools} />}
+        {metadata.slug === 'digital-tools' && <DigitalTools digitalTools={digitalTools} />}
       </DashboardLayout>
     </PageLayout>
   );

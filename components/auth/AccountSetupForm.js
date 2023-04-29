@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 
 import { useAuth } from '../../contexts/auth';
 
@@ -7,8 +6,6 @@ import Notice from '../elements/notice';
 import SubmitButton from '../elements/submit-button';
 
 export default function AccountSetupForm() {
-  const router = useRouter();
-
   const { setupAccount } = useAuth();
 
   const [name, setName] = useState('');
@@ -35,9 +32,10 @@ export default function AccountSetupForm() {
       return;
     }
 
+    setMessage(result);
     setProcessing(false);
 
-    router.push('/dashboard?setup=success');
+    window.open('/dashboard?setup=success', '_self');
   };
 
   return (

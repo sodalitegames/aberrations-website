@@ -13,9 +13,9 @@ export default function Signup({ metadata }) {
   const { user, data, loading } = useAuth();
 
   useEffect(() => {
-    // If user is not logged in, redirect to signup
+    // If user is not logged in, redirect to signin
     if (!loading && !user) {
-      router.push('/auth/signup');
+      router.push('/auth/signin');
     }
 
     // If account is already set up, redirect to dashboard

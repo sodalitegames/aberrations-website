@@ -8,7 +8,7 @@ import { User } from '../../../models/User';
 import { GROUP_IDS, subscribeEmailToGroup } from '../../../apis/mailerlite';
 
 import { firebase, firestore } from '../../../lib/firebase-admin';
-import { sendNotification } from '../../../lib/sendgrid';
+import { sendNotification, sendEmailVerification } from '../../../lib/sendgrid';
 
 const createPlayer = async (uid, email) => {
   let player;

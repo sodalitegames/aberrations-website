@@ -7,6 +7,8 @@ import DashboardLayout from '../../layouts/DashboardLayout';
 import Loader from '../../components/dashboard/components/Loader';
 import Section from '../../components/dashboard/components/Section';
 
+import { AberrationsSheets } from '../../components/dashboard/pages/digital-tools';
+
 import Notice from '../../components/elements/notice';
 
 import { useAuth } from '../../contexts/auth.js';
@@ -35,7 +37,7 @@ export default function Dashboard({ metadata }) {
     }
   }, [setup]);
 
-  if (!user) {
+  if (!user || !data) {
     return (
       <PageLayout title={metadata.title} seo={metadata} custom>
         <Loader />
@@ -53,6 +55,7 @@ export default function Dashboard({ metadata }) {
         <Section heading={`Hello there, ${user.displayName}`} description="Welcome to your dashboard." ariaTag="welcome">
           {/* <p>More content is going to go here once it's ready.</p> */}
         </Section>
+        <AberrationsSheets hasJoined={data.has_joined_sheets} />
       </DashboardLayout>
     </PageLayout>
   );
