@@ -1,5 +1,6 @@
 import { createHandler } from '../../../middleware';
 
+import databaseMiddleware from '../../../middleware/database';
 import authenticateMiddleware from '../../../middleware/authenticate';
 
 import { Player } from '../../../models/Player';
@@ -9,7 +10,7 @@ import { subscribeEmailToGroup, getSubscribersGroups, deleteSubscriber, getSubsc
 import { firebase, firestore } from '../../../lib/firebase-admin';
 import { sendEmailVerification } from '../../../lib/sendgrid';
 
-const handler = createHandler(authenticateMiddleware);
+const handler = createHandler(databaseMiddleware, authenticateMiddleware);
 
 handler.post(async (req, res) => {
   try {

@@ -1,5 +1,6 @@
 import { createHandler } from '../../../middleware';
 
+import databaseMiddleware from '../../../middleware/database';
 import authenticateMiddleware from '../../../middleware/authenticate';
 
 import { Player } from '../../../models/Player';
@@ -77,7 +78,7 @@ const subscribeUserToEmailGroups = async (name, email, subscribe) => {
   return { account, mailing, blog };
 };
 
-const handler = createHandler(authenticateMiddleware);
+const handler = createHandler(databaseMiddleware, authenticateMiddleware);
 
 handler.post(async (req, res) => {
   try {
