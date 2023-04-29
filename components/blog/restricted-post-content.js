@@ -6,32 +6,32 @@ import SignupForm from '../auth/SignupForm';
 
 import { PostHeader } from './post-content';
 
-const RestrictedPostContent = ({ post, member, paidPlan }) => {
-  const [hasAccount, setHasAccount] = useState(false);
+const RestrictedPostContent = ({ post, member, requiresPaidPlan }) => {
+  const [hasAccount, setHasAccount] = useState(true);
 
-  if (member) {
+  if (member && requiresPaidPlan) {
     return (
       <article>
         <PostHeader post={post} />
 
-        <div className="bg-gray-50 dark:bg-dark-50 p-4 rounded-md">
-          <h2 className="mt-6 text-center text-3xl md:w-3/4 mx-auto font-extrabold">Sign up for a paid plan to read this post</h2>
-          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
+        <div className="p-4 rounded-md bg-gray-50 dark:bg-dark-50">
+          <h2 className="mx-auto mt-6 text-3xl font-extrabold md:ml-8 md:w-3/4">Sign up for a paid plan to read this post</h2>
+          <p className="mt-2 text-sm text-gray-600 md:ml-8 dark:text-gray-300">
             Signing up for paid plan unlocks exclusive access to more than just blog posts.{' '}
             <Link href="/dashboard/plan-and-billing">
-              <a className="text-link cursor-pointer">Learn more here &rarr;</a>
+              <a className="cursor-pointer text-link">Learn more here &rarr;</a>
             </Link>
           </p>
-          <div className="flex flex-col md:flex-row items-center justify-between mt-12 mb-6">
-            <div className="w-full md:w-1/2 mx-auto">
-              <p className="md:ml-8 mt-8 py-8 text-xl text-center md:text-left font-medium italic">&quot;{post.excerpt}&quot;</p>
+          <div className="flex flex-col items-center justify-between mt-12 mb-6 md:flex-row">
+            <div className="w-full mx-auto md:w-1/2">
+              <p className="py-8 mt-8 text-xl italic font-medium text-center md:ml-8 md:text-left">&quot;{post.excerpt}&quot;</p>
             </div>
 
-            <div className="w-full md:w-1/2 mx-auto">
+            <div className="w-full mx-auto md:w-1/2">
               <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white dark:bg-gray-700 py-8 px-4 shadow rounded-lg sm:px-10">
+                <div className="px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-700 sm:px-10">
                   <Link href="/dashboard/plan-and-billing">
-                    <a className="btn-secondary w-full">See available plans</a>
+                    <a className="w-full btn-primary">See available plans &rarr;</a>
                   </Link>
                 </div>
               </div>
@@ -45,17 +45,17 @@ const RestrictedPostContent = ({ post, member, paidPlan }) => {
   return (
     <article>
       <PostHeader post={post} />
-      <div className="bg-gray-50 dark:bg-dark-50 p-4 rounded-md">
-        <h2 className="mt-6 text-center text-3xl md:w-3/4 mx-auto font-extrabold">
+      <div className="p-4 rounded-md bg-gray-50 dark:bg-dark-50">
+        <h2 className="mt-6 text-3xl font-extrabold md:ml-8 md:w-3/4">
           {hasAccount
-            ? `Sign in to your account to ${paidPlan ? 'access your subscription and' : ''} read this post`
-            : `You must sign up for a free account ${paidPlan ? 'then purchase a subscription' : ''} to read this post`}
+            ? `Sign in to your account to ${requiresPaidPlan ? 'access your subscription and' : ''} read this post`
+            : `You must sign up for a free account ${requiresPaidPlan ? 'then purchase a subscription' : ''} to read this post`}
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
+        <p className="mt-2 text-sm text-gray-600 md:ml-8 dark:text-gray-300">
           {hasAccount ? (
             <>
               Or{' '}
-              <a className="text-link-accent3 font-normal" onClick={() => setHasAccount(false)}>
+              <a className="font-normal text-link-accent3" onClick={() => setHasAccount(false)}>
                 create a free account
               </a>{' '}
               if you haven&apos;t already
@@ -63,22 +63,18 @@ const RestrictedPostContent = ({ post, member, paidPlan }) => {
           ) : (
             <>
               Or{' '}
-              <a className="text-link-accent3 font-normal" onClick={() => setHasAccount(true)}>
+              <a className="font-normal text-link-accent3" onClick={() => setHasAccount(true)}>
                 sign into your account
               </a>{' '}
               if you already have one
             </>
           )}
         </p>
-        <div className="flex flex-col md:flex-row items-start justify-between mt-12 mb-6">
-          {!hasAccount ? (
-            <div className="w-full md:w-1/2 mx-auto">
-              <p className="md:ml-8 mt-8 py-8 text-xl text-center md:text-left font-medium italic">&quot;{post.excerpt}&quot;</p>
-            </div>
-          ) : null}
-          <div className="w-full md:w-1/2 mx-auto">
-            {hasAccount ? <SigninForm redirectPath={`/community/blog/${post.metadata.slug}`} /> : <SignupForm redirectPath={`/community/blog/${post.metadata.slug}`} />}
+        <div className="flex flex-col items-start justify-between mt-12 mb-6 md:flex-row">
+          <div className="w-full mx-auto md:w-1/2">
+            <p className="py-8 mt-8 text-xl italic font-medium text-center md:ml-8 md:text-left">&quot;{post.excerpt}&quot;</p>
           </div>
+          <div className="w-full mx-auto md:w-1/2">{hasAccount ? <SigninForm /> : <SignupForm />}</div>
         </div>
       </div>
     </article>

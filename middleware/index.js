@@ -1,0 +1,14 @@
+import nextConnect from 'next-connect';
+
+import databaseMiddleware from './database';
+
+export function createHandler(...middleware) {
+  return nextConnect({
+    onError: (err, req, res, next) => {
+      res.status(500).end('An error occurred while accessing this route.');
+    },
+    onNoMatch: (req, res) => {
+      res.status(404).end('This route does not exist.');
+    },
+  }).use(databaseMiddleware, ...middleware);
+}

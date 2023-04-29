@@ -1,19 +1,19 @@
 import { CheckIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 
-import api from '../../../apis/auth';
+import { createPortalSession, createCheckoutSession } from '../../../apis/internal';
 import { getStripe } from '../../../lib/stripe';
 
 import classNames from '../../../utils/functions/classnames';
 
-export default function Pricing({ active, plans, subscriptionInterval, paidPlan }) {
+export default function Pricing({ active, plans, subscriptionInterval, customerId }) {
   const [interval, setInterval] = useState('month');
 
   const handleCheckout = async lookupId => {
-    if (paidPlan) {
+    if (customerId) {
       // if paid plan, redirect to customer portal
       try {
-        const { data } = await api.post('/users/create-portal-session');
+        const { data } = await createPortalSession();
         window.open(data.url);
       } catch (error) {
         return alert(error.message);
@@ -21,12 +21,8 @@ export default function Pricing({ active, plans, subscriptionInterval, paidPlan 
     } else {
       // otherwise, create a checkout session
       try {
-        const { data } = await api.post('/users/create-checkout-session', {
-          lookup_key: lookupId,
-        });
-
+        const { data } = await createCheckoutSession(lookupId);
         const { sessionId } = data;
-
         const stripe = await getStripe();
         stripe.redirectToCheckout({ sessionId });
       } catch (error) {
@@ -89,7 +85,7 @@ export default function Pricing({ active, plans, subscriptionInterval, paidPlan 
               >
                 {active === tier.lookupIdMonthly || active === tier.lookupIdYearly
                   ? `Current Plan ${tier.lookupIdMonthly !== 'free-forever' ? `(${subscriptionInterval})` : ''}`
-                  : paidPlan
+                  : customerId
                   ? 'Manage Subscription'
                   : `Purchase ${tier.name}`}
               </button>

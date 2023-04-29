@@ -6,9 +6,11 @@ import PageLayout from '../../../layouts/PageLayout';
 
 import DisplayBlogPost from '../../../components/blog/display-blog-post';
 import BlogPostCard from '../../../components/blog/blog-post-card';
+import LoadingSpinner from '../../../components/elements/loading-spinner';
+import Loader from '../../../components/dashboard/components/Loader';
 
 const PostPage = ({ post, relatedPosts, metadata }) => {
-  const { user, loading } = useAuth();
+  const { user, data, loading } = useAuth();
 
   // Check if the required data was provided
   if (!post) {
@@ -30,18 +32,20 @@ const PostPage = ({ post, relatedPosts, metadata }) => {
       ]}
     >
       {/* Display the blog post */}
-      <DisplayBlogPost post={post} loading={loading} user={user} />
+      {loading ? <Loader /> : <DisplayBlogPost post={post} member={Boolean(user && data)} subscription={Boolean(data?.stripe_subscription_id)} />}
       {/* End blog post */}
 
-      <div className="mt-12">
-        <h3 className="py-4 border-t border-b heading dark:border-gray-700">More posts you might like</h3>
+      {Boolean(relatedPosts.length) && (
+        <div className="mt-12">
+          <h3 className="py-4 border-t border-b heading dark:border-gray-700">More posts you might like</h3>
 
-        <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
-          {relatedPosts.map((post, index) => {
-            return <BlogPostCard key={index} post={post} />;
-          })}
+          <div className="grid gap-4 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-6">
+            {relatedPosts.map((post, index) => {
+              return <BlogPostCard key={index} post={post} />;
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </PageLayout>
   );
 };
