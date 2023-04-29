@@ -18,7 +18,7 @@ const handler = createHandler();
 
 handler.post(async (req, res) => {
   if (req.query.test) {
-    return res.status(200).json({ status: 'success', message: 'Webhook operations skipped -- test mode.' });
+    return res.status(200).json({ status: 'success', message: 'Webhook operations skipped.' });
   }
 
   try {
