@@ -15,8 +15,6 @@ export default function PlanAndBilling({ pricingPlans }) {
   const router = useRouter();
   const { data } = useAuth();
 
-  console.log('data:', data);
-
   const [notice, setNotice] = useState(null);
   const [message, setMessage] = useState(null);
 
