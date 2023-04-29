@@ -11,8 +11,8 @@ export default function BlogPostCard({ post }) {
           <p className="text-xl font-semibold">
             {post.metadata.title}{' '}
             {post.restriction && post.restriction !== 'NONE' ? (
-              <span className="text-sm font-normal rounded-full p-1 px-2 bg-gray-200 dark:bg-gray-500 text-gray-500 dark:text-gray-300 ml-2">
-                {post.restriction === 'FREE_PLAN' ? 'Members Only' : post.restriction === 'PAID_PLAN' ? 'Paid Members' : null}
+              <span className="p-1 px-2 ml-2 text-sm font-normal text-gray-500 bg-gray-200 rounded-full dark:bg-gray-500 dark:text-gray-300">
+                {post.restriction === 'FREE' ? 'Members' : post.restriction === 'PAID' ? 'Paid Members' : null}
               </span>
             ) : null}
           </p>
@@ -30,7 +30,7 @@ export default function BlogPostCard({ post }) {
           const category = getCategory(categ);
           return (
             <Link key={category.title} href={`/community/blog/categories/${category.slug}`}>
-              <a className="rounded-full mr-1 p-1 px-2 text-xs font-medium text-white" style={{ backgroundColor: category.color }}>
+              <a className="p-1 px-2 mr-1 text-xs font-medium text-white rounded-full" style={{ backgroundColor: category.color }}>
                 {category.title}
               </a>
             </Link>
