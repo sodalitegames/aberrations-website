@@ -5,7 +5,7 @@ import { BriefcaseIcon, GlobeIcon, LibraryIcon, MapIcon, OfficeBuildingIcon, Use
 
 import { Disclosure } from '@headlessui/react';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 const ICON_MAP = {
   BriefcaseIcon: BriefcaseIcon,
@@ -40,7 +40,7 @@ export default function DisclosureCustom({ item, children, nested, terNested }) 
               terNested ? 'pl-16' : ''
             )}
           >
-            {!nested && !terNested && <icon.icon className="mr-3 flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500 dark:group-hover:text-gray-300" aria-hidden="true" />}
+            {!nested && !terNested && <icon.icon className="flex-shrink-0 w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-500 dark:group-hover:text-gray-300" aria-hidden="true" />}
             <span className="flex-1">{item.name}</span>
             <svg
               className={classNames(

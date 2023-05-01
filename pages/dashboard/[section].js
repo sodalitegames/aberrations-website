@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { useAuth } from '../../contexts/auth.js';
+import { useAuth } from 'contexts/auth.js';
 
-import PageLayout from '../../layouts/PageLayout';
-import DashboardLayout from '../../layouts/DashboardLayout';
+import PageLayout from 'layouts/PageLayout';
+import DashboardLayout from 'layouts/DashboardLayout';
 
-import Account from '../../components/dashboard/pages/account-settings.js';
-import PlanAndBilling from '../../components/dashboard/pages/plan-and-billing.js';
-import Resources from '../../components/dashboard/pages/resources.js';
-import DigitalTools from '../../components/dashboard/pages/digital-tools.js';
+import Account from 'components/dashboard/pages/account-settings.js';
+import PlanAndBilling from 'components/dashboard/pages/plan-and-billing.js';
+import Resources from 'components/dashboard/pages/resources.js';
+import DigitalTools from 'components/dashboard/pages/digital-tools.js';
 
-import Loader from '../../components/dashboard/components/Loader';
+import Loader from 'components/dashboard/components/Loader';
 
 export default function DashboardSection({ resources, digitalTools, pricingPlans, metadata }) {
   const router = useRouter();

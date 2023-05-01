@@ -1,17 +1,17 @@
 import ErrorPage from 'next/error';
 
-import api from '../../../apis/database';
+import api from 'apis/database';
 
-import PageLayout from '../../../layouts/PageLayout';
+import PageLayout from 'layouts/PageLayout';
 
-import MarkdownContent from '../../../components/sections/markdown-content';
-import Notice from '../../../components/elements/notice';
+import MarkdownContent from 'components/sections/markdown-content';
+import Notice from 'components/elements/notice';
 
-import AugGroupCard from '../../../components/elements/cards/aug-group-card';
-import SpeciesCard from '../../../components/elements/cards/species-card';
-import WeaponCard from '../../../components/elements/cards/weapon-card';
-import ConsumableCategoryCard from '../../../components/elements/cards/consumable-category-card';
-import CreatureTypeCard from '../../../components/elements/cards/creature-type-card';
+import AugGroupCard from 'components/elements/cards/aug-group-card';
+import SpeciesCard from 'components/elements/cards/species-card';
+import WeaponCard from 'components/elements/cards/weapon-card';
+import ConsumableCategoryCard from 'components/elements/cards/consumable-category-card';
+import CreatureTypeCard from 'components/elements/cards/creature-type-card';
 
 const Playbook = ({ playbook, resources, metadata, navigation }) => {
   // Check if the required data was provided

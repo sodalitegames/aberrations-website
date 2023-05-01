@@ -1,4 +1,4 @@
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 interface LoadingSpinnerProps {
   dark?: boolean;

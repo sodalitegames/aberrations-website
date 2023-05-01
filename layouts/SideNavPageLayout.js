@@ -1,8 +1,8 @@
-import SideNav from './components/SideNav';
-
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { MenuAlt3Icon, XIcon } from '@heroicons/react/outline';
+
+import SideNav from 'layouts/components/SideNav';
 
 export default function SideNavPageLayout({ sideNav, children }) {
   const [open, setOpen] = useState(false);

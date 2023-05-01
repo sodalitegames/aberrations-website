@@ -11,9 +11,9 @@ import {
   reauthenticateWithCredential,
   EmailAuthProvider,
 } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
-import firebase from '../lib/firebase';
+import firebase from 'lib/firebase';
 
 import api, {
   sendPasswordReset as _sendPasswordReset,
@@ -21,7 +21,7 @@ import api, {
   sendEmailVerification as _sendEmailVerification,
   updateEmail as _updateEmailAPI,
   updateSubscriber,
-} from '../apis/internal';
+} from 'apis/internal';
 
 const auth = getAuth(firebase);
 const firestore = getFirestore(firebase);

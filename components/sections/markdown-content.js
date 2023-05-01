@@ -1,6 +1,6 @@
-import MarkdownText from '../utility/markdown-text';
+import MarkdownText from 'components/utility/markdown-text';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 const MarkdownContent = ({ data }) => {
   return (

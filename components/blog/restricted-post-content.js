@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-import SigninForm from '../auth/SigninForm';
-import SignupForm from '../auth/SignupForm';
+import SigninForm from 'components/auth/SigninForm';
+import SignupForm from 'components/auth/SignupForm';
 
 import { PostHeader } from './post-content';
 

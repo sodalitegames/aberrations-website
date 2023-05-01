@@ -1,5 +1,5 @@
-import PageLayout from '../../../layouts/PageLayout';
-import FullContentMessage from '../../../layouts/components/FullContentMessage';
+import PageLayout from 'layouts/PageLayout';
+import FullContentMessage from 'layouts/components/FullContentMessage';
 
 const ContactThanks = ({ data, metadata }) => {
   return (

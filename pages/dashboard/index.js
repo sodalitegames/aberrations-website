@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import PageLayout from '../../layouts/PageLayout';
-import DashboardLayout from '../../layouts/DashboardLayout';
+import PageLayout from 'layouts/PageLayout';
+import DashboardLayout from 'layouts/DashboardLayout';
 
-import Loader from '../../components/dashboard/components/Loader';
-import Section from '../../components/dashboard/components/Section';
+import Loader from 'components/dashboard/components/Loader';
+import Section from 'components/dashboard/components/Section';
 
-import { AberrationsSheets } from '../../components/dashboard/pages/digital-tools';
+import { AberrationsSheets } from 'components/dashboard/pages/digital-tools';
 
-import Notice from '../../components/elements/notice';
+import Notice from 'components/elements/notice';
 
-import { useAuth } from '../../contexts/auth.js';
+import { useAuth } from 'contexts/auth.js';
 
 export default function Dashboard({ metadata }) {
   const router = useRouter();

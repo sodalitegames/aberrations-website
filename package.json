@@ -6,7 +6,7 @@
     "dev": "next dev",
     "cms": "npx netlify-cms-proxy-server",
     "dev:cms": "concurrently \"npm run dev\" \"npm run cms\"",
-    "noIndex": "next build && echo 'User-agent: *\nDisallow: /' > public/robots.txt",
+    "build:branch": "next build && echo 'User-agent: *\nDisallow: /' > public/robots.txt",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

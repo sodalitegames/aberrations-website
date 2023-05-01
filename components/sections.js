@@ -1,15 +1,15 @@
-import MarkdownContent from './sections/markdown-content';
-import DigitalTool from './sections/digital-tool';
-import UnderConstruction from './sections/under-construction';
-import ContactForm from './sections/contact-form';
-import MailingList from './sections/mailing-list';
-import HeroSection from './sections/hero-section';
-import FeaturesList from './sections/features-list';
-import FeatureSection from './sections/feature-section';
-import ColumnContent from './sections/column-content';
-import Buttons from './sections/buttons';
-import Heading from './sections/heading';
-import NavigationCards from './sections/navigation-cards';
+import MarkdownContent from 'components/sections/markdown-content';
+import DigitalTool from 'components/sections/digital-tool';
+import UnderConstruction from 'components/sections/under-construction';
+import ContactForm from 'components/sections/contact-form';
+import MailingList from 'components/sections/mailing-list';
+import HeroSection from 'components/sections/hero-section';
+import FeaturesList from 'components/sections/features-list';
+import FeatureSection from 'components/sections/feature-section';
+import ColumnContent from 'components/sections/column-content';
+import Buttons from 'components/sections/buttons';
+import Heading from 'components/sections/heading';
+import NavigationCards from 'components/sections/navigation-cards';
 
 // Map page sections to section components
 const sectionComponents = {

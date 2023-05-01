@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 import { ExternalLinkIcon } from '@heroicons/react/outline';
 
-import { useAuth } from '../../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import Section from '../components/Section';
-import Action from '../components/Action';
+import Section from 'components/dashboard/components/Section';
+import Action from 'components/dashboard/components/Action';
 
 export const AberrationsSheets = ({ hasJoined }) => {
   return (

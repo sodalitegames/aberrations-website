@@ -1,13 +1,13 @@
 import ErrorPage from 'next/error';
 
-import { useAuth } from '../../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import PageLayout from '../../../layouts/PageLayout';
+import PageLayout from 'layouts/PageLayout';
 
-import DisplayBlogPost from '../../../components/blog/display-blog-post';
-import BlogPostCard from '../../../components/blog/blog-post-card';
-import LoadingSpinner from '../../../components/elements/loading-spinner';
-import Loader from '../../../components/dashboard/components/Loader';
+import DisplayBlogPost from 'components/blog/display-blog-post';
+import BlogPostCard from 'components/blog/blog-post-card';
+import LoadingSpinner from 'components/elements/loading-spinner';
+import Loader from 'components/dashboard/components/Loader';
 
 const PostPage = ({ post, relatedPosts, metadata }) => {
   const { user, data, loading } = useAuth();

@@ -1,8 +1,8 @@
 import ErrorPage from 'next/error';
 
-import PageLayout from '../../../layouts/PageLayout';
-import BlogPostCard from '../../../components/blog/blog-post-card';
-import EmailCTA from '../../../components/elements/email-cta';
+import PageLayout from 'layouts/PageLayout';
+import BlogPostCard from 'components/blog/blog-post-card';
+import EmailCTA from 'components/elements/email-cta';
 
 const BlogPage = ({ posts, metadata }) => {
   // Check if the required data was provided

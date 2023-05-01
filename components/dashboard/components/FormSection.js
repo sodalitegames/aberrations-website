@@ -1,4 +1,4 @@
-import SubmitButton from '../../elements/submit-button';
+import SubmitButton from 'components/elements/submit-button';
 
 export default function FormSection({ heading, description, ariaTag, submitText, submitDescription, submitColor, submitHandler, submitDisabled, processing, children }) {
   return (

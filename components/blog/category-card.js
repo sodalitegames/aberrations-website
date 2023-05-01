@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import NewlineText from '../utility/newline-text';
+import NewlineText from 'components/utility/newline-text';
 
-import { getPost } from '../../utils/functions/split-data';
+import { getPost } from 'utils/functions/split-data';
 
 export default function CategoryCard({ category }) {
   return (

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { attributes as navigation } from '../../content/settings/navigation.md';
+import { attributes as navigation } from 'content/settings/navigation.md';
 
 import MailerLiteForm from 'components/elements/mailer-lite-form';
 

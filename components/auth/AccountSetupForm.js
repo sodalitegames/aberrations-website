@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import Notice from '../elements/notice';
-import SubmitButton from '../elements/submit-button';
+import Notice from 'components/elements/notice';
+import SubmitButton from 'components/elements/submit-button';
 
 export default function AccountSetupForm() {
   const { setupAccount } = useAuth();

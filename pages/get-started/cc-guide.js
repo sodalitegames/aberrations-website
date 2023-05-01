@@ -1,16 +1,16 @@
 import ErrorPage from 'next/error';
 
-import api from '../../apis/database';
+import api from 'apis/database';
 
-import PageLayout from '../../layouts/PageLayout';
+import PageLayout from 'layouts/PageLayout';
 
-import MarkdownContent from '../../components/sections/markdown-content';
+import MarkdownContent from 'components/sections/markdown-content';
 
-import SectionDivider from '../../components/elements/section-divider';
-import Notice from '../../components/elements/notice';
-import NpcTable from '../../components/elements/npc-table';
+import SectionDivider from 'components/elements/section-divider';
+import Notice from 'components/elements/notice';
+import NpcTable from 'components/elements/npc-table';
 
-import { slugify } from '../../utils/functions/slugify';
+import { slugify } from 'utils/functions/slugify';
 
 const CCGuide = ({ ccGuide, npcTypes, navigation, metadata }) => {
   // Check if the required data was provided

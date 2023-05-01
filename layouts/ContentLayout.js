@@ -1,4 +1,4 @@
-import PageHeading from './components/PageHeading';
+import PageHeading from 'layouts/components/PageHeading';
 
 export default function ContentLayout({ title, heading, breadcrumbs, children }) {
   return (

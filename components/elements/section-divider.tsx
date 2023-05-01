@@ -1,4 +1,4 @@
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 interface SectionDividerProps {
   heading: string;
@@ -13,7 +13,7 @@ const SectionDivider: React.FC<SectionDividerProps> = ({ heading, id, nomargin }
         <div className="w-full border-t-2 border-gray-200 dark:border-gray-800" />
       </div>
       <div className="relative flex justify-start">
-        <h2 id={id} className="pr-3 bg-white dark:bg-dark text-4xl font-sans my-6 text-gray-900 dark:text-gray-300 font-semibold">
+        <h2 id={id} className="pr-3 my-6 font-sans text-4xl font-semibold text-gray-900 bg-white dark:bg-dark dark:text-gray-300">
           {heading.toUpperCase()}
         </h2>
       </div>

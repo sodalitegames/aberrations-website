@@ -1,4 +1,4 @@
-import Breadcrumbs from './Breadcrumbs';
+import Breadcrumbs from 'layouts/components/Breadcrumbs';
 
 export default function PageHeading({ breadcrumbs, children }) {
   return (

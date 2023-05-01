@@ -1,15 +1,16 @@
-import { createHandler } from '../../../middleware';
+import { createHandler } from 'middleware';
 
-import authenticateMiddleware from '../../../middleware/authenticate';
+import databaseMiddleware from 'middleware/database';
+import authenticateMiddleware from 'middleware/authenticate';
 
-import { Player } from '../../../models/Player';
+import { Player } from 'models/Player';
 
-import { subscribeEmailToGroup, getSubscribersGroups, deleteSubscriber, getSubscriber } from '../../../apis/mailerlite';
+import { subscribeEmailToGroup, getSubscribersGroups, deleteSubscriber, getSubscriber } from 'apis/mailerlite';
 
-import { firebase, firestore } from '../../../lib/firebase-admin';
-import { sendEmailVerification } from '../../../lib/sendgrid';
+import { firebase, firestore } from 'lib/firebase-admin';
+import { sendEmailVerification } from 'lib/sendgrid';
 
-const handler = createHandler(authenticateMiddleware);
+const handler = createHandler(databaseMiddleware, authenticateMiddleware);
 
 handler.post(async (req, res) => {
   try {

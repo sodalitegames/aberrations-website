@@ -1,7 +1,7 @@
-import { createHandler } from '../../../middleware';
+import { createHandler } from 'middleware';
 
-import { firebase } from '../../../lib/firebase-admin';
-import { sendPasswordReset } from '../../../lib/sendgrid';
+import { firebase } from 'lib/firebase-admin';
+import { sendPasswordReset } from 'lib/sendgrid';
 
 const handler = createHandler();
 

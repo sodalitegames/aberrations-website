@@ -1,9 +1,9 @@
-import { createHandler } from '../../../middleware';
+import { createHandler } from 'middleware';
 
-import authenticateMiddleware from '../../../middleware/authenticate';
+import authenticateMiddleware from 'middleware/authenticate';
 
-import { firebase } from '../../../lib/firebase-admin';
-import { sendEmailVerification } from '../../../lib/sendgrid';
+import { firebase } from 'lib/firebase-admin';
+import { sendEmailVerification } from 'lib/sendgrid';
 
 const handler = createHandler(authenticateMiddleware);
 

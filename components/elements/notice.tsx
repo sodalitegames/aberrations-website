@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { CheckCircleIcon, XCircleIcon, ExclamationIcon, InformationCircleIcon, XIcon } from '@heroicons/react/solid';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 export enum NoticeStatus {
   Success = 'success',

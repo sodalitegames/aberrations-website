@@ -1,12 +1,12 @@
 import Stripe from 'stripe';
 import { buffer } from 'micro';
 
-import { createHandler } from '../../../middleware';
+import { createHandler } from 'middleware';
 
-import { GROUP_IDS, subscribeEmailToGroup, updateSubscriber } from '../../../apis/mailerlite';
+import { GROUP_IDS, subscribeEmailToGroup, updateSubscriber } from 'apis/mailerlite';
 
-import { firebase, firestore } from '../../../lib/firebase-admin';
-import { sendNotification } from '../../../lib/sendgrid';
+import { firebase, firestore } from 'lib/firebase-admin';
+import { sendNotification } from 'lib/sendgrid';
 
 export const config = {
   api: {
@@ -18,7 +18,7 @@ const handler = createHandler();
 
 handler.post(async (req, res) => {
   if (req.query.test) {
-    return res.status(200).json({ status: 'success', message: 'Webhook operations skipped -- test mode.' });
+    return res.status(200).json({ status: 'success', message: 'Webhook operations skipped.' });
   }
 
   try {

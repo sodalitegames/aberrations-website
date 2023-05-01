@@ -5,7 +5,7 @@ import { roll } from '@aberrations-rpg/functions';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
-import classNames from '../../utils/functions/classnames';
+import classNames from 'utils/functions/classnames';
 
 const dice = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 
