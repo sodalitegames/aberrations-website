@@ -1,6 +1,6 @@
 import ErrorPage from 'next/error';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'auth/context';
 
 import PageLayout from 'layouts/PageLayout';
 

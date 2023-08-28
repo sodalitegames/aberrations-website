@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'auth/context';
 
 import classNames from 'utils/functions/classnames';
 

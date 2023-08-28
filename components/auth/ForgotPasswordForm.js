@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'auth/context';
 
 import Notice from 'components/elements/notice';
 import SubmitButton from 'components/elements/submit-button';

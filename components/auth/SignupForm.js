@@ -1,13 +1,17 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'auth/context';
 
 import Notice from 'components/elements/notice';
 import SubmitButton from 'components/elements/submit-button';
 
 export default function SignupForm() {
+  const router = useRouter();
   const { signup } = useAuth();
 
+  const [name, setName] = useState('');
+  const [subscribe, setSubscribe] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -19,7 +23,7 @@ export default function SignupForm() {
     e.preventDefault();
     setProcessing(true);
 
-    if (!email || !password || !passwordConfirm) {
+    if (!email || !password || !passwordConfirm || !name) {
       setMessage({ message: 'You must fill out all fields.', status: 'error' });
       setProcessing(false);
       return;
@@ -31,22 +35,38 @@ export default function SignupForm() {
       return;
     }
 
-    const { result, error } = await signup(email, password);
-
-    if (error) {
-      setMessage(error);
+    try {
+      await signup?.(email, password, name);
+      setMessage({ status: 'success', message: 'You have successfully signed up.' });
+      router.push(`/auth/verify-email?email=${email}`);
+    } catch (err) {
+      setMessage({ status: 'error', message: err?.message || 'An unknown error occurred. Please try again later.' });
+    } finally {
       setProcessing(false);
-      return;
     }
-
-    setMessage(result);
-    setProcessing(false);
   };
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="px-4 py-8 bg-white shadow dark:bg-dark-200 sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={submitHandler}>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium">
+              Name
+            </label>
+            <div className="mt-1">
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={name}
+                autoComplete="name"
+                className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
+                onChange={e => setName(e.target.value)}
+              />
+            </div>
+          </div>
+
           <div>
             <label htmlFor="email" className="block text-sm font-medium">
               Email address
@@ -95,6 +115,22 @@ export default function SignupForm() {
                 className="w-full border border-gray-300 rounded-md input-primary dark:border-gray-800"
                 onChange={e => setPasswordConfirm(e.target.value)}
               />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="subscribe"
+                name="subscribe"
+                type="checkbox"
+                className="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary dark:focus:ring-primary-fade dark:bg-dark-400 dark:border-gray-800"
+                checked={subscribe}
+                onChange={() => setSubscribe(!subscribe)}
+              />
+              <label htmlFor="subscribe" className="block ml-2 text-sm">
+                Sign me up for the mailing list
+              </label>
             </div>
           </div>
 

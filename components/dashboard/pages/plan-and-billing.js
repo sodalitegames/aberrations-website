@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { createPortalSession } from 'apis/internal';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'auth/context';
 
 import Section from 'components/dashboard/components/Section';
 import FormSection from 'components/dashboard/components/FormSection';

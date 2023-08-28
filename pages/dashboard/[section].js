@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-
-import { useAuth } from 'contexts/auth.js';
+import AuthGuard from 'auth/guards/auth';
 
 import PageLayout from 'layouts/PageLayout';
 import DashboardLayout from 'layouts/DashboardLayout';
@@ -11,38 +8,20 @@ import PlanAndBilling from 'components/dashboard/pages/plan-and-billing.js';
 import Resources from 'components/dashboard/pages/resources.js';
 import DigitalTools from 'components/dashboard/pages/digital-tools.js';
 
-import Loader from 'components/dashboard/components/Loader';
-
 export default function DashboardSection({ resources, digitalTools, pricingPlans, metadata }) {
-  const router = useRouter();
-  const { user, data, loading } = useAuth();
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/auth/signin');
-    }
-  }, [user, loading, router]);
-
-  if (!user || !data) {
-    return (
-      <PageLayout title={metadata.title} custom>
-        <Loader />
-      </PageLayout>
-    );
-  }
-
-  console.log('user:', user);
-  console.log('user:', data);
-
   return (
-    <PageLayout title={metadata.title} seo={metadata} custom>
-      <DashboardLayout heading={metadata.title} active={metadata.slug}>
-        {metadata.slug === 'account-settings' && <Account />}
-        {metadata.slug === 'plan-and-billing' && <PlanAndBilling pricingPlans={pricingPlans} />}
-        {metadata.slug === 'resources' && <Resources resources={resources} />}
-        {metadata.slug === 'digital-tools' && <DigitalTools digitalTools={digitalTools} />}
-      </DashboardLayout>
-    </PageLayout>
+    <AuthGuard>
+      {() => (
+        <PageLayout title={metadata.title} seo={metadata} custom>
+          <DashboardLayout heading={metadata.title} active={metadata.slug}>
+            {metadata.slug === 'account-settings' && <Account />}
+            {metadata.slug === 'plan-and-billing' && <PlanAndBilling pricingPlans={pricingPlans} />}
+            {metadata.slug === 'resources' && <Resources resources={resources} />}
+            {metadata.slug === 'digital-tools' && <DigitalTools digitalTools={digitalTools} />}
+          </DashboardLayout>
+        </PageLayout>
+      )}
+    </AuthGuard>
   );
 }
 

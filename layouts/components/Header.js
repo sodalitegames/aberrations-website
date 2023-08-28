@@ -10,7 +10,7 @@ import { DesktopComputerIcon, UserGroupIcon, DocumentTextIcon, BookOpenIcon, Cub
 
 import PopoverCustom from './PopoverCustom';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'auth/context';
 
 import { attributes as global } from 'content/settings/global.md';
 import { attributes as navigation } from 'content/settings/navigation.md';

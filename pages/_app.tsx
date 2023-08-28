@@ -8,7 +8,7 @@ import { DefaultSeo } from 'next-seo';
 
 import * as gtag from 'lib/gtag';
 
-import { AuthProvider } from 'contexts/auth';
+import { AuthProvider } from 'auth/context';
 
 import { attributes as global } from 'content/settings/global.md';
 

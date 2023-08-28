@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'auth/context';
 
 import Notice from 'components/elements/notice';
 import SubmitButton from 'components/elements/submit-button';
@@ -26,28 +26,20 @@ export default function SigninForm() {
       return;
     }
 
-    const { result, error } = await signin(email, password);
-
-    if (error) {
-      setMessage(error);
+    try {
+      await signin?.(email, password);
+      setMessage({ status: 'success', message: 'You have successfully signed in.' });
+    } catch (err) {
+      setMessage({ status: 'error', message: err?.message || 'An unknown error occurred. Please try again later.' });
+    } finally {
       setProcessing(false);
-      return;
     }
-
-    setMessage(result);
-    setProcessing(false);
   };
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="px-4 py-8 bg-white shadow dark:bg-dark-200 sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={submitHandler}>
-          <Notice
-            status="warn"
-            heading="We have a new authentication system!"
-            message="If you created an account with us before April 2023, you will need to create a new one now. Be sure to use the same email, so you don't lose any of your data."
-            noIcon
-          />
           <div>
             <label htmlFor="email" className="block text-sm font-medium">
               Email address
